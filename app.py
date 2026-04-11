@@ -140,6 +140,39 @@ def normalize_title(raw_name: str, media_type: str) -> str:
     return cleaned or "Unbekannt"
 
 
+def calculate_source_size(path: Path) -> int:
+    try:
+        if path.is_file():
+            return path.stat().st_size
+    except OSError:
+        return 0
+
+    total_size = 0
+    for root, _dirs, files in os.walk(path):
+        for file_name in files:
+            file_path = Path(root) / file_name
+            try:
+                total_size += file_path.stat().st_size
+            except OSError:
+                continue
+    return total_size
+
+
+def format_size(size_bytes: int) -> str:
+    if size_bytes <= 0:
+        return "-"
+    value = float(size_bytes)
+    for unit in ("B", "KB", "MB", "GB", "TB"):
+        if value < 1024 or unit == "TB":
+            if unit == "B":
+                return f"{int(value)} {unit}"
+            if value >= 10:
+                return f"{value:.0f} {unit}"
+            return f"{value:.1f} {unit}"
+        value /= 1024
+    return "-"
+
+
 def looks_like_video(path: Path) -> bool:
     return path.suffix.lower() in VIDEO_EXTENSIONS
 
@@ -196,6 +229,8 @@ class Job:
     media_type: str
     status: str = "Bereit"
     progress: str = "-"
+    size_bytes: int = 0
+    size_label: str = "-"
     return_code: int | None = None
     id: int = field(default_factory=int)
 
@@ -270,6 +305,7 @@ class PlexTransferApp(ctk.CTk):
         self.last_action_var = tk.StringVar(value="Keine letzte Aktion.")
         self.job_meta_var = tk.StringVar(value="0 Jobs in der Liste")
         self.job_status_line_var = tk.StringVar(value="0 wartend | 0 läuft | 0 Fehler")
+        self.overall_progress_text_var = tk.StringVar(value="0% abgeschlossen")
         self.log_errors_only_var = tk.BooleanVar(value=False)
 
         self.settings_vars = {
@@ -498,14 +534,15 @@ class PlexTransferApp(ctk.CTk):
         table_shell.grid(row=4, column=0, sticky="nsew")
         table_shell.grid_rowconfigure(0, weight=1)
         table_shell.grid_columnconfigure(0, weight=1)
-        self.job_tree = ttk.Treeview(table_shell, columns=("pick", "source", "target", "type", "status", "progress"), show="headings", selectmode="browse", style="Plex.Treeview")
+        self.job_tree = ttk.Treeview(table_shell, columns=("pick", "source", "target", "type", "status", "progress", "size"), show="headings", selectmode="browse", style="Plex.Treeview")
         for name, heading, width, anchor, stretch in (
             ("pick", "X", 46, "center", False),
-            ("source", "Quelle", 270, "w", True),
-            ("target", "Ziel", 290, "w", True),
+            ("source", "Quelle", 250, "w", True),
+            ("target", "Ziel", 270, "w", True),
             ("type", "Typ", 90, "center", False),
             ("status", "Status", 120, "center", False),
             ("progress", "Fortschritt", 110, "center", False),
+            ("size", "Größe", 96, "center", False),
         ):
             self.job_tree.heading(name, text=heading)
             self.job_tree.column(name, width=width, anchor=anchor, stretch=stretch)
@@ -543,12 +580,36 @@ class PlexTransferApp(ctk.CTk):
         self.status_card, status_body = self._create_card(right, "Status", "Gesamtstatus, Fortschritt und letzte Aktion")
         self.status_card.grid(row=0, column=0, sticky="new")
         ctk.CTkLabel(status_body, textvariable=self.status_detail_var, font=self._font(12, "bold"), justify="left").grid(row=0, column=0, sticky="w", pady=(0, 12))
-        self.overall_progress = ctk.CTkProgressBar(status_body, height=14, corner_radius=999)
-        self.overall_progress.grid(row=1, column=0, sticky="ew")
+
+        self.active_progress_rows: list[dict[str, object]] = []
+        active_progress_shell = ctk.CTkFrame(status_body, fg_color="transparent")
+        active_progress_shell.grid(row=1, column=0, sticky="ew")
+        active_progress_shell.grid_columnconfigure(0, weight=1)
+        for idx in range(2):
+            row = ctk.CTkFrame(active_progress_shell, corner_radius=12, border_width=1, fg_color=self.palette["card_soft"], border_color=self.palette["border"])
+            row.grid(row=idx, column=0, sticky="ew", pady=(0, 8 if idx == 0 else 0))
+            row.grid_columnconfigure(0, weight=1)
+            title = ctk.CTkLabel(row, text="", font=self._font(10, "bold"), justify="left", anchor="w", text_color=self.palette["text"])
+            title.grid(row=0, column=0, sticky="w", padx=12, pady=(10, 4))
+            bar = ctk.CTkProgressBar(row, height=12, corner_radius=999, fg_color=self.palette["primary_soft"], progress_color=self.palette["primary"])
+            bar.grid(row=1, column=0, sticky="ew", padx=12)
+            bar.set(0)
+            percent = ctk.CTkLabel(row, text="0%", font=self._font(10), justify="left", anchor="w", text_color=self.palette["muted"])
+            percent.grid(row=2, column=0, sticky="w", padx=12, pady=(6, 10))
+            row.grid_remove()
+            self.active_progress_rows.append({"frame": row, "title": title, "bar": bar, "percent": percent})
+
+        self.overall_progress_label = ctk.CTkLabel(status_body, text="Gesamtfortschritt", font=self._font(10, "bold"), justify="left", text_color=self.palette["muted"])
+        self.overall_progress_label.grid(row=2, column=0, sticky="w", pady=(14, 6))
+        self.overall_progress = ctk.CTkProgressBar(status_body, height=14, corner_radius=999, fg_color=self.palette["primary_soft"], progress_color=self.palette["primary"])
+        self.overall_progress.grid(row=3, column=0, sticky="ew")
         self.overall_progress.set(0)
-        ctk.CTkLabel(status_body, textvariable=self.summary_var, font=self._font(10), justify="left", wraplength=320).grid(row=2, column=0, sticky="w", pady=(10, 12))
+        self.overall_progress_text_label = ctk.CTkLabel(status_body, textvariable=self.overall_progress_text_var, font=self._font(10), justify="left", text_color=self.palette["muted"])
+        self.overall_progress_text_label.grid(row=4, column=0, sticky="w", pady=(6, 10))
+        self.summary_label = ctk.CTkLabel(status_body, textvariable=self.summary_var, font=self._font(10), justify="left", wraplength=320, text_color=self.palette["muted"])
+        self.summary_label.grid(row=5, column=0, sticky="w", pady=(0, 12))
         metrics = ctk.CTkFrame(status_body, fg_color="transparent")
-        metrics.grid(row=3, column=0, sticky="ew", pady=(0, 12))
+        metrics.grid(row=6, column=0, sticky="ew", pady=(0, 12))
         metrics.grid_columnconfigure(0, weight=1)
         metrics.grid_columnconfigure(1, weight=1)
         self._build_metric(metrics, "Gesamtstatus", self.status_var, 0, 0)
@@ -621,6 +682,35 @@ class PlexTransferApp(ctk.CTk):
         ctk.CTkLabel(card, text=title, font=self._font(9, "bold")).grid(row=0, column=0, sticky="w", padx=12, pady=(10, 2))
         ctk.CTkLabel(card, textvariable=variable, font=self._font(11), justify="left", wraplength=320).grid(row=1, column=0, sticky="w", padx=12, pady=(0, 10))
 
+    def _truncate_label(self, value: str, max_length: int = 40) -> str:
+        if len(value) <= max_length:
+            return value
+        return value[: max_length - 3].rstrip() + "..."
+
+    def _progress_to_fraction(self, progress: str) -> float:
+        match = re.search(r"(\d{1,3}(?:\.\d+)?)%", progress or "")
+        if not match:
+            return 0.0
+        try:
+            value = float(match.group(1))
+        except ValueError:
+            return 0.0
+        return max(0.0, min(1.0, value / 100))
+
+    def _refresh_active_progress_rows(self):
+        active_jobs = [job for job in self.jobs if job.id in self.active_job_ids][:2]
+        for index, widget_row in enumerate(self.active_progress_rows):
+            if index >= len(active_jobs):
+                widget_row["frame"].grid_remove()
+                continue
+            job = active_jobs[index]
+            job_name = Path(job.source).name or job.source
+            progress_value = job.progress if job.progress not in {"", "-"} else "0%"
+            widget_row["title"].configure(text=self._truncate_label(job_name))
+            widget_row["bar"].set(self._progress_to_fraction(progress_value))
+            widget_row["percent"].configure(text=progress_value)
+            widget_row["frame"].grid()
+
     def _apply_widget_palette(self):
         p = self.palette
         self.settings_button.configure(fg_color=p["card_soft"], hover_color=p["primary_soft"], text_color=p["text"], border_color=p["border"], border_width=1)
@@ -640,7 +730,15 @@ class PlexTransferApp(ctk.CTk):
         self.manage_separator.configure(text_color=p["muted"])
         self.log_errors_toggle.configure(text_color=p["text"], fg_color=p["primary"], hover_color=p["primary_hover"], border_color=p["border"])
         self.log_box.configure(fg_color=p["log_bg"], text_color=p["log_fg"], border_color="#1e2937", scrollbar_button_color=p["scroll"], scrollbar_button_hover_color=p["scroll_hover"])
+        for progress_row in self.active_progress_rows:
+            progress_row["frame"].configure(fg_color=p["card_soft"], border_color=p["border"])
+            progress_row["title"].configure(text_color=p["text"])
+            progress_row["bar"].configure(fg_color=p["primary_soft"], progress_color=p["primary"])
+            progress_row["percent"].configure(text_color=p["muted"])
+        self.overall_progress_label.configure(text_color=p["muted"])
         self.overall_progress.configure(fg_color=p["primary_soft"], progress_color=p["primary"])
+        self.overall_progress_text_label.configure(text_color=p["muted"])
+        self.summary_label.configure(text_color=p["muted"])
         self.jobs_empty_title.configure(text_color=p["text"])
         self.jobs_empty_text.configure(text_color=p["muted"])
 
@@ -846,7 +944,15 @@ class PlexTransferApp(ctk.CTk):
                 season = detect_season_number(path.stem) or 1
                 show_name = extract_show_name_from_episode(path.stem)
                 target_path = Path(self.config_data["series_root"]).expanduser() / show_name / f"Season {season:02d}" / path.name
-        job = Job(source=str(path), target=str(target_path), media_type=media_type, id=self.job_counter)
+        size_bytes = calculate_source_size(path)
+        job = Job(
+            source=str(path),
+            target=str(target_path),
+            media_type=media_type,
+            size_bytes=size_bytes,
+            size_label=format_size(size_bytes),
+            id=self.job_counter,
+        )
         self.job_counter += 1
         return job
 
@@ -865,6 +971,8 @@ class PlexTransferApp(ctk.CTk):
                 self.checked_job_ids.remove(job_id)
             else:
                 self.checked_job_ids.add(job_id)
+            self.job_tree.selection_set(row)
+            self.job_tree.focus(row)
             self.selected_job_id = job_id
             self._refresh_job_list(preserve_selection=True)
             return "break"
@@ -976,24 +1084,24 @@ class PlexTransferApp(ctk.CTk):
     def remove_selected_job(self):
         if self.running:
             return
-        if self.checked_job_ids:
-            removed_count = len(self.checked_job_ids)
-            self.jobs = [job for job in self.jobs if job.id not in self.checked_job_ids]
-            self.checked_job_ids.clear()
-            self.selected_job_id = self.jobs[0].id if self.jobs else None
-            self._refresh_job_list(preserve_selection=True)
-            self._refresh_empty_state()
-            self.last_action_var.set(f"{removed_count} Jobs entfernt.")
+        selected_ids = {int(item) for item in self.job_tree.selection()}
+        checked_ids = {job.id for job in self.jobs if job.id in self.checked_job_ids}
+        job_ids_to_remove = checked_ids or selected_ids
+        if not job_ids_to_remove and self.selected_job_id is not None:
+            job_ids_to_remove = {self.selected_job_id}
+        if not job_ids_to_remove:
             return
-        idx = self._job_index(self.selected_job_id)
-        if idx is None:
-            return
-        removed = self.jobs.pop(idx)
-        self.checked_job_ids.discard(removed.id)
-        self.selected_job_id = self.jobs[min(idx, len(self.jobs) - 1)].id if self.jobs else None
+        removed_jobs = [job for job in self.jobs if job.id in job_ids_to_remove]
+        first_index = next((index for index, job in enumerate(self.jobs) if job.id in job_ids_to_remove), 0)
+        self.jobs = [job for job in self.jobs if job.id not in job_ids_to_remove]
+        self.checked_job_ids.difference_update(job_ids_to_remove)
+        self.selected_job_id = self.jobs[min(first_index, len(self.jobs) - 1)].id if self.jobs else None
         self._refresh_job_list(preserve_selection=True)
         self._refresh_empty_state()
-        self.last_action_var.set(f"Job entfernt: {Path(removed.source).name}")
+        if len(removed_jobs) == 1:
+            self.last_action_var.set(f"Job entfernt: {Path(removed_jobs[0].source).name}")
+        else:
+            self.last_action_var.set(f"{len(removed_jobs)} Jobs entfernt.")
 
     def clear_all_jobs(self):
         if self.running or not self.jobs:
@@ -1017,7 +1125,7 @@ class PlexTransferApp(ctk.CTk):
             color_key = "danger" if job.status.startswith("Fehler") else JOB_COLORS.get(job.status, "muted")
             row_background = self.palette["primary_soft"] if job.id in self.active_job_ids else self.palette["card"]
             self.job_tree.tag_configure(tag, foreground=self.palette.get(color_key, self.palette["muted"]), background=row_background)
-            self.job_tree.insert("", "end", iid=str(job.id), values=(checkbox, job.source, job.target, job.media_type, job.status, job.progress), tags=(tag,))
+            self.job_tree.insert("", "end", iid=str(job.id), values=(checkbox, job.source, job.target, job.media_type, job.status, job.progress, job.size_label), tags=(tag,))
         if selected and str(selected) in self.job_tree.get_children():
             self.job_tree.selection_set(str(selected))
         else:
@@ -1036,10 +1144,14 @@ class PlexTransferApp(ctk.CTk):
         self.job_status_line_var.set(f"{waiting} wartend | {running} läuft | {failed} Fehler")
         if total == 0:
             self.overall_progress.set(0)
+            self.overall_progress_text_var.set("0% abgeschlossen")
             self.summary_var.set("Noch keine Kopiervorgänge gestartet.")
         else:
-            self.overall_progress.set(completed / total)
+            overall_fraction = completed / total
+            self.overall_progress.set(overall_fraction)
+            self.overall_progress_text_var.set(f"{round(overall_fraction * 100)}% abgeschlossen")
             self.summary_var.set(f"Erfolgreich {success} | Übersprungen {skipped} | Fehlgeschlagen {failed}")
+        self._refresh_active_progress_rows()
         self._refresh_job_actions()
 
     def _refresh_empty_state(self):
@@ -1256,7 +1368,61 @@ class PlexTransferApp(ctk.CTk):
                 self.append_log("Automatischer Plex-Refresh erfolgreich ausgelöst.", save_to_file=True)
             else:
                 self.append_log("Automatischer Plex-Refresh konnte nicht ausgelöst werden.", save_to_file=True, is_error=True)
-        messagebox.showinfo(APP_NAME, f"Kopiervorgang abgeschlossen.\n\nErfolgreich: {success}\nÜbersprungen: {skipped}\nFehlgeschlagen: {failed}")
+        self._show_completion_dialog(success, skipped, failed)
+
+    def _show_completion_dialog(self, success: int, skipped: int, failed: int):
+        dialog = ctk.CTkToplevel(self)
+        dialog.title("Kopiervorgang abgeschlossen")
+        dialog.geometry("430x280")
+        dialog.resizable(False, False)
+        dialog.transient(self)
+        dialog.grab_set()
+        dialog.configure(fg_color=self.palette["bg"])
+
+        shell = ctk.CTkFrame(dialog, corner_radius=18, border_width=1, fg_color=self.palette["card"], border_color=self.palette["border"])
+        shell.pack(fill="both", expand=True, padx=18, pady=18)
+        shell.grid_columnconfigure(0, weight=1)
+
+        accent_color = self.palette["success"] if failed == 0 else self.palette["danger"]
+        accent_text = "OK" if failed == 0 else "!"
+        message_text = "Alle Jobs wurden erfolgreich abgearbeitet." if failed == 0 else "Der Kopiervorgang ist beendet, aber mindestens ein Job ist fehlgeschlagen."
+
+        header = ctk.CTkFrame(shell, fg_color="transparent")
+        header.grid(row=0, column=0, sticky="ew", padx=18, pady=(18, 10))
+        header.grid_columnconfigure(1, weight=1)
+        badge = ctk.CTkLabel(header, text=accent_text, width=42, height=42, corner_radius=21, fg_color=accent_color, text_color="#ffffff", font=self._font(14, "bold"))
+        badge.grid(row=0, column=0, rowspan=2, sticky="nw")
+        ctk.CTkLabel(header, text="Kopiervorgang abgeschlossen", font=self._font(16, "bold"), text_color=self.palette["text"]).grid(row=0, column=1, sticky="w", padx=(12, 0))
+        ctk.CTkLabel(header, text=message_text, font=self._font(10), text_color=self.palette["muted"], justify="left", wraplength=300).grid(row=1, column=1, sticky="w", padx=(12, 0), pady=(4, 0))
+
+        stats = ctk.CTkFrame(shell, fg_color="transparent")
+        stats.grid(row=1, column=0, sticky="ew", padx=18, pady=(0, 18))
+        for column in range(3):
+            stats.grid_columnconfigure(column, weight=1)
+        for column, (label, value, color_key) in enumerate((
+            ("Erfolgreich", success, "success"),
+            ("Übersprungen", skipped, "warning"),
+            ("Fehlgeschlagen", failed, "danger"),
+        )):
+            card = ctk.CTkFrame(stats, corner_radius=12, border_width=1, fg_color=self.palette["card_soft"], border_color=self.palette["border"])
+            card.grid(row=0, column=column, sticky="ew", padx=(0 if column == 0 else 6, 0 if column == 2 else 6))
+            ctk.CTkLabel(card, text=label, font=self._font(10, "bold"), text_color=self.palette["muted"]).pack(anchor="w", padx=12, pady=(12, 4))
+            ctk.CTkLabel(card, text=str(value), font=self._font(18, "bold"), text_color=self.palette[color_key]).pack(anchor="w", padx=12, pady=(0, 12))
+
+        controls = ctk.CTkFrame(shell, fg_color="transparent")
+        controls.grid(row=2, column=0, sticky="ew", padx=18, pady=(0, 18))
+        controls.grid_columnconfigure(0, weight=1)
+        self._make_primary_button(controls, "OK", dialog.destroy).grid(row=0, column=0, sticky="ew")
+
+        dialog.update_idletasks()
+        parent_x = self.winfo_x()
+        parent_y = self.winfo_y()
+        parent_width = self.winfo_width()
+        parent_height = self.winfo_height()
+        dialog_width = dialog.winfo_width()
+        dialog_height = dialog.winfo_height()
+        dialog.geometry(f"+{parent_x + max((parent_width - dialog_width) // 2, 0)}+{parent_y + max((parent_height - dialog_height) // 2, 0)}")
+        self.wait_window(dialog)
 
     def _show_copy_preview(self) -> bool:
         dialog = ctk.CTkToplevel(self)
