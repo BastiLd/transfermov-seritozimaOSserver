@@ -6,6 +6,7 @@ import queue
 import re
 import subprocess
 import threading
+import time
 import tkinter as tk
 import urllib.error
 import urllib.parse
@@ -43,6 +44,9 @@ DEFAULT_CONFIG = {
     "parallel_enabled": False,
     "auto_refresh": False,
     "theme_mode": "hell",
+    "last_measured_bytes_per_sec": 0.0,
+    "last_measured_at": "",
+    "last_measured_source": "",
 }
 
 PALETTES = {
@@ -173,6 +177,26 @@ def format_size(size_bytes: int) -> str:
     return "-"
 
 
+def format_speed(bytes_per_sec: float) -> str:
+    if bytes_per_sec <= 0:
+        return "-"
+    return f"{format_size(int(bytes_per_sec))}/s"
+
+
+def format_eta(seconds_total: float) -> str:
+    if seconds_total <= 0:
+        return "unter 1 Min"
+    minutes = int(round(seconds_total / 60))
+    if minutes <= 1:
+        return "ca. 1 Min"
+    if minutes < 60:
+        return f"ca. {minutes} Min"
+    hours, rem_minutes = divmod(minutes, 60)
+    if rem_minutes == 0:
+        return f"ca. {hours} Std"
+    return f"ca. {hours} Std {rem_minutes} Min"
+
+
 def looks_like_video(path: Path) -> bool:
     return path.suffix.lower() in VIDEO_EXTENSIONS
 
@@ -298,6 +322,10 @@ class PlexTransferApp(ctk.CTk):
         self.checked_job_ids: set[int] = set()
         self.active_job_ids: set[int] = set()
         self.log_entries: list[tuple[str, bool]] = []
+        self.speed_test_running = False
+        self.pending_copy_after_speed_test = False
+        self.current_run_started_at: float | None = None
+        self.current_run_total_bytes = 0
 
         self.status_var = tk.StringVar(value="Bereit")
         self.status_detail_var = tk.StringVar(value="Wartet auf neue Jobs.")
@@ -306,6 +334,8 @@ class PlexTransferApp(ctk.CTk):
         self.job_meta_var = tk.StringVar(value="0 Jobs in der Liste")
         self.job_status_line_var = tk.StringVar(value="0 wartend | 0 läuft | 0 Fehler")
         self.overall_progress_text_var = tk.StringVar(value="0% abgeschlossen")
+        self.eta_var = tk.StringVar(value="Geschätzte Dauer: nicht verfügbar")
+        self.eta_detail_var = tk.StringVar(value="Noch kein Messwert vorhanden.")
         self.log_errors_only_var = tk.BooleanVar(value=False)
 
         self.settings_vars = {
@@ -581,9 +611,20 @@ class PlexTransferApp(ctk.CTk):
         self.status_card.grid(row=0, column=0, sticky="new")
         ctk.CTkLabel(status_body, textvariable=self.status_detail_var, font=self._font(12, "bold"), justify="left").grid(row=0, column=0, sticky="w", pady=(0, 12))
 
+        self.eta_shell = ctk.CTkFrame(status_body, corner_radius=12, border_width=1)
+        self.eta_shell.grid(row=1, column=0, sticky="ew", pady=(0, 12))
+        self.eta_shell.grid_columnconfigure(0, weight=1)
+        self.eta_title_label = ctk.CTkLabel(self.eta_shell, textvariable=self.eta_var, font=self._font(10, "bold"), justify="left", anchor="w")
+        self.eta_title_label.grid(row=0, column=0, sticky="w", padx=12, pady=(10, 4))
+        self.eta_detail_label = ctk.CTkLabel(self.eta_shell, textvariable=self.eta_detail_var, font=self._font(10), justify="left", anchor="w", wraplength=320)
+        self.eta_detail_label.grid(row=1, column=0, sticky="w", padx=12, pady=(0, 8))
+        self.speed_test_button = self._make_secondary_button(self.eta_shell, "Geschwindigkeit testen", self.run_speed_test)
+        self.speed_test_button.configure(height=34)
+        self.speed_test_button.grid(row=2, column=0, sticky="ew", padx=12, pady=(0, 10))
+
         self.active_progress_rows: list[dict[str, object]] = []
         active_progress_shell = ctk.CTkFrame(status_body, fg_color="transparent")
-        active_progress_shell.grid(row=1, column=0, sticky="ew")
+        active_progress_shell.grid(row=2, column=0, sticky="ew")
         active_progress_shell.grid_columnconfigure(0, weight=1)
         for idx in range(2):
             row = ctk.CTkFrame(active_progress_shell, corner_radius=12, border_width=1, fg_color=self.palette["card_soft"], border_color=self.palette["border"])
@@ -600,16 +641,16 @@ class PlexTransferApp(ctk.CTk):
             self.active_progress_rows.append({"frame": row, "title": title, "bar": bar, "percent": percent})
 
         self.overall_progress_label = ctk.CTkLabel(status_body, text="Gesamtfortschritt", font=self._font(10, "bold"), justify="left", text_color=self.palette["muted"])
-        self.overall_progress_label.grid(row=2, column=0, sticky="w", pady=(14, 6))
+        self.overall_progress_label.grid(row=3, column=0, sticky="w", pady=(14, 6))
         self.overall_progress = ctk.CTkProgressBar(status_body, height=14, corner_radius=999, fg_color=self.palette["primary_soft"], progress_color=self.palette["primary"])
-        self.overall_progress.grid(row=3, column=0, sticky="ew")
+        self.overall_progress.grid(row=4, column=0, sticky="ew")
         self.overall_progress.set(0)
         self.overall_progress_text_label = ctk.CTkLabel(status_body, textvariable=self.overall_progress_text_var, font=self._font(10), justify="left", text_color=self.palette["muted"])
-        self.overall_progress_text_label.grid(row=4, column=0, sticky="w", pady=(6, 10))
+        self.overall_progress_text_label.grid(row=5, column=0, sticky="w", pady=(6, 10))
         self.summary_label = ctk.CTkLabel(status_body, textvariable=self.summary_var, font=self._font(10), justify="left", wraplength=320, text_color=self.palette["muted"])
-        self.summary_label.grid(row=5, column=0, sticky="w", pady=(0, 12))
+        self.summary_label.grid(row=6, column=0, sticky="w", pady=(0, 12))
         metrics = ctk.CTkFrame(status_body, fg_color="transparent")
-        metrics.grid(row=6, column=0, sticky="ew", pady=(0, 12))
+        metrics.grid(row=7, column=0, sticky="ew", pady=(0, 12))
         metrics.grid_columnconfigure(0, weight=1)
         metrics.grid_columnconfigure(1, weight=1)
         self._build_metric(metrics, "Gesamtstatus", self.status_var, 0, 0)
@@ -711,6 +752,156 @@ class PlexTransferApp(ctk.CTk):
             widget_row["percent"].configure(text=progress_value)
             widget_row["frame"].grid()
 
+    def _get_measured_speed(self) -> float:
+        try:
+            return float(self.config_data.get("last_measured_bytes_per_sec", 0.0) or 0.0)
+        except (TypeError, ValueError):
+            return 0.0
+
+    def _store_measured_speed(self, bytes_per_sec: float, source: str):
+        if bytes_per_sec <= 0:
+            return
+        self.config_data["last_measured_bytes_per_sec"] = float(bytes_per_sec)
+        self.config_data["last_measured_at"] = datetime.now().isoformat(timespec="seconds")
+        self.config_data["last_measured_source"] = source
+        save_config(self.config_data)
+
+    def _format_measurement_note(self) -> str:
+        speed = self._get_measured_speed()
+        if speed <= 0:
+            return "Noch kein Messwert vorhanden."
+        source = str(self.config_data.get("last_measured_source", "") or "run")
+        measured_at = str(self.config_data.get("last_measured_at", "") or "")
+        source_label = "letzter echter Lauf" if source == "run" else "1-GB-Test"
+        if measured_at:
+            return f"Basis: {source_label} · {format_speed(speed)} · {measured_at.replace('T', ' ')}"
+        return f"Basis: {source_label} · {format_speed(speed)}"
+
+    def _update_eta_display(self):
+        total_size = sum(job.size_bytes for job in self.jobs if job.status not in {"Kopiert", "Übersprungen"})
+        if self.speed_test_running:
+            self.eta_var.set("Geschätzte Dauer: Messung läuft")
+            self.eta_detail_var.set("Die NAS-Geschwindigkeit wird gerade ermittelt.")
+        elif self.running:
+            self.eta_var.set("Geschätzte Dauer: vorab berechnet")
+            self.eta_detail_var.set("Die Vorab-Schätzung gilt für die Jobliste vor dem Start.")
+        elif not self.jobs:
+            self.eta_var.set("Geschätzte Dauer: nicht verfügbar")
+            self.eta_detail_var.set("Füge zuerst Jobs hinzu.")
+        elif total_size <= 0:
+            self.eta_var.set("Geschätzte Dauer: nichts offen")
+            self.eta_detail_var.set("Alle aktuellen Jobs sind bereits abgeschlossen oder übersprungen.")
+        else:
+            speed = self._get_measured_speed()
+            if speed > 0:
+                self.eta_var.set(f"Geschätzte Dauer: {format_eta(total_size / speed)}")
+                self.eta_detail_var.set(self._format_measurement_note())
+            else:
+                self.eta_var.set("Geschätzte Dauer: nicht verfügbar")
+                self.eta_detail_var.set("Noch kein Messwert vorhanden. Nutze „Geschwindigkeit testen“.")
+        if hasattr(self, "speed_test_button"):
+            self.speed_test_button.configure(state="disabled" if self.running or self.speed_test_running else "normal")
+
+    def _pick_probe_root(self) -> Path | None:
+        for key in ("movies_root", "series_root"):
+            raw = str(self.config_data.get(key, "")).strip()
+            if not raw:
+                continue
+            probe_root = Path(raw).expanduser()
+            if probe_root.exists():
+                return probe_root
+        return None
+
+    def _offer_speed_test_before_start(self) -> str:
+        answer = messagebox.askyesnocancel(
+            APP_NAME,
+            "Es gibt noch keinen gemessenen Geschwindigkeitswert.\n\n"
+            "Möchtest du jetzt einen 1-GB-Testtransfer für eine bessere Zeit-Schätzung ausführen?\n\n"
+            "Ja = Test jetzt ausführen\n"
+            "Nein = ohne Messung fortfahren\n"
+            "Abbrechen = Start abbrechen",
+        )
+        if answer is None:
+            return "cancel"
+        return "test" if answer else "skip"
+
+    def run_speed_test(self):
+        self._start_speed_test(auto_continue=False)
+
+    def _start_speed_test(self, auto_continue: bool):
+        if self.running or self.speed_test_running:
+            return
+        if not self.validate_roots():
+            return
+        probe_root = self._pick_probe_root()
+        if probe_root is None:
+            messagebox.showerror(APP_NAME, "Kein erreichbares Ziel für den Geschwindigkeitstest gefunden.")
+            return
+        self.speed_test_running = True
+        self.pending_copy_after_speed_test = auto_continue
+        self.last_action_var.set("Geschwindigkeitstest gestartet.")
+        self.append_log("Geschwindigkeitstest gestartet.", save_to_file=False)
+        self._update_eta_display()
+        threading.Thread(target=self._run_speed_test, args=(probe_root,), daemon=True).start()
+
+    def _run_speed_test(self, probe_root: Path):
+        probe_size = 1024 * 1024 * 1024
+        local_dir = BASE_DIR / "tmp_probe"
+        target_dir = probe_root / "_PlexTransferSpeedProbe"
+        source_file = local_dir / "plex_transfer_probe_1gb.bin"
+        try:
+            ensure_directory(local_dir)
+            ensure_directory(target_dir)
+            with source_file.open("wb") as handle:
+                handle.truncate(probe_size)
+            command = [
+                "robocopy",
+                str(local_dir),
+                str(target_dir),
+                source_file.name,
+                "/MT:32",
+                "/J",
+                "/R:1",
+                "/W:1",
+                "/Z",
+                "/FFT",
+                "/TEE",
+            ]
+            self.ui_queue.put(("log", ("Starte 1-GB-Geschwindigkeitstest.", False)))
+            started_at = time.perf_counter()
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace")
+            if process.stdout:
+                for line in process.stdout:
+                    cleaned = line.rstrip()
+                    if cleaned:
+                        is_error = "error" in cleaned.lower() or "fehler" in cleaned.lower()
+                        self.ui_queue.put(("log", (f"Speed-Test: {cleaned}", is_error)))
+            return_code = process.wait()
+            duration = max(time.perf_counter() - started_at, 0.001)
+            if return_code >= 8:
+                raise RuntimeError(f"robocopy fehlgeschlagen (Code {return_code})")
+            measured_bps = probe_size / duration
+            self.ui_queue.put(("speed_test_done", {"bytes_per_sec": measured_bps, "duration": duration}))
+        except Exception as exc:
+            self.ui_queue.put(("speed_test_failed", str(exc)))
+        finally:
+            for cleanup_path in (source_file, target_dir / source_file.name):
+                try:
+                    if cleanup_path.exists():
+                        cleanup_path.unlink()
+                except OSError:
+                    pass
+            try:
+                if target_dir.exists():
+                    target_dir.rmdir()
+            except OSError:
+                pass
+            try:
+                if local_dir.exists():
+                    local_dir.rmdir()
+            except OSError:
+                pass
+
     def _apply_widget_palette(self):
         p = self.palette
         self.settings_button.configure(fg_color=p["card_soft"], hover_color=p["primary_soft"], text_color=p["text"], border_color=p["border"], border_width=1)
@@ -730,6 +921,10 @@ class PlexTransferApp(ctk.CTk):
         self.manage_separator.configure(text_color=p["muted"])
         self.log_errors_toggle.configure(text_color=p["text"], fg_color=p["primary"], hover_color=p["primary_hover"], border_color=p["border"])
         self.log_box.configure(fg_color=p["log_bg"], text_color=p["log_fg"], border_color="#1e2937", scrollbar_button_color=p["scroll"], scrollbar_button_hover_color=p["scroll_hover"])
+        self.eta_shell.configure(fg_color=p["card_soft"], border_color=p["border"])
+        self.eta_title_label.configure(text_color=p["text"])
+        self.eta_detail_label.configure(text_color=p["muted"])
+        self.speed_test_button.configure(state="disabled" if self.running or self.speed_test_running else "normal")
         for progress_row in self.active_progress_rows:
             progress_row["frame"].configure(fg_color=p["card_soft"], border_color=p["border"])
             progress_row["title"].configure(text_color=p["text"])
@@ -772,7 +967,8 @@ class PlexTransferApp(ctk.CTk):
         self._show_settings_view()
 
     def save_settings_and_return(self):
-        self.config_data = {
+        updated_config = self.config_data.copy()
+        updated_config.update({
             "movies_root": self.settings_vars["movies_root"].get().strip(),
             "series_root": self.settings_vars["series_root"].get().strip(),
             "plex_url": self.settings_vars["plex_url"].get().strip(),
@@ -782,7 +978,8 @@ class PlexTransferApp(ctk.CTk):
             "parallel_enabled": bool(self.settings_vars["parallel_enabled"].get()),
             "auto_refresh": bool(self.settings_vars["auto_refresh"].get()),
             "theme_mode": self.settings_vars["theme_mode"].get(),
-        }
+        })
+        self.config_data = updated_config
         save_config(self.config_data)
         self.palette = PALETTES[self.config_data["theme_mode"]]
         self._apply_palette()
@@ -1152,6 +1349,7 @@ class PlexTransferApp(ctk.CTk):
             self.overall_progress_text_var.set(f"{round(overall_fraction * 100)}% abgeschlossen")
             self.summary_var.set(f"Erfolgreich {success} | Übersprungen {skipped} | Fehlgeschlagen {failed}")
         self._refresh_active_progress_rows()
+        self._update_eta_display()
         self._refresh_job_actions()
 
     def _refresh_empty_state(self):
@@ -1172,8 +1370,8 @@ class PlexTransferApp(ctk.CTk):
             return False
         return True
 
-    def start_copy(self):
-        if self.running:
+    def start_copy(self, skip_eta_prompt: bool = False):
+        if self.running or self.speed_test_running:
             messagebox.showinfo(APP_NAME, "Es läuft bereits ein Kopiervorgang.")
             return
         if not self.jobs:
@@ -1181,12 +1379,22 @@ class PlexTransferApp(ctk.CTk):
             return
         if not self.validate_roots():
             return
+        if not skip_eta_prompt and self._get_measured_speed() <= 0:
+            decision = self._offer_speed_test_before_start()
+            if decision == "cancel":
+                self.last_action_var.set("Kopiervorgang abgebrochen.")
+                return
+            if decision == "test":
+                self._start_speed_test(auto_continue=True)
+                return
         if not self._show_copy_preview():
             self.last_action_var.set("Kopiervorgang abgebrochen.")
             return
 
         self.running = True
         self.active_job_ids.clear()
+        self.current_run_started_at = time.perf_counter()
+        self.current_run_total_bytes = sum(job.size_bytes for job in self.jobs if job.status not in {"Kopiert", "Übersprungen"})
         self.current_log_path = LOG_DIR / f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
         ensure_directory(LOG_DIR)
         self._set_global_status("Kopiert...", "Kopiervorgang läuft.")
@@ -1328,6 +1536,24 @@ class PlexTransferApp(ctk.CTk):
                 elif message_type == "job_done":
                     self.active_job_ids.discard(int(payload))
                     self._refresh_job_list(preserve_selection=True)
+                elif message_type == "speed_test_done":
+                    bytes_per_sec = float(payload["bytes_per_sec"])
+                    duration = float(payload["duration"])
+                    self.speed_test_running = False
+                    self._store_measured_speed(bytes_per_sec, "probe")
+                    self.last_action_var.set("Geschwindigkeitstest abgeschlossen.")
+                    self.append_log(f"Geschwindigkeitstest abgeschlossen: {format_speed(bytes_per_sec)} in {duration:.1f}s.", is_error=False)
+                    self._refresh_job_list(preserve_selection=True)
+                    if self.pending_copy_after_speed_test:
+                        self.pending_copy_after_speed_test = False
+                        self.after(150, lambda: self.start_copy(skip_eta_prompt=True))
+                elif message_type == "speed_test_failed":
+                    self.speed_test_running = False
+                    self.pending_copy_after_speed_test = False
+                    self.last_action_var.set("Geschwindigkeitstest fehlgeschlagen.")
+                    self.append_log(f"Geschwindigkeitstest fehlgeschlagen: {payload}", is_error=True)
+                    messagebox.showerror(APP_NAME, f"Geschwindigkeitstest fehlgeschlagen:\n{payload}")
+                    self._refresh_job_list(preserve_selection=True)
                 elif message_type == "all_done":
                     self._finish_run()
         except queue.Empty:
@@ -1360,6 +1586,14 @@ class PlexTransferApp(ctk.CTk):
         self.summary_var.set(f"Erfolgreich {success} | Übersprungen {skipped} | Fehlgeschlagen {failed}")
         self.last_action_var.set("Kopiervorgang abgeschlossen.")
         self.append_log("Kopiervorgang abgeschlossen.", save_to_file=True)
+        copied_bytes = sum(job.size_bytes for job in self.jobs if job.status == "Kopiert")
+        if copied_bytes > 0 and self.current_run_started_at:
+            duration = max(time.perf_counter() - self.current_run_started_at, 0.001)
+            measured_bps = copied_bytes / duration
+            self._store_measured_speed(measured_bps, "run")
+            self.append_log(f"Gemessene Transfergeschwindigkeit gespeichert: {format_speed(measured_bps)}.", save_to_file=True)
+        self.current_run_started_at = None
+        self.current_run_total_bytes = 0
         self._refresh_job_list(preserve_selection=True)
         if self.config_data.get("auto_refresh") and success:
             affected_libraries = {job.media_type for job in self.jobs if job.status == "Kopiert"}
