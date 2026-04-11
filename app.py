@@ -27,6 +27,9 @@ VIDEO_EXTENSIONS = {
 }
 SEASON_PATTERN = re.compile(r"^(season|staffel|saison|series)\s*\d+|^s\d{1,2}$", re.IGNORECASE)
 INVALID_CHARS = r'<>:"/\\|?*'
+EPISODE_PATTERN = re.compile(r"(?i)(?:s(?P<season>\d{1,2})\s*e\d{1,2})|(?:(?P<season_alt>\d{1,2})x\d{1,2})")
+TRAILING_RELEASE_PATTERN = re.compile(r"(?i)[\s._-]*(2160p|1080p|720p|480p|bluray|brrip|web[-_. ]?dl|webrip|hdrip|dvdrip|x264|x265|h\.?264|h\.?265|hevc|dts|aac[.\d]*|ac3|yts|etrg|proper|repack|remux|multi|german|dubbed)(?:[\s._-]+.*)?$")
+SEPARATOR_PATTERN = re.compile(r"[._]+")
 WM_DROPFILES = 0x0233
 GWL_WNDPROC = -4
 LRESULT = ctypes.c_longlong if ctypes.sizeof(ctypes.c_void_p) == 8 else ctypes.c_long
@@ -123,7 +126,17 @@ def ensure_directory(path: Path) -> None:
 
 def sanitize_name(raw_name: str) -> str:
     cleaned = "".join("_" if c in INVALID_CHARS else c for c in raw_name)
-    cleaned = re.sub(r"\s+", " ", cleaned).strip(" .")
+    cleaned = SEPARATOR_PATTERN.sub(" ", cleaned)
+    cleaned = re.sub(r"\s*-\s*", " - ", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip(" ._-")
+    return cleaned or "Unbekannt"
+
+
+def normalize_title(raw_name: str, media_type: str) -> str:
+    cleaned = sanitize_name(raw_name)
+    if media_type == "Film":
+        cleaned = TRAILING_RELEASE_PATTERN.sub("", cleaned).strip(" ._-")
+    cleaned = re.sub(r"\s+", " ", cleaned).strip(" ._-")
     return cleaned or "Unbekannt"
 
 
@@ -139,6 +152,23 @@ def has_season_subfolders(source_dir: Path) -> bool:
         )
     except OSError:
         return False
+
+
+def detect_season_number(name: str) -> int | None:
+    match = EPISODE_PATTERN.search(name)
+    if not match:
+        return None
+    value = match.group("season") or match.group("season_alt")
+    return int(value) if value else None
+
+
+def extract_show_name_from_episode(name: str) -> str:
+    match = EPISODE_PATTERN.search(name)
+    if not match:
+        return normalize_title(name, "Serie")
+    prefix = name[:match.start()]
+    prefix = re.sub(r"[\s._-]+$", "", prefix)
+    return normalize_title(prefix, "Serie")
 
 
 def load_config() -> dict:
@@ -230,12 +260,17 @@ class PlexTransferApp(ctk.CTk):
         self.drop_feedback_job = None
         self.context_menu = None
         self.selected_job_id: int | None = None
+        self.checked_job_ids: set[int] = set()
+        self.active_job_ids: set[int] = set()
+        self.log_entries: list[tuple[str, bool]] = []
 
         self.status_var = tk.StringVar(value="Bereit")
         self.status_detail_var = tk.StringVar(value="Wartet auf neue Jobs.")
         self.summary_var = tk.StringVar(value="Noch keine Kopiervorgänge gestartet.")
         self.last_action_var = tk.StringVar(value="Keine letzte Aktion.")
         self.job_meta_var = tk.StringVar(value="0 Jobs in der Liste")
+        self.job_status_line_var = tk.StringVar(value="0 wartend | 0 läuft | 0 Fehler")
+        self.log_errors_only_var = tk.BooleanVar(value=False)
 
         self.settings_vars = {
             "movies_root": tk.StringVar(),
@@ -369,7 +404,6 @@ class PlexTransferApp(ctk.CTk):
         )
         self.settings_view.grid(row=0, column=0, sticky="nsew")
         self.settings_view.grid_columnconfigure(0, weight=1)
-
     def _create_card(self, parent, title: str, subtitle: str | None = None):
         card = ctk.CTkFrame(parent, corner_radius=18, border_width=1)
         card.grid_columnconfigure(0, weight=1)
@@ -421,13 +455,20 @@ class PlexTransferApp(ctk.CTk):
         for col in range(3):
             action_row.grid_columnconfigure(col, weight=1)
         self._make_primary_button(action_row, "Kopiervorgang starten", self.start_copy).grid(row=0, column=0, sticky="ew", padx=(0, 8))
-        self._make_secondary_button(action_row, "Logs öffnen", self.open_logs).grid(row=0, column=1, sticky="ew", padx=4)
-        self._make_secondary_button(action_row, "Plex Refresh", self.manual_refresh).grid(row=0, column=2, sticky="ew", padx=(8, 0))
+        self.logs_button = self._make_secondary_button(action_row, "Logs öffnen", self.open_logs)
+        self.logs_button.grid(row=0, column=1, sticky="ew", padx=4)
+        self.plex_refresh_button = self._make_secondary_button(action_row, "Plex Refresh", self.manual_refresh)
+        self.plex_refresh_button.grid(row=0, column=2, sticky="ew", padx=(8, 0))
 
         self.jobs_card, jobs_body = self._create_card(left, "Jobs", "Quelle, Ziel, Typ, Status und Fortschritt im Überblick")
         self.jobs_card.grid(row=1, column=0, sticky="nsew", pady=(0, 14))
-        jobs_body.grid_rowconfigure(3, weight=1)
-        ctk.CTkLabel(jobs_body, textvariable=self.job_meta_var, font=self._font(10)).grid(row=0, column=0, sticky="w", pady=(0, 10))
+        jobs_body.grid_rowconfigure(4, weight=1)
+
+        meta_row = ctk.CTkFrame(jobs_body, fg_color="transparent")
+        meta_row.grid(row=0, column=0, sticky="ew", pady=(0, 10))
+        meta_row.grid_columnconfigure(0, weight=1)
+        ctk.CTkLabel(meta_row, textvariable=self.job_meta_var, font=self._font(10)).grid(row=0, column=0, sticky="w")
+        ctk.CTkLabel(meta_row, textvariable=self.job_status_line_var, font=self._font(10)).grid(row=0, column=1, sticky="e")
 
         self.drop_zone = ctk.CTkFrame(jobs_body, corner_radius=14, border_width=1)
         self.drop_zone.grid(row=1, column=0, sticky="ew", pady=(0, 12))
@@ -437,8 +478,11 @@ class PlexTransferApp(ctk.CTk):
         self.drop_text = ctk.CTkLabel(self.drop_zone, text="Datei hierher ziehen = Film\nOrdner hierher ziehen = Serie", font=self._font(10), justify="left")
         self.drop_text.grid(row=1, column=0, sticky="w", padx=14, pady=(0, 12))
 
+        self.manage_separator = ctk.CTkLabel(jobs_body, text="Job-Aktionen", font=self._font(10, "bold"))
+        self.manage_separator.grid(row=2, column=0, sticky="w", pady=(2, 6))
+
         manage_row = ctk.CTkFrame(jobs_body, fg_color="transparent")
-        manage_row.grid(row=2, column=0, sticky="ew", pady=(0, 12))
+        manage_row.grid(row=3, column=0, sticky="ew", pady=(0, 12))
         for col in range(4):
             manage_row.grid_columnconfigure(col, weight=1)
         self.move_up_button = self._make_secondary_button(manage_row, "Nach oben", self.move_job_up)
@@ -451,11 +495,12 @@ class PlexTransferApp(ctk.CTk):
         self.clear_button.grid(row=0, column=3, sticky="ew", padx=(6, 0))
 
         table_shell = ctk.CTkFrame(jobs_body, corner_radius=14, border_width=1)
-        table_shell.grid(row=3, column=0, sticky="nsew")
+        table_shell.grid(row=4, column=0, sticky="nsew")
         table_shell.grid_rowconfigure(0, weight=1)
         table_shell.grid_columnconfigure(0, weight=1)
-        self.job_tree = ttk.Treeview(table_shell, columns=("source", "target", "type", "status", "progress"), show="headings", selectmode="browse", style="Plex.Treeview")
+        self.job_tree = ttk.Treeview(table_shell, columns=("pick", "source", "target", "type", "status", "progress"), show="headings", selectmode="browse", style="Plex.Treeview")
         for name, heading, width, anchor, stretch in (
+            ("pick", "X", 46, "center", False),
             ("source", "Quelle", 270, "w", True),
             ("target", "Ziel", 290, "w", True),
             ("type", "Typ", 90, "center", False),
@@ -472,16 +517,27 @@ class PlexTransferApp(ctk.CTk):
         self.job_tree.configure(yscrollcommand=tree_scroll.set)
         self.job_tree.configure(xscrollcommand=tree_scroll_x.set)
         self.job_tree.bind("<<TreeviewSelect>>", self.on_tree_select)
+        self.job_tree.bind("<Button-1>", self.on_tree_click)
         self.job_tree.bind("<Button-3>", self.open_tree_context_menu)
-        self.jobs_empty_state = ctk.CTkLabel(table_shell, text="Noch keine Jobs.\nFüge einen Film oder Serienordner hinzu oder nutze die Drop-Zone.", font=self._font(11), justify="center")
+        self.job_tree.bind("<Double-1>", self.open_selected_source)
+        self.jobs_empty_state = ctk.CTkFrame(table_shell, corner_radius=16, fg_color="transparent")
         self.jobs_empty_state.place(relx=0.5, rely=0.5, anchor="center")
+        self.jobs_empty_title = ctk.CTkLabel(self.jobs_empty_state, text="Noch keine Jobs", font=self._font(14, "bold"))
+        self.jobs_empty_title.pack(anchor="center")
+        self.jobs_empty_text = ctk.CTkLabel(self.jobs_empty_state, text="Füge einen Film oder Serienordner hinzu oder nutze die Drop-Zone.", font=self._font(11), justify="center")
+        self.jobs_empty_text.pack(anchor="center", pady=(6, 0))
 
         self.log_card, log_body = self._create_card(left, "Laufendes Log", "Robocopy-Ausgabe und Systemmeldungen")
         self.log_card.grid(row=2, column=0, sticky="nsew")
-        log_body.grid_rowconfigure(0, weight=1)
+        log_body.grid_rowconfigure(1, weight=1)
+        log_header = ctk.CTkFrame(log_body, fg_color="transparent")
+        log_header.grid(row=0, column=0, sticky="ew", pady=(0, 10))
+        log_header.grid_columnconfigure(0, weight=1)
+        self.log_errors_toggle = ctk.CTkCheckBox(log_header, text="Nur Fehler anzeigen", variable=self.log_errors_only_var, command=self.refresh_log_view)
+        self.log_errors_toggle.grid(row=0, column=1, sticky="e")
         log_font = "Cascadia Mono" if "Cascadia Mono" in set(tkfont.families(self)) else "Consolas"
         self.log_box = ctk.CTkTextbox(log_body, border_width=1, corner_radius=14, font=(log_font, 10), wrap="word")
-        self.log_box.grid(row=0, column=0, sticky="nsew")
+        self.log_box.grid(row=1, column=0, sticky="nsew")
         self.log_box.configure(state="disabled")
 
         self.status_card, status_body = self._create_card(right, "Status", "Gesamtstatus, Fortschritt und letzte Aktion")
@@ -498,7 +554,6 @@ class PlexTransferApp(ctk.CTk):
         self._build_metric(metrics, "Gesamtstatus", self.status_var, 0, 0)
         self._build_metric(metrics, "Fortschritt", self.job_meta_var, 0, 1)
         self._build_metric(metrics, "Letzte Aktion", self.last_action_var, 1, 0, 2)
-
     def _build_settings_view(self):
         top = ctk.CTkFrame(self.settings_view, fg_color="transparent")
         top.grid(row=0, column=0, sticky="ew", padx=6, pady=(6, 10))
@@ -550,8 +605,10 @@ class PlexTransferApp(ctk.CTk):
         self.context_menu.add_command(label="Nach unten", command=self.move_job_down)
         self.context_menu.add_separator()
         self.context_menu.add_command(label="Entfernen", command=self.remove_selected_job)
+        self.context_menu.add_command(label="Im Explorer öffnen", command=self.open_selected_source)
+        self.context_menu.add_command(label="Ziel öffnen", command=self.open_selected_target)
+        self.context_menu.add_command(label="Pfad kopieren", command=self.copy_selected_path)
         self.context_menu.add_command(label="Alle entfernen", command=self.clear_all_jobs)
-
     def _add_settings_field(self, parent, label_text, variable, row, show=None):
         ctk.CTkLabel(parent, text=label_text, font=self._font(10)).grid(row=row * 2, column=0, sticky="w", pady=(0 if row == 0 else 12, 4))
         self._make_entry(parent, variable, show=show).grid(row=row * 2 + 1, column=0, sticky="ew")
@@ -572,11 +629,7 @@ class PlexTransferApp(ctk.CTk):
         self.header.configure(fg_color="transparent")
         self.content.configure(fg_color="transparent")
         self.main_view.configure(fg_color="transparent")
-        self.main_left_scroll.configure(
-            fg_color="transparent",
-            scrollbar_button_color=p["scroll"],
-            scrollbar_button_hover_color=p["scroll_hover"],
-        )
+        self.main_left_scroll.configure(fg_color="transparent", scrollbar_button_color=p["scroll"], scrollbar_button_hover_color=p["scroll_hover"])
         self.settings_view.configure(fg_color="transparent", scrollbar_button_color=p["scroll"], scrollbar_button_hover_color=p["scroll_hover"])
 
         for card in (self.actions_card, self.jobs_card, self.log_card, self.status_card):
@@ -584,9 +637,12 @@ class PlexTransferApp(ctk.CTk):
         self.drop_zone.configure(fg_color=p["drop"], border_color=p["border"])
         self.drop_title.configure(text_color=p["text"])
         self.drop_text.configure(text_color=p["muted"])
+        self.manage_separator.configure(text_color=p["muted"])
+        self.log_errors_toggle.configure(text_color=p["text"], fg_color=p["primary"], hover_color=p["primary_hover"], border_color=p["border"])
         self.log_box.configure(fg_color=p["log_bg"], text_color=p["log_fg"], border_color="#1e2937", scrollbar_button_color=p["scroll"], scrollbar_button_hover_color=p["scroll_hover"])
         self.overall_progress.configure(fg_color=p["primary_soft"], progress_color=p["primary"])
-        self.jobs_empty_state.configure(text_color=p["muted"])
+        self.jobs_empty_title.configure(text_color=p["text"])
+        self.jobs_empty_text.configure(text_color=p["muted"])
 
         for panel, _ in self.settings_panels:
             panel.configure(fg_color=p["card"], border_color=p["border"])
@@ -597,7 +653,6 @@ class PlexTransferApp(ctk.CTk):
         self._update_status_badge()
         self._configure_treeview_style()
         self._refresh_job_list(preserve_selection=True)
-
     def _load_settings_draft(self):
         for key, var in self.settings_vars.items():
             var.set(self.config_data[key])
@@ -647,22 +702,34 @@ class PlexTransferApp(ctk.CTk):
     def on_theme_segment_changed(self, value: str):
         self.settings_vars["theme_mode"].set("dunkel" if value == "Dunkel" else "hell")
 
-    def append_log(self, message: str, save_to_file: bool = False):
+    def append_log(self, message: str, save_to_file: bool = False, is_error: bool | None = None):
+        if is_error is None:
+            lowered = message.lower()
+            is_error = any(token in lowered for token in ("fehler", "fehlgeschlagen", "abgebrochen", "konnte nicht", "traceback", "exception"))
         timestamped = f"[{datetime.now().strftime('%H:%M:%S')}] {message}"
+        self.log_entries.append((timestamped, bool(is_error)))
+        self.refresh_log_view()
+        if save_to_file and self.current_log_path:
+            ensure_directory(self.current_log_path.parent)
+            with self.current_log_path.open("a", encoding="utf-8") as handle:
+                handle.write(timestamped + "\n")
+
+    def refresh_log_view(self):
+        show_only_errors = self.log_errors_only_var.get()
+        visible_entries = [entry for entry in self.log_entries if (entry[1] if show_only_errors else True)]
         self.log_box.configure(state="normal")
-        self.log_box.insert("end", timestamped + "\n")
+        self.log_box.delete("1.0", "end")
+        for message, _is_error in visible_entries:
+            self.log_box.insert("end", message + "\n")
         self.log_box.see("end")
         self.log_box.configure(state="disabled")
-        if save_to_file and self.current_log_path:
-            ensure_directory(LOG_DIR)
-            with self.current_log_path.open("a", encoding="utf-8", errors="replace") as handle:
-                handle.write(timestamped + "\n")
 
     def open_logs(self):
         ensure_directory(LOG_DIR)
         os.startfile(str(LOG_DIR))
 
     def select_movie(self):
+
         path = filedialog.askopenfilename(
             title="Film auswählen",
             filetypes=[("Videodateien", "*.mkv *.mp4 *.avi *.mov *.wmv *.m4v *.ts *.mpg *.mpeg"), ("Alle Dateien", "*.*")],
@@ -745,27 +812,40 @@ class PlexTransferApp(ctk.CTk):
     def _build_job(self, path: Path, forced_type: str | None = None) -> Job:
         media_type = forced_type
         if media_type is None:
-            if path.is_file() and looks_like_video(path):
-                media_type = "Film"
-            elif path.is_dir():
+            if path.is_dir():
                 media_type = "Serie"
+            elif path.is_file() and looks_like_video(path):
+                media_type = "Serie" if detect_season_number(path.stem) is not None else "Film"
             else:
                 raise ValueError(f"Nicht unterstützter Pfad:\n{path}")
 
         if media_type == "Film":
             if not path.is_file():
                 raise ValueError(f"Ein Film muss eine Videodatei sein:\n{path}")
-            title = sanitize_name(path.stem)
+            title = normalize_title(path.stem, "Film")
             target_dir = Path(self.config_data["movies_root"]).expanduser() / title
             target_path = target_dir / f"{title}{path.suffix.lower()}"
         else:
-            if not path.is_dir():
-                raise ValueError(f"Eine Serie muss ein Ordner sein:\n{path}")
-            show_name = sanitize_name(path.name)
-            if has_season_subfolders(path):
-                target_path = Path(self.config_data["series_root"]).expanduser() / show_name
+            if path.is_dir():
+                show_name = normalize_title(path.name, "Serie")
+                if has_season_subfolders(path):
+                    target_path = Path(self.config_data["series_root"]).expanduser() / show_name
+                else:
+                    season = 1
+                    try:
+                        for child in path.iterdir():
+                            if child.is_file() and looks_like_video(child):
+                                season = detect_season_number(child.stem) or season
+                                break
+                    except OSError:
+                        pass
+                    target_path = Path(self.config_data["series_root"]).expanduser() / show_name / f"Season {season:02d}"
             else:
-                target_path = Path(self.config_data["series_root"]).expanduser() / show_name / "Season 01"
+                if not path.is_file() or not looks_like_video(path):
+                    raise ValueError(f"Eine Serie muss ein Ordner oder eine Episodendatei sein:\n{path}")
+                season = detect_season_number(path.stem) or 1
+                show_name = extract_show_name_from_episode(path.stem)
+                target_path = Path(self.config_data["series_root"]).expanduser() / show_name / f"Season {season:02d}" / path.name
         job = Job(source=str(path), target=str(target_path), media_type=media_type, id=self.job_counter)
         self.job_counter += 1
         return job
@@ -774,6 +854,21 @@ class PlexTransferApp(ctk.CTk):
         selection = self.job_tree.selection()
         self.selected_job_id = int(selection[0]) if selection else None
         self._refresh_job_actions()
+
+    def on_tree_click(self, event):
+        region = self.job_tree.identify("region", event.x, event.y)
+        column = self.job_tree.identify_column(event.x)
+        row = self.job_tree.identify_row(event.y)
+        if region == "cell" and column == "#1" and row:
+            job_id = int(row)
+            if job_id in self.checked_job_ids:
+                self.checked_job_ids.remove(job_id)
+            else:
+                self.checked_job_ids.add(job_id)
+            self.selected_job_id = job_id
+            self._refresh_job_list(preserve_selection=True)
+            return "break"
+        return None
 
     def open_tree_context_menu(self, event):
         row = self.job_tree.identify_row(event.y)
@@ -788,25 +883,75 @@ class PlexTransferApp(ctk.CTk):
             if self.context_menu:
                 self.context_menu.grab_release()
 
+    def _get_selected_job(self) -> Job | None:
+        idx = self._job_index(self.selected_job_id)
+        return self.jobs[idx] if idx is not None else None
+
+    def _get_checked_jobs(self) -> list[Job]:
+        return [job for job in self.jobs if job.id in self.checked_job_ids]
+
+    def open_selected_source(self, _event=None):
+        job = self._get_selected_job()
+        if job:
+            self._open_job_location(job, target=False)
+
+    def open_selected_target(self):
+        job = self._get_selected_job()
+        if job:
+            self._open_job_location(job, target=True)
+
+    def copy_selected_path(self):
+        job = self._get_selected_job()
+        if not job:
+            return
+        self.clipboard_clear()
+        self.clipboard_append(job.source)
+        self.last_action_var.set("Quellpfad in die Zwischenablage kopiert.")
+        self.append_log(f"Pfad kopiert: {job.source}")
+
+    def _open_job_location(self, job: Job, target: bool):
+        raw_path = Path(job.target if target else job.source)
+        try:
+            if raw_path.is_file():
+                open_path = raw_path.parent
+            elif raw_path.exists():
+                open_path = raw_path
+            elif target and raw_path.suffix:
+                open_path = raw_path.parent
+            else:
+                open_path = raw_path
+                while not open_path.exists() and open_path.parent != open_path:
+                    open_path = open_path.parent
+        except OSError:
+            open_path = raw_path.parent if target and raw_path.suffix else raw_path
+        try:
+            path_exists = open_path.exists()
+        except OSError:
+            path_exists = False
+        if not path_exists:
+            messagebox.showinfo(APP_NAME, f"Pfad ist aktuell nicht erreichbar:\n{raw_path}")
+            return
+        os.startfile(str(open_path))
+        self.last_action_var.set(f"Explorer geöffnet: {open_path.name}")
+
     def _refresh_job_actions(self):
-        disabled = self.running or self.selected_job_id is None
-        for button in (self.move_up_button, self.move_down_button, self.remove_button):
-            button.configure(state="disabled" if disabled else "normal")
+        checked = bool(self.checked_job_ids)
+        disabled_single = self.running or self.selected_job_id is None
+        disabled_remove = self.running or (self.selected_job_id is None and not checked)
+        for button in (self.move_up_button, self.move_down_button):
+            button.configure(state="disabled" if disabled_single else "normal")
+        self.remove_button.configure(state="disabled" if disabled_remove else "normal")
         self.clear_button.configure(state="disabled" if self.running or not self.jobs else "normal")
         if self.context_menu:
+            states = {0: disabled_single, 1: disabled_single, 3: disabled_remove, 4: disabled_single, 5: disabled_single, 6: disabled_single, 7: self.running or not self.jobs}
             end_index = self.context_menu.index("end")
             if end_index is not None:
-                for index in range(end_index + 1):
-                    item_type = self.context_menu.type(index)
-                    if item_type == "separator":
-                        continue
-                    if index == end_index:
-                        state = "disabled" if (self.running or not self.jobs) else "normal"
-                    else:
-                        state = "disabled" if disabled else "normal"
-                    self.context_menu.entryconfigure(index, state=state)
+                for index, disabled in states.items():
+                    if index <= end_index:
+                        self.context_menu.entryconfigure(index, state="disabled" if disabled else "normal")
 
     def _job_index(self, job_id: int | None) -> int | None:
+
         if job_id is None:
             return None
         for index, job in enumerate(self.jobs):
@@ -829,10 +974,22 @@ class PlexTransferApp(ctk.CTk):
         self._refresh_job_list(preserve_selection=True)
 
     def remove_selected_job(self):
+        if self.running:
+            return
+        if self.checked_job_ids:
+            removed_count = len(self.checked_job_ids)
+            self.jobs = [job for job in self.jobs if job.id not in self.checked_job_ids]
+            self.checked_job_ids.clear()
+            self.selected_job_id = self.jobs[0].id if self.jobs else None
+            self._refresh_job_list(preserve_selection=True)
+            self._refresh_empty_state()
+            self.last_action_var.set(f"{removed_count} Jobs entfernt.")
+            return
         idx = self._job_index(self.selected_job_id)
-        if idx is None or self.running:
+        if idx is None:
             return
         removed = self.jobs.pop(idx)
+        self.checked_job_ids.discard(removed.id)
         self.selected_job_id = self.jobs[min(idx, len(self.jobs) - 1)].id if self.jobs else None
         self._refresh_job_list(preserve_selection=True)
         self._refresh_empty_state()
@@ -844,6 +1001,7 @@ class PlexTransferApp(ctk.CTk):
         if not messagebox.askyesno(APP_NAME, "Alle Jobs wirklich entfernen?"):
             return
         self.jobs.clear()
+        self.checked_job_ids.clear()
         self.selected_job_id = None
         self._refresh_job_list(preserve_selection=False)
         self._refresh_empty_state()
@@ -855,21 +1013,27 @@ class PlexTransferApp(ctk.CTk):
             self.job_tree.delete(item)
         for job in self.jobs:
             tag = f"job_{job.id}"
+            checkbox = "[x]" if job.id in self.checked_job_ids else "[ ]"
             color_key = "danger" if job.status.startswith("Fehler") else JOB_COLORS.get(job.status, "muted")
-            self.job_tree.tag_configure(tag, foreground=self.palette[color_key])
-            self.job_tree.insert("", "end", iid=str(job.id), values=(job.source, job.target, job.media_type, job.status, job.progress), tags=(tag,))
+            row_background = self.palette["primary_soft"] if job.id in self.active_job_ids else self.palette["card"]
+            self.job_tree.tag_configure(tag, foreground=self.palette.get(color_key, self.palette["muted"]), background=row_background)
+            self.job_tree.insert("", "end", iid=str(job.id), values=(checkbox, job.source, job.target, job.media_type, job.status, job.progress), tags=(tag,))
         if selected and str(selected) in self.job_tree.get_children():
             self.job_tree.selection_set(str(selected))
         else:
-            self.selected_job_id = int(self.job_tree.get_children()[0]) if self.job_tree.get_children() else None
+            children = self.job_tree.get_children()
+            self.selected_job_id = int(children[0]) if children else None
             if self.selected_job_id is not None:
                 self.job_tree.selection_set(str(self.selected_job_id))
         total = len(self.jobs)
         success = sum(1 for job in self.jobs if job.status == "Kopiert")
         skipped = sum(1 for job in self.jobs if job.status == "Übersprungen")
         failed = sum(1 for job in self.jobs if job.status.startswith("Fehler"))
+        waiting = sum(1 for job in self.jobs if job.status in {"Bereit", "Wartet"})
+        running = len(self.active_job_ids)
         completed = success + skipped + failed
         self.job_meta_var.set(f"{total} Jobs in der Liste")
+        self.job_status_line_var.set(f"{waiting} wartend | {running} läuft | {failed} Fehler")
         if total == 0:
             self.overall_progress.set(0)
             self.summary_var.set("Noch keine Kopiervorgänge gestartet.")
@@ -885,6 +1049,7 @@ class PlexTransferApp(ctk.CTk):
             self.jobs_empty_state.place(relx=0.5, rely=0.5, anchor="center")
 
     def validate_roots(self) -> bool:
+
         movies_root = Path(self.config_data["movies_root"]).expanduser()
         series_root = Path(self.config_data["series_root"]).expanduser()
         missing = [str(path) for path in (movies_root, series_root) if not path.exists()]
@@ -904,8 +1069,12 @@ class PlexTransferApp(ctk.CTk):
             return
         if not self.validate_roots():
             return
+        if not self._show_copy_preview():
+            self.last_action_var.set("Kopiervorgang abgebrochen.")
+            return
 
         self.running = True
+        self.active_job_ids.clear()
         self.current_log_path = LOG_DIR / f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
         ensure_directory(LOG_DIR)
         self._set_global_status("Kopiert...", "Kopiervorgang läuft.")
@@ -932,19 +1101,21 @@ class PlexTransferApp(ctk.CTk):
     def _run_job(self, job: Job):
         source_path = Path(job.source)
         target_path = Path(job.target)
+        self.ui_queue.put(("job_start", job.id))
         self.ui_queue.put(("job_update", (job.id, "Kopiert...", "0%")))
-        self.ui_queue.put(("log", f"Starte Job #{job.id}: {job.source} -> {job.target}"))
+        self.ui_queue.put(("log", (f"Starte Job #{job.id}: {job.source} -> {job.target}", False)))
         try:
-            ensure_directory(target_path.parent if job.media_type == "Film" else target_path)
+            ensure_directory(target_path.parent if job.media_type == "Film" and target_path.suffix else target_path)
             command = self._build_robocopy_command(job)
-            self.ui_queue.put(("log", f"robocopy {' '.join(command)}"))
+            self.ui_queue.put(("log", (f"robocopy {' '.join(command)}", False)))
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace")
             last_progress = "0%"
             if process.stdout:
                 for line in process.stdout:
                     cleaned = line.rstrip()
                     if cleaned:
-                        self.ui_queue.put(("log", f"Job #{job.id}: {cleaned}"))
+                        is_error = "error" in cleaned.lower() or "fehler" in cleaned.lower()
+                        self.ui_queue.put(("log", (f"Job #{job.id}: {cleaned}", is_error)))
                     progress = self._extract_progress(cleaned)
                     if progress and progress != last_progress:
                         last_progress = progress
@@ -954,18 +1125,21 @@ class PlexTransferApp(ctk.CTk):
             if return_code < 8:
                 if return_code == 0:
                     self.ui_queue.put(("job_update", (job.id, "Übersprungen", last_progress)))
-                    self.ui_queue.put(("log", f"Job #{job.id} ohne Änderungen beendet (Code 0)."))
+                    self.ui_queue.put(("log", (f"Job #{job.id} ohne Änderungen beendet (Code 0).", False)))
                 else:
                     self.ui_queue.put(("job_update", (job.id, "Kopiert", "100%")))
-                    self.ui_queue.put(("log", f"Job #{job.id} erfolgreich abgeschlossen (Code {return_code})."))
+                    self.ui_queue.put(("log", (f"Job #{job.id} erfolgreich abgeschlossen (Code {return_code}).", False)))
             else:
                 self.ui_queue.put(("job_update", (job.id, f"Fehler ({return_code})", last_progress)))
-                self.ui_queue.put(("log", f"Job #{job.id} fehlgeschlagen (Code {return_code})."))
+                self.ui_queue.put(("log", (f"Job #{job.id} fehlgeschlagen (Code {return_code}).", True)))
         except Exception as exc:
             self.ui_queue.put(("job_update", (job.id, "Fehler", "-")))
-            self.ui_queue.put(("log", f"Job #{job.id} abgebrochen: {exc}"))
+            self.ui_queue.put(("log", (f"Job #{job.id} abgebrochen: {exc}", True)))
+        finally:
+            self.ui_queue.put(("job_done", job.id))
 
     def _build_robocopy_command(self, job: Job) -> list[str]:
+
         source_path = Path(job.source)
         target_path = Path(job.target)
         flags = ["/MT:32", "/J", "/R:1", "/W:1", "/Z", "/FFT", "/TEE"]
@@ -979,27 +1153,31 @@ class PlexTransferApp(ctk.CTk):
 
     def manual_refresh(self):
         if not self.config_data.get("plex_url") or not self.config_data.get("plex_token"):
-            messagebox.showinfo(APP_NAME, "Bitte zuerst Plex-URL und Token in den Einstellungen speichern.")
+            hint = "Bitte zuerst Plex-URL und Token in den Einstellungen speichern."
+            self.append_log(hint, save_to_file=True, is_error=True)
+            self.last_action_var.set("Plex-Zugangsdaten fehlen.")
+            messagebox.showinfo(APP_NAME, hint)
             return
-        movies_ok, series_ok = self._trigger_plex_refresh()
+        movies_ok, series_ok = self._trigger_plex_refresh({"Film", "Serie"})
         if movies_ok or series_ok:
             self.append_log("Plex-Refresh erfolgreich ausgelöst.", save_to_file=True)
             self.last_action_var.set("Plex-Refresh ausgelöst.")
             self._set_global_status("Bereit", "Plex-Refresh gesendet.")
             messagebox.showinfo(APP_NAME, "Plex-Refresh wurde ausgelöst.")
         else:
-            self.append_log("Plex-Refresh konnte nicht ausgelöst werden.", save_to_file=True)
+            self.append_log("Plex-Refresh konnte nicht ausgelöst werden.", save_to_file=True, is_error=True)
             self.last_action_var.set("Plex-Refresh fehlgeschlagen.")
             self._set_global_status("Fehler", "Plex-Refresh fehlgeschlagen.")
             messagebox.showerror(APP_NAME, "Plex-Refresh konnte nicht ausgelöst werden.")
 
-    def _trigger_plex_refresh(self) -> tuple[bool, bool]:
+    def _trigger_plex_refresh(self, libraries: set[str] | None = None) -> tuple[bool, bool]:
         base_url = str(self.config_data.get("plex_url", "")).rstrip("/")
         token = str(self.config_data.get("plex_token", "")).strip()
         movies_section = str(self.config_data.get("movies_section_id", "")).strip()
         series_section = str(self.config_data.get("series_section_id", "")).strip()
         if not base_url or not token:
             return False, False
+        target_libraries = libraries or {"Film", "Serie"}
 
         def refresh(section_id: str) -> bool:
             if not section_id:
@@ -1010,11 +1188,11 @@ class PlexTransferApp(ctk.CTk):
                 with urllib.request.urlopen(request, timeout=10) as response:
                     return 200 <= response.status < 300
             except Exception as exc:
-                self.append_log(f"Plex-Refresh für Section {section_id} fehlgeschlagen: {exc}", save_to_file=True)
+                self.append_log(f"Plex-Refresh für Section {section_id} fehlgeschlagen: {exc}", save_to_file=True, is_error=True)
                 return False
 
-        movies_ok = refresh(movies_section)
-        series_ok = refresh(series_section)
+        movies_ok = refresh(movies_section) if "Film" in target_libraries else False
+        series_ok = refresh(series_section) if "Serie" in target_libraries else False
         return movies_ok, series_ok
 
     def _poll_ui_queue(self):
@@ -1022,7 +1200,8 @@ class PlexTransferApp(ctk.CTk):
             while True:
                 message_type, payload = self.ui_queue.get_nowait()
                 if message_type == "log":
-                    self.append_log(str(payload), save_to_file=True)
+                    message, is_error = payload
+                    self.append_log(str(message), save_to_file=True, is_error=is_error)
                 elif message_type == "job_update":
                     job_id, status, progress = payload
                     for job in self.jobs:
@@ -1031,6 +1210,12 @@ class PlexTransferApp(ctk.CTk):
                             job.progress = progress
                             break
                     self._refresh_job_list(preserve_selection=True)
+                elif message_type == "job_start":
+                    self.active_job_ids.add(int(payload))
+                    self._refresh_job_list(preserve_selection=True)
+                elif message_type == "job_done":
+                    self.active_job_ids.discard(int(payload))
+                    self._refresh_job_list(preserve_selection=True)
                 elif message_type == "all_done":
                     self._finish_run()
         except queue.Empty:
@@ -1038,6 +1223,7 @@ class PlexTransferApp(ctk.CTk):
         self.after(150, self._poll_ui_queue)
 
     def _set_global_status(self, title: str, detail: str):
+
         self.status_var.set(title)
         self.status_detail_var.set(detail)
         self._update_status_badge()
@@ -1051,6 +1237,7 @@ class PlexTransferApp(ctk.CTk):
     def _finish_run(self):
         self.running = False
         self.executor = None
+        self.active_job_ids.clear()
         success = sum(1 for job in self.jobs if job.status == "Kopiert")
         skipped = sum(1 for job in self.jobs if job.status == "Übersprungen")
         failed = sum(1 for job in self.jobs if job.status.startswith("Fehler"))
@@ -1063,13 +1250,52 @@ class PlexTransferApp(ctk.CTk):
         self.append_log("Kopiervorgang abgeschlossen.", save_to_file=True)
         self._refresh_job_list(preserve_selection=True)
         if self.config_data.get("auto_refresh") and success:
-            movies_ok, series_ok = self._trigger_plex_refresh()
+            affected_libraries = {job.media_type for job in self.jobs if job.status == "Kopiert"}
+            movies_ok, series_ok = self._trigger_plex_refresh(affected_libraries)
             if movies_ok or series_ok:
                 self.append_log("Automatischer Plex-Refresh erfolgreich ausgelöst.", save_to_file=True)
             else:
-                self.append_log("Automatischer Plex-Refresh konnte nicht ausgelöst werden.", save_to_file=True)
+                self.append_log("Automatischer Plex-Refresh konnte nicht ausgelöst werden.", save_to_file=True, is_error=True)
+        messagebox.showinfo(APP_NAME, f"Kopiervorgang abgeschlossen.\n\nErfolgreich: {success}\nÜbersprungen: {skipped}\nFehlgeschlagen: {failed}")
+
+    def _show_copy_preview(self) -> bool:
+        dialog = ctk.CTkToplevel(self)
+        dialog.title("Zielvorschau")
+        dialog.geometry("980x620")
+        dialog.transient(self)
+        dialog.grab_set()
+        dialog.grid_columnconfigure(0, weight=1)
+        dialog.grid_rowconfigure(1, weight=1)
+
+        ctk.CTkLabel(dialog, text="Zielvorschau vor dem Start", font=self._font(20, "bold")).grid(row=0, column=0, sticky="w", padx=20, pady=(18, 10))
+        preview = ctk.CTkScrollableFrame(dialog, fg_color="transparent")
+        preview.grid(row=1, column=0, sticky="nsew", padx=20, pady=(0, 12))
+        preview.grid_columnconfigure(0, weight=1)
+        for idx, job in enumerate(self.jobs):
+            row = ctk.CTkFrame(preview, corner_radius=14, border_width=1, fg_color=self.palette["card"], border_color=self.palette["border"])
+            row.grid(row=idx, column=0, sticky="ew", pady=(0, 10))
+            row.grid_columnconfigure(0, weight=1)
+            ctk.CTkLabel(row, text=f"{job.media_type} · {Path(job.source).name}", font=self._font(11, "bold")).grid(row=0, column=0, sticky="w", padx=14, pady=(12, 4))
+            ctk.CTkLabel(row, text=f"Quelle: {job.source}", font=self._font(10), justify="left", wraplength=880).grid(row=1, column=0, sticky="w", padx=14)
+            ctk.CTkLabel(row, text=f"Ziel: {job.target}", font=self._font(10), justify="left", wraplength=880).grid(row=2, column=0, sticky="w", padx=14, pady=(4, 12))
+
+        confirmed = {"value": False}
+        controls = ctk.CTkFrame(dialog, fg_color="transparent")
+        controls.grid(row=2, column=0, sticky="ew", padx=20, pady=(0, 20))
+        controls.grid_columnconfigure(0, weight=1)
+        controls.grid_columnconfigure(1, weight=1)
+
+        def approve():
+            confirmed["value"] = True
+            dialog.destroy()
+
+        self._make_secondary_button(controls, "Abbrechen", dialog.destroy).grid(row=0, column=0, sticky="ew", padx=(0, 8))
+        self._make_primary_button(controls, "Starten", approve).grid(row=0, column=1, sticky="ew", padx=(8, 0))
+        self.wait_window(dialog)
+        return confirmed["value"]
 
     def on_close(self):
+
         if self.running:
             if not messagebox.askyesno(APP_NAME, "Es läuft noch ein Kopiervorgang. Anwendung trotzdem schließen?"):
                 return
