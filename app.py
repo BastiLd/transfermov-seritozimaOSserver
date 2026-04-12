@@ -253,6 +253,7 @@ class Job:
     media_type: str
     status: str = "Bereit"
     progress: str = "-"
+    live_speed_bytes_per_sec: float = 0.0
     size_bytes: int = 0
     size_label: str = "-"
     return_code: int | None = None
@@ -326,6 +327,7 @@ class PlexTransferApp(ctk.CTk):
         self.pending_copy_after_speed_test = False
         self.current_run_started_at: float | None = None
         self.current_run_total_bytes = 0
+        self.current_live_speed_bytes_per_sec = 0.0
 
         self.status_var = tk.StringVar(value="Bereit")
         self.status_detail_var = tk.StringVar(value="Wartet auf neue Jobs.")
@@ -752,6 +754,29 @@ class PlexTransferApp(ctk.CTk):
             widget_row["percent"].configure(text=progress_value)
             widget_row["frame"].grid()
 
+    def _extract_speed(self, line: str) -> float | None:
+        normalized = line.replace("\xa0", " ")
+        if not any(token in normalized.lower() for token in ("bytes/sek", "bytes/sec")):
+            return None
+        match = re.search(r"(?:geschwindigkeit|speed)\s*:\s*([\d\s.,]+)\s*bytes/(?:sek|sec)", normalized, re.IGNORECASE)
+        if not match:
+            return None
+        digits_only = re.sub(r"[^\d]", "", match.group(1))
+        if not digits_only:
+            return None
+        try:
+            speed = float(digits_only)
+        except ValueError:
+            return None
+        return speed if speed > 0 else None
+
+    def _current_live_speed(self) -> float:
+        return sum(
+            max(job.live_speed_bytes_per_sec, 0.0)
+            for job in self.jobs
+            if job.id in self.active_job_ids
+        )
+
     def _get_measured_speed(self) -> float:
         try:
             return float(self.config_data.get("last_measured_bytes_per_sec", 0.0) or 0.0)
@@ -783,8 +808,13 @@ class PlexTransferApp(ctk.CTk):
             self.eta_var.set("Geschätzte Dauer: Messung läuft")
             self.eta_detail_var.set("Die NAS-Geschwindigkeit wird gerade ermittelt.")
         elif self.running:
-            self.eta_var.set("Geschätzte Dauer: vorab berechnet")
-            self.eta_detail_var.set("Die Vorab-Schätzung gilt für die Jobliste vor dem Start.")
+            live_speed = self._current_live_speed()
+            if live_speed > 0:
+                self.eta_var.set(f"Aktuelle Geschwindigkeit: {format_speed(live_speed)}")
+                self.eta_detail_var.set("Live aus robocopy gelesen.")
+            else:
+                self.eta_var.set("Aktuelle Geschwindigkeit: wird ermittelt")
+                self.eta_detail_var.set("Warte auf erste robocopy-Geschwindigkeitsdaten.")
         elif not self.jobs:
             self.eta_var.set("Geschätzte Dauer: nicht verfügbar")
             self.eta_detail_var.set("Füge zuerst Jobs hinzu.")
@@ -1117,9 +1147,7 @@ class PlexTransferApp(ctk.CTk):
         if media_type == "Film":
             if not path.is_file():
                 raise ValueError(f"Ein Film muss eine Videodatei sein:\n{path}")
-            title = normalize_title(path.stem, "Film")
-            target_dir = Path(self.config_data["movies_root"]).expanduser() / title
-            target_path = target_dir / f"{title}{path.suffix.lower()}"
+            target_path = Path(self.config_data["movies_root"]).expanduser() / path.name
         else:
             if path.is_dir():
                 show_name = normalize_title(path.name, "Serie")
@@ -1395,6 +1423,7 @@ class PlexTransferApp(ctk.CTk):
         self.active_job_ids.clear()
         self.current_run_started_at = time.perf_counter()
         self.current_run_total_bytes = sum(job.size_bytes for job in self.jobs if job.status not in {"Kopiert", "Übersprungen"})
+        self.current_live_speed_bytes_per_sec = 0.0
         self.current_log_path = LOG_DIR / f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
         ensure_directory(LOG_DIR)
         self._set_global_status("Kopiert...", "Kopiervorgang läuft.")
@@ -1406,6 +1435,7 @@ class PlexTransferApp(ctk.CTk):
             if job.status not in {"Kopiert", "Übersprungen"}:
                 job.status = "Wartet"
                 job.progress = "0%"
+                job.live_speed_bytes_per_sec = 0.0
         self._refresh_job_list(preserve_selection=True)
         self.executor = ThreadPoolExecutor(max_workers=2 if self.config_data["parallel_enabled"] else 1)
         for job in self.jobs:
@@ -1440,6 +1470,9 @@ class PlexTransferApp(ctk.CTk):
                     if progress and progress != last_progress:
                         last_progress = progress
                         self.ui_queue.put(("job_update", (job.id, "Kopiert...", progress)))
+                    speed = self._extract_speed(cleaned)
+                    if speed is not None:
+                        self.ui_queue.put(("job_speed", (job.id, speed)))
             return_code = process.wait()
             job.return_code = return_code
             if return_code < 8:
@@ -1456,6 +1489,7 @@ class PlexTransferApp(ctk.CTk):
             self.ui_queue.put(("job_update", (job.id, "Fehler", "-")))
             self.ui_queue.put(("log", (f"Job #{job.id} abgebrochen: {exc}", True)))
         finally:
+            self.ui_queue.put(("job_speed", (job.id, 0.0)))
             self.ui_queue.put(("job_done", job.id))
 
     def _build_robocopy_command(self, job: Job) -> list[str]:
@@ -1533,8 +1567,21 @@ class PlexTransferApp(ctk.CTk):
                 elif message_type == "job_start":
                     self.active_job_ids.add(int(payload))
                     self._refresh_job_list(preserve_selection=True)
+                elif message_type == "job_speed":
+                    job_id, speed = payload
+                    for job in self.jobs:
+                        if job.id == int(job_id):
+                            job.live_speed_bytes_per_sec = float(speed)
+                            break
+                    self.current_live_speed_bytes_per_sec = self._current_live_speed()
+                    self._update_eta_display()
                 elif message_type == "job_done":
                     self.active_job_ids.discard(int(payload))
+                    for job in self.jobs:
+                        if job.id == int(payload):
+                            job.live_speed_bytes_per_sec = 0.0
+                            break
+                    self.current_live_speed_bytes_per_sec = self._current_live_speed()
                     self._refresh_job_list(preserve_selection=True)
                 elif message_type == "speed_test_done":
                     bytes_per_sec = float(payload["bytes_per_sec"])
@@ -1576,6 +1623,9 @@ class PlexTransferApp(ctk.CTk):
         self.running = False
         self.executor = None
         self.active_job_ids.clear()
+        self.current_live_speed_bytes_per_sec = 0.0
+        for job in self.jobs:
+            job.live_speed_bytes_per_sec = 0.0
         success = sum(1 for job in self.jobs if job.status == "Kopiert")
         skipped = sum(1 for job in self.jobs if job.status == "Übersprungen")
         failed = sum(1 for job in self.jobs if job.status.startswith("Fehler"))

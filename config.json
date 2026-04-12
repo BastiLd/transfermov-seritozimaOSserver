@@ -1,11 +1,14 @@
 {
   "movies_root": "Z:\\Movies",
   "series_root": "Z:\\Series",
-  "plex_url": "",
-  "plex_token": "",
-  "movies_section_id": "",
-  "series_section_id": "",
-  "parallel_enabled": false,
-  "auto_refresh": false,
-  "theme_mode": "dunkel"
+  "plex_url": "http://192.168.68.106:32400",
+  "plex_token": "aTQUrzSdTMAXazxQpkSb",
+  "movies_section_id": "3",
+  "series_section_id": "4",
+  "parallel_enabled": true,
+  "auto_refresh": true,
+  "theme_mode": "dunkel",
+  "last_measured_bytes_per_sec": 14817256.549199766,
+  "last_measured_at": "2026-04-11T22:37:57",
+  "last_measured_source": "run"
 }
