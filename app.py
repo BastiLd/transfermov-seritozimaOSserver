@@ -51,7 +51,8 @@ DEFAULT_CONFIG = {
     "last_measured_at": "",
     "last_measured_source": "",
 }
-ROBOCOPY_COPY_FLAGS = ["/MT:32", "/J", "/R:1", "/W:1", "/FFT", "/TEE"]
+ROBOCOPY_THREAD_COUNT = 8
+ROBOCOPY_COPY_FLAGS = [f"/MT:{ROBOCOPY_THREAD_COUNT}", "/J", "/R:1", "/W:1", "/FFT", "/TEE"]
 
 PALETTES = {
     "hell": {

@@ -32,7 +32,7 @@ Alternativ per Doppelklick auf `start_plex_transfer.pyw`.
 - `Logs öffnen`: öffnet den lokalen Log-Ordner
 - `Plex Refresh`: löst manuell einen Plex-Library-Refresh aus
 - Zahnrad oben rechts: öffnet die separate Einstellungsseite
-- Kopien laufen mit schnellen LAN-Flags (`/J`, `/MT:32`, kurze Retry-Werte). Robocopys langsamer Restart-Modus `/Z` ist bewusst deaktiviert.
+- Kopien laufen mit schnellen LAN-Flags (`/J`, `/MT:8`, kurze Retry-Werte). Robocopys langsamer Restart-Modus `/Z` ist bewusst deaktiviert.
 
 ## Oberfläche
 

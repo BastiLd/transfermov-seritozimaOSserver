@@ -1,16 +1,16 @@
 {
   "movies_root": "S:\\SM-MOONDOOM\\Movies",
   "series_root": "S:\\SM-MOONDOOM\\Series",
-  "plex_url": "http://192.168.68.106:32400",
-  "plex_token": "aTQUrzSdTMAXazxQpkSb",
-  "movies_section_id": "3",
-  "series_section_id": "4",
-  "parallel_enabled": true,
+  "plex_url": "http://192.168.68.10:32400",
+  "plex_token": "KYTBnStfTi-s-XnRWuyf",
+  "movies_section_id": "1",
+  "series_section_id": "2",
+  "parallel_enabled": false,
   "auto_refresh": true,
   "theme_mode": "dunkel",
   "remember_pending_jobs": true,
   "pending_jobs": [],
-  "last_measured_bytes_per_sec": 58839764.388170645,
-  "last_measured_at": "2026-04-30T18:56:00",
-  "last_measured_source": "probe"
+  "last_measured_bytes_per_sec": 115921326.33924004,
+  "last_measured_at": "2026-04-30T21:06:20",
+  "last_measured_source": "run"
 }
