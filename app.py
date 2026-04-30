@@ -4,6 +4,7 @@ import json
 import os
 import queue
 import re
+import shutil
 import subprocess
 import threading
 import time
@@ -44,10 +45,13 @@ DEFAULT_CONFIG = {
     "parallel_enabled": False,
     "auto_refresh": False,
     "theme_mode": "hell",
+    "remember_pending_jobs": True,
+    "pending_jobs": [],
     "last_measured_bytes_per_sec": 0.0,
     "last_measured_at": "",
     "last_measured_source": "",
 }
+ROBOCOPY_COPY_FLAGS = ["/MT:32", "/J", "/R:1", "/W:1", "/FFT", "/TEE"]
 
 PALETTES = {
     "hell": {
@@ -339,6 +343,8 @@ class PlexTransferApp(ctk.CTk):
         self.job_meta_var = tk.StringVar(value="0 Jobs in der Liste")
         self.job_status_line_var = tk.StringVar(value="0 wartend | 0 läuft | 0 Fehler")
         self.overall_progress_text_var = tk.StringVar(value="0% abgeschlossen")
+        self.transfer_size_var = tk.StringVar(value="Ausgewählt: -")
+        self.target_space_var = tk.StringVar(value="Ziel frei: -")
         self.eta_var = tk.StringVar(value="Geschätzte Dauer: nicht verfügbar")
         self.eta_detail_var = tk.StringVar(value="Noch kein Messwert vorhanden.")
         self.log_errors_only_var = tk.BooleanVar(value=False)
@@ -352,6 +358,7 @@ class PlexTransferApp(ctk.CTk):
             "series_section_id": tk.StringVar(),
             "parallel_enabled": tk.BooleanVar(),
             "auto_refresh": tk.BooleanVar(),
+            "remember_pending_jobs": tk.BooleanVar(),
             "theme_mode": tk.StringVar(),
         }
         self._load_settings_draft()
@@ -361,6 +368,7 @@ class PlexTransferApp(ctk.CTk):
         self._build_main_view()
         self._build_settings_view()
         self._show_main_view()
+        self._restore_pending_jobs()
         self._update_status_badge()
         self._refresh_job_actions()
         self._refresh_job_list()
@@ -660,7 +668,9 @@ class PlexTransferApp(ctk.CTk):
         metrics.grid_columnconfigure(1, weight=1)
         self._build_metric(metrics, "Gesamtstatus", self.status_var, 0, 0)
         self._build_metric(metrics, "Fortschritt", self.job_meta_var, 0, 1)
-        self._build_metric(metrics, "Letzte Aktion", self.last_action_var, 1, 0, 2)
+        self._build_metric(metrics, "Ausgewählte Größe", self.transfer_size_var, 1, 0, 2)
+        self._build_metric(metrics, "Zielspeicher", self.target_space_var, 2, 0, 2)
+        self._build_metric(metrics, "Letzte Aktion", self.last_action_var, 3, 0, 2)
     def _build_settings_view(self):
         top = ctk.CTkFrame(self.settings_view, fg_color="transparent")
         top.grid(row=0, column=0, sticky="ew", padx=6, pady=(6, 10))
@@ -680,6 +690,7 @@ class PlexTransferApp(ctk.CTk):
             ("Ziele", "Pfade für Filme und Serien"),
             ("Plex", "Serverdaten und Bibliotheksbereiche"),
             ("Parallelität", "Steuerung der Kopierausführung"),
+            ("Jobliste", "Offene Auswahl beim nächsten Start wiederherstellen"),
             ("Darstellung", "Helles oder dunkles Erscheinungsbild"),
         )):
             card, body = self._create_card(self.settings_view, title, subtitle)
@@ -703,6 +714,11 @@ class PlexTransferApp(ctk.CTk):
         self.parallel_switch.grid(row=0, column=0, sticky="ew")
 
         _, body = self.settings_panels[3]
+        self.remember_pending_check = ctk.CTkCheckBox(body, text="Offene Film- und Serienauswahl beim Schließen speichern", variable=self.settings_vars["remember_pending_jobs"], font=self._font(11))
+        self.remember_pending_check.grid(row=0, column=0, sticky="w")
+        ctk.CTkLabel(body, text="Nur noch nicht erfolgreich kopierte Jobs werden wiederhergestellt.", font=self._font(10)).grid(row=1, column=0, sticky="w", pady=(10, 0))
+
+        _, body = self.settings_panels[4]
         self.theme_switch = ctk.CTkSegmentedButton(body, values=["Hell", "Dunkel"], command=self.on_theme_segment_changed)
         self.theme_switch.grid(row=0, column=0, sticky="ew")
         ctk.CTkLabel(body, text="Das ausgewählte Theme wird erst nach dem Speichern aktiv.", font=self._font(10)).grid(row=1, column=0, sticky="w", pady=(10, 0))
@@ -780,6 +796,19 @@ class PlexTransferApp(ctk.CTk):
             if job.id in self.active_job_ids
         )
 
+    def _remaining_bytes_for_eta(self) -> int:
+        remaining_total = 0
+        for job in self.jobs:
+            if job.status in {"Kopiert", "Übersprungen"} or job.status.startswith("Fehler"):
+                continue
+            if job.size_bytes <= 0:
+                continue
+            remaining_fraction = 1.0
+            if job.status == "Kopiert...":
+                remaining_fraction = max(0.0, 1.0 - self._progress_to_fraction(job.progress))
+            remaining_total += int(job.size_bytes * remaining_fraction)
+        return remaining_total
+
     def _update_job_live_speed_from_progress(self, job: Job, progress: str) -> None:
         if job.size_bytes <= 0:
             return
@@ -808,6 +837,54 @@ class PlexTransferApp(ctk.CTk):
         job.last_progress_fraction = max(job.last_progress_fraction, progress_fraction)
         job.last_progress_at = now
 
+    def _open_transfer_jobs(self) -> list[Job]:
+        return [
+            job for job in self.jobs
+            if job.status not in {"Kopiert", "Übersprungen"}
+        ]
+
+    def _target_root_for_job(self, job: Job) -> Path:
+        root_key = "movies_root" if job.media_type == "Film" else "series_root"
+        return Path(self.config_data[root_key]).expanduser()
+
+    def _storage_group_key(self, root: Path) -> str:
+        anchor = root.anchor or str(root)
+        return anchor.rstrip("\\/") or str(root)
+
+    def _refresh_transfer_metrics(self) -> None:
+        open_jobs = self._open_transfer_jobs()
+        total_size = sum(job.size_bytes for job in open_jobs)
+        if total_size > 0:
+            self.transfer_size_var.set(f"Offene Transfers: {format_size(total_size)}")
+        elif self.jobs:
+            self.transfer_size_var.set("Offene Transfers: nichts offen")
+        else:
+            self.transfer_size_var.set("Offene Transfers: -")
+
+        if not open_jobs:
+            self.target_space_var.set("Ziel frei: -")
+            return
+
+        grouped: dict[str, dict[str, object]] = {}
+        for job in open_jobs:
+            root = self._target_root_for_job(job)
+            key = self._storage_group_key(root)
+            group = grouped.setdefault(key, {"root": root, "bytes": 0})
+            group["bytes"] = int(group["bytes"]) + max(job.size_bytes, 0)
+
+        lines = []
+        for key, group in grouped.items():
+            root = group["root"]
+            bytes_to_copy = int(group["bytes"])
+            try:
+                usage = shutil.disk_usage(root)
+                free_now = usage.free
+                free_after = free_now - bytes_to_copy
+                lines.append(f"{key}: {format_size(free_now)} frei, danach {format_size(max(free_after, 0))}")
+            except OSError:
+                lines.append(f"{key}: Ziel nicht erreichbar")
+        self.target_space_var.set("\n".join(lines))
+
     def _get_measured_speed(self) -> float:
         try:
             return float(self.config_data.get("last_measured_bytes_per_sec", 0.0) or 0.0)
@@ -834,17 +911,18 @@ class PlexTransferApp(ctk.CTk):
         return f"Basis: {source_label} · {format_speed(speed)}"
 
     def _update_eta_display(self):
-        total_size = sum(job.size_bytes for job in self.jobs if job.status not in {"Kopiert", "Übersprungen"})
+        total_size = self._remaining_bytes_for_eta()
         if self.speed_test_running:
             self.eta_var.set("Geschätzte Dauer: Messung läuft")
             self.eta_detail_var.set("Die NAS-Geschwindigkeit wird gerade ermittelt.")
         elif self.running:
             live_speed = self._current_live_speed()
             if live_speed > 0:
-                self.eta_var.set(f"Aktuelle Geschwindigkeit: {format_speed(live_speed)}")
+                eta_text = format_eta(total_size / live_speed) if total_size > 0 else "unter 1 Min"
+                self.eta_var.set(f"Aktuelle Geschwindigkeit: {format_speed(live_speed)} · Verbleibend: {eta_text}")
                 self.eta_detail_var.set("Live aus Fortschritt und robocopy-Daten berechnet.")
             else:
-                self.eta_var.set("Aktuelle Geschwindigkeit: wird ermittelt")
+                self.eta_var.set("Aktuelle Geschwindigkeit: wird ermittelt · Verbleibend: wird ermittelt")
                 self.eta_detail_var.set("Warte auf erste Fortschrittsdaten des laufenden Kopiervorgangs.")
         elif not self.jobs:
             self.eta_var.set("Geschätzte Dauer: nicht verfügbar")
@@ -920,13 +998,7 @@ class PlexTransferApp(ctk.CTk):
                 str(local_dir),
                 str(target_dir),
                 source_file.name,
-                "/MT:32",
-                "/J",
-                "/R:1",
-                "/W:1",
-                "/Z",
-                "/FFT",
-                "/TEE",
+                *ROBOCOPY_COPY_FLAGS,
             ]
             self.ui_queue.put(("log", ("Starte 1-GB-Geschwindigkeitstest.", False)))
             started_at = time.perf_counter()
@@ -1001,6 +1073,7 @@ class PlexTransferApp(ctk.CTk):
         for panel, _ in self.settings_panels:
             panel.configure(fg_color=p["card"], border_color=p["border"])
         self.auto_refresh_check.configure(text_color=p["text"], fg_color=p["primary"], hover_color=p["primary_hover"], border_color=p["border"])
+        self.remember_pending_check.configure(text_color=p["text"], fg_color=p["primary"], hover_color=p["primary_hover"], border_color=p["border"])
         self.parallel_switch.configure(fg_color=p["card_soft"], selected_color=p["primary"], selected_hover_color=p["primary_hover"], unselected_color=p["card_soft"], unselected_hover_color=p["surface"], text_color=p["text"])
         self.theme_switch.configure(fg_color=p["card_soft"], selected_color=p["primary"], selected_hover_color=p["primary_hover"], unselected_color=p["card_soft"], unselected_hover_color=p["surface"], text_color=p["text"])
         self._refresh_job_actions()
@@ -1038,9 +1111,11 @@ class PlexTransferApp(ctk.CTk):
             "series_section_id": self.settings_vars["series_section_id"].get().strip(),
             "parallel_enabled": bool(self.settings_vars["parallel_enabled"].get()),
             "auto_refresh": bool(self.settings_vars["auto_refresh"].get()),
+            "remember_pending_jobs": bool(self.settings_vars["remember_pending_jobs"].get()),
             "theme_mode": self.settings_vars["theme_mode"].get(),
         })
         self.config_data = updated_config
+        self._save_pending_jobs_if_enabled()
         save_config(self.config_data)
         self.palette = PALETTES[self.config_data["theme_mode"]]
         self._apply_palette()
@@ -1159,6 +1234,7 @@ class PlexTransferApp(ctk.CTk):
             return
         self.jobs.append(job)
         self.selected_job_id = job.id
+        self._save_pending_jobs_if_enabled()
         self._refresh_job_list(preserve_selection=True)
         self._refresh_empty_state()
         self.last_action_var.set(f"Job hinzugefügt: {Path(job.source).name}")
@@ -1211,6 +1287,62 @@ class PlexTransferApp(ctk.CTk):
         )
         self.job_counter += 1
         return job
+
+    def _pending_job_payload(self) -> list[dict[str, object]]:
+        payload = []
+        for job in self.jobs:
+            if job.status in {"Kopiert", "Übersprungen"}:
+                continue
+            payload.append({
+                "source": job.source,
+                "target": job.target,
+                "media_type": job.media_type,
+                "size_bytes": job.size_bytes,
+                "size_label": job.size_label,
+            })
+        return payload
+
+    def _save_pending_jobs_if_enabled(self) -> None:
+        if self.config_data.get("remember_pending_jobs"):
+            self.config_data["pending_jobs"] = self._pending_job_payload()
+        else:
+            self.config_data["pending_jobs"] = []
+        save_config(self.config_data)
+
+    def _restore_pending_jobs(self) -> None:
+        if not self.config_data.get("remember_pending_jobs"):
+            return
+        restored = 0
+        for item in self.config_data.get("pending_jobs", []):
+            if not isinstance(item, dict):
+                continue
+            source = str(item.get("source", "")).strip()
+            target = str(item.get("target", "")).strip()
+            media_type = str(item.get("media_type", "")).strip()
+            if not source or not target or media_type not in {"Film", "Serie"}:
+                continue
+            try:
+                size_bytes = int(item.get("size_bytes", 0) or 0)
+            except (TypeError, ValueError):
+                size_bytes = 0
+            source_path = Path(source)
+            if source_path.exists():
+                size_bytes = calculate_source_size(source_path)
+            job = Job(
+                source=source,
+                target=target,
+                media_type=media_type,
+                size_bytes=size_bytes,
+                size_label=format_size(size_bytes),
+                id=self.job_counter,
+            )
+            self.job_counter += 1
+            self.jobs.append(job)
+            restored += 1
+        if restored:
+            self.selected_job_id = self.jobs[0].id
+            self.last_action_var.set(f"{restored} offene Jobs wiederhergestellt.")
+            self.append_log(f"{restored} offene Jobs aus der letzten Sitzung wiederhergestellt.")
 
     def on_tree_select(self, _event=None):
         selection = self.job_tree.selection()
@@ -1328,6 +1460,7 @@ class PlexTransferApp(ctk.CTk):
         if idx is None or idx == 0 or self.running:
             return
         self.jobs[idx - 1], self.jobs[idx] = self.jobs[idx], self.jobs[idx - 1]
+        self._save_pending_jobs_if_enabled()
         self._refresh_job_list(preserve_selection=True)
 
     def move_job_down(self):
@@ -1335,6 +1468,7 @@ class PlexTransferApp(ctk.CTk):
         if idx is None or idx == len(self.jobs) - 1 or self.running:
             return
         self.jobs[idx + 1], self.jobs[idx] = self.jobs[idx], self.jobs[idx + 1]
+        self._save_pending_jobs_if_enabled()
         self._refresh_job_list(preserve_selection=True)
 
     def remove_selected_job(self):
@@ -1352,6 +1486,7 @@ class PlexTransferApp(ctk.CTk):
         self.jobs = [job for job in self.jobs if job.id not in job_ids_to_remove]
         self.checked_job_ids.difference_update(job_ids_to_remove)
         self.selected_job_id = self.jobs[min(first_index, len(self.jobs) - 1)].id if self.jobs else None
+        self._save_pending_jobs_if_enabled()
         self._refresh_job_list(preserve_selection=True)
         self._refresh_empty_state()
         if len(removed_jobs) == 1:
@@ -1367,6 +1502,7 @@ class PlexTransferApp(ctk.CTk):
         self.jobs.clear()
         self.checked_job_ids.clear()
         self.selected_job_id = None
+        self._save_pending_jobs_if_enabled()
         self._refresh_job_list(preserve_selection=False)
         self._refresh_empty_state()
         self.last_action_var.set("Alle Jobs entfernt.")
@@ -1408,6 +1544,7 @@ class PlexTransferApp(ctk.CTk):
             self.overall_progress_text_var.set(f"{round(overall_fraction * 100)}% abgeschlossen")
             self.summary_var.set(f"Erfolgreich {success} | Übersprungen {skipped} | Fehlgeschlagen {failed}")
         self._refresh_active_progress_rows()
+        self._refresh_transfer_metrics()
         self._update_eta_display()
         self._refresh_job_actions()
 
@@ -1530,7 +1667,7 @@ class PlexTransferApp(ctk.CTk):
 
         source_path = Path(job.source)
         target_path = Path(job.target)
-        flags = ["/MT:32", "/J", "/R:1", "/W:1", "/Z", "/FFT", "/TEE"]
+        flags = ROBOCOPY_COPY_FLAGS
         if job.media_type == "Film":
             return ["robocopy", str(source_path.parent), str(target_path.parent), source_path.name, *flags]
         return ["robocopy", str(source_path), str(target_path), "/E", *flags]
@@ -1696,6 +1833,7 @@ class PlexTransferApp(ctk.CTk):
             self.append_log(f"Gemessene Transfergeschwindigkeit gespeichert: {format_speed(measured_bps)}.", save_to_file=True)
         self.current_run_started_at = None
         self.current_run_total_bytes = 0
+        self._save_pending_jobs_if_enabled()
         self._refresh_job_list(preserve_selection=True)
         if self.config_data.get("auto_refresh") and success:
             affected_libraries = {job.media_type for job in self.jobs if job.status == "Kopiert"}
@@ -1801,6 +1939,7 @@ class PlexTransferApp(ctk.CTk):
         if self.running:
             if not messagebox.askyesno(APP_NAME, "Es läuft noch ein Kopiervorgang. Anwendung trotzdem schließen?"):
                 return
+        self._save_pending_jobs_if_enabled()
         self.destroy()
 
 

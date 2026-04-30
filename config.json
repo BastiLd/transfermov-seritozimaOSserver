@@ -1,6 +1,6 @@
 {
-  "movies_root": "Y:\\Movies",
-  "series_root": "Y:\\Series",
+  "movies_root": "S:\\SM-MOONDOOM\\Movies",
+  "series_root": "S:\\SM-MOONDOOM\\Series",
   "plex_url": "http://192.168.68.106:32400",
   "plex_token": "aTQUrzSdTMAXazxQpkSb",
   "movies_section_id": "3",
@@ -8,7 +8,9 @@
   "parallel_enabled": true,
   "auto_refresh": true,
   "theme_mode": "dunkel",
-  "last_measured_bytes_per_sec": 21097084.460341454,
-  "last_measured_at": "2026-04-12T22:30:03",
-  "last_measured_source": "run"
+  "remember_pending_jobs": true,
+  "pending_jobs": [],
+  "last_measured_bytes_per_sec": 58839764.388170645,
+  "last_measured_at": "2026-04-30T18:56:00",
+  "last_measured_source": "probe"
 }

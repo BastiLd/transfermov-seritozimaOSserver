@@ -32,6 +32,7 @@ Alternativ per Doppelklick auf `start_plex_transfer.pyw`.
 - `Logs öffnen`: öffnet den lokalen Log-Ordner
 - `Plex Refresh`: löst manuell einen Plex-Library-Refresh aus
 - Zahnrad oben rechts: öffnet die separate Einstellungsseite
+- Kopien laufen mit schnellen LAN-Flags (`/J`, `/MT:32`, kurze Retry-Werte). Robocopys langsamer Restart-Modus `/Z` ist bewusst deaktiviert.
 
 ## Oberfläche
 
@@ -44,6 +45,8 @@ Alternativ per Doppelklick auf `start_plex_transfer.pyw`.
   - `Nach unten`
   - `Entfernen`
   - `Alle entfernen`
+- Der rechte Statusbereich zeigt die gesamte offene Transfergröße und den freien Speicher des Ziel-Laufwerks vor und nach der Kopie.
+- In den Einstellungen kann die offene Jobliste automatisch gespeichert und beim nächsten Start wiederhergestellt werden.
 
 ## Zielstruktur
 
@@ -63,5 +66,6 @@ Alternativ per Doppelklick auf `start_plex_transfer.pyw`.
 ## Hinweise
 
 - Netzlaufwerke `Z:\Movies` und `Z:\Series` müssen erreichbar sein.
+- Die angezeigte Dauer basiert auf echter Schreibgeschwindigkeit zum Zielpfad, nicht auf der theoretischen 1-Gbit-Linkrate. Nach Netzwerk- oder Flag-Änderungen `Geschwindigkeit testen` erneut ausführen.
 - Robocopy-Rückgabecodes kleiner `8` werden als Erfolg behandelt.
 - Die App bleibt eine reine lokale Windows-Desktop-App ohne Web- oder Electron-Komponenten.
