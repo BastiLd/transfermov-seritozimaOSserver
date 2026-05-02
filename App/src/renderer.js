@@ -127,7 +127,8 @@ const els = {
   rememberInput: $("rememberInput"),
   themeInput: $("themeInput"),
   saveSettingsButton: $("saveSettingsButton"),
-  cancelSettingsButton: $("cancelSettingsButton")
+  cancelSettingsButton: $("cancelSettingsButton"),
+  plexieMascot: $("plexieMascot")
 };
 
 window.__plexTransferGetJobsForMain = () => state.jobs;
@@ -216,6 +217,16 @@ function setGlobalStatus(title, detail) {
   const active = title === "Kopiert...";
   els.statusBadge.style.background = danger ? "var(--danger)" : good ? "var(--success)" : active ? "var(--primary)" : "var(--primary-soft)";
   els.statusBadge.style.color = danger || good || active ? "#fff" : "var(--text)";
+  if (state.speedTestRunning) return;
+  if (danger) setMascotState("warning");
+  else if (good) setMascotState("sleeping");
+  else if (active) setMascotState("busy");
+  else setMascotState("idle");
+}
+
+function setMascotState(stateName) {
+  if (!els.plexieMascot) return;
+  els.plexieMascot.className = `mascot ${stateName}`;
 }
 
 function showToast(title, message = "", isError = false) {
@@ -553,6 +564,9 @@ async function addPaths(paths, forcedType = null) {
     setText(els.lastAction, `Job hinzugefügt: ${basename(job.source)}`);
   }
 
+  setMascotState("happy");
+  setTimeout(() => setMascotState(state.running ? "busy" : "idle"), 1500);
+
   if (duplicateMessages.length) {
     const message = `${duplicateMessages.length} Duplikat(e) wurden nicht erneut hinzugefügt.`;
     appendLog(`${message} ${duplicateMessages.join(", ")}`, true);
@@ -699,6 +713,7 @@ async function startCopyFlow(skipSpeedPrompt = false) {
   }
   setGlobalStatus("Kopiert...", "Kopiervorgang läuft.");
   setText(els.lastAction, "Robocopy-Worker gestartet.");
+  setMascotState("busy");
   renderJobs();
   await api.startCopy(state.jobs);
 }
@@ -726,6 +741,8 @@ async function cancelCopyFlow() {
   }
   appendLog("Kopiervorgang wurde abgebrochen.", true);
   setGlobalStatus("Fehler", "Kopiervorgang abgebrochen.");
+  setMascotState("warning");
+  setTimeout(() => setMascotState("idle"), 3000);
   showToast("Kopiervorgang abgebrochen", "Offene Jobs können erneut gestartet werden.", true);
   await savePendingJobs();
   renderJobs();
@@ -733,21 +750,29 @@ async function cancelCopyFlow() {
 
 async function runSpeedTestFlow(autoContinue = false) {
   state.speedTestRunning = true;
+  let speedTestSucceeded = false;
   setText(els.lastAction, "Geschwindigkeitstest gestartet.");
+  setMascotState("speeding");
   refreshEta();
   try {
     const result = await api.runSpeedTest();
+    speedTestSucceeded = true;
     state.config = await api.getConfig();
     appendLog(`Geschwindigkeitstest abgeschlossen: ${formatSpeed(result.bytes_per_sec)}.`);
     setText(els.lastAction, "Geschwindigkeitstest abgeschlossen.");
+    setMascotState("happy");
     showToast("Geschwindigkeitstest fertig", formatSpeed(result.bytes_per_sec));
     if (autoContinue) await startCopyFlow(true);
   } catch (error) {
     appendLog(`Geschwindigkeitstest fehlgeschlagen: ${error.message}`, true);
+    setMascotState("warning");
     await showMessage("Geschwindigkeitstest fehlgeschlagen", error.message, true);
   } finally {
     state.speedTestRunning = false;
     refreshEta();
+    if (!autoContinue) {
+      setTimeout(() => setMascotState(speedTestSucceeded ? "idle" : "warning"), 1800);
+    }
   }
 }
 
@@ -911,6 +936,7 @@ function wireEvents() {
   api.onCopyLog((payload) => appendLog(payload.message, payload.isError));
   api.onCopyJobStart((payload) => {
     state.activeJobIds.add(payload.id);
+    setMascotState("busy");
     renderJobs();
   });
   api.onCopyJobUpdate((payload) => {
@@ -945,6 +971,7 @@ function wireEvents() {
     const failed = Number(payload.failed || 0);
     setGlobalStatus(failed ? "Fehler" : "Fertig", failed ? "Mindestens ein Job ist fehlgeschlagen." : "Alle Jobs wurden abgearbeitet.");
     setText(els.lastAction, "Kopiervorgang abgeschlossen.");
+    setMascotState(failed ? "warning" : "sleeping");
     showToast(failed ? "Kopiervorgang beendet mit Fehlern" : "Kopiervorgang abgeschlossen", `${payload.success || 0} erfolgreich, ${payload.skipped || 0} übersprungen, ${payload.failed || 0} fehlgeschlagen`, Boolean(failed));
     await showModal({
       title: "Kopiervorgang abgeschlossen",
@@ -962,6 +989,7 @@ function wireEvents() {
   api.onCopyError(async (payload) => {
     state.running = false;
     setGlobalStatus("Fehler", payload.message);
+    setMascotState("warning");
     appendLog(payload.message, true);
     showToast("Fehler", payload.message, true);
     await showMessage("Fehler", payload.message, true);
