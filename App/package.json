@@ -1,0 +1,42 @@
+{
+  "name": "plex-transfer-electron",
+  "version": "1.0.0",
+  "description": "Lokale Electron-App fuer Plex-/NAS-Transfers mit Robocopy.",
+  "main": "main.js",
+  "author": "Plex Transfer",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "local.plex-transfer",
+    "productName": "Plex Transfer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "default-config.json",
+        "to": "default-config.json"
+      }
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "artifactName": "Plex Transfer Portable.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^41.4.0",
+    "electron-builder": "^26.8.1"
+  }
+}

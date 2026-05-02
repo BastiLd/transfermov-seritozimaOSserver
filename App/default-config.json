@@ -1,0 +1,16 @@
+{
+  "movies_root": "Z:\\Movies",
+  "series_root": "Z:\\Series",
+  "plex_url": "",
+  "plex_token": "",
+  "movies_section_id": "",
+  "series_section_id": "",
+  "parallel_enabled": false,
+  "auto_refresh": false,
+  "theme_mode": "hell",
+  "remember_pending_jobs": true,
+  "pending_jobs": [],
+  "last_measured_bytes_per_sec": 0,
+  "last_measured_at": "",
+  "last_measured_source": ""
+}
