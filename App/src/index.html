@@ -9,52 +9,65 @@
   </head>
   <body>
     <div id="app" class="theme-dunkel">
+      <div class="app-backdrop" aria-hidden="true"></div>
+
       <header class="topbar">
-        <div>
-          <h1>Plex Transfer</h1>
-          <p id="subtitle">Lokaler Plex-/NAS-Kopierworkflow mit Robocopy</p>
+        <div class="brand-block">
+          <div class="brand-mark">PT</div>
+          <div>
+            <h1>Plex Transfer</h1>
+            <p id="subtitle">Lokaler Plex-/NAS-Kopierworkflow mit Robocopy</p>
+          </div>
         </div>
         <div class="top-actions">
-          <button id="settingsButton" class="icon-button" title="Einstellungen">⚙</button>
+          <button id="settingsButton" class="icon-button" title="Einstellungen" aria-label="Einstellungen">⚙</button>
           <span id="statusBadge" class="status-badge">Bereit</span>
         </div>
       </header>
 
       <main id="mainView" class="layout">
-        <section class="left-column">
-          <section class="panel">
-            <div class="panel-heading">
-              <h2>Aktionen</h2>
-              <p>Medien hinzufuegen und Kopiervorgang starten.</p>
+        <section class="workspace">
+          <section class="hero-panel">
+            <div>
+              <span class="eyebrow">Transfer-Zentrale</span>
+              <h2>Medien auswählen, prüfen und sauber nach Plex kopieren.</h2>
             </div>
-            <div class="button-grid">
-              <button id="movieButton" class="primary">Film auswaehlen</button>
-              <button id="seriesButton">Serie auswaehlen</button>
+            <div class="quick-actions">
+              <button id="movieButton" class="primary">Film auswählen</button>
+              <button id="seriesButton">Serie auswählen</button>
               <button id="multiButton">Mehrere Dateien/Ordner</button>
-              <button id="startButton" class="primary">Kopiervorgang starten</button>
+              <button id="startButton" class="primary strong">Kopiervorgang starten</button>
+              <button id="cancelButton" class="danger hidden">Abbrechen</button>
               <button id="plexButton">Plex Refresh</button>
-              <button id="logsButton">Logs oeffnen</button>
+              <button id="logsButton">Logs öffnen</button>
             </div>
           </section>
 
           <section class="panel jobs-panel">
-            <div class="panel-heading row-heading">
+            <div class="panel-heading split">
               <div>
-                <h2>Jobs</h2>
+                <h2>Warteschlange</h2>
                 <p id="jobMeta">0 Jobs in der Liste</p>
               </div>
-              <p id="jobStatusLine">0 wartend | 0 laeuft | 0 Fehler</p>
+              <div class="queue-tools">
+                <input id="jobSearchInput" type="search" placeholder="Jobs suchen">
+                <span id="jobStatusLine">0 wartend | 0 läuft | 0 Fehler</span>
+              </div>
             </div>
 
             <div id="dropZone" class="drop-zone">
-              <strong>Drop-Zone</strong>
-              <span>Datei hierher ziehen = Film, Ordner hierher ziehen = Serie</span>
+              <div class="drop-icon">＋</div>
+              <div>
+                <strong>Dateien oder Ordner hier ablegen</strong>
+                <span>Datei = Film, Ordner = Serie. Episoden werden automatisch erkannt.</span>
+              </div>
             </div>
 
             <div class="job-actions">
               <button id="moveUpButton">Nach oben</button>
               <button id="moveDownButton">Nach unten</button>
               <button id="removeButton">Entfernen</button>
+              <button id="retryButton">Fehler erneut</button>
               <button id="clearButton" class="danger">Alle entfernen</button>
             </div>
 
@@ -65,7 +78,7 @@
                     <th>Typ</th>
                     <th>Quelle</th>
                     <th>Ziel</th>
-                    <th>Groesse</th>
+                    <th>Größe</th>
                     <th>Status</th>
                     <th>Fortschritt</th>
                   </tr>
@@ -74,16 +87,16 @@
               </table>
               <div id="emptyJobs" class="empty-state">
                 <strong>Noch keine Jobs</strong>
-                <span>Fuege einen Film oder Serienordner hinzu.</span>
+                <span>Füge Medien über die Buttons hinzu oder ziehe sie in die Drop-Zone.</span>
               </div>
             </div>
           </section>
 
           <section class="panel log-panel">
-            <div class="panel-heading row-heading">
+            <div class="panel-heading split">
               <div>
                 <h2>Laufendes Log</h2>
-                <p>Robocopy-Ausgabe und Systemmeldungen.</p>
+                <p>Robocopy-Ausgabe, Warnungen und Systemmeldungen.</p>
               </div>
               <label class="check-label"><input id="errorsOnlyToggle" type="checkbox"> Nur Fehler</label>
             </div>
@@ -91,7 +104,7 @@
           </section>
         </section>
 
-        <aside class="right-column">
+        <aside class="side-rail">
           <section class="panel status-panel">
             <div class="panel-heading">
               <h2>Status</h2>
@@ -99,8 +112,8 @@
             </div>
 
             <div class="eta-box">
-              <strong id="etaTitle">Geschaetzte Dauer: nicht verfuegbar</strong>
-              <span id="etaDetail">Fuege zuerst Jobs hinzu.</span>
+              <strong id="etaTitle">Geschätzte Dauer: nicht verfügbar</strong>
+              <span id="etaDetail">Füge zuerst Jobs hinzu.</span>
               <button id="speedButton">Geschwindigkeit testen</button>
             </div>
 
@@ -117,7 +130,7 @@
             <div class="metric-list">
               <div>
                 <span>Zusammenfassung</span>
-                <strong id="summary">Noch keine Kopiervorgaenge gestartet.</strong>
+                <strong id="summary">Noch keine Kopiervorgänge gestartet.</strong>
               </div>
               <div>
                 <span>Letzte Aktion</span>
@@ -128,7 +141,7 @@
                 <strong id="transferSize">Offene Transfers: -</strong>
               </div>
               <div>
-                <span>Ziel frei</span>
+                <span>Zielspeicher</span>
                 <strong id="targetSpace">-</strong>
               </div>
             </div>
@@ -139,11 +152,12 @@
       <main id="settingsView" class="settings-view hidden">
         <section class="settings-head">
           <div>
+            <span class="eyebrow">Konfiguration</span>
             <h2>Einstellungen</h2>
-            <p>Aenderungen gelten erst nach dem Speichern.</p>
+            <p>Änderungen gelten erst nach dem Speichern.</p>
           </div>
           <div class="settings-actions">
-            <button id="cancelSettingsButton">Abbrechen</button>
+            <button id="cancelSettingsButton">Zurück</button>
             <button id="saveSettingsButton" class="primary">Einstellungen speichern</button>
           </div>
         </section>
@@ -156,7 +170,7 @@
           <label>Movies Section ID<input id="moviesSectionInput" type="text"></label>
           <label>Series Section ID<input id="seriesSectionInput" type="text"></label>
           <label class="check-card"><input id="parallelInput" type="checkbox"> Parallel kopieren (max. 2 Jobs)</label>
-          <label class="check-card"><input id="autoRefreshInput" type="checkbox"> Nach Erfolg Plex-Refresh ausloesen</label>
+          <label class="check-card"><input id="autoRefreshInput" type="checkbox"> Nach Erfolg Plex-Refresh auslösen</label>
           <label class="check-card"><input id="rememberInput" type="checkbox"> Offene Jobs beim Start wiederherstellen</label>
           <label>Theme
             <select id="themeInput">
@@ -169,6 +183,8 @@
     </div>
 
     <div id="modalHost" class="modal-host hidden"></div>
+    <div id="contextMenu" class="context-menu hidden"></div>
+    <div id="toastHost" class="toast-host"></div>
     <script src="renderer.js"></script>
   </body>
 </html>

@@ -51,8 +51,9 @@ DEFAULT_CONFIG = {
     "last_measured_at": "",
     "last_measured_source": "",
 }
-ROBOCOPY_THREAD_COUNT = 8
-ROBOCOPY_COPY_FLAGS = [f"/MT:{ROBOCOPY_THREAD_COUNT}", "/J", "/R:1", "/W:1", "/FFT", "/TEE"]
+ROBOCOPY_SERIAL_THREADS = 32
+ROBOCOPY_PARALLEL_THREADS = 8
+ROBOCOPY_BASE_FLAGS = ["/J", "/R:1", "/W:1", "/FFT", "/TEE", "/XC", "/XN", "/XO"]
 
 PALETTES = {
     "hell": {
@@ -999,7 +1000,7 @@ class PlexTransferApp(ctk.CTk):
                 str(local_dir),
                 str(target_dir),
                 source_file.name,
-                *ROBOCOPY_COPY_FLAGS,
+                *self._robocopy_flags(),
             ]
             self.ui_queue.put(("log", ("Starte 1-GB-Geschwindigkeitstest.", False)))
             started_at = time.perf_counter()
@@ -1668,10 +1669,14 @@ class PlexTransferApp(ctk.CTk):
 
         source_path = Path(job.source)
         target_path = Path(job.target)
-        flags = ROBOCOPY_COPY_FLAGS
+        flags = self._robocopy_flags()
         if job.media_type == "Film":
             return ["robocopy", str(source_path.parent), str(target_path.parent), source_path.name, *flags]
         return ["robocopy", str(source_path), str(target_path), "/E", *flags]
+
+    def _robocopy_flags(self) -> list[str]:
+        thread_count = ROBOCOPY_PARALLEL_THREADS if self.config_data.get("parallel_enabled") else ROBOCOPY_SERIAL_THREADS
+        return [f"/MT:{thread_count}", *ROBOCOPY_BASE_FLAGS]
 
     def _extract_progress(self, line: str) -> str | None:
         match = re.search(r"(\d{1,3}(?:\.\d+)?)%", line)

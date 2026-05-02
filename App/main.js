@@ -1,5 +1,5 @@
-const { app, BrowserWindow, dialog, ipcMain, shell } = require("electron");
-const { spawn } = require("child_process");
+const { app, BrowserWindow, dialog, ipcMain, shell, clipboard } = require("electron");
+const { spawn, execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
@@ -207,6 +207,81 @@ function formatSize(sizeBytes) {
   return "-";
 }
 
+function driveRootFor(rawPath) {
+  const resolved = path.resolve(expandHome(rawPath || ""));
+  return path.parse(resolved).root || resolved;
+}
+
+function diskFreeBytes(rawPath) {
+  const resolved = path.resolve(expandHome(rawPath || ""));
+  if (!fs.existsSync(resolved)) return { exists: false, free: 0, error: "Pfad nicht erreichbar" };
+
+  try {
+    const stat = fs.statfsSync(resolved);
+    return { exists: true, free: Number(stat.bavail || stat.bfree || 0) * Number(stat.bsize || 0), error: "" };
+  } catch {
+    // Windows fallback for Electron/Node builds where statfs is not available for a path.
+  }
+
+  try {
+    const root = driveRootFor(resolved).replace(/\\+$/, "");
+    const driveName = root.endsWith(":") ? root : root.slice(0, 2);
+    const output = execFileSync(
+      "powershell",
+      ["-NoProfile", "-Command", `[Console]::OutputEncoding=[Text.Encoding]::UTF8; ([System.IO.DriveInfo]::new('${driveName}')).AvailableFreeSpace`],
+      { encoding: "utf8", windowsHide: true, timeout: 5000 }
+    ).trim();
+    const free = Number(output);
+    return Number.isFinite(free) ? { exists: true, free, error: "" } : { exists: true, free: 0, error: "Speicherplatz unbekannt" };
+  } catch (error) {
+    return { exists: true, free: 0, error: error.message || "Speicherplatz unbekannt" };
+  }
+}
+
+function targetStorageSummary(jobs) {
+  const config = loadConfig();
+  const buckets = new Map();
+  for (const job of jobs || []) {
+    if (!job || ["Kopiert", "Uebersprungen", "Übersprungen"].includes(job.status) || String(job.status || "").startsWith("Fehler")) continue;
+    const root = expandHome(job.media_type === "Film" ? config.movies_root : config.series_root);
+    if (!root) continue;
+    const current = buckets.get(root) || { root, planned_bytes: 0 };
+    current.planned_bytes += Number(job.size_bytes || 0);
+    buckets.set(root, current);
+  }
+
+  return [...buckets.values()].map((item) => {
+    const disk = diskFreeBytes(item.root);
+    return {
+      ...item,
+      exists: disk.exists,
+      free_bytes: disk.free,
+      after_bytes: disk.exists ? disk.free - item.planned_bytes : 0,
+      ok: disk.exists && (!disk.free || disk.free >= item.planned_bytes),
+      error: disk.error
+    };
+  });
+}
+
+function openPathSmart(rawPath) {
+  const resolved = path.resolve(expandHome(rawPath || ""));
+  if (!fs.existsSync(resolved)) {
+    const parent = path.dirname(resolved);
+    if (parent && parent !== resolved && fs.existsSync(parent)) {
+      shell.openPath(parent);
+      return parent;
+    }
+    throw new Error(`Pfad ist aktuell nicht erreichbar:\n${resolved}`);
+  }
+  const stat = fs.statSync(resolved);
+  if (stat.isFile()) {
+    shell.showItemInFolder(resolved);
+    return resolved;
+  }
+  shell.openPath(resolved);
+  return resolved;
+}
+
 function buildJob(sourcePath, forcedType) {
   const config = loadConfig();
   const resolvedPath = path.resolve(sourcePath);
@@ -220,7 +295,7 @@ function buildJob(sourcePath, forcedType) {
     } else if (stat.isFile() && looksLikeVideo(resolvedPath)) {
       mediaType = detectSeasonNumber(path.parse(resolvedPath).name) ? "Serie" : "Film";
     } else {
-      throw new Error(`Nicht unterstuetzter Pfad:\n${resolvedPath}`);
+      throw new Error(`Nicht unterstützter Pfad:\n${resolvedPath}`);
     }
   }
 
@@ -315,7 +390,7 @@ function validateRoots(config) {
 
 function pendingJobPayload(jobs) {
   return jobs
-    .filter((job) => !["Kopiert", "Uebersprungen"].includes(job.status))
+      .filter((job) => !["Kopiert", "Uebersprungen", "Übersprungen"].includes(job.status))
     .map((job) => ({
       source: job.source,
       target: job.target,
@@ -384,8 +459,8 @@ async function runSingleJob(job, config) {
         const returnCode = Number(code || 0);
         if (returnCode < 8) {
           if (returnCode === 0) {
-            send("copy:job-update", { id: job.id, status: "Uebersprungen", progress: lastProgress, return_code: returnCode });
-            appendLog(`Job #${job.id} ohne Aenderungen beendet (Code 0).`, false);
+            send("copy:job-update", { id: job.id, status: "Übersprungen", progress: lastProgress, return_code: returnCode });
+            appendLog(`Job #${job.id} ohne Änderungen beendet (Code 0).`, false);
           } else {
             send("copy:job-update", { id: job.id, status: "Kopiert", progress: "100%", return_code: returnCode });
             appendLog(`Job #${job.id} erfolgreich abgeschlossen (Code ${returnCode}).`, false);
@@ -441,7 +516,7 @@ function triggerPlexRefresh(config, libraries) {
       req.destroy(new Error("Timeout"));
     });
     req.on("error", (error) => {
-      appendLog(`Plex-Refresh fuer Section ${sectionId} fehlgeschlagen: ${error.message}`, true);
+      appendLog(`Plex-Refresh für Section ${sectionId} fehlgeschlagen: ${error.message}`, true);
       resolve(false);
     });
     req.end();
@@ -454,12 +529,12 @@ function triggerPlexRefresh(config, libraries) {
 }
 
 async function startCopy(jobs) {
-  if (running || speedTestRunning) throw new Error("Es laeuft bereits ein Kopiervorgang.");
+  if (running || speedTestRunning) throw new Error("Es läuft bereits ein Kopiervorgang.");
   if (!jobs || !jobs.length) throw new Error("Es sind keine Jobs vorhanden.");
   const config = loadConfig();
   validateRoots(config);
 
-  const copyJobs = jobs.filter((job) => !["Kopiert", "Uebersprungen"].includes(job.status));
+  const copyJobs = jobs.filter((job) => !["Kopiert", "Uebersprungen", "Übersprungen"].includes(job.status));
   if (!copyJobs.length) throw new Error("Es gibt keine offenen Jobs.");
 
   running = true;
@@ -478,7 +553,7 @@ async function startCopy(jobs) {
   appendLog("Kopiervorgang abgeschlossen.", false);
   const latestJobs = await mainWindow.webContents.executeJavaScript("window.__plexTransferGetJobsForMain && window.__plexTransferGetJobsForMain()", true).catch(() => jobs);
   const success = latestJobs.filter((job) => job.status === "Kopiert").length;
-  const skipped = latestJobs.filter((job) => job.status === "Uebersprungen").length;
+  const skipped = latestJobs.filter((job) => ["Uebersprungen", "Übersprungen"].includes(job.status)).length;
   const failed = latestJobs.filter((job) => String(job.status || "").startsWith("Fehler")).length;
   const copiedBytes = latestJobs.filter((job) => job.status === "Kopiert").reduce((sum, job) => sum + Number(job.size_bytes || 0), 0);
 
@@ -494,7 +569,7 @@ async function startCopy(jobs) {
   if (config.auto_refresh && success > 0) {
     const libraries = [...new Set(latestJobs.filter((job) => job.status === "Kopiert").map((job) => job.media_type))];
     const result = await triggerPlexRefresh(config, libraries);
-    appendLog(result.movies_ok || result.series_ok ? "Automatischer Plex-Refresh erfolgreich ausgeloest." : "Automatischer Plex-Refresh konnte nicht ausgeloest werden.", !(result.movies_ok || result.series_ok));
+    appendLog(result.movies_ok || result.series_ok ? "Automatischer Plex-Refresh erfolgreich ausgelöst." : "Automatischer Plex-Refresh konnte nicht ausgelöst werden.", !(result.movies_ok || result.series_ok));
   }
 
   send("copy:finished", { success, skipped, failed });
@@ -502,11 +577,11 @@ async function startCopy(jobs) {
 }
 
 async function runSpeedTest() {
-  if (running || speedTestRunning) throw new Error("Es laeuft bereits ein Vorgang.");
+  if (running || speedTestRunning) throw new Error("Es läuft bereits ein Vorgang.");
   const config = loadConfig();
   validateRoots(config);
   const probeRoot = [config.movies_root, config.series_root].map(expandHome).find((root) => fs.existsSync(root));
-  if (!probeRoot) throw new Error("Kein erreichbares Ziel fuer den Geschwindigkeitstest gefunden.");
+  if (!probeRoot) throw new Error("Kein erreichbares Ziel für den Geschwindigkeitstest gefunden.");
 
   speedTestRunning = true;
   const localDir = tmpProbeDir();
@@ -604,6 +679,7 @@ ipcMain.handle("jobs:create", (_event, paths, forcedType) => {
   return { jobs, errors };
 });
 ipcMain.handle("jobs:savePending", (_event, jobs) => updatePendingJobs(jobs));
+ipcMain.handle("storage:targets", (_event, jobs) => targetStorageSummary(jobs));
 ipcMain.handle("copy:start", (_event, jobs) => {
   startCopy(jobs).catch((error) => {
     running = false;
@@ -624,7 +700,7 @@ ipcMain.handle("copy:cancel", () => {
 });
 ipcMain.handle("dialog:movie", async () => {
   const result = await dialog.showOpenDialog(mainWindow, {
-    title: "Film auswaehlen",
+    title: "Film auswählen",
     properties: ["openFile", "multiSelections"],
     filters: [
       { name: "Videodateien", extensions: [...VIDEO_EXTENSIONS].map((ext) => ext.slice(1)) },
@@ -635,14 +711,14 @@ ipcMain.handle("dialog:movie", async () => {
 });
 ipcMain.handle("dialog:series", async () => {
   const result = await dialog.showOpenDialog(mainWindow, {
-    title: "Serienordner auswaehlen",
+    title: "Serienordner auswählen",
     properties: ["openDirectory", "multiSelections"]
   });
   return result.canceled ? [] : result.filePaths;
 });
 ipcMain.handle("dialog:any", async () => {
   const result = await dialog.showOpenDialog(mainWindow, {
-    title: "Mehrere Medien auswaehlen",
+    title: "Mehrere Medien auswählen",
     properties: ["openFile", "openDirectory", "multiSelections"],
     filters: [
       { name: "Videodateien", extensions: [...VIDEO_EXTENSIONS].map((ext) => ext.slice(1)) },
@@ -655,6 +731,11 @@ ipcMain.handle("logs:open", async () => {
   ensureDir(logsDir());
   await shell.openPath(logsDir());
   return logsDir();
+});
+ipcMain.handle("path:open", (_event, rawPath) => openPathSmart(rawPath));
+ipcMain.handle("path:copy", (_event, rawPath) => {
+  clipboard.writeText(String(rawPath || ""));
+  return { ok: true };
 });
 ipcMain.handle("plex:refresh", async (_event, libraries) => triggerPlexRefresh(loadConfig(), libraries));
 ipcMain.handle("speed:test", () => runSpeedTest());

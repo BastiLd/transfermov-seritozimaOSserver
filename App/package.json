@@ -1,7 +1,7 @@
 {
   "name": "plex-transfer-electron",
   "version": "1.0.0",
-  "description": "Lokale Electron-App fuer Plex-/NAS-Transfers mit Robocopy.",
+  "description": "Lokale Electron-App für Plex-/NAS-Transfers mit Robocopy.",
   "main": "main.js",
   "author": "Plex Transfer",
   "license": "UNLICENSED",

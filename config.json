@@ -1,0 +1,16 @@
+{
+  "movies_root": "T:\\TO-MOONDOOM\\Movies",
+  "series_root": "T:\\TO-MOONDOOM\\Series",
+  "plex_url": "http://192.168.68.10:32400",
+  "plex_token": "KYTBnStfTi-s-XnRWuyf",
+  "movies_section_id": "1",
+  "series_section_id": "2",
+  "parallel_enabled": false,
+  "auto_refresh": true,
+  "theme_mode": "dunkel",
+  "remember_pending_jobs": true,
+  "pending_jobs": [],
+  "last_measured_bytes_per_sec": 115583665.86385435,
+  "last_measured_at": "2026-05-01T23:48:16",
+  "last_measured_source": "run"
+}

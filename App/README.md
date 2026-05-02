@@ -1,6 +1,6 @@
 # Plex Transfer Electron
 
-Eigenstaendige Electron-Version der lokalen Plex-Transfer-App.
+Eigenständige Electron-Version der lokalen Plex-Transfer-App. Diese Version ist die Haupt-App im Repository.
 
 ## Entwicklung
 
@@ -23,7 +23,7 @@ dist\Plex Transfer Portable.exe
 
 ## Laufzeitdaten
 
-- Im Entwicklungsmodus nutzt die App eine lokale `config.json` und `logs\` direkt im `App`-Ordner.
+- Im Entwicklungsmodus nutzt die App `config.json` und `logs\` direkt im `App`-Ordner.
 - Wenn keine lokale `config.json` existiert, wird sie aus `default-config.json` erzeugt.
 - Die portable EXE legt `config.json` und `logs\` neben der EXE an bzw. nutzt sie dort.
-- Die bestehende Python-App im uebergeordneten Ordner wird nicht benoetigt.
+- Die Python-App im übergeordneten Ordner bleibt als Legacy-Version erhalten, wird für Electron aber nicht benötigt.

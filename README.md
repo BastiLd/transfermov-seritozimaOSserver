@@ -1,71 +1,63 @@
-﻿# Plex Transfer
+# Plex Transfer
 
-Kleine lokale Windows-App für deinen Plex-/NAS-Kopierworkflow mit Python und CustomTkinter.
+Lokale Windows-Desktop-App für den Plex-/NAS-Kopierworkflow mit Electron und Robocopy.
 
-## Start
-
-1. Prüfen, dass Python 3.11 oder neuer unter Windows installiert ist.
-2. Sicherstellen, dass `robocopy` vorhanden ist. Unter Windows 10/11 ist das standardmäßig der Fall.
-3. Abhängigkeiten installieren:
+## Haupt-App starten
 
 ```powershell
-pip install -r requirements.txt
+cd App
+npm install
+npm start
 ```
 
-4. App im Projektordner starten:
+## Portable EXE bauen
 
 ```powershell
-python app.py
+cd App
+npm run dist
 ```
 
-Alternativ per Doppelklick auf `start_plex_transfer.pyw`.
+Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
 
 ## Bedienung
 
-- `Film auswählen`: einzelne Videodatei als Filmjob hinzufügen
-- `Serie auswählen`: Ordner als Serienjob hinzufügen
-- `Mehrere Dateien/Ordner auswählen`: mehrere Dateien und Ordner gesammelt hinzufügen
-- Drag & Drop:
-  - Datei auf das Fenster ziehen = Film
-  - Ordner auf das Fenster ziehen = Serie
-- `Kopiervorgang starten`: startet `robocopy` seriell oder mit maximal 2 parallelen Jobs
-- `Logs öffnen`: öffnet den lokalen Log-Ordner
+- `Film auswählen`: einzelne Videodateien als Filmjobs hinzufügen
+- `Serie auswählen`: Serienordner oder Episodendateien hinzufügen
+- `Mehrere Dateien/Ordner`: Dateien und Ordner gesammelt hinzufügen
+- Drag & Drop auf die Drop-Zone fügt Medien direkt hinzu
+- `Kopiervorgang starten`: zeigt eine Zielvorschau und startet Robocopy
+- `Abbrechen`: beendet laufende Robocopy-Prozesse
 - `Plex Refresh`: löst manuell einen Plex-Library-Refresh aus
-- Zahnrad oben rechts: öffnet die separate Einstellungsseite
-- Kopien laufen mit schnellen LAN-Flags (`/J`, `/MT:8`, kurze Retry-Werte). Robocopys langsamer Restart-Modus `/Z` ist bewusst deaktiviert.
+- `Logs öffnen`: öffnet den lokalen Log-Ordner
+- Rechtsklick auf Jobs: Quelle/Ziel öffnen, Pfad kopieren, verschieben oder entfernen
 
-## Oberfläche
+## Features
 
-- Hauptseite für Aktionen, Drop-Zone, Jobliste, Status und Log
-- Separate Einstellungsseite statt permanenter rechter Sidebar
-- Einstellungen werden erst nach `Einstellungen speichern` übernommen
-- Helles und dunkles Theme auswählbar
-- Job-Verwaltung direkt in der Liste:
-  - `Nach oben`
-  - `Nach unten`
-  - `Entfernen`
-  - `Alle entfernen`
-- Der rechte Statusbereich zeigt die gesamte offene Transfergröße und den freien Speicher des Ziel-Laufwerks vor und nach der Kopie.
-- In den Einstellungen kann die offene Jobliste automatisch gespeichert und beim nächsten Start wiederhergestellt werden.
+- Moderne Electron-Oberfläche mit Dark-/Light-Theme
+- Warteschlange mit Suche, Drag & Drop, Duplikatwarnung und Retry für fehlgeschlagene Jobs
+- Ziel-Speicheranzeige mit freiem Speicher vor und nach der geplanten Kopie
+- Live-Status, Gesamtfortschritt, ETA und Geschwindigkeitstest
+- Serielle Kopien oder Parallelmodus mit maximal 2 Jobs
+- Automatischer Plex-Refresh nach erfolgreichem Kopieren, wenn konfiguriert
+- Offene Jobs können gespeichert und beim nächsten Start wiederhergestellt werden
 
 ## Zielstruktur
 
-- Filme:
-  - `Z:\Movies\Filmname\Filmname.ext`
-- Serien:
-  - mit vorhandenen Staffelordnern: `Z:\Series\Serienname\...`
-  - ohne Staffelordner: `Z:\Series\Serienname\Season 01\...`
+- Filme: `Z:\Movies\Filmname.ext`
+- Serienordner mit Staffelordnern: `Z:\Series\Serienname\...`
+- Serienordner ohne Staffelordner: `Z:\Series\Serienname\Season 01\...`
+- Einzelne Episoden: `Z:\Series\Serienname\Season 01\Episode.ext`
 
 ## Dateien
 
-- `app.py`: komplette Anwendung
-- `requirements.txt`: benötigte GUI-Abhängigkeit
-- `config.json`: wird beim ersten Start automatisch angelegt
-- `logs\`: Laufzeit-Logs pro Kopiervorgang
+- `App\main.js`: Electron-Main-Prozess, Robocopy, Plex Refresh, Config und System-APIs
+- `App\src\renderer.js`: UI-Logik
+- `App\src\styles.css`: Design
+- `App\config.json`: lokale Laufzeitkonfiguration
+- `app.py`: alte Python-/CustomTkinter-Version als Legacy-App
 
 ## Hinweise
 
-- Netzlaufwerke `Z:\Movies` und `Z:\Series` müssen erreichbar sein.
-- Die angezeigte Dauer basiert auf echter Schreibgeschwindigkeit zum Zielpfad, nicht auf der theoretischen 1-Gbit-Linkrate. Nach Netzwerk- oder Flag-Änderungen `Geschwindigkeit testen` erneut ausführen.
-- Robocopy-Rückgabecodes kleiner `8` werden als Erfolg behandelt.
-- Die App bleibt eine reine lokale Windows-Desktop-App ohne Web- oder Electron-Komponenten.
+- Windows mit Robocopy wird vorausgesetzt.
+- Die Zielpfade müssen erreichbar sein, bevor echte Kopien gestartet werden.
+- Robocopy läuft mit schnellen LAN-Flags (`/J`, seriell `/MT:32`, parallel `/MT:8`, kurze Retry-Werte). Vorhandene Dateien werden nicht ersetzt (`/XC`, `/XN`, `/XO`).
