@@ -2,7 +2,7 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://image.tmdb.org;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plex Transfer</title>
     <link rel="stylesheet" href="styles.css">
@@ -264,9 +264,12 @@
               <div>
                 <span class="eyebrow">Umbenennen</span>
                 <h2>Plex-Namensvorschau</h2>
-                <p>Dateien und Ordner werden erst nach deiner Bestaetigung geaendert.</p>
+                <p>Dateien und Ordner werden erst nach deiner Bestätigung geändert.</p>
               </div>
-              <button id="renamePickButton" class="primary">Dateien/Ordner auswaehlen</button>
+              <div class="pick-group">
+                <button id="renamePickButton" class="primary">Dateien wählen</button>
+                <button id="renameFolderButton">Ordner wählen</button>
+              </div>
             </div>
             <div class="tool-options">
               <label>Typ
@@ -279,7 +282,7 @@
               <label>Ordnerstruktur
                 <select id="renameStructureInput">
                   <option value="plex">Plex-Struktur anlegen</option>
-                  <option value="none">Nur Namen aendern</option>
+                  <option value="none">Nur Namen ändern</option>
                 </select>
               </label>
               <label>Serienname optional<input id="renameShowInput" type="text" placeholder="Leer = aus Ordner/Datei erkennen"></label>
@@ -287,6 +290,7 @@
               <label class="check-card"><input id="renameRefreshInput" type="checkbox"> Nach Umbenennen Plex aktualisieren</label>
             </div>
             <div class="tool-actions">
+              <button id="renameSearchButton">TMDb Suche</button>
               <button id="renamePreviewButton">Vorschau aktualisieren</button>
               <button id="renameStartButton" class="primary strong">Umbenennen starten</button>
               <button id="renameClearButton" class="danger">Leeren</button>
@@ -302,10 +306,13 @@
             <div class="panel-heading split">
               <div>
                 <span class="eyebrow">Beides</span>
-                <h2>Erst umbenennen, dann uebertragen</h2>
+                <h2>Erst umbenennen, dann übertragen</h2>
                 <p>Die Vorschau zeigt die lokale Umbenennung vor dem Transfer.</p>
               </div>
-              <button id="comboPickButton" class="primary">Dateien/Ordner auswaehlen</button>
+              <div class="pick-group">
+                <button id="comboPickButton" class="primary">Dateien wählen</button>
+                <button id="comboFolderButton">Ordner wählen</button>
+              </div>
             </div>
             <div class="tool-options">
               <label>Typ
@@ -318,7 +325,7 @@
               <label>Ordnerstruktur
                 <select id="comboStructureInput">
                   <option value="plex">Plex-Struktur anlegen</option>
-                  <option value="none">Nur Namen aendern</option>
+                  <option value="none">Nur Namen ändern</option>
                 </select>
               </label>
               <label>Serienname optional<input id="comboShowInput" type="text" placeholder="Leer = aus Ordner/Datei erkennen"></label>
@@ -326,8 +333,9 @@
               <label class="check-card"><input id="comboRefreshInput" type="checkbox"> Nach Beides Plex aktualisieren</label>
             </div>
             <div class="tool-actions">
+              <button id="comboSearchButton">TMDb Suche</button>
               <button id="comboPreviewButton">Vorschau aktualisieren</button>
-              <button id="comboStartButton" class="primary strong">Umbenennen und uebertragen</button>
+              <button id="comboStartButton" class="primary strong">Umbenennen und übertragen</button>
               <button id="comboClearButton" class="danger">Leeren</button>
             </div>
             <div id="comboPreviewList" class="preview-list"></div>
@@ -362,14 +370,22 @@
           <label>Movies Section ID<input id="moviesSectionInput" type="text"></label>
           <label>Series Section ID<input id="seriesSectionInput" type="text"></label>
           <label class="check-card"><input id="parallelInput" type="checkbox"> Parallel kopieren (max. 2 Jobs)</label>
-          <label class="check-card"><input id="autoRefreshInput" type="checkbox"> Nach Transfer Plex-Refresh ausloesen</label>
-          <label class="check-card"><input id="renameRefreshSettingsInput" type="checkbox"> Nach Umbenennen Plex-Refresh ausloesen</label>
-          <label class="check-card"><input id="comboRefreshSettingsInput" type="checkbox"> Nach Beides Plex-Refresh ausloesen</label>
+          <label class="check-card"><input id="autoRefreshInput" type="checkbox"> Nach Transfer Plex-Refresh auslösen</label>
+          <label class="check-card"><input id="renameRefreshSettingsInput" type="checkbox"> Nach Umbenennen Plex-Refresh auslösen</label>
+          <label class="check-card"><input id="comboRefreshSettingsInput" type="checkbox"> Nach Beides Plex-Refresh auslösen</label>
           <label>Umbenennen-Ordnerstruktur
             <select id="renameStructureSettingsInput">
               <option value="plex">Plex-Struktur anlegen</option>
-              <option value="none">Nur Namen aendern</option>
+              <option value="none">Nur Namen ändern</option>
             </select>
+          </label>
+          <label>TMDb Token oder API-Key<input id="tmdbTokenInput" type="password" placeholder="Read Access Token oder API-Key eintragen"></label>
+          <label>TMDb Sprache<input id="tmdbLanguageInput" type="text" placeholder="de-DE"></label>
+          <label>TMDb Region<input id="tmdbRegionInput" type="text" placeholder="DE"></label>
+          <label class="check-card metadata-card">
+            <span>TMDb Metadaten</span>
+            <button id="tmdbTestButton" type="button">Verbindung testen</button>
+            <small id="tmdbStatusText">This product uses the TMDB API but is not endorsed or certified by TMDB.</small>
           </label>
           <label class="check-card"><input id="rememberInput" type="checkbox"> Offene Jobs beim Start wiederherstellen</label>
           <label>Theme

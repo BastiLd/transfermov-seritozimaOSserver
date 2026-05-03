@@ -474,6 +474,14 @@ h1, h2, p {
   display: flex;
   gap: 10px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.pick-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .preview-list {
@@ -539,6 +547,201 @@ h1, h2, p {
   margin-top: 6px;
   color: var(--warning);
   font-style: normal;
+}
+
+.rename-preview-item .metadata-ok {
+  color: var(--success);
+}
+
+.preview-side-actions {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
+.metadata-search-button {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.metadata-card {
+  align-items: start;
+  flex-direction: column;
+}
+
+.metadata-card button {
+  width: 100%;
+}
+
+.metadata-card small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.metadata-modal {
+  width: min(1060px, 100%);
+}
+
+.metadata-query,
+.metadata-detail,
+.metadata-detail-block,
+.episode-chooser,
+.metadata-result {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card-soft);
+}
+
+.metadata-query {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.metadata-query span,
+.metadata-result span,
+.metadata-detail span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.metadata-detail-slot {
+  margin-bottom: 12px;
+}
+
+.metadata-detail {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.metadata-detail img,
+.metadata-result img {
+  width: 92px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: var(--card-solid);
+}
+
+.metadata-detail h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.metadata-detail p,
+.metadata-detail-block p,
+.metadata-result p {
+  margin: 8px 0 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.metadata-detail-block {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+}
+
+.metadata-results {
+  display: grid;
+  gap: 10px;
+}
+
+.metadata-result {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 160px;
+  gap: 14px;
+  padding: 12px;
+  align-items: start;
+}
+
+.metadata-poster-empty {
+  width: 92px;
+  min-height: 132px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: var(--card-solid);
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.metadata-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.metadata-actions button {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.metadata-search-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.episode-copy {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.episode-copy label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.episode-copy input {
+  width: 90px;
+  min-height: 34px;
+}
+
+.episode-chooser {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.episode-chooser span,
+.episode-chooser p {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+
+.episode-picker-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(220px, 2fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.episode-picker-row label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.episode-picker-row select {
+  min-height: 38px;
+}
+
+.free-search-result .metadata-actions button.primary {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .workspace {

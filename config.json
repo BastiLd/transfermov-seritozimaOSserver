@@ -7,14 +7,18 @@
   "series_section_id": "2",
   "parallel_enabled": false,
   "auto_refresh": true,
-  "refresh_after_transfer": true,
-  "refresh_after_rename": true,
-  "refresh_after_combo": true,
-  "rename_folder_structure_mode": "plex",
   "theme_mode": "dunkel",
   "remember_pending_jobs": true,
   "pending_jobs": [],
   "last_measured_bytes_per_sec": 102101571.1231283,
   "last_measured_at": "2026-05-03T08:37:15",
-  "last_measured_source": "run"
+  "last_measured_source": "run",
+  "refresh_after_transfer": true,
+  "refresh_after_rename": true,
+  "refresh_after_combo": true,
+  "rename_folder_structure_mode": "plex",
+  "tmdb_access_token": "",
+  "tmdb_language": "de-DE",
+  "tmdb_region": "DE",
+  "metadata_provider": "tmdb"
 }

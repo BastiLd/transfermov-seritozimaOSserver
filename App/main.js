@@ -26,6 +26,10 @@ const DEFAULT_CONFIG = {
   refresh_after_rename: false,
   refresh_after_combo: false,
   rename_folder_structure_mode: "plex",
+  tmdb_access_token: "",
+  tmdb_language: "de-DE",
+  tmdb_region: "DE",
+  metadata_provider: "tmdb",
   theme_mode: "hell",
   remember_pending_jobs: true,
   pending_jobs: [],
@@ -77,6 +81,9 @@ function normalizeConfig(parsed = {}) {
   if (parsed.refresh_after_rename === undefined) config.refresh_after_rename = migratedRefresh;
   if (parsed.refresh_after_combo === undefined) config.refresh_after_combo = migratedRefresh;
   if (!["none", "plex"].includes(config.rename_folder_structure_mode)) config.rename_folder_structure_mode = "plex";
+  if (!config.tmdb_language) config.tmdb_language = "de-DE";
+  if (!config.tmdb_region) config.tmdb_region = "DE";
+  config.metadata_provider = "tmdb";
   if (!["hell", "dunkel"].includes(config.theme_mode)) config.theme_mode = "hell";
   config.auto_refresh = Boolean(config.refresh_after_transfer);
   return config;
@@ -268,16 +275,70 @@ function uniquePathForPreview(targetPath, sourcePath) {
   return candidate;
 }
 
+function mediaBaseFromMetadata(job, metadata) {
+  if (job.media_type === "Serie") {
+    const showName = normalizeShowName(metadata.title || metadata.name || job.tmdb_title || "Unbekannt");
+    const season = Number(metadata.season || metadata.selected_season || job.season || 1);
+    const episode = Number(metadata.episode || metadata.selected_episode || job.episode || 1);
+    const episodeTitle = titleCaseWords(metadata.episode_title || metadata.tmdb_episode_title || "Episode");
+    return {
+      name: `${showName} - S${String(season).padStart(2, "0")}E${String(episode).padStart(2, "0")} - ${episodeTitle}`,
+      parentName: showName,
+      season
+    };
+  }
+  const title = normalizeTitle(metadata.title || metadata.name || job.tmdb_title || "Unbekannt", "Film");
+  const year = detectMovieYear("", metadata.year || metadata.release_year || "");
+  const name = year ? `${title} (${year})` : title;
+  return { name, parentName: name, year };
+}
+
+function applyMetadataToRenameJob(job, metadata = {}) {
+  const effectiveJob = metadata.media_type && metadata.media_type !== job.media_type ? { ...job, media_type: metadata.media_type } : job;
+  const source = path.resolve(job.source || "");
+  const parsedSource = path.parse(source);
+  const parsedTarget = path.parse(job.target || source);
+  const base = mediaBaseFromMetadata(effectiveJob, metadata);
+  let targetDir = parsedTarget.dir || parsedSource.dir;
+
+  if (effectiveJob.media_type === "Serie") {
+    const seasonDirName = `Season ${String(base.season || 1).padStart(2, "0")}`;
+    const currentDirName = path.basename(targetDir);
+    if (/^Season\s+\d{2}$/i.test(currentDirName)) {
+      const showRoot = path.dirname(targetDir);
+      targetDir = path.join(path.dirname(showRoot), base.parentName, seasonDirName);
+    }
+  } else if (path.basename(targetDir) === parsedTarget.name || /\(\d{4}\)$/.test(path.basename(targetDir))) {
+    targetDir = path.join(path.dirname(targetDir), base.parentName);
+  }
+
+  const target = uniquePathForPreview(path.join(targetDir, `${base.name}${parsedSource.ext}`), source);
+  return {
+    ...effectiveJob,
+    target,
+    label: base.name,
+    warning: "",
+    metadata_source: "tmdb",
+    tmdb_id: metadata.id || job.tmdb_id || null,
+    tmdb_title: metadata.title || metadata.name || job.tmdb_title || "",
+    tmdb_year: metadata.year || metadata.release_year || job.tmdb_year || "",
+    tmdb_episode_title: metadata.episode_title || metadata.tmdb_episode_title || job.tmdb_episode_title || "",
+    metadata_confirmed: true
+  };
+}
+
 function renamePreviewForFile(filePath, context) {
   const parsed = path.parse(filePath);
   const episode = detectEpisodeParts(parsed.name);
   const forcedType = context.mediaType;
-  const mediaType = forcedType === "Film" || forcedType === "Serie" ? forcedType : episode ? "Serie" : "Film";
+  const mediaType = forcedType === "Film" || forcedType === "Serie" ? forcedType : context.sourceWasDirectory || episode ? "Serie" : "Film";
   const structureMode = context.structureMode === "plex" ? "plex" : "none";
   let target;
   let label;
   let year = "";
   let warning = "";
+  let jobSeason = null;
+  let jobEpisode = null;
 
   if (mediaType === "Serie") {
     const season = episode?.season || 1;
@@ -290,6 +351,8 @@ function renamePreviewForFile(filePath, context) {
     const baseDir = structureMode === "plex" ? path.join(context.showRoot || parsed.dir, `Season ${String(season).padStart(2, "0")}`) : parsed.dir;
     target = path.join(baseDir, newName);
     label = `${showName} S${String(season).padStart(2, "0")}E${String(episodeNumber).padStart(2, "0")}`;
+    jobSeason = season;
+    jobEpisode = episodeNumber;
   } else {
     year = detectMovieYear(parsed.name, context.movieYear);
     const title = movieTitleFromStem(parsed.name);
@@ -302,7 +365,7 @@ function renamePreviewForFile(filePath, context) {
   }
 
   target = uniquePathForPreview(target, filePath);
-  return {
+  const previewJob = {
     source: filePath,
     target,
     media_type: mediaType,
@@ -311,14 +374,28 @@ function renamePreviewForFile(filePath, context) {
     size_label: formatSize(calculateSourceSize(filePath)),
     label,
     warning,
-    year
+    year,
+    season: jobSeason || null,
+    episode: jobEpisode || null,
+    metadata_source: "",
+    tmdb_id: null,
+    tmdb_title: "",
+    tmdb_year: "",
+    tmdb_episode_title: "",
+    metadata_confirmed: false,
+    plex_movies_root: context.moviesRoot || "",
+    plex_series_root: context.seriesRoot || "",
+    plex_url_configured: Boolean(context.plexUrl),
+    plex_section_id: mediaType === "Film" ? context.moviesSectionId || "" : context.seriesSectionId || ""
   };
+  return previewJob;
 }
 
 function createRenamePreview(paths, options = {}) {
   const jobs = [];
   const errors = [];
-  const structureMode = options.structureMode || options.rename_folder_structure_mode || loadConfig().rename_folder_structure_mode;
+  const config = loadConfig();
+  const structureMode = options.structureMode || options.rename_folder_structure_mode || config.rename_folder_structure_mode;
   const mediaType = options.mediaType || "auto";
   const movieYear = options.movieYear || "";
   const explicitShowName = options.showName || "";
@@ -340,7 +417,13 @@ function createRenamePreview(paths, options = {}) {
           movieYear,
           showName: explicitShowName,
           defaultShowName,
-          showRoot
+          showRoot,
+          sourceWasDirectory: stat.isDirectory(),
+          moviesRoot: expandHome(config.movies_root),
+          seriesRoot: expandHome(config.series_root),
+          plexUrl: config.plex_url,
+          moviesSectionId: config.movies_section_id,
+          seriesSectionId: config.series_section_id
         }));
       }
     } catch (error) {
@@ -352,7 +435,7 @@ function createRenamePreview(paths, options = {}) {
 }
 
 async function startRename(jobs, options = {}) {
-  if (running || speedTestRunning) throw new Error("Es laeuft bereits ein Vorgang.");
+  if (running || speedTestRunning) throw new Error("Es läuft bereits ein Vorgang.");
   if (!jobs || !jobs.length) throw new Error("Es sind keine Umbenennen-Jobs vorhanden.");
 
   running = true;
@@ -390,11 +473,176 @@ async function startRename(jobs, options = {}) {
   if (options.refreshAfter && successJobs.length) {
     const libraries = [...new Set(successJobs.map((job) => job.media_type))];
     refresh = await triggerPlexRefresh(loadConfig(), libraries);
-    appendLog(refresh.movies_ok || refresh.series_ok ? "Plex-Refresh nach Umbenennen erfolgreich ausgeloest." : "Plex-Refresh nach Umbenennen konnte nicht ausgeloest werden.", !(refresh.movies_ok || refresh.series_ok));
+    appendLog(refresh.movies_ok || refresh.series_ok ? "Plex-Refresh nach Umbenennen erfolgreich ausgelöst." : "Plex-Refresh nach Umbenennen konnte nicht ausgelöst werden.", !(refresh.movies_ok || refresh.series_ok));
   }
   appendLog("Umbenennen abgeschlossen.", Boolean(failed));
   currentLogPath = null;
   return { jobs: results, success: successJobs.length, failed, refresh };
+}
+
+function tmdbConfig() {
+  const config = loadConfig();
+  let token = String(config.tmdb_access_token || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "");
+  if (!token) throw new Error("TMDb Token fehlt. Bitte in den Einstellungen eintragen.");
+  const isBearerToken = token.startsWith("eyJ") || token.split(".").length === 3;
+  return {
+    token,
+    authMode: isBearerToken ? "bearer" : "api_key",
+    language: String(config.tmdb_language || "de-DE").trim() || "de-DE",
+    region: String(config.tmdb_region || "DE").trim() || "DE"
+  };
+}
+
+function tmdbRequest(endpoint, params = {}) {
+  const { token, authMode, language, region } = tmdbConfig();
+  const url = new URL(`https://api.themoviedb.org/3${endpoint}`);
+  const requestParams = { language, ...params };
+  if (region && !requestParams.region) requestParams.region = region;
+  if (authMode === "api_key") requestParams.api_key = token;
+  for (const [key, value] of Object.entries(requestParams)) {
+    if (value !== undefined && value !== null && value !== "") url.searchParams.set(key, String(value));
+  }
+
+  const headers = { Accept: "application/json" };
+  if (authMode === "bearer") headers.Authorization = `Bearer ${token}`;
+
+  return new Promise((resolve, reject) => {
+    const req = https.request(url, {
+      method: "GET",
+      headers,
+      timeout: 12000
+    }, (res) => {
+      let body = "";
+      res.setEncoding("utf8");
+      res.on("data", (chunk) => { body += chunk; });
+      res.on("end", () => {
+        let parsed = {};
+        try {
+          parsed = body ? JSON.parse(body) : {};
+        } catch {
+          reject(new Error("TMDb Antwort konnte nicht gelesen werden."));
+          return;
+        }
+        if (res.statusCode === 401 || res.statusCode === 403) {
+          reject(new Error("TMDb Token/API-Key ist ungültig oder nicht erlaubt."));
+          return;
+        }
+        if (res.statusCode === 429) {
+          reject(new Error("TMDb Rate Limit erreicht. Bitte später erneut versuchen."));
+          return;
+        }
+        if (res.statusCode < 200 || res.statusCode >= 300) {
+          reject(new Error(parsed.status_message || `TMDb Fehler ${res.statusCode}`));
+          return;
+        }
+        resolve(parsed);
+      });
+    });
+    req.on("timeout", () => req.destroy(new Error("TMDb Anfrage Timeout.")));
+    req.on("error", (error) => reject(new Error(`TMDb nicht erreichbar: ${error.message}`)));
+    req.end();
+  });
+}
+
+function normalizeTmdbResult(item, mediaType) {
+  const isMovie = mediaType === "Film" || item.media_type === "movie";
+  const date = isMovie ? item.release_date : item.first_air_date;
+  const title = isMovie ? item.title : item.name;
+  const originalTitle = isMovie ? item.original_title : item.original_name;
+  const year = date ? String(date).slice(0, 4) : "";
+  return {
+    id: item.id,
+    media_type: isMovie ? "Film" : "Serie",
+    title: title || originalTitle || "Unbekannt",
+    original_title: originalTitle || title || "",
+    year,
+    date: date || "",
+    overview: item.overview || "",
+    vote_average: item.vote_average || 0,
+    popularity: item.popularity || 0,
+    poster_url: item.poster_path ? `https://image.tmdb.org/t/p/w185${item.poster_path}` : "",
+    backdrop_url: item.backdrop_path ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}` : ""
+  };
+}
+
+async function searchMetadata(query, mediaType, context = {}) {
+  const normalizedQuery = String(query || "").trim();
+  if (!normalizedQuery) throw new Error("Suchbegriff fehlt.");
+  const type = mediaType === "Serie" ? "Serie" : mediaType === "Film" ? "Film" : "auto";
+  const endpoint = type === "Serie" ? "/search/tv" : type === "Film" ? "/search/movie" : "/search/multi";
+  const params = { query: normalizedQuery, page: 1, include_adult: false };
+  if (type === "Film" && context.year) {
+    params.year = context.year;
+    params.primary_release_year = context.year;
+  }
+  if (type === "Serie" && context.year) params.first_air_date_year = context.year;
+  const response = await tmdbRequest(endpoint, params);
+  const rawResults = (response.results || [])
+    .filter((item) => type !== "auto" || ["movie", "tv"].includes(item.media_type))
+    .slice(0, 8);
+  const results = rawResults.map((item) => normalizeTmdbResult(item, type === "Serie" ? "Serie" : type === "Film" ? "Film" : item.media_type === "tv" ? "Serie" : "Film"));
+  if (!results.length) throw new Error("Keine TMDb Treffer gefunden.");
+  return { results };
+}
+
+async function metadataDetails(tmdbId, mediaType) {
+  const type = mediaType === "Serie" ? "Serie" : "Film";
+  const endpoint = type === "Serie" ? `/tv/${tmdbId}` : `/movie/${tmdbId}`;
+  const item = await tmdbRequest(endpoint, {});
+  const details = normalizeTmdbResult(item, type);
+  if (type === "Serie") {
+    details.seasons = (item.seasons || [])
+      .filter((season) => Number.isFinite(Number(season.season_number)))
+      .map((season) => ({
+        season_number: Number(season.season_number),
+        name: season.name || `Season ${season.season_number}`,
+        episode_count: Number(season.episode_count || 0),
+        air_date: season.air_date || "",
+        overview: season.overview || "",
+        poster_url: season.poster_path ? `https://image.tmdb.org/t/p/w185${season.poster_path}` : ""
+      }));
+  }
+  return details;
+}
+
+async function metadataEpisode(tvId, season, episode) {
+  const item = await tmdbRequest(`/tv/${tvId}/season/${season}/episode/${episode}`, {});
+  return {
+    id: item.id,
+    title: item.name || `Episode ${episode}`,
+    overview: item.overview || "",
+    date: item.air_date || "",
+    season: Number(season),
+    episode: Number(episode),
+    vote_average: item.vote_average || 0,
+    still_url: item.still_path ? `https://image.tmdb.org/t/p/w300${item.still_path}` : ""
+  };
+}
+
+async function metadataSeason(tvId, season) {
+  const item = await tmdbRequest(`/tv/${tvId}/season/${season}`, {});
+  return {
+    id: item.id,
+    season: Number(item.season_number || season),
+    title: item.name || `Season ${season}`,
+    overview: item.overview || "",
+    air_date: item.air_date || "",
+    poster_url: item.poster_path ? `https://image.tmdb.org/t/p/w185${item.poster_path}` : "",
+    episodes: (item.episodes || []).map((episode) => ({
+      id: episode.id,
+      episode: Number(episode.episode_number || 0),
+      title: episode.name || `Episode ${episode.episode_number}`,
+      overview: episode.overview || "",
+      date: episode.air_date || "",
+      vote_average: episode.vote_average || 0,
+      still_url: episode.still_path ? `https://image.tmdb.org/t/p/w300${episode.still_path}` : ""
+    })).filter((episode) => episode.episode > 0)
+  };
+}
+
+async function testTmdbConfig() {
+  await tmdbRequest("/configuration", {});
+  return { ok: true };
 }
 
 function calculateSourceSize(sourcePath) {
@@ -975,6 +1223,24 @@ ipcMain.handle("dialog:any", async () => {
   });
   return result.canceled ? [] : result.filePaths;
 });
+ipcMain.handle("dialog:renameFiles", async () => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    title: "Dateien zum Umbenennen auswählen",
+    properties: ["openFile", "multiSelections"],
+    filters: [
+      { name: "Videodateien", extensions: [...VIDEO_EXTENSIONS].map((ext) => ext.slice(1)) },
+      { name: "Alle Dateien", extensions: ["*"] }
+    ]
+  });
+  return result.canceled ? [] : result.filePaths;
+});
+ipcMain.handle("dialog:renameFolders", async () => {
+  const result = await dialog.showOpenDialog(mainWindow, {
+    title: "Ordner zum Umbenennen auswählen",
+    properties: ["openDirectory", "multiSelections"]
+  });
+  return result.canceled ? [] : result.filePaths;
+});
 ipcMain.handle("logs:open", async () => {
   ensureDir(logsDir());
   await shell.openPath(logsDir());
@@ -989,6 +1255,12 @@ ipcMain.handle("plex:refresh", async (_event, libraries) => triggerPlexRefresh(l
 ipcMain.handle("speed:test", () => runSpeedTest());
 ipcMain.handle("rename:preview", (_event, paths, options) => createRenamePreview(paths, options || {}));
 ipcMain.handle("rename:start", (_event, jobs, options) => startRename(jobs, options || {}));
+ipcMain.handle("rename:applyMetadata", (_event, job, metadata) => applyMetadataToRenameJob(job, metadata || {}));
+ipcMain.handle("metadata:search", (_event, query, mediaType, context) => searchMetadata(query, mediaType, context || {}));
+ipcMain.handle("metadata:details", (_event, tmdbId, mediaType) => metadataDetails(tmdbId, mediaType));
+ipcMain.handle("metadata:episode", (_event, tvId, season, episode) => metadataEpisode(tvId, season, episode));
+ipcMain.handle("metadata:season", (_event, tvId, season) => metadataSeason(tvId, season));
+ipcMain.handle("metadata:testConfig", () => testTmdbConfig());
 ipcMain.handle("workflow:setMode", (_event, mode) => {
   if (!mainWindow || mainWindow.isDestroyed()) return { ok: false };
   if (["transfer", "rename", "combo"].includes(mode)) {

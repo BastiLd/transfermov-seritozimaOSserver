@@ -12,6 +12,10 @@ const api = window.plexTransfer || {
     refresh_after_rename: true,
     refresh_after_combo: true,
     rename_folder_structure_mode: "plex",
+    tmdb_access_token: "",
+    tmdb_language: "de-DE",
+    tmdb_region: "DE",
+    metadata_provider: "tmdb",
     theme_mode: "dunkel",
     remember_pending_jobs: true,
     pending_jobs: [],
@@ -46,6 +50,8 @@ const api = window.plexTransfer || {
   }],
   startCopy: async () => ({ ok: true }),
   cancelCopy: async () => ({ ok: true }),
+  selectRenameFiles: async () => ["D:\\Demo\\Example.Movie.2026.1080p.mkv"],
+  selectRenameFolders: async () => ["D:\\Demo\\Example.Show"],
   selectMovies: async () => ["D:\\Demo\\Example.Movie.2026.1080p.mkv"],
   selectSeries: async () => ["D:\\Demo\\Example.Show\\Example.Show.S01E01.mkv"],
   selectAny: async () => ["D:\\Demo\\Example.Movie.2026.1080p.mkv", "D:\\Demo\\Example.Show\\Example.Show.S01E01.mkv"],
@@ -66,6 +72,12 @@ const api = window.plexTransfer || {
     errors: []
   }),
   startRename: async (jobs) => ({ jobs: (jobs || []).map((job) => ({ ...job, final_path: job.target, status: "Umbenannt" })), success: (jobs || []).length, failed: 0 }),
+  applyMetadataToRenameJob: async (job, metadata) => ({ ...job, metadata_source: "tmdb", metadata_confirmed: true, tmdb_title: metadata.title || "" }),
+  searchMetadata: async () => ({ results: [] }),
+  getMetadataDetails: async (_id, mediaType) => ({ id: _id, media_type: mediaType, title: "Demo", overview: "" }),
+  getEpisodeMetadata: async () => ({ title: "Episode", overview: "" }),
+  getSeasonMetadata: async (_id, season) => ({ season, episodes: [{ episode: 1, title: "Episode" }] }),
+  testMetadataConfig: async () => ({ ok: true }),
   setWorkflowMode: async () => ({ ok: true }),
   onCopyStarted: () => () => {},
   onCopyLog: () => () => {},
@@ -153,12 +165,19 @@ const els = {
   renameRefreshSettingsInput: $("renameRefreshSettingsInput"),
   comboRefreshSettingsInput: $("comboRefreshSettingsInput"),
   renameStructureSettingsInput: $("renameStructureSettingsInput"),
+  tmdbTokenInput: $("tmdbTokenInput"),
+  tmdbLanguageInput: $("tmdbLanguageInput"),
+  tmdbRegionInput: $("tmdbRegionInput"),
+  tmdbTestButton: $("tmdbTestButton"),
+  tmdbStatusText: $("tmdbStatusText"),
   rememberInput: $("rememberInput"),
   themeInput: $("themeInput"),
   saveSettingsButton: $("saveSettingsButton"),
   cancelSettingsButton: $("cancelSettingsButton"),
   plexieMascot: $("plexieMascot"),
   renamePickButton: $("renamePickButton"),
+  renameFolderButton: $("renameFolderButton"),
+  renameSearchButton: $("renameSearchButton"),
   renameTypeInput: $("renameTypeInput"),
   renameStructureInput: $("renameStructureInput"),
   renameShowInput: $("renameShowInput"),
@@ -169,6 +188,8 @@ const els = {
   renameClearButton: $("renameClearButton"),
   renamePreviewList: $("renamePreviewList"),
   comboPickButton: $("comboPickButton"),
+  comboFolderButton: $("comboFolderButton"),
+  comboSearchButton: $("comboSearchButton"),
   comboTypeInput: $("comboTypeInput"),
   comboStructureInput: $("comboStructureInput"),
   comboShowInput: $("comboShowInput"),
@@ -192,6 +213,12 @@ function escapeHtml(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function cleanErrorMessage(error) {
+  return String(error?.message || error || "Unbekannter Fehler")
+    .replace(/^Error invoking remote method '[^']+': Error:\s*/i, "")
+    .replace(/^Error:\s*/i, "");
 }
 
 function formatSize(sizeBytes) {
@@ -384,11 +411,13 @@ function showWorkflowView(mode) {
 }
 
 async function setWorkflowMode(mode) {
+  state.config = await api.getConfig();
+  loadSettingsDraft();
   state.workflowMode = mode;
   await api.setWorkflowMode(mode);
   showWorkflowView(mode);
-  const labels = { transfer: "Uebertragen", rename: "Umbenennen", combo: "Beides", picker: "Plex Transfer" };
-  setText($("subtitle"), mode === "combo" ? "Erst Plex-konform umbenennen, dann uebertragen" : mode === "rename" ? "Lokales Plex-konformes Umbenennen" : "Lokaler Plex-/NAS-Kopierworkflow mit Robocopy");
+  const labels = { transfer: "Übertragen", rename: "Umbenennen", combo: "Beides", picker: "Plex Transfer" };
+  setText($("subtitle"), mode === "combo" ? "Erst Plex-konform umbenennen, dann übertragen" : mode === "rename" ? "Lokales Plex-konformes Umbenennen" : "Lokaler Plex-/NAS-Kopierworkflow mit Robocopy");
   setGlobalStatus("Bereit", `${labels[mode] || "Workflow"} bereit.`);
 }
 
@@ -404,6 +433,10 @@ function loadSettingsDraft() {
   els.renameRefreshSettingsInput.checked = Boolean(state.config.refresh_after_rename ?? state.config.auto_refresh);
   els.comboRefreshSettingsInput.checked = Boolean(state.config.refresh_after_combo ?? state.config.auto_refresh);
   els.renameStructureSettingsInput.value = state.config.rename_folder_structure_mode || "plex";
+  els.tmdbTokenInput.value = state.config.tmdb_access_token || "";
+  els.tmdbLanguageInput.value = state.config.tmdb_language || "de-DE";
+  els.tmdbRegionInput.value = state.config.tmdb_region || "DE";
+  setText(els.tmdbStatusText, "This product uses the TMDB API but is not endorsed or certified by TMDB.");
   els.rememberInput.checked = Boolean(state.config.remember_pending_jobs);
   els.themeInput.value = state.config.theme_mode || "hell";
   els.renameStructureInput.value = state.config.rename_folder_structure_mode || "plex";
@@ -427,6 +460,10 @@ function readSettingsDraft() {
     refresh_after_rename: els.renameRefreshSettingsInput.checked,
     refresh_after_combo: els.comboRefreshSettingsInput.checked,
     rename_folder_structure_mode: els.renameStructureSettingsInput.value,
+    tmdb_access_token: els.tmdbTokenInput.value.trim(),
+    tmdb_language: els.tmdbLanguageInput.value.trim() || "de-DE",
+    tmdb_region: els.tmdbRegionInput.value.trim() || "DE",
+    metadata_provider: "tmdb",
     remember_pending_jobs: els.rememberInput.checked,
     theme_mode: els.themeInput.value
   };
@@ -1014,7 +1051,7 @@ function renderRenamePreview(kind) {
   const jobs = kind === "combo" ? state.comboJobs : state.renameJobs;
   const list = kind === "combo" ? els.comboPreviewList : els.renamePreviewList;
   if (!jobs.length) {
-    list.innerHTML = `<div class="empty-tool-state">Noch keine Vorschau. Waehle Dateien oder Ordner aus.</div>`;
+    list.innerHTML = `<div class="empty-tool-state">Noch keine Vorschau. Wähle Dateien oder Ordner aus.</div>`;
     return;
   }
   list.innerHTML = jobs.map((job, index) => `
@@ -1024,18 +1061,28 @@ function renderRenamePreview(kind) {
         <strong>${escapeHtml(job.label || basename(job.target))}</strong>
         <span>Quelle: ${escapeHtml(job.source)}</span>
         <span>Ziel: ${escapeHtml(job.target)}</span>
+        <span>Plex Config: ${escapeHtml(job.media_type === "Film" ? job.plex_movies_root || state.config.movies_root || "-" : job.plex_series_root || state.config.series_root || "-")}</span>
+        ${job.metadata_confirmed ? `<em class="metadata-ok">TMDb übernommen: ${escapeHtml(job.tmdb_title || job.tmdb_episode_title || "bestätigt")}</em>` : ""}
         ${job.warning ? `<em>${escapeHtml(job.warning)}</em>` : ""}
         ${job.error ? `<em class="status-error">${escapeHtml(job.error)}</em>` : ""}
       </div>
-      <small>${escapeHtml(job.media_type || "-")} | ${escapeHtml(job.status || "Bereit")}</small>
+      <div class="preview-side-actions">
+        <small>${escapeHtml(job.media_type || "-")} | ${escapeHtml(job.status || "Bereit")}</small>
+        <button class="metadata-search-button" data-kind="${kind}" data-index="${index}">Online suchen</button>
+      </div>
     </div>
   `).join("");
+  list.querySelectorAll(".metadata-search-button").forEach((button) => {
+    button.addEventListener("click", () => searchMetadataForJob(button.dataset.kind, Number(button.dataset.index)));
+  });
 }
 
 async function refreshRenamePreview(kind) {
+  state.config = await api.getConfig();
+  loadSettingsDraft();
   const paths = kind === "combo" ? state.comboPaths : state.renamePaths;
   if (!paths.length) {
-    await showMessage("Umbenennen", "Bitte zuerst Dateien oder Ordner auswaehlen.");
+    await showMessage("Umbenennen", "Bitte zuerst Dateien oder Ordner auswählen.");
     return;
   }
   const result = await api.previewRename(paths, renameOptions(kind));
@@ -1043,15 +1090,498 @@ async function refreshRenamePreview(kind) {
   else state.renameJobs = result.jobs || [];
   for (const error of result.errors || []) appendLog(error, true);
   renderRenamePreview(kind);
-  setGlobalStatus("Bereit", `${(result.jobs || []).length} Vorschlaege erstellt.`);
+  setGlobalStatus("Bereit", `${(result.jobs || []).length} Vorschläge erstellt.`);
 }
 
-async function pickRenamePaths(kind) {
-  const paths = await api.selectAny();
+function metadataSearchQuery(job) {
+  if (job.media_type === "Serie") {
+    const label = String(job.label || basename(job.source));
+    return label.replace(/\s*S\d{2}E\d{2}.*$/i, "").trim() || basename(job.source);
+  }
+  return String(job.label || basename(job.source)).replace(/\s*\(\d{4}\)\s*$/g, "").trim();
+}
+
+function metadataContext(job) {
+  return {
+    year: job.year || job.tmdb_year || "",
+    season: job.season || null,
+    episode: job.episode || null
+  };
+}
+
+function jobListForKind(kind) {
+  return kind === "combo" ? state.comboJobs : state.renameJobs;
+}
+
+function replaceJobForKind(kind, index, job) {
+  if (kind === "combo") state.comboJobs[index] = job;
+  else state.renameJobs[index] = job;
+  renderRenamePreview(kind);
+}
+
+async function metadataDetailsHtml(result, job) {
+  try {
+    const details = await api.getMetadataDetails(result.id, result.media_type);
+    let episodeText = "";
+    if (result.media_type === "Serie" && job.season && job.episode) {
+      const episode = await api.getEpisodeMetadata(result.id, job.season, job.episode).catch(() => null);
+      if (episode) episodeText = `<div class="metadata-detail-block"><strong>Episode</strong><span>S${String(job.season).padStart(2, "0")}E${String(job.episode).padStart(2, "0")} - ${escapeHtml(episode.title)}</span><p>${escapeHtml(episode.overview || "")}</p></div>`;
+    }
+    return `
+        <div class="metadata-detail">
+          ${details.poster_url ? `<img src="${escapeHtml(details.poster_url)}" alt="">` : ""}
+          <div>
+            <h3>${escapeHtml(details.title)}${details.year ? ` (${escapeHtml(details.year)})` : ""}</h3>
+            <p>${escapeHtml(details.overview || "Keine Beschreibung vorhanden.")}</p>
+            <span>Original: ${escapeHtml(details.original_title || "-")}</span>
+            <span>TMDb ID: ${escapeHtml(details.id)}</span>
+          </div>
+        </div>
+        ${episodeText}
+      `;
+  } catch (error) {
+    return `<p class="status-error">${escapeHtml(error.message)}</p>`;
+  }
+}
+
+async function acceptMetadataResult(kind, index, result) {
+  const jobs = jobListForKind(kind);
+  const job = jobs[index];
+  if (!job) return;
+  let metadata = { ...result };
+  const selectedSeason = Number(result.season || result.selected_season || job.season || 0);
+  const selectedEpisode = Number(result.episode || result.selected_episode || job.episode || 0);
+  if (result.media_type === "Serie" && selectedSeason && selectedEpisode) {
+    const episode = result.episode_title || result.tmdb_episode_title
+      ? { title: result.episode_title || result.tmdb_episode_title }
+      : await api.getEpisodeMetadata(result.id, selectedSeason, selectedEpisode).catch(() => null);
+    if (episode) metadata = { ...metadata, episode_title: episode.title, tmdb_episode_title: episode.title };
+    metadata = { ...metadata, season: selectedSeason, episode: selectedEpisode };
+  }
+  const updated = await api.applyMetadataToRenameJob(job, metadata);
+  replaceJobForKind(kind, index, updated);
+  setGlobalStatus("Bereit", "TMDb Treffer übernommen.");
+  showToast("TMDb übernommen", updated.label || result.title);
+}
+
+async function showEpisodeChooser(modal, result, onSelect) {
+  const slot = modal.querySelector(".metadata-detail-slot");
+  if (!slot) return;
+  slot.innerHTML = `<div class="metadata-detail-block"><strong>Staffeln werden geladen...</strong></div>`;
+  try {
+    const details = await api.getMetadataDetails(result.id, "Serie");
+    const seasons = (details.seasons || []).filter((season) => Number(season.season_number) > 0);
+    if (!seasons.length) {
+      slot.innerHTML = `<p class="status-error">Keine Staffeln bei TMDb gefunden.</p>`;
+      return;
+    }
+    slot.innerHTML = `
+      <div class="episode-chooser">
+        <div>
+          <strong>${escapeHtml(details.title || result.title)}</strong>
+          <span>Wähle Staffel und Folge aus TMDb.</span>
+        </div>
+        <div class="episode-picker-row">
+          <label>Staffel
+            <select data-role="season-select">
+              ${seasons.map((season) => `<option value="${escapeHtml(season.season_number)}">${escapeHtml(season.name || `Staffel ${season.season_number}`)} (${escapeHtml(season.episode_count || 0)} Folgen)</option>`).join("")}
+            </select>
+          </label>
+          <label>Folge
+            <select data-role="episode-select"></select>
+          </label>
+          <button data-role="episode-apply" class="primary">Übernehmen</button>
+        </div>
+        <p data-role="episode-info"></p>
+      </div>
+    `;
+    const seasonSelect = slot.querySelector('[data-role="season-select"]');
+    const episodeSelect = slot.querySelector('[data-role="episode-select"]');
+    const info = slot.querySelector('[data-role="episode-info"]');
+    let currentEpisodes = [];
+    const loadSeason = async () => {
+      const seasonNumber = Number(seasonSelect.value);
+      episodeSelect.innerHTML = `<option>Lade Folgen...</option>`;
+      info.textContent = "";
+      const seasonData = await api.getSeasonMetadata(result.id, seasonNumber);
+      currentEpisodes = seasonData.episodes || [];
+      episodeSelect.innerHTML = currentEpisodes.map((episode) => `<option value="${escapeHtml(episode.episode)}">${episodeCode(seasonNumber, episode.episode)} - ${escapeHtml(episode.title || `Folge ${episode.episode}`)}</option>`).join("");
+      if (!currentEpisodes.length) episodeSelect.innerHTML = `<option value="">Keine Folgen gefunden</option>`;
+    };
+    seasonSelect.addEventListener("change", () => {
+      loadSeason().catch((error) => {
+        currentEpisodes = [];
+        episodeSelect.innerHTML = `<option value="">Fehler</option>`;
+        info.textContent = cleanErrorMessage(error);
+      });
+    });
+    slot.querySelector('[data-role="episode-apply"]').addEventListener("click", async () => {
+      const seasonNumber = Number(seasonSelect.value);
+      const episodeNumber = Number(episodeSelect.value);
+      const episode = currentEpisodes.find((item) => Number(item.episode) === episodeNumber);
+      if (!seasonNumber || !episodeNumber || !episode) {
+        info.textContent = "Bitte eine gültige Folge wählen.";
+        return;
+      }
+      await onSelect({
+        ...result,
+        season: seasonNumber,
+        episode: episodeNumber,
+        episode_title: episode.title || `Episode ${episodeNumber}`,
+        tmdb_episode_title: episode.title || `Episode ${episodeNumber}`
+      });
+    });
+    await loadSeason();
+  } catch (error) {
+    slot.innerHTML = `<p class="status-error">${escapeHtml(cleanErrorMessage(error))}</p>`;
+  }
+}
+
+async function showMetadataResults(kind, index, results) {
+  let visible = results.slice();
+  const jobs = jobListForKind(kind);
+  const job = jobs[index];
+  const renderBody = () => visible.map((result, resultIndex) => `
+    <div class="metadata-result">
+      ${result.poster_url ? `<img src="${escapeHtml(result.poster_url)}" alt="">` : `<div class="metadata-poster-empty">TMDb</div>`}
+      <div>
+        <strong>${escapeHtml(result.title)}${result.year ? ` (${escapeHtml(result.year)})` : ""}</strong>
+        <span>${escapeHtml(result.media_type)} | Bewertung ${Number(result.vote_average || 0).toFixed(1)} | Popularität ${Math.round(result.popularity || 0)}</span>
+        <p>${escapeHtml(result.overview || "Keine Beschreibung vorhanden.")}</p>
+      </div>
+      <div class="metadata-actions">
+        <button data-action="accept" data-index="${resultIndex}" class="primary">Ja, übernehmen</button>
+        <button data-action="episodes" data-index="${resultIndex}" class="${result.media_type === "Serie" ? "" : "hidden"}">Staffel/Folge wählen</button>
+        <button data-action="wrong" data-index="${resultIndex}">Falsch</button>
+        <button data-action="details" data-index="${resultIndex}">Mehr Infos</button>
+      </div>
+    </div>
+  `).join("") || `<p>Keine weiteren Treffer. Nutze Ablehnen oder starte eine neue Suche.</p>`;
+
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal";
+    modal.innerHTML = `
+      <div class="modal-header"><h2>TMDb Treffer prüfen</h2></div>
+      <div class="modal-body">
+        <div class="metadata-query">
+          <span>Quelle</span>
+          <strong>${escapeHtml(basename(job.source))}</strong>
+        </div>
+        <div class="metadata-detail-slot"></div>
+        <div class="metadata-results">${renderBody()}</div>
+      </div>
+      <div class="modal-footer">
+        <button data-action="reject">Ablehnen</button>
+      </div>
+    `;
+    const refreshResults = () => {
+      modal.querySelector(".metadata-results").innerHTML = renderBody();
+      wireModalButtons();
+    };
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
+    const wireModalButtons = () => {
+      modal.querySelectorAll("[data-action]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const action = button.dataset.action;
+          if (action === "reject") {
+            close();
+            return;
+          }
+          const result = visible[Number(button.dataset.index)];
+          if (!result) return;
+          if (action === "wrong") {
+            visible = visible.filter((item) => item.id !== result.id || item.media_type !== result.media_type);
+            refreshResults();
+            return;
+          }
+          if (action === "details") {
+            modal.querySelector(".metadata-detail-slot").innerHTML = await metadataDetailsHtml(result, job);
+            return;
+          }
+          if (action === "episodes") {
+            await showEpisodeChooser(modal, result, async (selectedResult) => {
+              await acceptMetadataResult(kind, index, selectedResult);
+              close();
+            });
+            return;
+          }
+          if (action === "accept") {
+            await acceptMetadataResult(kind, index, result);
+            close();
+          }
+        });
+      });
+    };
+    els.modalHost.appendChild(modal);
+    wireModalButtons();
+  });
+}
+
+async function openRetryMetadataSearch(kind, index, initialQuery, initialMessage) {
+  return new Promise((resolve) => {
+    const jobs = jobListForKind(kind);
+    const job = jobs[index];
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal";
+    modal.innerHTML = `
+      <div class="modal-header"><h2>TMDb Suche verfeinern</h2></div>
+      <div class="modal-body">
+        <div class="metadata-query">
+          <span>Für diesen Job wurde nichts gefunden. Gib Zusatzinfos ein, z.B. nur den Seriennamen.</span>
+          <strong>${escapeHtml(basename(job.source))}</strong>
+          ${initialMessage ? `<p class="status-error">${escapeHtml(initialMessage)}</p>` : ""}
+        </div>
+        <div class="metadata-search-bar">
+          <input id="retryMetadataQuery" type="search" value="${escapeHtml(initialQuery)}" placeholder="z.B. Miraculous">
+          <button id="retryMetadataSearchButton" class="primary">Suchen</button>
+        </div>
+        <div class="metadata-detail-slot"></div>
+        <div id="retryMetadataResults" class="metadata-results"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="retryMetadataCloseButton">Ablehnen</button>
+      </div>
+    `;
+
+    const resultsHost = modal.querySelector("#retryMetadataResults");
+    let visible = [];
+
+    const renderBody = () => visible.map((result, resultIndex) => `
+      <div class="metadata-result">
+        ${result.poster_url ? `<img src="${escapeHtml(result.poster_url)}" alt="">` : `<div class="metadata-poster-empty">TMDb</div>`}
+        <div>
+          <strong>${escapeHtml(result.title)}${result.year ? ` (${escapeHtml(result.year)})` : ""}</strong>
+          <span>${escapeHtml(result.media_type)} | Bewertung ${Number(result.vote_average || 0).toFixed(1)} | Popularität ${Math.round(result.popularity || 0)}</span>
+          <p>${escapeHtml(result.overview || "Keine Beschreibung vorhanden.")}</p>
+        </div>
+        <div class="metadata-actions">
+          <button data-action="accept" data-index="${resultIndex}" class="primary">Ja, übernehmen</button>
+          <button data-action="episodes" data-index="${resultIndex}" class="${result.media_type === "Serie" ? "" : "hidden"}">Staffel/Folge wählen</button>
+          <button data-action="wrong" data-index="${resultIndex}">Falsch</button>
+          <button data-action="details" data-index="${resultIndex}">Mehr Infos</button>
+        </div>
+      </div>
+    `).join("") || `<p>Keine Treffer. Gib mehr oder andere Infos ein.</p>`;
+
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
+
+    const wireResults = () => {
+      resultsHost.innerHTML = renderBody();
+      resultsHost.querySelectorAll("[data-action]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const result = visible[Number(button.dataset.index)];
+          if (!result) return;
+          if (button.dataset.action === "wrong") {
+            visible = visible.filter((item) => item.id !== result.id || item.media_type !== result.media_type);
+            wireResults();
+            return;
+          }
+          if (button.dataset.action === "details") {
+            modal.querySelector(".metadata-detail-slot").innerHTML = await metadataDetailsHtml(result, job);
+            return;
+          }
+          if (button.dataset.action === "episodes") {
+            await showEpisodeChooser(modal, result, async (selectedResult) => {
+              await acceptMetadataResult(kind, index, selectedResult);
+              close();
+            });
+            return;
+          }
+          await acceptMetadataResult(kind, index, result);
+          close();
+        });
+      });
+    };
+
+    const runSearch = async () => {
+      const query = modal.querySelector("#retryMetadataQuery").value.trim();
+      if (!query) return;
+      resultsHost.innerHTML = "<p>Suche läuft...</p>";
+      try {
+        const response = await api.searchMetadata(query, "auto", metadataContext(job));
+        visible = response.results || [];
+        wireResults();
+      } catch (error) {
+        visible = [];
+        resultsHost.innerHTML = `<p class="status-error">${escapeHtml(cleanErrorMessage(error))}</p>`;
+      }
+    };
+
+    els.modalHost.appendChild(modal);
+    modal.querySelector("#retryMetadataCloseButton").addEventListener("click", close);
+    modal.querySelector("#retryMetadataSearchButton").addEventListener("click", runSearch);
+    modal.querySelector("#retryMetadataQuery").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") runSearch();
+    });
+    modal.querySelector("#retryMetadataQuery").focus();
+  });
+}
+
+async function searchMetadataForJob(kind, index) {
+  const jobs = jobListForKind(kind);
+  const job = jobs[index];
+  if (!job) return;
+  const query = metadataSearchQuery(job);
+  try {
+    setGlobalStatus("Bereit", "TMDb Suche läuft...");
+    const result = await api.searchMetadata(query, job.media_type, metadataContext(job));
+    await showMetadataResults(kind, index, result.results || []);
+    setGlobalStatus("Bereit", "TMDb Suche abgeschlossen.");
+  } catch (error) {
+    const message = cleanErrorMessage(error);
+    appendLog(`TMDb Suche fehlgeschlagen: ${message}`, true);
+    if (/Keine TMDb Treffer gefunden/i.test(message)) {
+      await openRetryMetadataSearch(kind, index, query, message);
+      setGlobalStatus("Bereit", "TMDb Suche bereit.");
+    } else {
+      await showMessage("TMDb Suche", message, true);
+      setGlobalStatus("Fehler", "TMDb Suche fehlgeschlagen.");
+    }
+  }
+}
+
+async function pickRenamePaths(kind, sourceKind = "files") {
+  const paths = sourceKind === "folders" ? await api.selectRenameFolders() : await api.selectRenameFiles();
   if (!paths.length) return;
   if (kind === "combo") state.comboPaths = paths;
   else state.renamePaths = paths;
   await refreshRenamePreview(kind);
+}
+
+function formatMetadataCopyName(result) {
+  const title = result.title || result.name || "Unbekannt";
+  if (result.media_type === "Film") return result.year ? `${title} (${result.year})` : title;
+  return title;
+}
+
+function episodeCode(season, episode) {
+  return `S${String(Number(season) || 1).padStart(2, "0")}E${String(Number(episode) || 1).padStart(2, "0")}`;
+}
+
+async function copyMetadataName(result, season = null, episode = null) {
+  let text = formatMetadataCopyName(result);
+  if (result.media_type === "Serie" && season && episode) {
+    let episodeTitle = result.episode_title || result.tmdb_episode_title || "";
+    if (!episodeTitle) {
+      try {
+        const details = await api.getEpisodeMetadata(result.id, season, episode);
+        episodeTitle = details?.title || "";
+      } catch {
+        episodeTitle = "";
+      }
+    }
+    text = `${result.title} - ${episodeCode(season, episode)}${episodeTitle ? ` - ${episodeTitle}` : ""}`;
+  }
+  await api.copyPath(text);
+  showToast("Name kopiert", text);
+}
+
+function renderFreeSearchResults(container, results) {
+  container.innerHTML = (results || []).map((result, index) => `
+    <div class="metadata-result free-search-result">
+      ${result.poster_url ? `<img src="${escapeHtml(result.poster_url)}" alt="">` : `<div class="metadata-poster-empty">TMDb</div>`}
+      <div>
+        <strong>${escapeHtml(result.title)}${result.year ? ` (${escapeHtml(result.year)})` : ""}</strong>
+        <span>${escapeHtml(result.media_type)} | Bewertung ${Number(result.vote_average || 0).toFixed(1)} | Popularität ${Math.round(result.popularity || 0)}</span>
+        <p>${escapeHtml(result.overview || "Keine Beschreibung vorhanden.")}</p>
+        <div class="episode-copy ${result.media_type === "Serie" ? "" : "hidden"}">
+          <label>Staffel<input data-role="season" data-index="${index}" type="number" min="1" value="1"></label>
+          <label>Folge<input data-role="episode" data-index="${index}" type="number" min="1" value="1"></label>
+        </div>
+      </div>
+      <div class="metadata-actions">
+        <button data-action="copy" data-index="${index}" class="primary" title="Name kopieren" aria-label="Name kopieren">⧉</button>
+        <button data-action="episodes" data-index="${index}" class="${result.media_type === "Serie" ? "" : "hidden"}">Staffel/Folge wählen</button>
+        <button data-action="details" data-index="${index}">Mehr Infos</button>
+      </div>
+    </div>
+  `).join("") || `<p>Keine Treffer.</p>`;
+
+  container.querySelectorAll("[data-action]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const result = results[Number(button.dataset.index)];
+      if (!result) return;
+      if (button.dataset.action === "details") {
+        const slot = container.closest(".modal").querySelector(".metadata-detail-slot");
+        slot.innerHTML = await metadataDetailsHtml(result, { season: 1, episode: 1 });
+        return;
+      }
+      if (button.dataset.action === "episodes") {
+        await showEpisodeChooser(container.closest(".modal"), result, async (selectedResult) => {
+          await copyMetadataName(selectedResult, selectedResult.season, selectedResult.episode);
+        });
+        return;
+      }
+      const row = button.closest(".metadata-result");
+      const season = row.querySelector('[data-role="season"]')?.value || null;
+      const episode = row.querySelector('[data-role="episode"]')?.value || null;
+      await copyMetadataName(result, season, episode);
+    });
+  });
+}
+
+async function openFreeMetadataSearch() {
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal";
+    modal.innerHTML = `
+      <div class="modal-header"><h2>TMDb Suche</h2></div>
+      <div class="modal-body">
+        <div class="metadata-search-bar">
+          <input id="freeMetadataQuery" type="search" placeholder="Film oder Serie suchen">
+          <button id="freeMetadataSearchButton" class="primary">Suchen</button>
+        </div>
+        <div class="metadata-detail-slot"></div>
+        <div id="freeMetadataResults" class="metadata-results"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="freeMetadataCloseButton">Schließen</button>
+      </div>
+    `;
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
+    const runSearch = async () => {
+      const input = modal.querySelector("#freeMetadataQuery");
+      const resultsHost = modal.querySelector("#freeMetadataResults");
+      const query = input.value.trim();
+      if (!query) {
+        input.focus();
+        return;
+      }
+      resultsHost.innerHTML = "<p>Suche läuft...</p>";
+      try {
+        const result = await api.searchMetadata(query, "auto", {});
+        renderFreeSearchResults(resultsHost, result.results || []);
+      } catch (error) {
+        resultsHost.innerHTML = `<p class="status-error">${escapeHtml(cleanErrorMessage(error))}</p>`;
+      }
+    };
+    els.modalHost.appendChild(modal);
+    modal.querySelector("#freeMetadataCloseButton").addEventListener("click", close);
+    modal.querySelector("#freeMetadataSearchButton").addEventListener("click", runSearch);
+    modal.querySelector("#freeMetadataQuery").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") runSearch();
+    });
+    modal.querySelector("#freeMetadataQuery").focus();
+  });
 }
 
 async function clearRenameWorkflow(kind) {
@@ -1073,7 +1603,7 @@ async function startRenameOnly() {
   }
   const confirmed = await showModal({
     title: "Umbenennen starten",
-    body: "<p>Die Dateien werden jetzt am aktuellen Ort umbenannt oder in die gewaehlte Plex-Struktur verschoben.</p>",
+    body: "<p>Die Dateien werden jetzt am aktuellen Ort umbenannt oder in die gewählte Plex-Struktur verschoben.</p>",
     small: true,
     buttons: [
       { label: "Abbrechen", value: false },
@@ -1081,7 +1611,7 @@ async function startRenameOnly() {
     ]
   });
   if (!confirmed) return;
-  setGlobalStatus("Kopiert...", "Umbenennen laeuft.");
+  setGlobalStatus("Kopiert...", "Umbenennen läuft.");
   const result = await api.startRename(state.renameJobs, { refreshAfter: els.renameRefreshInput.checked });
   state.renameJobs = result.jobs || [];
   renderRenamePreview("rename");
@@ -1096,7 +1626,7 @@ async function startComboFlow() {
   }
   const confirmed = await showModal({
     title: "Beides starten",
-    body: "<p>Zuerst wird lokal umbenannt. Danach werden die erfolgreichen Dateien auf das Plex-Ziel uebertragen.</p>",
+    body: "<p>Zuerst wird lokal umbenannt. Danach werden die erfolgreichen Dateien auf das Plex-Ziel übertragen.</p>",
     small: true,
     buttons: [
       { label: "Abbrechen", value: false },
@@ -1105,7 +1635,7 @@ async function startComboFlow() {
   });
   if (!confirmed) return;
 
-  setGlobalStatus("Kopiert...", "Umbenennen fuer Kombi laeuft.");
+  setGlobalStatus("Kopiert...", "Umbenennen für Kombi läuft.");
   const renameResult = await api.startRename(state.comboJobs, { refreshAfter: false });
   state.comboJobs = renameResult.jobs || [];
   renderRenamePreview("combo");
@@ -1113,7 +1643,7 @@ async function startComboFlow() {
     .filter((job) => ["Umbenannt", "Unveraendert"].includes(job.status))
     .map((job) => job.final_path || job.target);
   if (!finalPaths.length) {
-    setGlobalStatus("Fehler", "Keine erfolgreich umbenannten Dateien fuer den Transfer.");
+    setGlobalStatus("Fehler", "Keine erfolgreich umbenannten Dateien für den Transfer.");
     return;
   }
 
@@ -1148,11 +1678,15 @@ function wireEvents() {
   els.multiButton.addEventListener("click", async () => addPaths(await api.selectAny(), null));
   els.startButton.addEventListener("click", () => startCopyFlow(false, "transfer"));
   els.cancelButton.addEventListener("click", cancelCopyFlow);
-  els.renamePickButton.addEventListener("click", () => pickRenamePaths("rename"));
+  els.renamePickButton.addEventListener("click", () => pickRenamePaths("rename", "files"));
+  els.renameFolderButton.addEventListener("click", () => pickRenamePaths("rename", "folders"));
+  els.renameSearchButton.addEventListener("click", openFreeMetadataSearch);
   els.renamePreviewButton.addEventListener("click", () => refreshRenamePreview("rename"));
   els.renameStartButton.addEventListener("click", startRenameOnly);
   els.renameClearButton.addEventListener("click", () => clearRenameWorkflow("rename"));
-  els.comboPickButton.addEventListener("click", () => pickRenamePaths("combo"));
+  els.comboPickButton.addEventListener("click", () => pickRenamePaths("combo", "files"));
+  els.comboFolderButton.addEventListener("click", () => pickRenamePaths("combo", "folders"));
+  els.comboSearchButton.addEventListener("click", openFreeMetadataSearch);
   els.comboPreviewButton.addEventListener("click", () => refreshRenamePreview("combo"));
   els.comboStartButton.addEventListener("click", startComboFlow);
   els.comboClearButton.addEventListener("click", () => clearRenameWorkflow("combo"));
@@ -1178,6 +1712,19 @@ function wireEvents() {
   els.jobSearchInput.addEventListener("input", renderJobs);
   els.settingsButton.addEventListener("click", showSettings);
   els.cancelSettingsButton.addEventListener("click", hideSettings);
+  els.tmdbTestButton.addEventListener("click", async () => {
+    try {
+      state.config = await api.saveConfig(readSettingsDraft());
+      setText(els.tmdbStatusText, "TMDb Verbindung wird getestet...");
+      await api.testMetadataConfig();
+      setText(els.tmdbStatusText, "TMDb Verbindung erfolgreich.");
+      showToast("TMDb", "Verbindung erfolgreich.");
+    } catch (error) {
+      const message = cleanErrorMessage(error);
+      setText(els.tmdbStatusText, message);
+      await showMessage("TMDb Verbindung", message, true);
+    }
+  });
   els.saveSettingsButton.addEventListener("click", async () => {
     state.config = await api.saveConfig(readSettingsDraft());
     applyTheme();
@@ -1295,11 +1842,12 @@ function wireEvents() {
   });
   api.onCopyError(async (payload) => {
     state.running = false;
-    setGlobalStatus("Fehler", payload.message);
+    const message = cleanErrorMessage(payload.message);
+    setGlobalStatus("Fehler", message);
     setMascotState("warning");
-    appendLog(payload.message, true);
-    showToast("Fehler", payload.message, true);
-    await showMessage("Fehler", payload.message, true);
+    appendLog(message, true);
+    showToast("Fehler", message, true);
+    await showMessage("Fehler", message, true);
     renderJobs();
   });
 }

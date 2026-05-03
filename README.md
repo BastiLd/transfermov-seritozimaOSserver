@@ -34,6 +34,7 @@ Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
 - `Kopiervorgang starten`: zeigt eine Zielvorschau und startet Robocopy
 - `Umbenennen`: zeigt zuerst eine Plex-Namensvorschau und benennt erst nach Bestaetigung um
 - `Beides`: benennt zuerst lokal um und uebertraegt danach auf das Plex-Ziel
+- `Online suchen`: sucht ueber TMDb nach Film-/Serien-Metadaten und uebernimmt Treffer erst nach Bestaetigung
 - `Abbrechen`: beendet laufende Robocopy-Prozesse
 - `Plex Refresh`: loest manuell einen Plex-Library-Refresh aus
 - `Logs oeffnen`: oeffnet den lokalen Log-Ordner
@@ -48,6 +49,7 @@ Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
 - Serielle Kopien oder Parallelmodus mit maximal 2 Jobs
 - Automatischer Plex-Refresh nach erfolgreichem Kopieren, wenn konfiguriert
 - Separater Plex-Refresh nach Transfer, Umbenennen oder Kombi-Workflow
+- Optionale TMDb-Metadatensuche fuer bessere Plex-Namen, Titel, Jahr und Episodentitel
 - Offene Jobs koennen gespeichert und beim naechsten Start wiederhergestellt werden
 
 ## Zielstruktur
@@ -72,3 +74,5 @@ Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
 - Die Zielpfade muessen erreichbar sein, bevor echte Kopien gestartet werden.
 - Robocopy laeuft mit schnellen LAN-Flags (`/J`, seriell `/MT:32`, parallel `/MT:8`, kurze Retry-Werte). Vorhandene Dateien werden nicht ersetzt (`/XC`, `/XN`, `/XO`).
 - Die Default-Config fuer neue portable Builds enthaelt die aktuell gewaehlten Plex-Daten inklusive Token.
+- Der TMDb API Read Access Token wird lokal in `config.json` eingetragen und nicht in `default-config.json` vorbefuellt.
+- This product uses the TMDB API but is not endorsed or certified by TMDB.
