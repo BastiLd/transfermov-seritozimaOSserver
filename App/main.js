@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog, ipcMain, shell, clipboard } = require("electron");
+const { app, BrowserWindow, Menu, dialog, ipcMain, shell, clipboard } = require("electron");
 const { spawn, execFileSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
@@ -22,6 +22,10 @@ const DEFAULT_CONFIG = {
   series_section_id: "",
   parallel_enabled: false,
   auto_refresh: false,
+  refresh_after_transfer: false,
+  refresh_after_rename: false,
+  refresh_after_combo: false,
+  rename_folder_structure_mode: "plex",
   theme_mode: "hell",
   remember_pending_jobs: true,
   pending_jobs: [],
@@ -66,6 +70,18 @@ function expandHome(rawPath) {
   return path.join(os.homedir(), rawPath.slice(1));
 }
 
+function normalizeConfig(parsed = {}) {
+  const migratedRefresh = Boolean(parsed.auto_refresh);
+  const config = { ...DEFAULT_CONFIG, ...parsed };
+  if (parsed.refresh_after_transfer === undefined) config.refresh_after_transfer = migratedRefresh;
+  if (parsed.refresh_after_rename === undefined) config.refresh_after_rename = migratedRefresh;
+  if (parsed.refresh_after_combo === undefined) config.refresh_after_combo = migratedRefresh;
+  if (!["none", "plex"].includes(config.rename_folder_structure_mode)) config.rename_folder_structure_mode = "plex";
+  if (!["hell", "dunkel"].includes(config.theme_mode)) config.theme_mode = "hell";
+  config.auto_refresh = Boolean(config.refresh_after_transfer);
+  return config;
+}
+
 function loadConfig() {
   const targetConfig = configPath();
   if (!fs.existsSync(targetConfig) && fs.existsSync(bundledConfigPath())) {
@@ -77,16 +93,14 @@ function loadConfig() {
   }
   try {
     const parsed = JSON.parse(fs.readFileSync(targetConfig, "utf8"));
-    const config = { ...DEFAULT_CONFIG, ...parsed };
-    if (!["hell", "dunkel"].includes(config.theme_mode)) config.theme_mode = "hell";
-    return config;
+    return normalizeConfig(parsed);
   } catch {
-    return { ...DEFAULT_CONFIG };
+    return normalizeConfig(DEFAULT_CONFIG);
   }
 }
 
 function saveConfig(config) {
-  fs.writeFileSync(configPath(), JSON.stringify({ ...DEFAULT_CONFIG, ...config }, null, 2), "utf8");
+  fs.writeFileSync(configPath(), JSON.stringify(normalizeConfig(config), null, 2), "utf8");
 }
 
 function nowStamp() {
@@ -133,6 +147,25 @@ function normalizeTitle(rawName, mediaType) {
   return cleaned.replace(/\s+/g, " ").replace(/^[ ._-]+|[ ._-]+$/g, "") || "Unbekannt";
 }
 
+function titleCaseWords(rawName) {
+  return sanitizeName(rawName)
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => {
+      if (/^[A-Z0-9]{2,}$/.test(part)) return part;
+      return part.charAt(0).toUpperCase() + part.slice(1);
+    })
+    .join(" ");
+}
+
+function normalizeShowName(rawName) {
+  return normalizeTitle(rawName, "Serie")
+    .replace(/\b(?:season|staffel|saison|series)\s*\d{1,2}\b.*$/i, "")
+    .replace(/\b(?:complete|web[- ]?dl|webrip|nf|hulu|x264|x265|720p|1080p|2160p)\b.*$/i, "")
+    .replace(/\s+/g, " ")
+    .replace(/^[ ._-]+|[ ._-]+$/g, "") || "Unbekannt";
+}
+
 function looksLikeVideo(filePath) {
   return VIDEO_EXTENSIONS.has(path.extname(filePath).toLowerCase());
 }
@@ -143,10 +176,30 @@ function detectSeasonNumber(name) {
   return Number(match[1] || match[2]);
 }
 
+function detectEpisodeParts(name) {
+  const patterns = [
+    /(?:s|season)[\s._-]*(\d{1,2})[\s._-]*(?:e|ep|episode)[\s._-]*(\d{1,3})/i,
+    /(\d{1,2})x(\d{1,3})/i
+  ];
+  for (const pattern of patterns) {
+    const match = pattern.exec(name);
+    if (match) {
+      return {
+        season: Number(match[1]),
+        episode: Number(match[2]),
+        index: match.index,
+        end: match.index + match[0].length
+      };
+    }
+  }
+  return null;
+}
+
 function extractShowNameFromEpisode(name) {
-  const match = /(?:s\d{1,2}\s*e\d{1,2})|(?:\d{1,2}x\d{1,2})/i.exec(name);
-  if (!match) return normalizeTitle(name, "Serie");
-  return normalizeTitle(name.slice(0, match.index).replace(/[\s._-]+$/g, ""), "Serie");
+  const episode = detectEpisodeParts(name);
+  if (!episode) return normalizeShowName(name);
+  const prefix = name.slice(0, episode.index).replace(/[\s._-]+$/g, "");
+  return normalizeShowName(/^[a-z]$/i.test(prefix) ? "" : prefix);
 }
 
 function hasSeasonSubfolders(sourceDir) {
@@ -157,6 +210,191 @@ function hasSeasonSubfolders(sourceDir) {
   } catch {
     return false;
   }
+}
+
+function collectVideoFiles(sourcePath) {
+  const stat = fs.statSync(sourcePath);
+  if (stat.isFile()) return looksLikeVideo(sourcePath) ? [sourcePath] : [];
+
+  const files = [];
+  const stack = [sourcePath];
+  while (stack.length) {
+    const current = stack.pop();
+    let entries = [];
+    try {
+      entries = fs.readdirSync(current, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+    for (const entry of entries) {
+      const entryPath = path.join(current, entry.name);
+      if (entry.isDirectory()) stack.push(entryPath);
+      else if (entry.isFile() && looksLikeVideo(entryPath)) files.push(entryPath);
+    }
+  }
+  return files.sort((a, b) => a.localeCompare(b, "de"));
+}
+
+function cleanEpisodeTitle(stem, episode) {
+  let raw = episode ? stem.slice(episode.end) : stem;
+  raw = raw
+    .replace(/^[\s._-]+/g, "")
+    .replace(/[\s._-]+$/g, "")
+    .replace(/[\s._-]*(2160p|1080p|720p|480p|bluray|brrip|web[-_. ]?dl|webrip|hdrip|dvdrip|x264|x265|h\.?264|h\.?265|hevc|dts|aac[.\d]*|ac3|proper|repack|remux|multi|german|dubbed)\b.*$/i, "")
+    .replace(/[_-][A-Za-z0-9]{6,12}$/i, "");
+  return titleCaseWords(raw || "Episode");
+}
+
+function detectMovieYear(stem, fallbackYear) {
+  const explicit = /\b(19\d{2}|20\d{2})\b/.exec(stem);
+  const year = explicit ? explicit[1] : String(fallbackYear || "").trim();
+  return /^(19\d{2}|20\d{2})$/.test(year) ? year : "";
+}
+
+function movieTitleFromStem(stem) {
+  return normalizeTitle(stem.replace(/\b(19\d{2}|20\d{2})\b/g, ""), "Film");
+}
+
+function uniquePathForPreview(targetPath, sourcePath) {
+  if (path.resolve(targetPath).toLowerCase() === path.resolve(sourcePath).toLowerCase()) return targetPath;
+  if (!fs.existsSync(targetPath)) return targetPath;
+  const parsed = path.parse(targetPath);
+  let index = 2;
+  let candidate = path.join(parsed.dir, `${parsed.name} (${index})${parsed.ext}`);
+  while (fs.existsSync(candidate)) {
+    index += 1;
+    candidate = path.join(parsed.dir, `${parsed.name} (${index})${parsed.ext}`);
+  }
+  return candidate;
+}
+
+function renamePreviewForFile(filePath, context) {
+  const parsed = path.parse(filePath);
+  const episode = detectEpisodeParts(parsed.name);
+  const forcedType = context.mediaType;
+  const mediaType = forcedType === "Film" || forcedType === "Serie" ? forcedType : episode ? "Serie" : "Film";
+  const structureMode = context.structureMode === "plex" ? "plex" : "none";
+  let target;
+  let label;
+  let year = "";
+  let warning = "";
+
+  if (mediaType === "Serie") {
+    const season = episode?.season || 1;
+    const episodeNumber = episode?.episode || 1;
+    const extractedShow = extractShowNameFromEpisode(parsed.name);
+    const showName = normalizeShowName(context.showName || (extractedShow === "Unbekannt" ? context.defaultShowName : extractedShow));
+    const episodeTitle = cleanEpisodeTitle(parsed.name, episode);
+    const newName = `${showName} - S${String(season).padStart(2, "0")}E${String(episodeNumber).padStart(2, "0")} - ${episodeTitle}${parsed.ext}`;
+    if (!episode) warning = "Keine Episode erkannt; S01E01 wird als Vorschlag genutzt.";
+    const baseDir = structureMode === "plex" ? path.join(context.showRoot || parsed.dir, `Season ${String(season).padStart(2, "0")}`) : parsed.dir;
+    target = path.join(baseDir, newName);
+    label = `${showName} S${String(season).padStart(2, "0")}E${String(episodeNumber).padStart(2, "0")}`;
+  } else {
+    year = detectMovieYear(parsed.name, context.movieYear);
+    const title = movieTitleFromStem(parsed.name);
+    const movieBase = year ? `${title} (${year})` : title;
+    const newName = `${movieBase}${parsed.ext}`;
+    if (!year) warning = "Kein Filmjahr erkannt. Der Vorschlag bleibt ohne Jahr.";
+    const baseDir = structureMode === "plex" ? path.join(parsed.dir, movieBase) : parsed.dir;
+    target = path.join(baseDir, newName);
+    label = movieBase;
+  }
+
+  target = uniquePathForPreview(target, filePath);
+  return {
+    source: filePath,
+    target,
+    media_type: mediaType,
+    status: path.resolve(filePath).toLowerCase() === path.resolve(target).toLowerCase() ? "Unveraendert" : "Bereit",
+    size_bytes: calculateSourceSize(filePath),
+    size_label: formatSize(calculateSourceSize(filePath)),
+    label,
+    warning,
+    year
+  };
+}
+
+function createRenamePreview(paths, options = {}) {
+  const jobs = [];
+  const errors = [];
+  const structureMode = options.structureMode || options.rename_folder_structure_mode || loadConfig().rename_folder_structure_mode;
+  const mediaType = options.mediaType || "auto";
+  const movieYear = options.movieYear || "";
+  const explicitShowName = options.showName || "";
+
+  for (const item of paths || []) {
+    try {
+      const resolved = path.resolve(item);
+      if (!fs.existsSync(resolved)) throw new Error(`Pfad nicht gefunden:\n${resolved}`);
+      const stat = fs.statSync(resolved);
+      const selectedDir = stat.isDirectory() ? resolved : path.dirname(resolved);
+      const defaultShowName = normalizeShowName(explicitShowName || path.basename(selectedDir));
+      const showRoot = stat.isDirectory() ? resolved : path.join(path.dirname(resolved), defaultShowName);
+      const files = collectVideoFiles(resolved);
+      if (!files.length) throw new Error(`Keine Videodateien gefunden:\n${resolved}`);
+      for (const filePath of files) {
+        jobs.push(renamePreviewForFile(filePath, {
+          mediaType,
+          structureMode,
+          movieYear,
+          showName: explicitShowName,
+          defaultShowName,
+          showRoot
+        }));
+      }
+    } catch (error) {
+      errors.push(error.message);
+    }
+  }
+
+  return { jobs, errors };
+}
+
+async function startRename(jobs, options = {}) {
+  if (running || speedTestRunning) throw new Error("Es laeuft bereits ein Vorgang.");
+  if (!jobs || !jobs.length) throw new Error("Es sind keine Umbenennen-Jobs vorhanden.");
+
+  running = true;
+  currentLogPath = path.join(logsDir(), `rename_${nowStamp()}.log`);
+  ensureDir(logsDir());
+  appendLog("Umbenennen gestartet.", false);
+
+  const results = [];
+  for (const job of jobs) {
+    const source = path.resolve(job.source || "");
+    const target = path.resolve(job.target || "");
+    try {
+      if (!fs.existsSync(source)) throw new Error("Quelle nicht gefunden.");
+      if (!target) throw new Error("Ziel fehlt.");
+      if (source.toLowerCase() === target.toLowerCase()) {
+        results.push({ ...job, final_path: source, status: "Unveraendert" });
+        appendLog(`Unveraendert: ${source}`, false);
+        continue;
+      }
+      if (fs.existsSync(target)) throw new Error(`Ziel existiert bereits: ${target}`);
+      ensureDir(path.dirname(target));
+      fs.renameSync(source, target);
+      results.push({ ...job, final_path: target, status: "Umbenannt" });
+      appendLog(`Umbenannt: ${source} -> ${target}`, false);
+    } catch (error) {
+      results.push({ ...job, final_path: source, status: "Fehler", error: error.message });
+      appendLog(`Umbenennen fehlgeschlagen: ${source} -> ${target}: ${error.message}`, true);
+    }
+  }
+
+  running = false;
+  const successJobs = results.filter((job) => ["Umbenannt", "Unveraendert"].includes(job.status));
+  const failed = results.length - successJobs.length;
+  let refresh = { movies_ok: false, series_ok: false };
+  if (options.refreshAfter && successJobs.length) {
+    const libraries = [...new Set(successJobs.map((job) => job.media_type))];
+    refresh = await triggerPlexRefresh(loadConfig(), libraries);
+    appendLog(refresh.movies_ok || refresh.series_ok ? "Plex-Refresh nach Umbenennen erfolgreich ausgeloest." : "Plex-Refresh nach Umbenennen konnte nicht ausgeloest werden.", !(refresh.movies_ok || refresh.series_ok));
+  }
+  appendLog("Umbenennen abgeschlossen.", Boolean(failed));
+  currentLogPath = null;
+  return { jobs: results, success: successJobs.length, failed, refresh };
 }
 
 function calculateSourceSize(sourcePath) {
@@ -327,7 +565,8 @@ function buildJob(sourcePath, forcedType) {
         throw new Error(`Eine Serie muss ein Ordner oder eine Episodendatei sein:\n${resolvedPath}`);
       }
       const season = detectSeasonNumber(path.parse(resolvedPath).name) || 1;
-      const showName = extractShowNameFromEpisode(path.parse(resolvedPath).name);
+      const extractedShowName = extractShowNameFromEpisode(path.parse(resolvedPath).name);
+      const showName = extractedShowName === "Unbekannt" ? normalizeShowName(path.basename(path.dirname(resolvedPath))) : extractedShowName;
       targetPath = path.join(expandHome(config.series_root), showName, `Season ${String(season).padStart(2, "0")}`, path.basename(resolvedPath));
     }
   }
@@ -528,7 +767,13 @@ function triggerPlexRefresh(config, libraries) {
   ]).then(([moviesOk, seriesOk]) => ({ movies_ok: moviesOk, series_ok: seriesOk }));
 }
 
-async function startCopy(jobs) {
+function refreshEnabledForWorkflow(config, workflow) {
+  if (workflow === "combo") return Boolean(config.refresh_after_combo);
+  if (workflow === "rename") return Boolean(config.refresh_after_rename);
+  return Boolean(config.refresh_after_transfer ?? config.auto_refresh);
+}
+
+async function startCopy(jobs, options = {}) {
   if (running || speedTestRunning) throw new Error("Es läuft bereits ein Kopiervorgang.");
   if (!jobs || !jobs.length) throw new Error("Es sind keine Jobs vorhanden.");
   const config = loadConfig();
@@ -566,7 +811,8 @@ async function startCopy(jobs) {
   }
   updatePendingJobs(latestJobs);
 
-  if (config.auto_refresh && success > 0) {
+  const shouldRefresh = typeof options.refreshAfter === "boolean" ? options.refreshAfter : refreshEnabledForWorkflow(config, options.workflow || "transfer");
+  if (shouldRefresh && success > 0) {
     const libraries = [...new Set(latestJobs.filter((job) => job.status === "Kopiert").map((job) => job.media_type))];
     const result = await triggerPlexRefresh(config, libraries);
     appendLog(result.movies_ok || result.series_ok ? "Automatischer Plex-Refresh erfolgreich ausgelöst." : "Automatischer Plex-Refresh konnte nicht ausgelöst werden.", !(result.movies_ok || result.series_ok));
@@ -633,13 +879,15 @@ async function runSpeedTest() {
 }
 
 function createWindow() {
+  Menu.setApplicationMenu(null);
   mainWindow = new BrowserWindow({
-    width: 1380,
-    height: 900,
-    minWidth: 1120,
-    minHeight: 720,
+    width: 520,
+    height: 430,
+    minWidth: 480,
+    minHeight: 390,
     title: APP_NAME,
     backgroundColor: "#171b22",
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
@@ -680,8 +928,8 @@ ipcMain.handle("jobs:create", (_event, paths, forcedType) => {
 });
 ipcMain.handle("jobs:savePending", (_event, jobs) => updatePendingJobs(jobs));
 ipcMain.handle("storage:targets", (_event, jobs) => targetStorageSummary(jobs));
-ipcMain.handle("copy:start", (_event, jobs) => {
-  startCopy(jobs).catch((error) => {
+ipcMain.handle("copy:start", (_event, jobs, options) => {
+  startCopy(jobs, options || {}).catch((error) => {
     running = false;
     send("copy:error", { message: error.message });
   });
@@ -739,3 +987,18 @@ ipcMain.handle("path:copy", (_event, rawPath) => {
 });
 ipcMain.handle("plex:refresh", async (_event, libraries) => triggerPlexRefresh(loadConfig(), libraries));
 ipcMain.handle("speed:test", () => runSpeedTest());
+ipcMain.handle("rename:preview", (_event, paths, options) => createRenamePreview(paths, options || {}));
+ipcMain.handle("rename:start", (_event, jobs, options) => startRename(jobs, options || {}));
+ipcMain.handle("workflow:setMode", (_event, mode) => {
+  if (!mainWindow || mainWindow.isDestroyed()) return { ok: false };
+  if (["transfer", "rename", "combo"].includes(mode)) {
+    mainWindow.setMinimumSize(1120, 720);
+    mainWindow.setSize(1380, 900, true);
+    mainWindow.center();
+  } else {
+    mainWindow.setMinimumSize(500, 380);
+    mainWindow.setSize(560, 440, true);
+    mainWindow.center();
+  }
+  return { ok: true };
+});

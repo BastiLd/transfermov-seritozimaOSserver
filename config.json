@@ -7,10 +7,14 @@
   "series_section_id": "2",
   "parallel_enabled": false,
   "auto_refresh": true,
+  "refresh_after_transfer": true,
+  "refresh_after_rename": true,
+  "refresh_after_combo": true,
+  "rename_folder_structure_mode": "plex",
   "theme_mode": "dunkel",
   "remember_pending_jobs": true,
   "pending_jobs": [],
-  "last_measured_bytes_per_sec": 115583665.86385435,
-  "last_measured_at": "2026-05-01T23:48:16",
+  "last_measured_bytes_per_sec": 102101571.1231283,
+  "last_measured_at": "2026-05-03T08:37:15",
   "last_measured_source": "run"
 }

@@ -1,19 +1,24 @@
 # Plex Transfer
 
-Lokale Windows-Desktop-App für den Plex-/NAS-Kopierworkflow mit Electron und Robocopy.
+Lokale Windows-Desktop-App fuer den Plex-/NAS-Kopierworkflow mit Electron und Robocopy.
 
 ## Haupt-App starten
 
 ```powershell
+npm --prefix App install
+npm start
+```
+
+Alternativ kann die App weiterhin direkt aus dem Unterordner gestartet werden:
+
+```powershell
 cd App
-npm install
 npm start
 ```
 
 ## Portable EXE bauen
 
 ```powershell
-cd App
 npm run dist
 ```
 
@@ -21,32 +26,37 @@ Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
 
 ## Bedienung
 
-- `Film auswählen`: einzelne Videodateien als Filmjobs hinzufügen
-- `Serie auswählen`: Serienordner oder Episodendateien hinzufügen
-- `Mehrere Dateien/Ordner`: Dateien und Ordner gesammelt hinzufügen
-- Drag & Drop auf die Drop-Zone fügt Medien direkt hinzu
+- `Film auswaehlen`: einzelne Videodateien als Filmjobs hinzufuegen
+- `Serie auswaehlen`: Serienordner oder Episodendateien hinzufuegen
+- `Mehrere Dateien/Ordner`: Dateien und Ordner gesammelt hinzufuegen
+- Drag & Drop auf die Drop-Zone fuegt Medien direkt hinzu
+- Beim Start wird zuerst der Workflow gewaehlt: Uebertragen, Umbenennen oder Beides
 - `Kopiervorgang starten`: zeigt eine Zielvorschau und startet Robocopy
+- `Umbenennen`: zeigt zuerst eine Plex-Namensvorschau und benennt erst nach Bestaetigung um
+- `Beides`: benennt zuerst lokal um und uebertraegt danach auf das Plex-Ziel
 - `Abbrechen`: beendet laufende Robocopy-Prozesse
-- `Plex Refresh`: löst manuell einen Plex-Library-Refresh aus
-- `Logs öffnen`: öffnet den lokalen Log-Ordner
-- Rechtsklick auf Jobs: Quelle/Ziel öffnen, Pfad kopieren, verschieben oder entfernen
+- `Plex Refresh`: loest manuell einen Plex-Library-Refresh aus
+- `Logs oeffnen`: oeffnet den lokalen Log-Ordner
+- Rechtsklick auf Jobs: Quelle/Ziel oeffnen, Pfad kopieren, verschieben oder entfernen
 
 ## Features
 
-- Moderne Electron-Oberfläche mit Dark-/Light-Theme
-- Warteschlange mit Suche, Drag & Drop, Duplikatwarnung und Retry für fehlgeschlagene Jobs
+- Moderne Electron-Oberflaeche mit Dark-/Light-Theme
+- Warteschlange mit Suche, Drag & Drop, Duplikatwarnung und Retry fuer fehlgeschlagene Jobs
 - Ziel-Speicheranzeige mit freiem Speicher vor und nach der geplanten Kopie
 - Live-Status, Gesamtfortschritt, ETA und Geschwindigkeitstest
 - Serielle Kopien oder Parallelmodus mit maximal 2 Jobs
 - Automatischer Plex-Refresh nach erfolgreichem Kopieren, wenn konfiguriert
-- Offene Jobs können gespeichert und beim nächsten Start wiederhergestellt werden
+- Separater Plex-Refresh nach Transfer, Umbenennen oder Kombi-Workflow
+- Offene Jobs koennen gespeichert und beim naechsten Start wiederhergestellt werden
 
 ## Zielstruktur
 
 - Filme: `Z:\Movies\Filmname.ext`
 - Serienordner mit Staffelordnern: `Z:\Series\Serienname\...`
 - Serienordner ohne Staffelordner: `Z:\Series\Serienname\Season 01\...`
-- Einzelne Episoden: `Z:\Series\Serienname\Season 01\Episode.ext`
+- Einzelne Episoden: `Z:\Series\Serienname\Season 01\Serienname - S01E01 - Titel.ext`
+- Umbenannte Filme mit Plex-Struktur: `Z:\Movies\Filmname (Jahr)\Filmname (Jahr).ext`
 
 ## Dateien
 
@@ -59,5 +69,6 @@ Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
 ## Hinweise
 
 - Windows mit Robocopy wird vorausgesetzt.
-- Die Zielpfade müssen erreichbar sein, bevor echte Kopien gestartet werden.
-- Robocopy läuft mit schnellen LAN-Flags (`/J`, seriell `/MT:32`, parallel `/MT:8`, kurze Retry-Werte). Vorhandene Dateien werden nicht ersetzt (`/XC`, `/XN`, `/XO`).
+- Die Zielpfade muessen erreichbar sein, bevor echte Kopien gestartet werden.
+- Robocopy laeuft mit schnellen LAN-Flags (`/J`, seriell `/MT:32`, parallel `/MT:8`, kurze Retry-Werte). Vorhandene Dateien werden nicht ersetzt (`/XC`, `/XN`, `/XO`).
+- Die Default-Config fuer neue portable Builds enthaelt die aktuell gewaehlten Plex-Daten inklusive Token.

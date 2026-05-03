@@ -11,7 +11,40 @@
     <div id="app" class="theme-dunkel">
       <div class="app-backdrop" aria-hidden="true"></div>
 
-      <header class="topbar">
+      <main id="workflowPicker" class="workflow-picker">
+        <section class="picker-shell">
+          <div class="picker-side">
+            <span class="picker-mark">PT</span>
+            <div>
+              <span class="picker-kicker">Plex Transfer</span>
+              <h1>Startdeck</h1>
+            </div>
+            <div class="picker-signal">
+              <span>Config</span>
+              <strong>Plex bereit</strong>
+            </div>
+          </div>
+          <div class="picker-actions">
+            <button class="picker-card transfer" data-workflow="transfer">
+              <span class="picker-number">01</span>
+              <span><strong>Übertragen</strong><small>NAS Transfer</small></span>
+              <span class="picker-arrow">↗</span>
+            </button>
+            <button class="picker-card rename" data-workflow="rename">
+              <span class="picker-number">02</span>
+              <span><strong>Umbenennen</strong><small>Plex Namen</small></span>
+              <span class="picker-arrow">Aa</span>
+            </button>
+            <button class="picker-card combo" data-workflow="combo">
+              <span class="picker-number">03</span>
+              <span><strong>Beides</strong><small>Rename + Transfer</small></span>
+              <span class="picker-arrow">✓</span>
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <header class="topbar hidden">
         <div class="brand-block">
           <div class="brand-mark">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -22,6 +55,7 @@
           </div>
         </div>
         <div class="top-actions">
+          <button id="workflowBackButton">Workflow wechseln</button>
           <button id="settingsButton" class="icon-button" title="Einstellungen" aria-label="Einstellungen">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
           </button>
@@ -29,7 +63,7 @@
         </div>
       </header>
 
-      <main id="mainView" class="layout">
+      <main id="mainView" class="layout hidden">
         <section class="workspace">
           <section class="hero-panel">
             <div>
@@ -163,9 +197,11 @@
 
             <div class="mascot-area">
               <div id="plexieMascot" class="mascot idle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="80" height="80" aria-hidden="true">
-                  <circle cx="50" cy="55" r="28" class="speed-ring" />
-                  <path d="M50 16 L57 29 L43 29 Z" class="speed-pointer" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 124 124" width="112" height="112" aria-hidden="true">
+                  <circle cx="50" cy="55" r="45" class="speed-ring speed-ring-outer" />
+                  <circle cx="50" cy="55" r="35" class="speed-ring speed-ring-inner" />
+                  <path d="M50 2 L58 19 L42 19 Z" class="speed-pointer" />
+                  <path d="M13 82 C24 101 77 101 88 82" class="speed-trail" />
                   <g class="robot-shell">
                     <!-- Robot Base -->
                     <rect x="25" y="40" width="50" height="40" rx="10" fill="currentColor" class="robot-body" />
@@ -221,6 +257,84 @@
         </aside>
       </main>
 
+      <main id="renameView" class="tool-view hidden">
+        <section class="tool-grid">
+          <section class="panel tool-panel">
+            <div class="panel-heading split">
+              <div>
+                <span class="eyebrow">Umbenennen</span>
+                <h2>Plex-Namensvorschau</h2>
+                <p>Dateien und Ordner werden erst nach deiner Bestaetigung geaendert.</p>
+              </div>
+              <button id="renamePickButton" class="primary">Dateien/Ordner auswaehlen</button>
+            </div>
+            <div class="tool-options">
+              <label>Typ
+                <select id="renameTypeInput">
+                  <option value="auto">Automatisch</option>
+                  <option value="Film">Film</option>
+                  <option value="Serie">Serie</option>
+                </select>
+              </label>
+              <label>Ordnerstruktur
+                <select id="renameStructureInput">
+                  <option value="plex">Plex-Struktur anlegen</option>
+                  <option value="none">Nur Namen aendern</option>
+                </select>
+              </label>
+              <label>Serienname optional<input id="renameShowInput" type="text" placeholder="Leer = aus Ordner/Datei erkennen"></label>
+              <label>Filmjahr optional<input id="renameYearInput" type="text" inputmode="numeric" placeholder="Leer erlaubt"></label>
+              <label class="check-card"><input id="renameRefreshInput" type="checkbox"> Nach Umbenennen Plex aktualisieren</label>
+            </div>
+            <div class="tool-actions">
+              <button id="renamePreviewButton">Vorschau aktualisieren</button>
+              <button id="renameStartButton" class="primary strong">Umbenennen starten</button>
+              <button id="renameClearButton" class="danger">Leeren</button>
+            </div>
+            <div id="renamePreviewList" class="preview-list"></div>
+          </section>
+        </section>
+      </main>
+
+      <main id="comboView" class="tool-view hidden">
+        <section class="tool-grid">
+          <section class="panel tool-panel">
+            <div class="panel-heading split">
+              <div>
+                <span class="eyebrow">Beides</span>
+                <h2>Erst umbenennen, dann uebertragen</h2>
+                <p>Die Vorschau zeigt die lokale Umbenennung vor dem Transfer.</p>
+              </div>
+              <button id="comboPickButton" class="primary">Dateien/Ordner auswaehlen</button>
+            </div>
+            <div class="tool-options">
+              <label>Typ
+                <select id="comboTypeInput">
+                  <option value="auto">Automatisch</option>
+                  <option value="Film">Film</option>
+                  <option value="Serie">Serie</option>
+                </select>
+              </label>
+              <label>Ordnerstruktur
+                <select id="comboStructureInput">
+                  <option value="plex">Plex-Struktur anlegen</option>
+                  <option value="none">Nur Namen aendern</option>
+                </select>
+              </label>
+              <label>Serienname optional<input id="comboShowInput" type="text" placeholder="Leer = aus Ordner/Datei erkennen"></label>
+              <label>Filmjahr optional<input id="comboYearInput" type="text" inputmode="numeric" placeholder="Leer erlaubt"></label>
+              <label class="check-card"><input id="comboRefreshInput" type="checkbox"> Nach Beides Plex aktualisieren</label>
+            </div>
+            <div class="tool-actions">
+              <button id="comboPreviewButton">Vorschau aktualisieren</button>
+              <button id="comboStartButton" class="primary strong">Umbenennen und uebertragen</button>
+              <button id="comboClearButton" class="danger">Leeren</button>
+            </div>
+            <div id="comboPreviewList" class="preview-list"></div>
+          </section>
+        </section>
+      </main>
+
       <main id="settingsView" class="settings-view hidden">
         <section class="settings-head">
           <div>
@@ -248,7 +362,15 @@
           <label>Movies Section ID<input id="moviesSectionInput" type="text"></label>
           <label>Series Section ID<input id="seriesSectionInput" type="text"></label>
           <label class="check-card"><input id="parallelInput" type="checkbox"> Parallel kopieren (max. 2 Jobs)</label>
-          <label class="check-card"><input id="autoRefreshInput" type="checkbox"> Nach Erfolg Plex-Refresh auslösen</label>
+          <label class="check-card"><input id="autoRefreshInput" type="checkbox"> Nach Transfer Plex-Refresh ausloesen</label>
+          <label class="check-card"><input id="renameRefreshSettingsInput" type="checkbox"> Nach Umbenennen Plex-Refresh ausloesen</label>
+          <label class="check-card"><input id="comboRefreshSettingsInput" type="checkbox"> Nach Beides Plex-Refresh ausloesen</label>
+          <label>Umbenennen-Ordnerstruktur
+            <select id="renameStructureSettingsInput">
+              <option value="plex">Plex-Struktur anlegen</option>
+              <option value="none">Nur Namen aendern</option>
+            </select>
+          </label>
           <label class="check-card"><input id="rememberInput" type="checkbox"> Offene Jobs beim Start wiederherstellen</label>
           <label>Theme
             <select id="themeInput">

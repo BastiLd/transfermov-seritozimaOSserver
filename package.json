@@ -1,0 +1,10 @@
+{
+  "name": "plex-transfer-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workspace scripts for the Plex Transfer Electron app.",
+  "scripts": {
+    "start": "npm --prefix App run start",
+    "dist": "npm --prefix App run dist"
+  }
+}

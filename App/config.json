@@ -7,10 +7,57 @@
   "series_section_id": "2",
   "parallel_enabled": false,
   "auto_refresh": true,
+  "refresh_after_transfer": true,
+  "refresh_after_rename": true,
+  "refresh_after_combo": true,
+  "rename_folder_structure_mode": "plex",
   "theme_mode": "dunkel",
   "remember_pending_jobs": true,
-  "pending_jobs": [],
-  "last_measured_bytes_per_sec": 115583665.86385435,
-  "last_measured_at": "2026-05-01T23:48:16",
-  "last_measured_source": "run"
+  "pending_jobs": [
+    {
+      "source": "C:\\Movies\\Avengers\\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i_c]",
+      "target": "T:\\TO-MOONDOOM\\Series\\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i c]\\Season 01",
+      "media_type": "Serie",
+      "size_bytes": 9506728398,
+      "size_label": "8.9 GB"
+    },
+    {
+      "source": "C:\\Movies\\Avengers\\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]",
+      "target": "T:\\TO-MOONDOOM\\Series\\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i c]\\Season 04",
+      "media_type": "Serie",
+      "size_bytes": 8497112499,
+      "size_label": "7.9 GB"
+    },
+    {
+      "source": "C:\\Movies\\Avengers\\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]",
+      "target": "T:\\TO-MOONDOOM\\Series\\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB - DL 720p x264 [i c]\\Season 01",
+      "media_type": "Serie",
+      "size_bytes": 8041293238,
+      "size_label": "7.5 GB"
+    },
+    {
+      "source": "C:\\Movies\\Avengers\\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]",
+      "target": "T:\\TO-MOONDOOM\\Series\\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i c]\\Season 02",
+      "media_type": "Serie",
+      "size_bytes": 8037673222,
+      "size_label": "7.5 GB"
+    },
+    {
+      "source": "C:\\Movies\\Avengers\\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]",
+      "target": "T:\\TO-MOONDOOM\\Series\\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB - DL x264 [i c]\\Season 03",
+      "media_type": "Serie",
+      "size_bytes": 8534108436,
+      "size_label": "7.9 GB"
+    },
+    {
+      "source": "C:\\Users\\basti\\Videos\\4K Video Downloader+\\(4k) Transformers Prime Beast Hunters Predacons Rising.mp4",
+      "target": "T:\\TO-MOONDOOM\\Movies\\(4k) Transformers Prime Beast Hunters Predacons Rising.mp4",
+      "media_type": "Film",
+      "size_bytes": 1677772710,
+      "size_label": "1.6 GB"
+    }
+  ],
+  "last_measured_bytes_per_sec": 117131212.39227664,
+  "last_measured_at": "2026-05-03T13:15:25",
+  "last_measured_source": "speed_test"
 }

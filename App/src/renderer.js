@@ -8,6 +8,10 @@ const api = window.plexTransfer || {
     series_section_id: "",
     parallel_enabled: false,
     auto_refresh: true,
+    refresh_after_transfer: true,
+    refresh_after_rename: true,
+    refresh_after_combo: true,
+    rename_folder_structure_mode: "plex",
     theme_mode: "dunkel",
     remember_pending_jobs: true,
     pending_jobs: [],
@@ -50,6 +54,19 @@ const api = window.plexTransfer || {
   copyPath: async () => ({ ok: true }),
   refreshPlex: async () => ({ movies_ok: true, series_ok: true }),
   runSpeedTest: async () => ({ bytes_per_sec: 115583665, duration: 9 }),
+  previewRename: async (paths) => ({
+    jobs: (paths || []).map((item) => ({
+      source: item,
+      target: String(item).replace(/(\.[^.]+)$/, " - Vorschau$1"),
+      media_type: "Film",
+      status: "Bereit",
+      size_label: "700 MB",
+      warning: ""
+    })),
+    errors: []
+  }),
+  startRename: async (jobs) => ({ jobs: (jobs || []).map((job) => ({ ...job, final_path: job.target, status: "Umbenannt" })), success: (jobs || []).length, failed: 0 }),
+  setWorkflowMode: async () => ({ ok: true }),
   onCopyStarted: () => () => {},
   onCopyLog: () => () => {},
   onCopyJobStart: () => () => {},
@@ -68,7 +85,12 @@ const state = {
   nextJobId: 1,
   running: false,
   speedTestRunning: false,
+  workflowMode: "picker",
   activeJobIds: new Set(),
+  renamePaths: [],
+  renameJobs: [],
+  comboPaths: [],
+  comboJobs: [],
   logEntries: [],
   storageWarnings: [],
   storageRequestId: 0
@@ -78,7 +100,11 @@ const $ = (id) => document.getElementById(id);
 
 const els = {
   app: $("app"),
+  workflowPicker: $("workflowPicker"),
+  workflowBackButton: $("workflowBackButton"),
   mainView: $("mainView"),
+  renameView: $("renameView"),
+  comboView: $("comboView"),
   settingsView: $("settingsView"),
   settingsButton: $("settingsButton"),
   statusBadge: $("statusBadge"),
@@ -124,11 +150,34 @@ const els = {
   seriesSectionInput: $("seriesSectionInput"),
   parallelInput: $("parallelInput"),
   autoRefreshInput: $("autoRefreshInput"),
+  renameRefreshSettingsInput: $("renameRefreshSettingsInput"),
+  comboRefreshSettingsInput: $("comboRefreshSettingsInput"),
+  renameStructureSettingsInput: $("renameStructureSettingsInput"),
   rememberInput: $("rememberInput"),
   themeInput: $("themeInput"),
   saveSettingsButton: $("saveSettingsButton"),
   cancelSettingsButton: $("cancelSettingsButton"),
-  plexieMascot: $("plexieMascot")
+  plexieMascot: $("plexieMascot"),
+  renamePickButton: $("renamePickButton"),
+  renameTypeInput: $("renameTypeInput"),
+  renameStructureInput: $("renameStructureInput"),
+  renameShowInput: $("renameShowInput"),
+  renameYearInput: $("renameYearInput"),
+  renameRefreshInput: $("renameRefreshInput"),
+  renamePreviewButton: $("renamePreviewButton"),
+  renameStartButton: $("renameStartButton"),
+  renameClearButton: $("renameClearButton"),
+  renamePreviewList: $("renamePreviewList"),
+  comboPickButton: $("comboPickButton"),
+  comboTypeInput: $("comboTypeInput"),
+  comboStructureInput: $("comboStructureInput"),
+  comboShowInput: $("comboShowInput"),
+  comboYearInput: $("comboYearInput"),
+  comboRefreshInput: $("comboRefreshInput"),
+  comboPreviewButton: $("comboPreviewButton"),
+  comboStartButton: $("comboStartButton"),
+  comboClearButton: $("comboClearButton"),
+  comboPreviewList: $("comboPreviewList")
 };
 
 window.__plexTransferGetJobsForMain = () => state.jobs;
@@ -229,6 +278,70 @@ function setMascotState(stateName) {
   els.plexieMascot.className = `mascot ${stateName}`;
 }
 
+function restingMascotState() {
+  if (state.speedTestRunning) return "speeding";
+  if (state.running) return "busy";
+  if (state.jobs.some(isFailed)) return "warning";
+  return "idle";
+}
+
+function cueMascotState(stateName, duration = 1600) {
+  setMascotState(stateName);
+  clearTimeout(window.__plexieCueTimer);
+  window.__plexieCueTimer = setTimeout(() => setMascotState(restingMascotState()), duration);
+}
+
+function launchMascotTour(returnState = restingMascotState()) {
+  if (!els.plexieMascot) return;
+  if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+    cueMascotState("happy", 1400);
+    return;
+  }
+  clearTimeout(window.__plexieCueTimer);
+  clearTimeout(window.__plexieTourTimer);
+  const rect = els.plexieMascot.getBoundingClientRect();
+  const width = rect.width || 112;
+  const height = rect.height || 112;
+  const point = (x, y, transform) => ({
+    left: `${Math.max(16, Math.min(window.innerWidth - width - 16, x - width / 2))}px`,
+    top: `${Math.max(16, Math.min(window.innerHeight - height - 16, y - height / 2))}px`,
+    transform
+  });
+  const start = point(rect.left + width / 2, rect.top + height / 2, "scale(1) rotate(0deg)");
+
+  els.plexieMascot.className = "mascot roaming happy";
+  Object.assign(els.plexieMascot.style, {
+    position: "fixed",
+    left: start.left,
+    top: start.top,
+    width: `${width}px`,
+    height: `${height}px`
+  });
+
+  const flight = els.plexieMascot.animate([
+    start,
+    point(window.innerWidth * 0.76, window.innerHeight * 0.18, "scale(1.07) rotate(8deg)"),
+    point(window.innerWidth * 0.48, window.innerHeight * 0.2, "scale(1.12) rotate(-9deg)"),
+    point(window.innerWidth * 0.18, window.innerHeight * 0.42, "scale(1.05) rotate(10deg)"),
+    point(window.innerWidth * 0.38, window.innerHeight * 0.68, "scale(1.13) rotate(-6deg)"),
+    point(window.innerWidth * 0.72, window.innerHeight * 0.58, "scale(1.08) rotate(7deg)"),
+    start
+  ], {
+    duration: 6200,
+    easing: "cubic-bezier(0.37, 0, 0.18, 1)",
+    fill: "forwards"
+  });
+
+  flight.onfinish = () => {
+    els.plexieMascot.removeAttribute("style");
+    setMascotState(returnState);
+  };
+  flight.oncancel = flight.onfinish;
+  window.__plexieTourTimer = setTimeout(() => {
+    flight.cancel();
+  }, 7000);
+}
+
 function showToast(title, message = "", isError = false) {
   const toast = document.createElement("div");
   toast.className = `toast${isError ? " error" : ""}`;
@@ -259,6 +372,26 @@ function applyTheme() {
   els.app.classList.toggle("theme-dunkel", theme === "dunkel");
 }
 
+function showWorkflowView(mode) {
+  const topbar = document.querySelector(".topbar");
+  els.workflowPicker.classList.toggle("hidden", mode !== "picker");
+  topbar?.classList.toggle("hidden", mode === "picker");
+  els.mainView.classList.toggle("hidden", mode !== "transfer");
+  els.renameView.classList.toggle("hidden", mode !== "rename");
+  els.comboView.classList.toggle("hidden", mode !== "combo");
+  els.settingsView.classList.add("hidden");
+  els.settingsButton.disabled = mode === "picker";
+}
+
+async function setWorkflowMode(mode) {
+  state.workflowMode = mode;
+  await api.setWorkflowMode(mode);
+  showWorkflowView(mode);
+  const labels = { transfer: "Uebertragen", rename: "Umbenennen", combo: "Beides", picker: "Plex Transfer" };
+  setText($("subtitle"), mode === "combo" ? "Erst Plex-konform umbenennen, dann uebertragen" : mode === "rename" ? "Lokales Plex-konformes Umbenennen" : "Lokaler Plex-/NAS-Kopierworkflow mit Robocopy");
+  setGlobalStatus("Bereit", `${labels[mode] || "Workflow"} bereit.`);
+}
+
 function loadSettingsDraft() {
   els.moviesRootInput.value = state.config.movies_root || "";
   els.seriesRootInput.value = state.config.series_root || "";
@@ -267,9 +400,16 @@ function loadSettingsDraft() {
   els.moviesSectionInput.value = state.config.movies_section_id || "";
   els.seriesSectionInput.value = state.config.series_section_id || "";
   els.parallelInput.checked = Boolean(state.config.parallel_enabled);
-  els.autoRefreshInput.checked = Boolean(state.config.auto_refresh);
+  els.autoRefreshInput.checked = Boolean(state.config.refresh_after_transfer ?? state.config.auto_refresh);
+  els.renameRefreshSettingsInput.checked = Boolean(state.config.refresh_after_rename ?? state.config.auto_refresh);
+  els.comboRefreshSettingsInput.checked = Boolean(state.config.refresh_after_combo ?? state.config.auto_refresh);
+  els.renameStructureSettingsInput.value = state.config.rename_folder_structure_mode || "plex";
   els.rememberInput.checked = Boolean(state.config.remember_pending_jobs);
   els.themeInput.value = state.config.theme_mode || "hell";
+  els.renameStructureInput.value = state.config.rename_folder_structure_mode || "plex";
+  els.comboStructureInput.value = state.config.rename_folder_structure_mode || "plex";
+  els.renameRefreshInput.checked = Boolean(state.config.refresh_after_rename ?? state.config.auto_refresh);
+  els.comboRefreshInput.checked = Boolean(state.config.refresh_after_combo ?? state.config.auto_refresh);
 }
 
 function readSettingsDraft() {
@@ -283,6 +423,10 @@ function readSettingsDraft() {
     series_section_id: els.seriesSectionInput.value.trim(),
     parallel_enabled: els.parallelInput.checked,
     auto_refresh: els.autoRefreshInput.checked,
+    refresh_after_transfer: els.autoRefreshInput.checked,
+    refresh_after_rename: els.renameRefreshSettingsInput.checked,
+    refresh_after_combo: els.comboRefreshSettingsInput.checked,
+    rename_folder_structure_mode: els.renameStructureSettingsInput.value,
     remember_pending_jobs: els.rememberInput.checked,
     theme_mode: els.themeInput.value
   };
@@ -291,13 +435,15 @@ function readSettingsDraft() {
 function showSettings() {
   loadSettingsDraft();
   els.mainView.classList.add("hidden");
+  els.renameView.classList.add("hidden");
+  els.comboView.classList.add("hidden");
   els.settingsView.classList.remove("hidden");
   els.settingsButton.disabled = true;
 }
 
 function hideSettings() {
   els.settingsView.classList.add("hidden");
-  els.mainView.classList.remove("hidden");
+  showWorkflowView(state.workflowMode);
   els.settingsButton.disabled = false;
 }
 
@@ -564,8 +710,7 @@ async function addPaths(paths, forcedType = null) {
     setText(els.lastAction, `Job hinzugefügt: ${basename(job.source)}`);
   }
 
-  setMascotState("happy");
-  setTimeout(() => setMascotState(state.running ? "busy" : "idle"), 1500);
+  launchMascotTour("idle");
 
   if (duplicateMessages.length) {
     const message = `${duplicateMessages.length} Duplikat(e) wurden nicht erneut hinzugefügt.`;
@@ -583,6 +728,7 @@ function swapJobs(from, to) {
   const temp = state.jobs[from];
   state.jobs[from] = state.jobs[to];
   state.jobs[to] = temp;
+  cueMascotState("sorting", 1100);
   savePendingJobs();
   renderJobs();
 }
@@ -673,7 +819,7 @@ async function confirmStorageWarnings() {
   });
 }
 
-async function startCopyFlow(skipSpeedPrompt = false) {
+async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", refreshAfter = undefined) {
   if (state.running || state.speedTestRunning) {
     await showMessage("Plex Transfer", "Es läuft bereits ein Vorgang.");
     return;
@@ -715,7 +861,7 @@ async function startCopyFlow(skipSpeedPrompt = false) {
   setText(els.lastAction, "Robocopy-Worker gestartet.");
   setMascotState("busy");
   renderJobs();
-  await api.startCopy(state.jobs);
+  await api.startCopy(state.jobs, { workflow, refreshAfter });
 }
 
 async function cancelCopyFlow() {
@@ -760,9 +906,12 @@ async function runSpeedTestFlow(autoContinue = false) {
     state.config = await api.getConfig();
     appendLog(`Geschwindigkeitstest abgeschlossen: ${formatSpeed(result.bytes_per_sec)}.`);
     setText(els.lastAction, "Geschwindigkeitstest abgeschlossen.");
-    setMascotState("happy");
+    launchMascotTour(autoContinue ? "busy" : "idle");
     showToast("Geschwindigkeitstest fertig", formatSpeed(result.bytes_per_sec));
-    if (autoContinue) await startCopyFlow(true);
+    if (autoContinue) {
+      const isCombo = state.workflowMode === "combo";
+      await startCopyFlow(true, isCombo ? "combo" : "transfer", isCombo ? els.comboRefreshInput.checked : undefined);
+    }
   } catch (error) {
     appendLog(`Geschwindigkeitstest fehlgeschlagen: ${error.message}`, true);
     setMascotState("warning");
@@ -770,8 +919,8 @@ async function runSpeedTestFlow(autoContinue = false) {
   } finally {
     state.speedTestRunning = false;
     refreshEta();
-    if (!autoContinue) {
-      setTimeout(() => setMascotState(speedTestSucceeded ? "idle" : "warning"), 1800);
+    if (!autoContinue && !speedTestSucceeded) {
+      setTimeout(() => setMascotState("warning"), 1800);
     }
   }
 }
@@ -828,6 +977,7 @@ async function removeSelectedJob() {
   const [removed] = state.jobs.splice(index, 1);
   state.selectedJobId = state.jobs[Math.min(index, state.jobs.length - 1)]?.id || null;
   appendLog(`Job entfernt: ${removed.source}`);
+  cueMascotState("sorting", 1100);
   await savePendingJobs();
   renderJobs();
 }
@@ -844,27 +994,181 @@ async function retryFailedJobs() {
   }
   if (!count) return;
   appendLog(`${count} fehlgeschlagene Jobs erneut bereitgestellt.`);
+  cueMascotState("happy", 1400);
   showToast("Retry vorbereitet", `${count} Jobs sind wieder bereit.`);
   await savePendingJobs();
   renderJobs();
 }
 
+function renameOptions(kind) {
+  const prefix = kind === "combo" ? "combo" : "rename";
+  return {
+    mediaType: els[`${prefix}TypeInput`].value,
+    structureMode: els[`${prefix}StructureInput`].value,
+    showName: els[`${prefix}ShowInput`].value.trim(),
+    movieYear: els[`${prefix}YearInput`].value.trim()
+  };
+}
+
+function renderRenamePreview(kind) {
+  const jobs = kind === "combo" ? state.comboJobs : state.renameJobs;
+  const list = kind === "combo" ? els.comboPreviewList : els.renamePreviewList;
+  if (!jobs.length) {
+    list.innerHTML = `<div class="empty-tool-state">Noch keine Vorschau. Waehle Dateien oder Ordner aus.</div>`;
+    return;
+  }
+  list.innerHTML = jobs.map((job, index) => `
+    <div class="rename-preview-item ${job.status === "Fehler" ? "error" : ""}">
+      <div class="preview-index">${index + 1}</div>
+      <div>
+        <strong>${escapeHtml(job.label || basename(job.target))}</strong>
+        <span>Quelle: ${escapeHtml(job.source)}</span>
+        <span>Ziel: ${escapeHtml(job.target)}</span>
+        ${job.warning ? `<em>${escapeHtml(job.warning)}</em>` : ""}
+        ${job.error ? `<em class="status-error">${escapeHtml(job.error)}</em>` : ""}
+      </div>
+      <small>${escapeHtml(job.media_type || "-")} | ${escapeHtml(job.status || "Bereit")}</small>
+    </div>
+  `).join("");
+}
+
+async function refreshRenamePreview(kind) {
+  const paths = kind === "combo" ? state.comboPaths : state.renamePaths;
+  if (!paths.length) {
+    await showMessage("Umbenennen", "Bitte zuerst Dateien oder Ordner auswaehlen.");
+    return;
+  }
+  const result = await api.previewRename(paths, renameOptions(kind));
+  if (kind === "combo") state.comboJobs = result.jobs || [];
+  else state.renameJobs = result.jobs || [];
+  for (const error of result.errors || []) appendLog(error, true);
+  renderRenamePreview(kind);
+  setGlobalStatus("Bereit", `${(result.jobs || []).length} Vorschlaege erstellt.`);
+}
+
+async function pickRenamePaths(kind) {
+  const paths = await api.selectAny();
+  if (!paths.length) return;
+  if (kind === "combo") state.comboPaths = paths;
+  else state.renamePaths = paths;
+  await refreshRenamePreview(kind);
+}
+
+async function clearRenameWorkflow(kind) {
+  if (kind === "combo") {
+    state.comboPaths = [];
+    state.comboJobs = [];
+  } else {
+    state.renamePaths = [];
+    state.renameJobs = [];
+  }
+  renderRenamePreview(kind);
+  setGlobalStatus("Bereit", "Vorschau geleert.");
+}
+
+async function startRenameOnly() {
+  if (!state.renameJobs.length) {
+    await showMessage("Umbenennen", "Es gibt keine Umbenennen-Vorschau.");
+    return;
+  }
+  const confirmed = await showModal({
+    title: "Umbenennen starten",
+    body: "<p>Die Dateien werden jetzt am aktuellen Ort umbenannt oder in die gewaehlte Plex-Struktur verschoben.</p>",
+    small: true,
+    buttons: [
+      { label: "Abbrechen", value: false },
+      { label: "Umbenennen", value: true, primary: true }
+    ]
+  });
+  if (!confirmed) return;
+  setGlobalStatus("Kopiert...", "Umbenennen laeuft.");
+  const result = await api.startRename(state.renameJobs, { refreshAfter: els.renameRefreshInput.checked });
+  state.renameJobs = result.jobs || [];
+  renderRenamePreview("rename");
+  setGlobalStatus(result.failed ? "Fehler" : "Fertig", `${result.success || 0} umbenannt, ${result.failed || 0} fehlgeschlagen.`);
+  showToast("Umbenennen abgeschlossen", `${result.success || 0} erfolgreich, ${result.failed || 0} fehlgeschlagen`, Boolean(result.failed));
+}
+
+async function startComboFlow() {
+  if (!state.comboJobs.length) {
+    await showMessage("Beides", "Es gibt keine Umbenennen-Vorschau.");
+    return;
+  }
+  const confirmed = await showModal({
+    title: "Beides starten",
+    body: "<p>Zuerst wird lokal umbenannt. Danach werden die erfolgreichen Dateien auf das Plex-Ziel uebertragen.</p>",
+    small: true,
+    buttons: [
+      { label: "Abbrechen", value: false },
+      { label: "Starten", value: true, primary: true }
+    ]
+  });
+  if (!confirmed) return;
+
+  setGlobalStatus("Kopiert...", "Umbenennen fuer Kombi laeuft.");
+  const renameResult = await api.startRename(state.comboJobs, { refreshAfter: false });
+  state.comboJobs = renameResult.jobs || [];
+  renderRenamePreview("combo");
+  const finalPaths = state.comboJobs
+    .filter((job) => ["Umbenannt", "Unveraendert"].includes(job.status))
+    .map((job) => job.final_path || job.target);
+  if (!finalPaths.length) {
+    setGlobalStatus("Fehler", "Keine erfolgreich umbenannten Dateien fuer den Transfer.");
+    return;
+  }
+
+  const result = await api.createJobs(finalPaths, null);
+  state.jobs = [];
+  state.selectedJobId = null;
+  for (const job of result.jobs || []) {
+    job.id = state.nextJobId++;
+    job.started_at = 0;
+    job.last_progress_fraction = 0;
+    job.last_progress_at = 0;
+    state.jobs.push(job);
+  }
+  for (const error of result.errors || []) appendLog(error, true);
+  if (!state.jobs.length) {
+    setGlobalStatus("Fehler", "Nach dem Umbenennen konnten keine Transferjobs erstellt werden.");
+    return;
+  }
+  showWorkflowView("transfer");
+  await savePendingJobs();
+  renderJobs();
+  await startCopyFlow(false, "combo", els.comboRefreshInput.checked);
+}
+
 function wireEvents() {
+  document.querySelectorAll("[data-workflow]").forEach((button) => {
+    button.addEventListener("click", () => setWorkflowMode(button.dataset.workflow));
+  });
+  els.workflowBackButton.addEventListener("click", () => setWorkflowMode("picker"));
   els.movieButton.addEventListener("click", async () => addPaths(await api.selectMovies(), "Film"));
   els.seriesButton.addEventListener("click", async () => addPaths(await api.selectSeries(), "Serie"));
   els.multiButton.addEventListener("click", async () => addPaths(await api.selectAny(), null));
-  els.startButton.addEventListener("click", startCopyFlow);
+  els.startButton.addEventListener("click", () => startCopyFlow(false, "transfer"));
   els.cancelButton.addEventListener("click", cancelCopyFlow);
+  els.renamePickButton.addEventListener("click", () => pickRenamePaths("rename"));
+  els.renamePreviewButton.addEventListener("click", () => refreshRenamePreview("rename"));
+  els.renameStartButton.addEventListener("click", startRenameOnly);
+  els.renameClearButton.addEventListener("click", () => clearRenameWorkflow("rename"));
+  els.comboPickButton.addEventListener("click", () => pickRenamePaths("combo"));
+  els.comboPreviewButton.addEventListener("click", () => refreshRenamePreview("combo"));
+  els.comboStartButton.addEventListener("click", startComboFlow);
+  els.comboClearButton.addEventListener("click", () => clearRenameWorkflow("combo"));
   els.plexButton.addEventListener("click", async () => {
+    setMascotState("refreshing");
     const result = await api.refreshPlex(["Film", "Serie"]);
     if (result.movies_ok || result.series_ok) {
       appendLog("Plex-Refresh erfolgreich ausgelöst.");
       setGlobalStatus("Bereit", "Plex-Refresh gesendet.");
+      launchMascotTour("idle");
       showToast("Plex Refresh", "Refresh wurde ausgelöst.");
       await showMessage("Plex Refresh", "Plex-Refresh wurde ausgelöst.");
     } else {
       appendLog("Plex-Refresh konnte nicht ausgelöst werden.", true);
       setGlobalStatus("Fehler", "Plex-Refresh fehlgeschlagen.");
+      setMascotState("warning");
       await showMessage("Plex Refresh", "Plex-Refresh konnte nicht ausgelöst werden.", true);
     }
   });
@@ -877,9 +1181,11 @@ function wireEvents() {
   els.saveSettingsButton.addEventListener("click", async () => {
     state.config = await api.saveConfig(readSettingsDraft());
     applyTheme();
+    loadSettingsDraft();
     await savePendingJobs();
     appendLog("Einstellungen gespeichert.");
     setText(els.lastAction, "Einstellungen gespeichert.");
+    cueMascotState("happy", 1200);
     showToast("Einstellungen gespeichert");
     hideSettings();
     renderJobs();
@@ -907,6 +1213,7 @@ function wireEvents() {
     }))) return;
     state.jobs = [];
     state.selectedJobId = null;
+    cueMascotState("sorting", 1100);
     await savePendingJobs();
     appendLog("Alle Jobs entfernt.");
     renderJobs();
@@ -1003,6 +1310,10 @@ async function init() {
   loadSettingsDraft();
   restorePendingJobs();
   wireEvents();
+  await api.setWorkflowMode("picker");
+  showWorkflowView("picker");
+  renderRenamePreview("rename");
+  renderRenamePreview("combo");
   setGlobalStatus("Bereit", "Wartet auf neue Jobs.");
   renderJobs();
 }
