@@ -601,8 +601,8 @@ h1, h2, p {
   background:
     linear-gradient(140deg, color-mix(in srgb, var(--accent-soft) 45%, transparent), transparent 48%),
     color-mix(in srgb, var(--card-solid) 98%, transparent);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
 }
 
 .metadata-modal::before {
@@ -610,7 +610,7 @@ h1, h2, p {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: rgba(0, 0, 0, 0.28);
+  background: rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
 
@@ -840,8 +840,8 @@ h1, h2, p {
   background:
     linear-gradient(140deg, color-mix(in srgb, var(--accent-soft) 40%, transparent), transparent 50%),
     color-mix(in srgb, var(--card-solid) 92%, transparent);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   box-shadow: var(--shadow);
   padding: 6px;
 }
@@ -1245,9 +1245,9 @@ tr.selected {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
   opacity: 1;
   transition: opacity 200ms ease;
 }
