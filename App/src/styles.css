@@ -600,9 +600,23 @@ h1, h2, p {
   border: 1px solid var(--border-strong);
   background:
     linear-gradient(140deg, color-mix(in srgb, var(--accent-soft) 45%, transparent), transparent 48%),
-    color-mix(in srgb, var(--card-solid) 92%, transparent);
+    color-mix(in srgb, var(--card-solid) 98%, transparent);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
+}
+
+.metadata-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+.metadata-modal > * {
+  position: relative;
+  z-index: 1;
 }
 
 .metadata-query,
@@ -612,7 +626,7 @@ h1, h2, p {
 .metadata-result {
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: var(--card-soft);
+  background: color-mix(in srgb, var(--card-solid) 72%, transparent);
 }
 
 .metadata-query {
@@ -705,7 +719,7 @@ h1, h2, p {
   font-size: 13px;
   font-weight: 600;
   border-color: var(--border-strong);
-  background: color-mix(in srgb, var(--card-solid) 80%, transparent);
+  background: color-mix(in srgb, var(--card-solid) 92%, transparent);
 }
 
 .metadata-search-bar {
@@ -791,6 +805,11 @@ h1, h2, p {
 
 .custom-episode-select {
   position: relative;
+}
+
+.custom-episode-select.open .custom-select-trigger {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .custom-select-trigger {
