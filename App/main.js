@@ -888,8 +888,10 @@ function buildRobocopyCommand(job, config) {
 }
 
 function extractProgress(line) {
-  const match = /(\d{1,3}(?:\.\d+)?)%/.exec(line);
-  return match ? `${match[1]}%` : null;
+  const match = /(\d{1,3}(?:[\.,]\d+)?)%/.exec(line);
+  if (!match) return null;
+  const normalized = match[1].replace(",", ".");
+  return `${normalized}%`;
 }
 
 function extractSpeed(line) {

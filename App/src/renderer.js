@@ -274,9 +274,10 @@ function isOpenJob(job) {
 }
 
 function progressToFraction(progress) {
-  const match = String(progress || "").match(/(\d{1,3}(?:\.\d+)?)%/);
+  const match = String(progress || "").match(/(\d{1,3}(?:[\.,]\d+)?)%/);
   if (!match) return 0;
-  return Math.max(0, Math.min(1, Number(match[1]) / 100));
+  const raw = match[1].replace(",", ".");
+  return Math.max(0, Math.min(1, Number(raw) / 100));
 }
 
 function shortPath(value, max = 78) {
@@ -1084,15 +1085,25 @@ function stripEpisodeFromSeriesText(value) {
     .trim();
 }
 
+function sanitizeTmdbQuery(value) {
+  return String(value ?? "")
+    .replace(/\s*[-_. ]*S\d{1,2}E\d{1,3}.*$/i, "")
+    .replace(/\s*[-_. ]*\d{1,2}x\d{1,3}.*$/i, "")
+    .replace(/\(?\b(19\d{2}|20\d{2})\b\)?/g, " ")
+    .replace(/[._]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function commonSeriesQuery(kind, jobs) {
   const options = renameOptions(kind);
-  if (options.showName) return expandSeriesAlias(options.showName);
+  if (options.showName) return sanitizeTmdbQuery(expandSeriesAlias(options.showName));
   const counts = new Map();
   for (const job of jobs) {
     if (job.media_type !== "Serie") continue;
     const text = stripEpisodeFromSeriesText(job.label || basename(job.source));
     if (!text) continue;
-    const expanded = expandSeriesAlias(text);
+    const expanded = sanitizeTmdbQuery(expandSeriesAlias(text));
     counts.set(expanded, (counts.get(expanded) || 0) + 1);
   }
   return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "";
@@ -1146,16 +1157,16 @@ async function refreshRenamePreview(kind) {
 function metadataSearchQuery(job) {
   if (job.media_type === "Serie") {
     const label = String(job.label || basename(job.source));
-    return expandSeriesAlias(stripEpisodeFromSeriesText(label) || stripEpisodeFromSeriesText(basename(job.source)));
+    return sanitizeTmdbQuery(expandSeriesAlias(stripEpisodeFromSeriesText(label) || stripEpisodeFromSeriesText(basename(job.source))));
   }
-  return String(job.label || basename(job.source)).replace(/\s*\(\d{4}\)\s*$/g, "").trim();
+  return sanitizeTmdbQuery(String(job.label || basename(job.source)));
 }
 
 function metadataContext(job) {
   return {
-    year: job.media_type === "Serie" ? "" : job.year || job.tmdb_year || "",
-    season: job.season || null,
-    episode: job.episode || null
+    year: "",
+    season: null,
+    episode: null
   };
 }
 
@@ -1923,7 +1934,7 @@ async function openFreeMetadataSearch() {
     const runSearch = async () => {
       const input = modal.querySelector("#freeMetadataQuery");
       const resultsHost = modal.querySelector("#freeMetadataResults");
-      const query = input.value.trim();
+      const query = sanitizeTmdbQuery(input.value.trim());
       if (!query) {
         input.focus();
         return;
