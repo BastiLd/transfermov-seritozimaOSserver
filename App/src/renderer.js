@@ -1360,7 +1360,7 @@ async function showEpisodeChooser(modal, result, onSelect) {
       <div class="episode-chooser">
         <div>
           <strong>${escapeHtml(details.title || result.title)}</strong>
-          <span>Wähle Staffel und Folge direkt aus dem Dropdown.</span>
+          <span>Wähle Staffel und Folge direkt aus der Liste.</span>
         </div>
         <div class="episode-picker-row">
           <label>Staffel
@@ -1369,7 +1369,15 @@ async function showEpisodeChooser(modal, result, onSelect) {
             </select>
           </label>
           <label>Folge
-            <select data-role="episode-select"></select>
+            <div class="custom-episode-select" data-role="episode-custom">
+              <button type="button" class="custom-select-trigger" data-role="episode-trigger" aria-haspopup="listbox" aria-expanded="false">
+                <span data-role="episode-trigger-label">Folge wählen</span>
+                <span aria-hidden="true">▾</span>
+              </button>
+              <div class="custom-select-popover hidden" data-role="episode-popover">
+                <div class="custom-select-list" role="listbox" data-role="episode-list"></div>
+              </div>
+            </div>
           </label>
           <button data-role="episode-preview">Vorschau</button>
           <button data-role="episode-apply" class="primary">Übernehmen</button>
@@ -1378,26 +1386,85 @@ async function showEpisodeChooser(modal, result, onSelect) {
       </div>
     `;
     const seasonSelect = slot.querySelector('[data-role="season-select"]');
-    const episodeSelect = slot.querySelector('[data-role="episode-select"]');
+    const episodeCustom = slot.querySelector('[data-role="episode-custom"]');
+    const episodeTrigger = slot.querySelector('[data-role="episode-trigger"]');
+    const episodeTriggerLabel = slot.querySelector('[data-role="episode-trigger-label"]');
+    const episodePopover = slot.querySelector('[data-role="episode-popover"]');
+    const episodeList = slot.querySelector('[data-role="episode-list"]');
     const info = slot.querySelector('[data-role="episode-info"]');
     let currentEpisodes = [];
+    let selectedEpisodeNumber = 0;
+    let listOpen = false;
+
+    const closeEpisodeList = () => {
+      listOpen = false;
+      episodePopover.classList.add("hidden");
+      episodeCustom.classList.remove("open");
+      episodeTrigger.setAttribute("aria-expanded", "false");
+    };
+    const openEpisodeList = () => {
+      if (!currentEpisodes.length) return;
+      listOpen = true;
+      episodePopover.classList.remove("hidden");
+      episodeCustom.classList.add("open");
+      episodeTrigger.setAttribute("aria-expanded", "true");
+    };
+    const updateEpisodeLabel = () => {
+      const selectedEpisode = currentEpisodes.find((item) => Number(item.episode) === Number(selectedEpisodeNumber));
+      if (!selectedEpisode) {
+        episodeTriggerLabel.textContent = "Folge wählen";
+        return;
+      }
+      episodeTriggerLabel.textContent = `${episodeCode(Number(seasonSelect.value || 1), selectedEpisodeNumber)} - ${selectedEpisode.title || `Folge ${selectedEpisodeNumber}`}`;
+    };
+    const renderEpisodeOptions = () => {
+      if (!currentEpisodes.length) {
+        episodeList.innerHTML = `<button type="button" class="custom-select-option empty" disabled>Keine Folgen gefunden</button>`;
+        selectedEpisodeNumber = 0;
+        updateEpisodeLabel();
+        return;
+      }
+      if (!currentEpisodes.some((item) => Number(item.episode) === Number(selectedEpisodeNumber))) {
+        selectedEpisodeNumber = Number(currentEpisodes[0].episode || 0);
+      }
+      episodeList.innerHTML = currentEpisodes.map((episode) => {
+        const episodeNumber = Number(episode.episode || 0);
+        return `
+          <button type="button" class="custom-select-option${episodeNumber === Number(selectedEpisodeNumber) ? " active" : ""}" data-episode="${episodeNumber}" role="option" aria-selected="${episodeNumber === Number(selectedEpisodeNumber)}">
+            ${escapeHtml(`${episodeCode(Number(seasonSelect.value || 1), episodeNumber)} - ${episode.title || `Folge ${episodeNumber}`}`)}
+          </button>
+        `;
+      }).join("");
+      episodeList.querySelectorAll("[data-episode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedEpisodeNumber = Number(button.dataset.episode || 0);
+          renderEpisodeOptions();
+          closeEpisodeList();
+          previewEpisode().catch((error) => {
+            info.textContent = cleanErrorMessage(error);
+          });
+        });
+      });
+      updateEpisodeLabel();
+    };
+
     const loadSeason = async (seasonNumber) => {
       info.textContent = `Lade Staffel ${seasonNumber}...`;
       const seasonData = await api.getSeasonMetadata(result.id, seasonNumber);
       currentEpisodes = seasonData.episodes || [];
       if (!currentEpisodes.length) {
-        episodeSelect.innerHTML = `<option value="">Keine Folgen gefunden</option>`;
+        selectedEpisodeNumber = 0;
+        renderEpisodeOptions();
         info.textContent = `Keine Folgen für Staffel ${seasonNumber} gefunden.`;
         return;
       }
-      episodeSelect.innerHTML = currentEpisodes.map((episode) => (
-        `<option value="${escapeHtml(episode.episode)}">${episodeCode(seasonNumber, episode.episode)} - ${escapeHtml(episode.title || `Folge ${episode.episode}`)}</option>`
-      )).join("");
+      selectedEpisodeNumber = Number(currentEpisodes[0].episode || 0);
+      renderEpisodeOptions();
       await previewEpisode();
     };
     const previewEpisode = async () => {
       const seasonNumber = Number(seasonSelect.value || 1);
-      const episodeNumber = Number(episodeSelect.value || 0);
+      const episodeNumber = Number(selectedEpisodeNumber || 0);
       if (!seasonNumber || !episodeNumber) {
         info.textContent = "Bitte gültige Staffel/Folge eingeben.";
         return;
@@ -1412,15 +1479,24 @@ async function showEpisodeChooser(modal, result, onSelect) {
     };
     seasonSelect.value = String(defaultSeason);
     seasonSelect.addEventListener("change", async () => {
+      closeEpisodeList();
       await loadSeason(Number(seasonSelect.value || 1)).catch((error) => {
         currentEpisodes = [];
+        selectedEpisodeNumber = 0;
+        renderEpisodeOptions();
         info.textContent = cleanErrorMessage(error);
       });
     });
-    episodeSelect.addEventListener("change", () => {
-      previewEpisode().catch((error) => {
-        info.textContent = cleanErrorMessage(error);
-      });
+    episodeTrigger.addEventListener("click", () => {
+      if (!currentEpisodes.length) return;
+      listOpen ? closeEpisodeList() : openEpisodeList();
+    });
+    episodeCustom.addEventListener("focusout", (event) => {
+      if (!listOpen) return;
+      if (!episodeCustom.contains(event.relatedTarget)) closeEpisodeList();
+    });
+    episodeCustom.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeEpisodeList();
     });
     slot.querySelector('[data-role="episode-preview"]').addEventListener("click", () => {
       previewEpisode().catch((error) => {
@@ -1429,7 +1505,7 @@ async function showEpisodeChooser(modal, result, onSelect) {
     });
     slot.querySelector('[data-role="episode-apply"]').addEventListener("click", async () => {
       const seasonNumber = Number(seasonSelect.value || 1);
-      const episodeNumber = Number(episodeSelect.value || 0);
+      const episodeNumber = Number(selectedEpisodeNumber || 0);
       if (!seasonNumber || !episodeNumber) {
         info.textContent = "Bitte eine gültige Folge wählen.";
         return;

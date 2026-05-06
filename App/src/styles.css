@@ -789,6 +789,74 @@ h1, h2, p {
   border-color: var(--border-strong);
 }
 
+.custom-episode-select {
+  position: relative;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  min-height: 38px;
+  justify-content: space-between;
+  border-color: var(--border-strong);
+  background: var(--entry);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.custom-select-trigger span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.custom-select-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  z-index: 30;
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  background:
+    linear-gradient(140deg, color-mix(in srgb, var(--accent-soft) 40%, transparent), transparent 50%),
+    color-mix(in srgb, var(--card-solid) 92%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow);
+  padding: 6px;
+}
+
+.custom-select-list {
+  display: grid;
+  gap: 4px;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.custom-select-option {
+  min-height: 34px;
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 10px;
+}
+
+.custom-select-option.active {
+  background: var(--primary-soft);
+  border-color: color-mix(in srgb, var(--primary) 48%, var(--border));
+}
+
+.custom-select-option.empty {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .free-search-result .metadata-actions button.primary {
   font-size: 18px;
   font-weight: 900;
