@@ -178,6 +178,7 @@ const els = {
   renamePickButton: $("renamePickButton"),
   renameFolderButton: $("renameFolderButton"),
   renameSearchButton: $("renameSearchButton"),
+  renameAutoSearchButton: $("renameAutoSearchButton"),
   renameTypeInput: $("renameTypeInput"),
   renameStructureInput: $("renameStructureInput"),
   renameShowInput: $("renameShowInput"),
@@ -190,6 +191,7 @@ const els = {
   comboPickButton: $("comboPickButton"),
   comboFolderButton: $("comboFolderButton"),
   comboSearchButton: $("comboSearchButton"),
+  comboAutoSearchButton: $("comboAutoSearchButton"),
   comboTypeInput: $("comboTypeInput"),
   comboStructureInput: $("comboStructureInput"),
   comboShowInput: $("comboShowInput"),
@@ -250,7 +252,9 @@ function formatEta(secondsTotal) {
 }
 
 function normalizeStatus(status) {
-  return status === "Uebersprungen" ? "Übersprungen" : String(status || "");
+  if (status === "Uebersprungen") return "Übersprungen";
+  if (status === "Unveraendert") return "Unverändert";
+  return String(status || "");
 }
 
 function isSkipped(job) {
@@ -1047,6 +1051,53 @@ function renameOptions(kind) {
   };
 }
 
+const SERIES_ALIASES = new Map([
+  ["mlpfim", "My Little Pony Friendship Is Magic"],
+  ["mlp fim", "My Little Pony Friendship Is Magic"],
+  ["my little pony fim", "My Little Pony Friendship Is Magic"]
+]);
+
+function aliasKey(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function expandSeriesAlias(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return raw;
+  const key = aliasKey(raw);
+  if (SERIES_ALIASES.has(key)) return SERIES_ALIASES.get(key);
+  const compact = key.replace(/\s+/g, "");
+  if (SERIES_ALIASES.has(compact)) return SERIES_ALIASES.get(compact);
+  return raw;
+}
+
+function stripEpisodeFromSeriesText(value) {
+  return String(value || "")
+    .replace(/\s*S\d{1,2}E\d{1,3}.*$/i, "")
+    .replace(/\s*\d{1,2}x\d{1,3}.*$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function commonSeriesQuery(kind, jobs) {
+  const options = renameOptions(kind);
+  if (options.showName) return expandSeriesAlias(options.showName);
+  const counts = new Map();
+  for (const job of jobs) {
+    if (job.media_type !== "Serie") continue;
+    const text = stripEpisodeFromSeriesText(job.label || basename(job.source));
+    if (!text) continue;
+    const expanded = expandSeriesAlias(text);
+    counts.set(expanded, (counts.get(expanded) || 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "";
+}
+
 function renderRenamePreview(kind) {
   const jobs = kind === "combo" ? state.comboJobs : state.renameJobs;
   const list = kind === "combo" ? els.comboPreviewList : els.renamePreviewList;
@@ -1067,7 +1118,7 @@ function renderRenamePreview(kind) {
         ${job.error ? `<em class="status-error">${escapeHtml(job.error)}</em>` : ""}
       </div>
       <div class="preview-side-actions">
-        <small>${escapeHtml(job.media_type || "-")} | ${escapeHtml(job.status || "Bereit")}</small>
+        <small>${escapeHtml(job.media_type || "-")} | ${escapeHtml(normalizeStatus(job.status || "Bereit"))}</small>
         <button class="metadata-search-button" data-kind="${kind}" data-index="${index}">Online suchen</button>
       </div>
     </div>
@@ -1079,7 +1130,6 @@ function renderRenamePreview(kind) {
 
 async function refreshRenamePreview(kind) {
   state.config = await api.getConfig();
-  loadSettingsDraft();
   const paths = kind === "combo" ? state.comboPaths : state.renamePaths;
   if (!paths.length) {
     await showMessage("Umbenennen", "Bitte zuerst Dateien oder Ordner auswählen.");
@@ -1096,14 +1146,14 @@ async function refreshRenamePreview(kind) {
 function metadataSearchQuery(job) {
   if (job.media_type === "Serie") {
     const label = String(job.label || basename(job.source));
-    return label.replace(/\s*S\d{2}E\d{2}.*$/i, "").trim() || basename(job.source);
+    return expandSeriesAlias(stripEpisodeFromSeriesText(label) || stripEpisodeFromSeriesText(basename(job.source)));
   }
   return String(job.label || basename(job.source)).replace(/\s*\(\d{4}\)\s*$/g, "").trim();
 }
 
 function metadataContext(job) {
   return {
-    year: job.year || job.tmdb_year || "",
+    year: job.media_type === "Serie" ? "" : job.year || job.tmdb_year || "",
     season: job.season || null,
     episode: job.episode || null
   };
@@ -1117,6 +1167,136 @@ function replaceJobForKind(kind, index, job) {
   if (kind === "combo") state.comboJobs[index] = job;
   else state.renameJobs[index] = job;
   renderRenamePreview(kind);
+}
+
+async function applySeriesMetadataToAll(kind, result) {
+  const jobs = jobListForKind(kind);
+  const updatedJobs = [...jobs];
+  let changed = 0;
+  for (let index = 0; index < jobs.length; index += 1) {
+    const job = jobs[index];
+    if (job.media_type !== "Serie") continue;
+    const season = Number(job.season || result.season || 1);
+    const episodeNumber = Number(job.episode || result.episode || 1);
+    let episodeTitle = "";
+    if (season && episodeNumber) {
+      const episode = await api.getEpisodeMetadata(result.id, season, episodeNumber).catch(() => null);
+      episodeTitle = episode?.title || "";
+    }
+    const metadata = {
+      ...result,
+      media_type: "Serie",
+      season,
+      episode: episodeNumber,
+      episode_title: episodeTitle || `Episode ${episodeNumber}`,
+      tmdb_episode_title: episodeTitle || `Episode ${episodeNumber}`
+    };
+    updatedJobs[index] = await api.applyMetadataToRenameJob(job, metadata);
+    changed += 1;
+  }
+  if (kind === "combo") state.comboJobs = updatedJobs;
+  else state.renameJobs = updatedJobs;
+  renderRenamePreview(kind);
+  setGlobalStatus("Bereit", `${changed} Serien-Folgen mit TMDb abgeglichen.`);
+  showToast("TMDb abgeglichen", `${changed} Folgen aktualisiert.`);
+}
+
+async function showBatchSeriesResults(kind, query, results) {
+  let visible = (results || []).filter((result) => result.media_type === "Serie");
+  if (!visible.length) throw new Error("Keine Serien-Treffer gefunden.");
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal";
+    const renderBody = () => visible.map((result, resultIndex) => `
+      <div class="metadata-result">
+        ${result.poster_url ? `<img src="${escapeHtml(result.poster_url)}" alt="">` : `<div class="metadata-poster-empty">TMDb</div>`}
+        <div>
+          <strong>${escapeHtml(result.title)}${result.year ? ` (${escapeHtml(result.year)})` : ""}</strong>
+          <span>Serie | Bewertung ${Number(result.vote_average || 0).toFixed(1)} | Popularität ${Math.round(result.popularity || 0)}</span>
+          <p>${escapeHtml(result.overview || "Keine Beschreibung vorhanden.")}</p>
+        </div>
+        <div class="metadata-actions">
+          <button data-action="accept-all" data-index="${resultIndex}" class="primary">Für alle übernehmen</button>
+          <button data-action="wrong" data-index="${resultIndex}">Falsch</button>
+          <button data-action="details" data-index="${resultIndex}">Mehr Infos</button>
+        </div>
+      </div>
+    `).join("") || `<p>Keine weiteren Treffer. Starte eine manuelle Suche.</p>`;
+    modal.innerHTML = `
+      <div class="modal-header"><h2>Serie für alle Folgen wählen</h2></div>
+      <div class="modal-body">
+        <div class="metadata-query">
+          <span>TMDb Suche ohne Jahr</span>
+          <strong>${escapeHtml(query)}</strong>
+        </div>
+        <div class="metadata-detail-slot"></div>
+        <div class="metadata-results">${renderBody()}</div>
+      </div>
+      <div class="modal-footer">
+        <button data-action="close">Später bearbeiten</button>
+      </div>
+    `;
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
+    const wireButtons = () => {
+      modal.querySelectorAll("[data-action]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const action = button.dataset.action;
+          if (action === "close") {
+            close();
+            return;
+          }
+          const result = visible[Number(button.dataset.index)];
+          if (!result) return;
+          if (action === "wrong") {
+            visible = visible.filter((item) => item.id !== result.id);
+            modal.querySelector(".metadata-results").innerHTML = renderBody();
+            wireButtons();
+            return;
+          }
+          if (action === "details") {
+            modal.querySelector(".metadata-detail-slot").innerHTML = await metadataDetailsHtml(result, { season: 1, episode: 1 });
+            return;
+          }
+          if (action === "accept-all") {
+            button.disabled = true;
+            button.textContent = "Übernehme...";
+            await applySeriesMetadataToAll(kind, result);
+            close();
+          }
+        });
+      });
+    };
+    els.modalHost.appendChild(modal);
+    wireButtons();
+  });
+}
+
+async function autoSearchMetadataForKind(kind, force = false) {
+  const jobs = jobListForKind(kind);
+  const seriesJobs = jobs.filter((job) => job.media_type === "Serie");
+  if (!seriesJobs.length) {
+    if (force) await showMessage("TMDb Abgleich", "Keine Serien-Folgen in der Vorschau.");
+    return;
+  }
+  const query = commonSeriesQuery(kind, seriesJobs);
+  if (!query) return;
+  try {
+    setGlobalStatus("Bereit", "TMDb Serien-Suche läuft...");
+    const response = await api.searchMetadata(query, "Serie", {});
+    await showBatchSeriesResults(kind, query, response.results || []);
+    setGlobalStatus("Bereit", "TMDb Serien-Suche abgeschlossen.");
+  } catch (error) {
+    const message = cleanErrorMessage(error);
+    appendLog(`Automatischer TMDb Abgleich fehlgeschlagen: ${message}`, true);
+    setGlobalStatus(force ? "Fehler" : "Bereit", force ? "TMDb Abgleich fehlgeschlagen." : "TMDb Abgleich bereit.");
+    if (force) await showMessage("TMDb Abgleich", message, true);
+  }
 }
 
 async function metadataDetailsHtml(result, job) {
@@ -1175,11 +1355,12 @@ async function showEpisodeChooser(modal, result, onSelect) {
       slot.innerHTML = `<p class="status-error">Keine Staffeln bei TMDb gefunden.</p>`;
       return;
     }
+    const defaultSeason = Number(seasons[0]?.season_number || 1);
     slot.innerHTML = `
       <div class="episode-chooser">
         <div>
           <strong>${escapeHtml(details.title || result.title)}</strong>
-          <span>Wähle Staffel und Folge aus TMDb.</span>
+          <span>Wähle Staffel und Folge direkt aus dem Dropdown.</span>
         </div>
         <div class="episode-picker-row">
           <label>Staffel
@@ -1190,48 +1371,83 @@ async function showEpisodeChooser(modal, result, onSelect) {
           <label>Folge
             <select data-role="episode-select"></select>
           </label>
+          <button data-role="episode-preview">Vorschau</button>
           <button data-role="episode-apply" class="primary">Übernehmen</button>
         </div>
-        <p data-role="episode-info"></p>
+        <p data-role="episode-info">Folge wird geladen...</p>
       </div>
     `;
     const seasonSelect = slot.querySelector('[data-role="season-select"]');
     const episodeSelect = slot.querySelector('[data-role="episode-select"]');
     const info = slot.querySelector('[data-role="episode-info"]');
     let currentEpisodes = [];
-    const loadSeason = async () => {
-      const seasonNumber = Number(seasonSelect.value);
-      episodeSelect.innerHTML = `<option>Lade Folgen...</option>`;
-      info.textContent = "";
+    const loadSeason = async (seasonNumber) => {
+      info.textContent = `Lade Staffel ${seasonNumber}...`;
       const seasonData = await api.getSeasonMetadata(result.id, seasonNumber);
       currentEpisodes = seasonData.episodes || [];
-      episodeSelect.innerHTML = currentEpisodes.map((episode) => `<option value="${escapeHtml(episode.episode)}">${episodeCode(seasonNumber, episode.episode)} - ${escapeHtml(episode.title || `Folge ${episode.episode}`)}</option>`).join("");
-      if (!currentEpisodes.length) episodeSelect.innerHTML = `<option value="">Keine Folgen gefunden</option>`;
+      if (!currentEpisodes.length) {
+        episodeSelect.innerHTML = `<option value="">Keine Folgen gefunden</option>`;
+        info.textContent = `Keine Folgen für Staffel ${seasonNumber} gefunden.`;
+        return;
+      }
+      episodeSelect.innerHTML = currentEpisodes.map((episode) => (
+        `<option value="${escapeHtml(episode.episode)}">${episodeCode(seasonNumber, episode.episode)} - ${escapeHtml(episode.title || `Folge ${episode.episode}`)}</option>`
+      )).join("");
+      await previewEpisode();
     };
-    seasonSelect.addEventListener("change", () => {
-      loadSeason().catch((error) => {
+    const previewEpisode = async () => {
+      const seasonNumber = Number(seasonSelect.value || 1);
+      const episodeNumber = Number(episodeSelect.value || 0);
+      if (!seasonNumber || !episodeNumber) {
+        info.textContent = "Bitte gültige Staffel/Folge eingeben.";
+        return;
+      }
+      const cached = currentEpisodes.find((item) => Number(item.episode) === episodeNumber);
+      if (cached) {
+        info.textContent = `${episodeCode(seasonNumber, episodeNumber)} - ${cached.title || `Folge ${episodeNumber}`}`;
+        return;
+      }
+      const episodeData = await api.getEpisodeMetadata(result.id, seasonNumber, episodeNumber);
+      info.textContent = `${episodeCode(seasonNumber, episodeNumber)} - ${episodeData?.title || `Folge ${episodeNumber}`}`;
+    };
+    seasonSelect.value = String(defaultSeason);
+    seasonSelect.addEventListener("change", async () => {
+      await loadSeason(Number(seasonSelect.value || 1)).catch((error) => {
         currentEpisodes = [];
-        episodeSelect.innerHTML = `<option value="">Fehler</option>`;
+        info.textContent = cleanErrorMessage(error);
+      });
+    });
+    episodeSelect.addEventListener("change", () => {
+      previewEpisode().catch((error) => {
+        info.textContent = cleanErrorMessage(error);
+      });
+    });
+    slot.querySelector('[data-role="episode-preview"]').addEventListener("click", () => {
+      previewEpisode().catch((error) => {
         info.textContent = cleanErrorMessage(error);
       });
     });
     slot.querySelector('[data-role="episode-apply"]').addEventListener("click", async () => {
-      const seasonNumber = Number(seasonSelect.value);
-      const episodeNumber = Number(episodeSelect.value);
-      const episode = currentEpisodes.find((item) => Number(item.episode) === episodeNumber);
-      if (!seasonNumber || !episodeNumber || !episode) {
+      const seasonNumber = Number(seasonSelect.value || 1);
+      const episodeNumber = Number(episodeSelect.value || 0);
+      if (!seasonNumber || !episodeNumber) {
         info.textContent = "Bitte eine gültige Folge wählen.";
         return;
+      }
+      let episode = currentEpisodes.find((item) => Number(item.episode) === episodeNumber);
+      if (!episode) {
+        const episodeData = await api.getEpisodeMetadata(result.id, seasonNumber, episodeNumber).catch(() => null);
+        if (episodeData) episode = { episode: episodeNumber, title: episodeData.title || `Episode ${episodeNumber}` };
       }
       await onSelect({
         ...result,
         season: seasonNumber,
         episode: episodeNumber,
-        episode_title: episode.title || `Episode ${episodeNumber}`,
-        tmdb_episode_title: episode.title || `Episode ${episodeNumber}`
+        episode_title: episode?.title || `Episode ${episodeNumber}`,
+        tmdb_episode_title: episode?.title || `Episode ${episodeNumber}`
       });
     });
-    await loadSeason();
+    await loadSeason(defaultSeason);
   } catch (error) {
     slot.innerHTML = `<p class="status-error">${escapeHtml(cleanErrorMessage(error))}</p>`;
   }
@@ -1459,6 +1675,7 @@ async function pickRenamePaths(kind, sourceKind = "files") {
   if (kind === "combo") state.comboPaths = paths;
   else state.renamePaths = paths;
   await refreshRenamePreview(kind);
+  await autoSearchMetadataForKind(kind, false);
 }
 
 function formatMetadataCopyName(result) {
@@ -1639,15 +1856,33 @@ async function startComboFlow() {
   const renameResult = await api.startRename(state.comboJobs, { refreshAfter: false });
   state.comboJobs = renameResult.jobs || [];
   renderRenamePreview("combo");
-  const finalPaths = state.comboJobs
-    .filter((job) => ["Umbenannt", "Unveraendert"].includes(job.status))
-    .map((job) => job.final_path || job.target);
+  const successfulRenameJobs = state.comboJobs.filter((job) => ["Umbenannt", "Unveraendert", "Unverändert"].includes(job.status));
+  const uniquePathMap = new Map();
+  for (const job of successfulRenameJobs) {
+    const rawPath = String(job.final_path || job.target || "").trim();
+    if (!rawPath) continue;
+    const key = rawPath.toLowerCase();
+    if (!uniquePathMap.has(key)) uniquePathMap.set(key, { path: rawPath, media_type: job.media_type || null });
+  }
+  const finalItems = [...uniquePathMap.values()];
+  const finalPaths = finalItems.map((item) => item.path);
   if (!finalPaths.length) {
     setGlobalStatus("Fehler", "Keine erfolgreich umbenannten Dateien für den Transfer.");
     return;
   }
 
-  const result = await api.createJobs(finalPaths, null);
+  const films = finalItems.filter((item) => item.media_type === "Film").map((item) => item.path);
+  const series = finalItems.filter((item) => item.media_type === "Serie").map((item) => item.path);
+  const unknown = finalItems.filter((item) => !["Film", "Serie"].includes(item.media_type)).map((item) => item.path);
+  const [filmResult, seriesResult, mixedResult] = await Promise.all([
+    films.length ? api.createJobs(films, "Film") : Promise.resolve({ jobs: [], errors: [] }),
+    series.length ? api.createJobs(series, "Serie") : Promise.resolve({ jobs: [], errors: [] }),
+    unknown.length ? api.createJobs(unknown, null) : Promise.resolve({ jobs: [], errors: [] })
+  ]);
+  const result = {
+    jobs: [...(filmResult.jobs || []), ...(seriesResult.jobs || []), ...(mixedResult.jobs || [])],
+    errors: [...(filmResult.errors || []), ...(seriesResult.errors || []), ...(mixedResult.errors || [])]
+  };
   state.jobs = [];
   state.selectedJobId = null;
   for (const job of result.jobs || []) {
@@ -1681,12 +1916,14 @@ function wireEvents() {
   els.renamePickButton.addEventListener("click", () => pickRenamePaths("rename", "files"));
   els.renameFolderButton.addEventListener("click", () => pickRenamePaths("rename", "folders"));
   els.renameSearchButton.addEventListener("click", openFreeMetadataSearch);
+  els.renameAutoSearchButton.addEventListener("click", () => autoSearchMetadataForKind("rename", true));
   els.renamePreviewButton.addEventListener("click", () => refreshRenamePreview("rename"));
   els.renameStartButton.addEventListener("click", startRenameOnly);
   els.renameClearButton.addEventListener("click", () => clearRenameWorkflow("rename"));
   els.comboPickButton.addEventListener("click", () => pickRenamePaths("combo", "files"));
   els.comboFolderButton.addEventListener("click", () => pickRenamePaths("combo", "folders"));
   els.comboSearchButton.addEventListener("click", openFreeMetadataSearch);
+  els.comboAutoSearchButton.addEventListener("click", () => autoSearchMetadataForKind("combo", true));
   els.comboPreviewButton.addEventListener("click", () => refreshRenamePreview("combo"));
   els.comboStartButton.addEventListener("click", startComboFlow);
   els.comboClearButton.addEventListener("click", () => clearRenameWorkflow("combo"));

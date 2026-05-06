@@ -165,8 +165,34 @@ function titleCaseWords(rawName) {
     .join(" ");
 }
 
+const SERIES_ALIASES = new Map([
+  ["mlpfim", "My Little Pony Friendship Is Magic"],
+  ["mlp fim", "My Little Pony Friendship Is Magic"],
+  ["my little pony fim", "My Little Pony Friendship Is Magic"]
+]);
+
+function aliasKey(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function expandSeriesAlias(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return raw;
+  const key = aliasKey(raw);
+  if (SERIES_ALIASES.has(key)) return SERIES_ALIASES.get(key);
+  const compact = key.replace(/\s+/g, "");
+  if (SERIES_ALIASES.has(compact)) return SERIES_ALIASES.get(compact);
+  return raw;
+}
+
 function normalizeShowName(rawName) {
-  return normalizeTitle(rawName, "Serie")
+  const expanded = expandSeriesAlias(rawName);
+  return normalizeTitle(expanded, "Serie")
     .replace(/\b(?:season|staffel|saison|series)\s*\d{1,2}\b.*$/i, "")
     .replace(/\b(?:complete|web[- ]?dl|webrip|nf|hulu|x264|x265|720p|1080p|2160p)\b.*$/i, "")
     .replace(/\s+/g, " ")
@@ -217,6 +243,13 @@ function hasSeasonSubfolders(sourceDir) {
   } catch {
     return false;
   }
+}
+
+function seasonFolderInfo(name) {
+  const trimmed = String(name || "").trim();
+  const match = /^(?:season|staffel|saison|series)\s*(\d{1,2})$/i.exec(trimmed) || /^s(\d{1,2})$/i.exec(trimmed);
+  if (!match) return null;
+  return { season: Number(match[1]) };
 }
 
 function collectVideoFiles(sourcePath) {
@@ -322,6 +355,8 @@ function applyMetadataToRenameJob(job, metadata = {}) {
     tmdb_id: metadata.id || job.tmdb_id || null,
     tmdb_title: metadata.title || metadata.name || job.tmdb_title || "",
     tmdb_year: metadata.year || metadata.release_year || job.tmdb_year || "",
+    season: effectiveJob.media_type === "Serie" ? Number(metadata.season || metadata.selected_season || job.season || 1) : null,
+    episode: effectiveJob.media_type === "Serie" ? Number(metadata.episode || metadata.selected_episode || job.episode || 1) : null,
     tmdb_episode_title: metadata.episode_title || metadata.tmdb_episode_title || job.tmdb_episode_title || "",
     metadata_confirmed: true
   };
@@ -369,7 +404,7 @@ function renamePreviewForFile(filePath, context) {
     source: filePath,
     target,
     media_type: mediaType,
-    status: path.resolve(filePath).toLowerCase() === path.resolve(target).toLowerCase() ? "Unveraendert" : "Bereit",
+    status: path.resolve(filePath).toLowerCase() === path.resolve(target).toLowerCase() ? "Unverändert" : "Bereit",
     size_bytes: calculateSourceSize(filePath),
     size_label: formatSize(calculateSourceSize(filePath)),
     label,
@@ -451,8 +486,8 @@ async function startRename(jobs, options = {}) {
       if (!fs.existsSync(source)) throw new Error("Quelle nicht gefunden.");
       if (!target) throw new Error("Ziel fehlt.");
       if (source.toLowerCase() === target.toLowerCase()) {
-        results.push({ ...job, final_path: source, status: "Unveraendert" });
-        appendLog(`Unveraendert: ${source}`, false);
+        results.push({ ...job, final_path: source, status: "Unverändert" });
+        appendLog(`Unverändert: ${source}`, false);
         continue;
       }
       if (fs.existsSync(target)) throw new Error(`Ziel existiert bereits: ${target}`);
@@ -467,7 +502,7 @@ async function startRename(jobs, options = {}) {
   }
 
   running = false;
-  const successJobs = results.filter((job) => ["Umbenannt", "Unveraendert"].includes(job.status));
+  const successJobs = results.filter((job) => ["Umbenannt", "Unveraendert", "Unverändert"].includes(job.status));
   const failed = results.length - successJobs.length;
   let refresh = { movies_ok: false, series_ok: false };
   if (options.refreshAfter && successJobs.length) {
@@ -566,16 +601,11 @@ function normalizeTmdbResult(item, mediaType) {
 }
 
 async function searchMetadata(query, mediaType, context = {}) {
-  const normalizedQuery = String(query || "").trim();
+  const normalizedQuery = mediaType === "Serie" ? expandSeriesAlias(query) : String(query || "").trim();
   if (!normalizedQuery) throw new Error("Suchbegriff fehlt.");
   const type = mediaType === "Serie" ? "Serie" : mediaType === "Film" ? "Film" : "auto";
   const endpoint = type === "Serie" ? "/search/tv" : type === "Film" ? "/search/movie" : "/search/multi";
   const params = { query: normalizedQuery, page: 1, include_adult: false };
-  if (type === "Film" && context.year) {
-    params.year = context.year;
-    params.primary_release_year = context.year;
-  }
-  if (type === "Serie" && context.year) params.first_air_date_year = context.year;
   const response = await tmdbRequest(endpoint, params);
   const rawResults = (response.results || [])
     .filter((item) => type !== "auto" || ["movie", "tv"].includes(item.media_type))
@@ -791,20 +821,25 @@ function buildJob(sourcePath, forcedType) {
     targetPath = path.join(expandHome(config.movies_root), path.basename(resolvedPath));
   } else {
     if (stat.isDirectory()) {
-      const showName = normalizeTitle(path.basename(resolvedPath), "Serie");
+      const sourceName = path.basename(resolvedPath);
+      const explicitSeasonFolder = seasonFolderInfo(sourceName);
+      const showBaseDir = explicitSeasonFolder ? path.dirname(resolvedPath) : resolvedPath;
+      const showName = normalizeTitle(path.basename(showBaseDir), "Serie");
       if (hasSeasonSubfolders(resolvedPath)) {
         targetPath = path.join(expandHome(config.series_root), showName);
       } else {
-        let season = 1;
-        try {
-          for (const entry of fs.readdirSync(resolvedPath, { withFileTypes: true })) {
-            if (entry.isFile() && looksLikeVideo(entry.name)) {
-              season = detectSeasonNumber(path.parse(entry.name).name) || season;
-              break;
+        let season = explicitSeasonFolder?.season || 1;
+        if (!explicitSeasonFolder) {
+          try {
+            for (const entry of fs.readdirSync(resolvedPath, { withFileTypes: true })) {
+              if (entry.isFile() && looksLikeVideo(entry.name)) {
+                season = detectSeasonNumber(path.parse(entry.name).name) || season;
+                break;
+              }
             }
+          } catch {
+            // Keep season 1 if the folder cannot be inspected.
           }
-        } catch {
-          // Keep season 1 if the folder cannot be inspected.
         }
         targetPath = path.join(expandHome(config.series_root), showName, `Season ${String(season).padStart(2, "0")}`);
       }

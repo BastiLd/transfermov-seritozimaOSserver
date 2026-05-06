@@ -101,6 +101,21 @@ select {
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
+#app.theme-dunkel input,
+#app.theme-dunkel select {
+  color-scheme: dark;
+}
+
+select option {
+  background: var(--card-solid);
+  color: var(--text);
+}
+
+#app.theme-dunkel select option {
+  background: #16232d;
+  color: #fff7e8;
+}
+
 input:focus,
 select:focus {
   border-color: var(--accent);
@@ -582,6 +597,12 @@ h1, h2, p {
 
 .metadata-modal {
   width: min(1060px, 100%);
+  border: 1px solid var(--border-strong);
+  background:
+    linear-gradient(140deg, color-mix(in srgb, var(--accent-soft) 45%, transparent), transparent 48%),
+    color-mix(in srgb, var(--card-solid) 92%, transparent);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .metadata-query,
@@ -675,12 +696,16 @@ h1, h2, p {
 .metadata-actions {
   display: grid;
   gap: 8px;
+  align-content: start;
 }
 
 .metadata-actions button {
-  min-height: 34px;
-  padding: 0 10px;
-  font-size: 12px;
+  min-height: 38px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--card-solid) 80%, transparent);
 }
 
 .metadata-search-bar {
@@ -712,6 +737,8 @@ h1, h2, p {
   display: grid;
   gap: 12px;
   padding: 12px;
+  background: color-mix(in srgb, var(--card) 90%, transparent);
+  border-color: var(--border-strong);
 }
 
 .episode-chooser span,
@@ -721,9 +748,28 @@ h1, h2, p {
   margin: 4px 0 0;
 }
 
+.season-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.season-pill {
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.season-pill.active {
+  background: var(--primary);
+  border-color: transparent;
+  color: #fff;
+}
+
 .episode-picker-row {
   display: grid;
-  grid-template-columns: minmax(160px, 1fr) minmax(220px, 2fr) auto;
+  grid-template-columns: minmax(140px, 1fr) minmax(160px, 1fr) auto auto;
   gap: 10px;
   align-items: end;
 }
@@ -735,8 +781,12 @@ h1, h2, p {
   font-size: 12px;
 }
 
-.episode-picker-row select {
+.episode-picker-row select,
+.episode-picker-row input {
   min-height: 38px;
+  background: var(--entry);
+  color: var(--text);
+  border-color: var(--border-strong);
 }
 
 .free-search-result .metadata-actions button.primary {
