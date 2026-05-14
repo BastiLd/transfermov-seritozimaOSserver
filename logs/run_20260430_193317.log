@@ -1,0 +1,420 @@
+[19:33:17] Kopiervorgang gestartet.
+[19:33:17] Starte Job #1: G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02
+[19:33:17] Starte Job #2: G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02
+[19:33:17] robocopy robocopy G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:33:17] robocopy robocopy G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:33:18] Job #1: -------------------------------------------------------------------------------
+[19:33:18] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:33:18] Job #1: -------------------------------------------------------------------------------
+[19:33:18] Job #1:   Gestartet: Donnerstag, 30. April 2026 19:33:18
+[19:33:18] Job #1:    Quelle : G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA\
+[19:33:18] Job #1:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02\
+[19:33:18] Job #1:     Dateien : *.*
+[19:33:18] Job #1:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:33:18] Job #1: ------------------------------------------------------------------------------
+[19:33:18] Job #1: 	    Neue Datei		   5.2 g	G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA\Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA.mkv
+[19:33:18] Job #2: -------------------------------------------------------------------------------
+[19:33:18] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:33:18] Job #2: -------------------------------------------------------------------------------
+[19:33:18] Job #2:   Gestartet: Donnerstag, 30. April 2026 19:33:18
+[19:33:18] Job #2:    Quelle : G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune\
+[19:33:18] Job #2:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02\
+[19:33:18] Job #2:     Dateien : *.*
+[19:33:18] Job #2:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:33:18] Job #2: ------------------------------------------------------------------------------
+[19:33:18] Job #1:   0%
+[19:33:18] Job #2: 	    Neue Datei		   5.0 g	G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune\Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune.mkv
+[19:33:19] Job #1:   1%
+[19:33:20] Job #2:   0%
+[19:33:20] Job #1:   2%
+[19:33:21] Job #2:   1%
+[19:33:21] Job #1:   3%
+[19:33:22] Job #2:   2%
+[19:33:22] Job #1:   4%
+[19:33:23] Job #1:   5%
+[19:33:23] Job #2:   3%
+[19:33:24] Job #1:   6%
+[19:33:24] Job #2:   4%
+[19:33:24] Job #2:   5%
+[19:33:25] Job #1:   7%
+[19:33:25] Job #1:   8%
+[19:33:26] Job #2:   6%
+[19:33:26] Job #2:   7%
+[19:33:27] Job #1:   9%
+[19:33:27] Job #2:   8%
+[19:33:28] Job #1:  10%
+[19:33:28] Job #2:   9%
+[19:33:28] Job #1:  11%
+[19:33:29] Job #2:  10%
+[19:33:29] Job #1:  12%
+[19:33:30] Job #2:  11%
+[19:33:30] Job #1:  13%
+[19:33:31] Job #2:  12%
+[19:33:31] Job #1:  14%
+[19:33:32] Job #2:  13%
+[19:33:32] Job #1:  15%
+[19:33:33] Job #2:  14%
+[19:33:33] Job #1:  16%
+[19:33:34] Job #2:  15%
+[19:33:34] Job #1:  17%
+[19:33:35] Job #2:  16%
+[19:33:35] Job #1:  18%
+[19:33:35] Job #2:  17%
+[19:33:36] Job #1:  19%
+[19:33:37] Job #2:  18%
+[19:33:37] Job #1:  20%
+[19:33:37] Job #2:  19%
+[19:33:38] Job #1:  21%
+[19:33:38] Job #2:  20%
+[19:33:39] Job #1:  22%
+[19:33:39] Job #2:  21%
+[19:33:40] Job #1:  23%
+[19:33:40] Job #2:  22%
+[19:33:40] Job #1:  24%
+[19:33:41] Job #2:  23%
+[19:33:42] Job #1:  25%
+[19:33:42] Job #2:  24%
+[19:33:43] Job #1:  26%
+[19:33:43] Job #2:  25%
+[19:33:44] Job #1:  27%
+[19:33:44] Job #2:  26%
+[19:33:44] Job #1:  28%
+[19:33:45] Job #2:  27%
+[19:33:45] Job #1:  29%
+[19:33:46] Job #2:  28%
+[19:33:46] Job #1:  30%
+[19:33:46] Job #2:  29%
+[19:33:47] Job #1:  31%
+[19:33:48] Job #2:  30%
+[19:33:48] Job #1:  32%
+[19:33:48] Job #2:  31%
+[19:33:49] Job #1:  33%
+[19:33:49] Job #2:  32%
+[19:33:50] Job #2:  33%
+[19:33:51] Job #1:  34%
+[19:33:51] Job #1:  35%
+[19:33:51] Job #2:  34%
+[19:33:52] Job #2:  35%
+[19:33:52] Job #1:  36%
+[19:33:53] Job #1:  37%
+[19:33:53] Job #2:  36%
+[19:33:54] Job #2:  37%
+[19:33:54] Job #1:  38%
+[19:33:55] Job #1:  39%
+[19:33:55] Job #2:  38%
+[19:33:56] Job #2:  39%
+[19:33:56] Job #1:  40%
+[19:33:57] Job #2:  40%
+[19:33:57] Job #1:  41%
+[19:33:58] Job #2:  41%
+[19:33:58] Job #1:  42%
+[19:33:58] Job #2:  42%
+[19:33:59] Job #1:  43%
+[19:33:59] Job #2:  43%
+[19:33:59] Job #1:  44%
+[19:34:00] Job #2:  44%
+[19:34:01] Job #1:  45%
+[19:34:01] Job #2:  45%
+[19:34:01] Job #1:  46%
+[19:34:02] Job #2:  46%
+[19:34:03] Job #1:  47%
+[19:34:03] Job #2:  47%
+[19:34:04] Job #1:  48%
+[19:34:04] Job #2:  48%
+[19:34:04] Job #1:  49%
+[19:34:05] Job #2:  49%
+[19:34:05] Job #1:  50%
+[19:34:06] Job #2:  50%
+[19:34:06] Job #1:  51%
+[19:34:07] Job #2:  51%
+[19:34:07] Job #1:  52%
+[19:34:08] Job #2:  52%
+[19:34:08] Job #1:  53%
+[19:34:08] Job #2:  53%
+[19:34:09] Job #1:  54%
+[19:34:09] Job #2:  54%
+[19:34:10] Job #1:  55%
+[19:34:10] Job #2:  55%
+[19:34:11] Job #1:  56%
+[19:34:11] Job #2:  56%
+[19:34:12] Job #1:  57%
+[19:34:12] Job #2:  57%
+[19:34:13] Job #1:  58%
+[19:34:13] Job #2:  58%
+[19:34:14] Job #1:  59%
+[19:34:14] Job #2:  59%
+[19:34:15] Job #1:  60%
+[19:34:15] Job #2:  60%
+[19:34:15] Job #1:  61%
+[19:34:16] Job #2:  61%
+[19:34:17] Job #1:  62%
+[19:34:17] Job #2:  62%
+[19:34:17] Job #2:  63%
+[19:34:18] Job #1:  63%
+[19:34:19] Job #1:  64%
+[19:34:19] Job #2:  64%
+[19:34:19] Job #1:  65%
+[19:34:20] Job #2:  65%
+[19:34:20] Job #1:  66%
+[19:34:20] Job #2:  66%
+[19:34:21] Job #1:  67%
+[19:34:22] Job #2:  67%
+[19:34:22] Job #2:  68%
+[19:34:22] Job #1:  68%
+[19:34:23] Job #1:  69%
+[19:34:24] Job #2:  69%
+[19:34:24] Job #2:  70%
+[19:34:24] Job #1:  70%
+[19:34:25] Job #2:  71%
+[19:34:25] Job #1:  71%
+[19:34:26] Job #2:  72%
+[19:34:26] Job #1:  72%
+[19:34:27] Job #2:  73%
+[19:34:27] Job #1:  73%
+[19:34:28] Job #2:  74%
+[19:34:28] Job #1:  74%
+[19:34:29] Job #2:  75%
+[19:34:29] Job #1:  75%
+[19:34:29] Job #2:  76%
+[19:34:30] Job #1:  76%
+[19:34:30] Job #2:  77%
+[19:34:31] Job #1:  77%
+[19:34:31] Job #2:  78%
+[19:34:32] Job #1:  78%
+[19:34:32] Job #2:  79%
+[19:34:32] Job #1:  79%
+[19:34:33] Job #2:  80%
+[19:34:34] Job #1:  80%
+[19:34:34] Job #2:  81%
+[19:34:34] Job #1:  81%
+[19:34:35] Job #2:  82%
+[19:34:35] Job #1:  82%
+[19:34:36] Job #2:  83%
+[19:34:36] Job #1:  83%
+[19:34:37] Job #2:  84%
+[19:34:38] Job #1:  84%
+[19:34:38] Job #2:  85%
+[19:34:38] Job #1:  85%
+[19:34:38] Job #2:  86%
+[19:34:39] Job #1:  86%
+[19:34:39] Job #2:  87%
+[19:34:40] Job #1:  87%
+[19:34:40] Job #2:  88%
+[19:34:41] Job #1:  88%
+[19:34:41] Job #2:  89%
+[19:34:42] Job #1:  89%
+[19:34:42] Job #2:  90%
+[19:34:43] Job #1:  90%
+[19:34:43] Job #2:  91%
+[19:34:44] Job #1:  91%
+[19:34:44] Job #2:  92%
+[19:34:45] Job #1:  92%
+[19:34:45] Job #2:  93%
+[19:34:46] Job #1:  93%
+[19:34:46] Job #2:  94%
+[19:34:47] Job #1:  94%
+[19:34:47] Job #2:  95%
+[19:34:48] Job #1:  95%
+[19:34:48] Job #2:  96%
+[19:34:49] Job #1:  96%
+[19:34:49] Job #2:  97%
+[19:34:49] Job #2:  98%
+[19:34:50] Job #1:  97%
+[19:34:51] Job #1:  98%
+[19:34:51] Job #2:  99%
+[19:34:51] Job #2: 100%
+[19:34:51] Job #2: ------------------------------------------------------------------------------
+[19:34:51] Job #2:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:34:51] Job #2: Verzeich.:         1         1         1         0         0         0
+[19:34:51] Job #2:   Dateien:         1         1         0         0         0         0
+[19:34:51] Job #2:     Bytes:   5.043 g   5.043 g         0         0         0         0
+[19:34:51] Job #2:    Zeiten:   0:03:04   0:00:46                       0:00:00   0:00:46
+[19:34:51] Job #2: Geschwindigkeit:           117�279�320 Bytes/Sek.
+[19:34:51] Job #2: Geschwindigkeit:              6710,776 Megabytes/Min.
+[19:34:51] Job #2:    Beendet: Donnerstag, 30. April 2026 19:34:51
+[19:34:51] Job #2 erfolgreich abgeschlossen (Code 1).
+[19:34:51] Starte Job #3: C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02
+[19:34:51] robocopy robocopy C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:34:51] Job #1:  99%
+[19:34:53] Job #1: 100%
+[19:35:00] Job #1: 	    Neue Datei		    1214	G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA\Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA.mkv.nfo
+[19:35:00] Job #1: 100%
+[19:35:00] Job #1: ------------------------------------------------------------------------------
+[19:35:00] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:35:00] Job #1: Verzeich.:         1         1         1         0         0         0
+[19:35:00] Job #1:   Dateien:         2         2         0         0         0         0
+[19:35:00] Job #1:     Bytes:   5.209 g   5.209 g         0         0         0         0
+[19:35:00] Job #1:    Zeiten:   0:03:05   0:00:46                       0:00:00   0:00:46
+[19:35:00] Job #1: Geschwindigkeit:           120�470�828 Bytes/Sek.
+[19:35:00] Job #1: Geschwindigkeit:              6893,396 Megabytes/Min.
+[19:35:00] Job #1:    Beendet: Donnerstag, 30. April 2026 19:34:51
+[19:35:07] Job #1 erfolgreich abgeschlossen (Code 1).
+[19:35:22] Starte Job #4: C:\Movies\Avengers\transformers-prime_202602 -> S:\SM-MOONDOOM\Series\transformers - prime 202602
+[19:35:22] robocopy robocopy C:\Movies\Avengers\transformers-prime_202602 S:\SM-MOONDOOM\Series\transformers - prime 202602 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:35:22] Job #4: -------------------------------------------------------------------------------
+[19:35:22] Job #4:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:35:22] Job #4: -------------------------------------------------------------------------------
+[19:35:22] Job #4:   Gestartet: Donnerstag, 30. April 2026 19:34:51
+[19:35:22] Job #4:    Quelle : C:\Movies\Avengers\transformers-prime_202602\
+[19:35:22] Job #4:      Ziel : S:\SM-MOONDOOM\Series\transformers - prime 202602\
+[19:35:22] Job #4:     Dateien : *.*
+[19:35:22] Job #4:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:35:22] Job #4: ------------------------------------------------------------------------------
+[19:35:22] Job #4: 	    Neue Datei		 125.4 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E01.Darkness.Rising.Part.1.1080p.BluRay.x264-DEiMOS.mp4
+[19:35:22] Job #4:   6%
+[19:35:27] Job #4:   7%
+[19:35:27] Job #4:  10%
+[19:35:27] Job #4:  11%
+[19:35:36] Job #4:  12%
+[19:36:04] Job #3 fehlgeschlagen (Code 3221225794).
+[19:36:33] Starte Job #5: G:\Movies Temporär\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) -> S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01
+[19:36:33] Job #4:  13%
+[19:36:42] Job #4:  14%
+[19:36:48] Job #4:  16%
+[19:36:52] Job #4:  17%
+[19:36:58] Job #4:  18%
+[19:37:03] Job #4:  19%
+[19:37:13] Job #4:  23%
+[19:37:19] Job #4:  24%
+[19:37:24] Job #4:  25%
+[19:37:30] Job #4:  26%
+[19:37:36] Job #4:  29%
+[19:37:44] Job #4:  30%
+[19:37:49] Job #4:  31%
+[19:37:55] Job #4:  32%
+[19:38:02] Job #4:  35%
+[19:38:12] Job #4:  36%
+[19:38:19] Job #4:  37%
+[19:38:27] Job #4:  38%
+[19:38:35] Job #4:  39%
+[19:38:42] Job #4:  42%
+[19:38:52] Job #4:  43%
+[19:38:59] robocopy robocopy G:\Movies Temporär\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:38:59] Job #4:  44%
+[19:39:07] Job #4:  45%
+[19:39:17] Job #5: -------------------------------------------------------------------------------
+[19:39:17] Job #5:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:39:17] Job #5: -------------------------------------------------------------------------------
+[19:39:17] Job #4:  48%
+[19:39:24] Job #4:  49%
+[19:39:34] Job #4:  50%
+[19:39:42] Job #4:  51%
+[19:39:49] Job #4:  55%
+[19:39:56] Job #4:  56%
+[19:40:04] Job #4:  57%
+[19:40:09] Job #4:  58%
+[19:40:21] Job #4:  60%
+[19:40:26] Job #4:  61%
+[19:40:33] Job #4:  62%
+[19:40:38] Job #4:  63%
+[19:40:43] Job #4:  64%
+[19:40:51] Job #4:  66%
+[19:40:56] Job #5:   Gestartet: Donnerstag, 30. April 2026 19:35:06
+[19:40:56] Job #5:    Quelle : G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\
+[19:40:56] Job #5:      Ziel : S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01\
+[19:40:56] Job #5:     Dateien : *.*
+[19:40:56] Job #5:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:40:56] Job #5: ------------------------------------------------------------------------------
+[19:40:56] Job #4:  67%
+[19:41:01] Job #4:  68%
+[19:41:08] Job #4:  70%
+[19:41:13] Job #4:  73%
+[19:41:18] Job #4:  74%
+[19:41:25] Job #4:  76%
+[19:41:30] Job #4:  77%
+[19:41:35] Job #4:  79%
+[19:41:43] Job #4:  80%
+[19:41:48] Job #4:  81%
+[19:41:53] Job #4:  82%
+[19:41:58] Job #4:  83%
+[19:42:05] Job #4:  86%
+[19:42:10] Job #4:  87%
+[19:42:15] Job #4:  88%
+[19:42:22] Job #4:  89%
+[19:42:27] Job #4:  90%
+[19:42:32] Job #4:  92%
+[19:42:37] Job #4:  93%
+[19:42:45] Job #4:  94%
+[19:42:50] Job #4:  95%
+[19:42:54] Job #4:  96%
+[19:43:02] Job #4:  98%
+[19:43:07] Job #4:  99%
+[19:43:12] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.7 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E02.Darkness.Rising.Part.2.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.1 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E03.Darkness.Rising.Part.3.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.8 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E04.Darkness.Rising.Part.4.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E05.Darkness.Rising.Part.5.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.2 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E06.Masters.and.Students.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E07.Scrapheap.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.6 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E08.Con.Job.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 127.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E09.Convoy.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 126.0 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E10.Deus.Ex.Machina.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 126.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E11.Speed.Metal.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 127.6 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E12.Predatory.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.9 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E13.Sick.Mind.Part.1.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.4 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E14.Out.of.His.Head.Part.2.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.6 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E15.ShadowZone.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 126.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E16.Operation.Breakdown.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 126.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E17.Crisscross.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.8 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E18.Metal.Attraction.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 126.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E19.Rock.Bottom.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.8 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E20.Partners.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.0 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E21.T.M.I.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.9 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E22.Stronger.Faster.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #5: 	    Neue Datei		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E01 - Roadhouse Blues (1080p DSNP WEB-DL x265 Ghost).mkv
+[19:43:17] Job #4: 	    Neue Datei		 124.8 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E23.One.Shall.Fall.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.3 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E24.One.Shall.Rise.Part.1.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.3 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E25.One.Shall.Rise.Part.2.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.0 m	C:\Movies\Avengers\transformers-prime_202602\Season 1\Transformers.Prime.S01E26.One.Shall.Rise.Part.3.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.7 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E01.Orion.Pax.Part.1.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.9 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E02.Orion.Pax.Part.2.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.1 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E03.Orion.Pax.Part.3.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 124.3 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E04.Operation.Bumblebee.Part.1.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.8 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E05.Operation.Bumblebee.Part.2.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 125.5 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E06.Loose.Cannons.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4: 100%
+[19:43:17] Job #4: 	    Neue Datei		 126.3 m	C:\Movies\Avengers\transformers-prime_202602\Season 2\Transformers.Prime.S02E07.Crossfire.1080p.BluRay.x264-DEiMOS.mp4
+[19:43:17] Job #4:  27%
+[19:43:25] Job #4:  30%
+[19:43:29] Job #4:  31%
+[19:43:34] Job #4:  32%
+[19:43:42] Job #4:  33%
+[19:43:47] Job #4:  34%
+[19:43:52] Job #4:  36%
+[19:43:57] Job #4:  38%
+[19:44:04] Job #4:  39%
+[19:44:09] Job #4:  40%
+[19:44:14] Job #4:  42%
+[19:44:21] Job #5:   0%
+[19:44:21] Job #4:  44%
+[19:44:26] Job #4:  45%

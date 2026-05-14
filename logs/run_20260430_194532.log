@@ -1,0 +1,96 @@
+[19:45:32] Kopiervorgang gestartet.
+[19:45:32] Starte Job #1: G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02
+[19:45:32] Starte Job #2: G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02
+[19:45:32] robocopy robocopy G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:45:32] robocopy robocopy G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:45:33] Job #2: -------------------------------------------------------------------------------
+[19:45:33] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:45:33] Job #2: -------------------------------------------------------------------------------
+[19:45:33] Job #2:   Gestartet: Donnerstag, 30. April 2026 19:45:33
+[19:45:33] Job #2:    Quelle : G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune\
+[19:45:33] Job #2:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02\
+[19:45:33] Job #2:     Dateien : *.*
+[19:45:33] Job #2:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:45:33] Job #2: ------------------------------------------------------------------------------
+[19:45:33] Job #2: ------------------------------------------------------------------------------
+[19:45:33] Job #2:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:45:33] Job #2: Verzeich.:         1         1         1         0         0         0
+[19:45:33] Job #2:   Dateien:         1         0         1         0         0         0
+[19:45:33] Job #2:     Bytes:   5.043 g         0   5.043 g         0         0         0
+[19:45:33] Job #2:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[19:45:33] Job #2:    Beendet: Donnerstag, 30. April 2026 19:45:33
+[19:45:33] Job #2 ohne Änderungen beendet (Code 0).
+[19:45:33] Starte Job #3: C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02
+[19:45:33] robocopy robocopy C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:45:33] Job #1: -------------------------------------------------------------------------------
+[19:45:33] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:45:33] Job #1: -------------------------------------------------------------------------------
+[19:45:33] Job #1:   Gestartet: Donnerstag, 30. April 2026 19:45:33
+[19:45:33] Job #1:    Quelle : G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA\
+[19:45:33] Job #1:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02\
+[19:45:33] Job #1:     Dateien : *.*
+[19:45:33] Job #1:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:45:33] Job #1: ------------------------------------------------------------------------------
+[19:45:33] Job #1: ------------------------------------------------------------------------------
+[19:45:33] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:45:33] Job #1: Verzeich.:         1         1         1         0         0         0
+[19:45:33] Job #1:   Dateien:         2         0         2         0         0         0
+[19:45:33] Job #1:     Bytes:   5.209 g         0   5.209 g         0         0         0
+[19:45:33] Job #1:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[19:45:34] Job #1:    Beendet: Donnerstag, 30. April 2026 19:45:33
+[19:45:34] Job #1 ohne Änderungen beendet (Code 0).
+[19:45:34] Starte Job #4: C:\Movies\Avengers\transformers-prime_202602 -> S:\SM-MOONDOOM\Series\transformers - prime 202602
+[19:45:34] robocopy robocopy C:\Movies\Avengers\transformers-prime_202602 S:\SM-MOONDOOM\Series\transformers - prime 202602 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:45:34] Job #3: -------------------------------------------------------------------------------
+[19:45:34] Job #3:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:45:34] Job #3: -------------------------------------------------------------------------------
+[19:45:34] Job #3:   Gestartet: Donnerstag, 30. April 2026 19:45:33
+[19:45:34] Job #3:    Quelle : C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\
+[19:45:34] Job #3:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02\
+[19:45:34] Job #3:     Dateien : *.*
+[19:45:34] Job #3:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:45:34] Job #3: ------------------------------------------------------------------------------
+[19:45:34] Job #3: 	    Neue Datei		   4.5 g	C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune.mkv
+[19:45:34] Job #4: -------------------------------------------------------------------------------
+[19:45:34] Job #4:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:45:34] Job #4: -------------------------------------------------------------------------------
+[19:45:34] Job #4:   Gestartet: Donnerstag, 30. April 2026 19:45:33
+[19:45:35] Job #4:    Quelle : C:\Movies\Avengers\transformers-prime_202602\
+[19:45:35] Job #4:      Ziel : S:\SM-MOONDOOM\Series\transformers - prime 202602\
+[19:45:35] Job #4:     Dateien : *.*
+[19:45:35] Job #4:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:45:35] Job #4: ------------------------------------------------------------------------------
+[19:45:35] Job #3:   0%
+[19:45:35] Job #3:   1%
+[19:45:35] Job #4: ------------------------------------------------------------------------------
+[19:45:35] Job #4:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:45:35] Job #4: Verzeich.:         4         4         4         0         0         0
+[19:45:35] Job #4:   Dateien:        63         0        63         0         0         0
+[19:45:35] Job #4:     Bytes:   7.700 g         0   7.700 g         0         0         0
+[19:45:35] Job #4:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[19:45:35] Job #4:    Beendet: Donnerstag, 30. April 2026 19:45:35
+[19:45:35] Job #4 ohne Änderungen beendet (Code 0).
+[19:45:35] Starte Job #5: G:\Movies Temporär\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) -> S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01
+[19:45:35] Job #3:   2%
+[19:45:36] robocopy robocopy G:\Movies Temporär\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01 /E /MT:32 /J /R:1 /W:1 /FFT /TEE
+[19:45:36] Job #5: -------------------------------------------------------------------------------
+[19:45:36] Job #5:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:45:36] Job #5: -------------------------------------------------------------------------------
+[19:45:36] Job #5:   Gestartet: Donnerstag, 30. April 2026 19:45:35
+[19:45:36] Job #5:    Quelle : G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\
+[19:45:36] Job #5:      Ziel : S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01\
+[19:45:36] Job #5:     Dateien : *.*
+[19:45:36] Job #5:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:32 /R:1 /W:1
+[19:45:36] Job #5: ------------------------------------------------------------------------------
+[19:45:36] Job #3:   3%
+[19:45:36] Job #3:   4%
+[19:45:37] Job #3:   5%
+[19:45:39] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E01 - 3AM (1080p DSNP WEB-DL x265 Ghost).mkv
+[19:45:39] Job #3:   6%
+[19:45:43] Job #5:   0%
+[19:45:43] Job #5:   1%
+[19:45:47] Job #3:   7%
+[19:45:53] Job #5:   2%
+[19:46:01] Job #5:   3%
+[19:46:06] Job #5:   4%
+[19:46:10] Job #3:   8%

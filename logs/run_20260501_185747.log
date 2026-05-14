@@ -1,0 +1,249 @@
+[18:57:47] Kopiervorgang gestartet.
+[18:57:47] Starte Job #1: G:\Movies Temporär\Iron.Man.2008.2160p.UHD.BluRay.x265-TERMiNAL\iron.man.2008.2160p.uhd.bluray.x265-terminal.mkv -> T:\TO-MOONDOOM\Movies\iron.man.2008.2160p.uhd.bluray.x265-terminal.mkv
+[18:57:47] robocopy robocopy G:\Movies Temporär\Iron.Man.2008.2160p.UHD.BluRay.x265-TERMiNAL T:\TO-MOONDOOM\Movies iron.man.2008.2160p.uhd.bluray.x265-terminal.mkv /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[18:57:48] Job #1: -------------------------------------------------------------------------------
+[18:57:48] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[18:57:48] Job #1: -------------------------------------------------------------------------------
+[18:57:48] Job #1:   Gestartet: Freitag, 1. Mai 2026 18:57:48
+[18:57:48] Job #1:    Quelle : G:\Movies Tempor�r\Iron.Man.2008.2160p.UHD.BluRay.x265-TERMiNAL\
+[18:57:48] Job #1:      Ziel : T:\TO-MOONDOOM\Movies\
+[18:57:48] Job #1:     Dateien : iron.man.2008.2160p.uhd.bluray.x265-terminal.mkv
+[18:57:48] Job #1:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[18:57:48] Job #1: ------------------------------------------------------------------------------
+[18:57:48] Job #1: 	    Neue Datei		  13.3 g	G:\Movies Tempor�r\Iron.Man.2008.2160p.UHD.BluRay.x265-TERMiNAL\iron.man.2008.2160p.uhd.bluray.x265-terminal.mkv
+[18:57:49] Job #1:   0%
+[18:57:50] Job #1:   1%
+[18:57:51] Job #1:   2%
+[18:57:53] Job #1:   3%
+[18:57:54] Job #1:   4%
+[18:57:55] Job #1:   5%
+[18:57:56] Job #1:   6%
+[18:57:58] Job #1:   7%
+[18:57:59] Job #1:   8%
+[18:58:00] Job #1:   9%
+[18:58:01] Job #1:  10%
+[18:58:02] Job #1:  11%
+[18:58:04] Job #1:  12%
+[18:58:05] Job #1:  13%
+[18:58:06] Job #1:  14%
+[18:58:07] Job #1:  15%
+[18:58:09] Job #1:  16%
+[18:58:10] Job #1:  17%
+[18:58:11] Job #1:  18%
+[18:58:12] Job #1:  19%
+[18:58:13] Job #1:  20%
+[18:58:15] Job #1:  21%
+[18:58:16] Job #1:  22%
+[18:58:17] Job #1:  23%
+[18:58:18] Job #1:  24%
+[18:58:20] Job #1:  25%
+[18:58:21] Job #1:  26%
+[18:58:22] Job #1:  27%
+[18:58:23] Job #1:  28%
+[18:58:25] Job #1:  29%
+[18:58:26] Job #1:  30%
+[18:58:27] Job #1:  31%
+[18:58:28] Job #1:  32%
+[18:58:29] Job #1:  33%
+[18:58:31] Job #1:  34%
+[18:58:32] Job #1:  35%
+[18:58:33] Job #1:  36%
+[18:58:34] Job #1:  37%
+[18:58:35] Job #1:  38%
+[18:58:37] Job #1:  39%
+[18:58:38] Job #1:  40%
+[18:58:39] Job #1:  41%
+[18:58:40] Job #1:  42%
+[18:58:42] Job #1:  43%
+[18:58:43] Job #1:  44%
+[18:58:44] Job #1:  45%
+[18:58:45] Job #1:  46%
+[18:58:47] Job #1:  47%
+[18:58:48] Job #1:  48%
+[18:58:49] Job #1:  49%
+[18:58:50] Job #1:  50%
+[18:58:52] Job #1:  51%
+[18:58:53] Job #1:  52%
+[18:58:54] Job #1:  53%
+[18:58:55] Job #1:  54%
+[18:58:57] Job #1:  55%
+[18:58:58] Job #1:  56%
+[18:58:59] Job #1:  57%
+[18:59:00] Job #1:  58%
+[18:59:01] Job #1:  59%
+[18:59:03] Job #1:  60%
+[18:59:04] Job #1:  61%
+[18:59:05] Job #1:  62%
+[18:59:06] Job #1:  63%
+[18:59:08] Job #1:  64%
+[18:59:09] Job #1:  65%
+[18:59:10] Job #1:  66%
+[18:59:11] Job #1:  67%
+[18:59:12] Job #1:  68%
+[18:59:14] Job #1:  69%
+[18:59:15] Job #1:  70%
+[18:59:16] Job #1:  71%
+[18:59:17] Job #1:  72%
+[18:59:19] Job #1:  73%
+[18:59:20] Job #1:  74%
+[18:59:21] Job #1:  75%
+[18:59:22] Job #1:  76%
+[18:59:24] Job #1:  77%
+[18:59:25] Job #1:  78%
+[18:59:26] Job #1:  79%
+[18:59:27] Job #1:  80%
+[18:59:29] Job #1:  81%
+[18:59:30] Job #1:  82%
+[18:59:31] Job #1:  83%
+[18:59:32] Job #1:  84%
+[18:59:33] Job #1:  85%
+[18:59:34] Job #1:  86%
+[18:59:36] Job #1:  87%
+[18:59:37] Job #1:  88%
+[18:59:38] Job #1:  89%
+[18:59:39] Job #1:  90%
+[18:59:41] Job #1:  91%
+[18:59:42] Job #1:  92%
+[18:59:43] Job #1:  93%
+[18:59:44] Job #1:  94%
+[18:59:46] Job #1:  95%
+[18:59:47] Job #1:  96%
+[18:59:48] Job #1:  97%
+[18:59:49] Job #1:  98%
+[18:59:51] Job #1:  99%
+[18:59:51] Job #1: 100%
+[18:59:52] Job #1: ------------------------------------------------------------------------------
+[18:59:52] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[18:59:52] Job #1: Verzeich.:         1         1         1         0         0         0
+[18:59:52] Job #1:   Dateien:         1         1         0         0         0         0
+[18:59:52] Job #1:     Bytes:  13.397 g  13.397 g         0         0         0         0
+[18:59:52] Job #1:    Zeiten:   0:04:07   0:01:01                       0:00:00   0:01:01
+[18:59:52] Job #1: Geschwindigkeit:           232�448�328 Bytes/Sek.
+[18:59:52] Job #1: Geschwindigkeit:             13300,800 Megabytes/Min.
+[18:59:52] Job #1:    Beendet: Freitag, 1. Mai 2026 18:59:51
+[18:59:52] Job #1 erfolgreich abgeschlossen (Code 1).
+[18:59:52] Starte Job #2: G:\Movies Temporär\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv -> T:\TO-MOONDOOM\Movies\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv
+[18:59:52] robocopy robocopy G:\Movies Temporär\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR T:\TO-MOONDOOM\Movies Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[18:59:52] Job #2: -------------------------------------------------------------------------------
+[18:59:52] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[18:59:52] Job #2: -------------------------------------------------------------------------------
+[18:59:52] Job #2:   Gestartet: Freitag, 1. Mai 2026 18:59:52
+[18:59:52] Job #2:    Quelle : G:\Movies Tempor�r\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR\
+[18:59:52] Job #2:      Ziel : T:\TO-MOONDOOM\Movies\
+[18:59:52] Job #2:     Dateien : Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv
+[18:59:52] Job #2:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[18:59:52] Job #2: ------------------------------------------------------------------------------
+[18:59:54] Job #2: 	    Neue Datei		  16.4 g	G:\Movies Tempor�r\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR\Frozen.2013.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv
+[18:59:55] Job #2:   1%
+[18:59:57] Job #2:   2%
+[18:59:58] Job #2:   3%
+[19:00:00] Job #2:   4%
+[19:00:01] Job #2:   5%
+[19:00:03] Job #2:   6%
+[19:00:04] Job #2:   7%
+[19:00:06] Job #2:   8%
+[19:00:07] Job #2:   9%
+[19:00:09] Job #2:  10%
+[19:00:10] Job #2:  11%
+[19:00:12] Job #2:  12%
+[19:00:13] Job #2:  13%
+[19:00:15] Job #2:  14%
+[19:00:16] Job #2:  15%
+[19:00:18] Job #2:  16%
+[19:00:19] Job #2:  17%
+[19:00:21] Job #2:  18%
+[19:00:23] Job #2:  19%
+[19:00:24] Job #2:  20%
+[19:00:26] Job #2:  21%
+[19:00:27] Job #2:  22%
+[19:00:28] Job #2:  23%
+[19:00:30] Job #2:  24%
+[19:00:31] Job #2:  25%
+[19:00:33] Job #2:  26%
+[19:00:34] Job #2:  27%
+[19:00:36] Job #2:  28%
+[19:00:38] Job #2:  29%
+[19:00:39] Job #2:  30%
+[19:00:41] Job #2:  31%
+[19:00:42] Job #2:  32%
+[19:00:44] Job #2:  33%
+[19:00:45] Job #2:  34%
+[19:00:46] Job #2:  35%
+[19:00:48] Job #2:  36%
+[19:00:50] Job #2:  37%
+[19:00:51] Job #2:  38%
+[19:00:53] Job #2:  39%
+[19:00:54] Job #2:  40%
+[19:00:56] Job #2:  41%
+[19:00:57] Job #2:  42%
+[19:00:59] Job #2:  43%
+[19:01:00] Job #2:  44%
+[19:01:02] Job #2:  45%
+[19:01:03] Job #2:  46%
+[19:01:05] Job #2:  47%
+[19:01:06] Job #2:  48%
+[19:01:08] Job #2:  49%
+[19:01:09] Job #2:  50%
+[19:01:11] Job #2:  51%
+[19:01:12] Job #2:  52%
+[19:01:14] Job #2:  53%
+[19:01:15] Job #2:  54%
+[19:01:17] Job #2:  55%
+[19:01:18] Job #2:  56%
+[19:01:20] Job #2:  57%
+[19:01:21] Job #2:  58%
+[19:01:23] Job #2:  59%
+[19:01:24] Job #2:  60%
+[19:01:26] Job #2:  61%
+[19:01:27] Job #2:  62%
+[19:01:29] Job #2:  63%
+[19:01:30] Job #2:  64%
+[19:01:32] Job #2:  65%
+[19:01:33] Job #2:  66%
+[19:01:35] Job #2:  67%
+[19:01:36] Job #2:  68%
+[19:01:38] Job #2:  69%
+[19:01:39] Job #2:  70%
+[19:01:41] Job #2:  71%
+[19:01:42] Job #2:  72%
+[19:01:44] Job #2:  73%
+[19:01:45] Job #2:  74%
+[19:01:47] Job #2:  75%
+[19:01:48] Job #2:  76%
+[19:01:50] Job #2:  77%
+[19:01:51] Job #2:  78%
+[19:01:53] Job #2:  79%
+[19:01:54] Job #2:  80%
+[19:01:56] Job #2:  81%
+[19:01:57] Job #2:  82%
+[19:01:59] Job #2:  83%
+[19:02:00] Job #2:  84%
+[19:02:02] Job #2:  85%
+[19:02:03] Job #2:  86%
+[19:02:05] Job #2:  87%
+[19:02:06] Job #2:  88%
+[19:02:08] Job #2:  89%
+[19:02:09] Job #2:  90%
+[19:02:11] Job #2:  91%
+[19:02:12] Job #2:  92%
+[19:02:14] Job #2:  93%
+[19:02:15] Job #2:  94%
+[19:02:17] Job #2:  95%
+[19:02:18] Job #2:  96%
+[19:02:20] Job #2:  97%
+[19:02:21] Job #2:  98%
+[19:02:25] Job #2:  99%
+[19:02:25] Job #2: 100%
+[19:02:25] Job #2: ------------------------------------------------------------------------------
+[19:02:25] Job #2:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:02:25] Job #2: Verzeich.:         1         1         1         0         0         0
+[19:02:25] Job #2:   Dateien:         1         1         0         0         0         0
+[19:02:25] Job #2:     Bytes:  16.461 g  16.461 g         0         0         0         0
+[19:02:25] Job #2:    Zeiten:   0:05:06   0:01:16                       0:00:00   0:01:16
+[19:02:26] Job #2: Geschwindigkeit:           230�676�201 Bytes/Sek.
+[19:02:26] Job #2: Geschwindigkeit:             13199,398 Megabytes/Min.
+[19:02:26] Job #2:    Beendet: Freitag, 1. Mai 2026 19:02:25
+[19:02:26] Job #2 erfolgreich abgeschlossen (Code 1).
+[19:02:26] Kopiervorgang abgeschlossen.
+[19:02:26] Gemessene Transfergeschwindigkeit gespeichert: 110 MB/s.
+[19:02:26] Automatischer Plex-Refresh erfolgreich ausgelöst.

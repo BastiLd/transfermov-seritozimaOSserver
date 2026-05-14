@@ -1,0 +1,111 @@
+[08:36:15] Kopiervorgang gestartet.
+[08:36:15] Starte Job #7: G:\Movies Temporär\Miraculous Tales of Ladybug & Cat Noir -> T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug & Cat Noir\Season 01
+[08:36:15] robocopy robocopy G:\Movies Temporär\Miraculous Tales of Ladybug & Cat Noir T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug & Cat Noir\Season 01 /E /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:36:15] Job #7: -------------------------------------------------------------------------------
+[08:36:15] Job #7:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:36:15] Job #7: -------------------------------------------------------------------------------
+[08:36:15] Job #7:   Gestartet: Sonntag, 3. Mai 2026 08:36:15
+[08:36:15] Job #7:    Quelle : G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\
+[08:36:15] Job #7:      Ziel : T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug & Cat Noir\Season 01\
+[08:36:15] Job #7:     Dateien : *.*
+[08:36:15] Job #7:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:36:15] Job #7: ------------------------------------------------------------------------------
+[08:36:15] Job #7: 	    Neue Datei		 232.5 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-1-Climatiqueen-.mp4
+[08:36:16] Job #7:   0%
+[08:36:17] Job #7:   3%
+[08:36:20] Job #7:   5%
+[08:36:24] Job #7:   6%
+[08:36:27] Job #7:  10%
+[08:36:31] Job #7:  13%
+[08:36:34] Job #7:  16%
+[08:36:38] Job #7:  17%
+[08:36:41] Job #7:  20%
+[08:36:45] Job #7:  24%
+[08:36:48] Job #7:  27%
+[08:36:52] Job #7:  30%
+[08:36:57] Job #7:  31%
+[08:36:59] Job #7:  34%
+[08:37:05] Job #7:  37%
+[08:37:08] Job #7:  41%
+[08:37:10] Job #7:  44%
+[08:37:11] Job #7:  47%
+[08:37:12] Job #7:  48%
+[08:37:13] Job #7:  51%
+[08:37:13] Job #7:  55%
+[08:37:13] Job #7:  58%
+[08:37:14] Job #7:  61%
+[08:37:14] Job #7:  63%
+[08:37:14] Job #7:  65%
+[08:37:14] Job #7:  67%
+[08:37:14] Job #7:  68%
+[08:37:14] Job #7:  71%
+[08:37:14] Job #7:  72%
+[08:37:14] Job #7:  74%
+[08:37:14] Job #7:  75%
+[08:37:14] Job #7:  78%
+[08:37:14] Job #7:  79%
+[08:37:14] Job #7:  81%
+[08:37:14] Job #7:  82%
+[08:37:14] Job #7:  85%
+[08:37:14] Job #7:  86%
+[08:37:14] Job #7:  89%
+[08:37:14] Job #7:  92%
+[08:37:14] Job #7:  93%
+[08:37:14] Job #7:  96%
+[08:37:14] Job #7:  99%
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 303.9 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-10-The-Dark-Castle-.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 133.6 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-11-Revelator-.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 279.3 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-12-wreckless-driver.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 252.3 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-13-yaksi-gozen-season-6-episode-13.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 200.8 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-15-The-Ruler-.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 260.9 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-2-The-Illustrhater.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 226.2 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-3-Sublimation.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 258.3 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-4-Daddycop-b.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 259.5 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-5-werepapas.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 340.7 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-6-Sleeping-Syren.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 122.4 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-7-El-Toro-De-Piedra-.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 331.2 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\M-S6-Ep-9-Mr-agreste.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 299.5 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\m-season-6-episode-22-lady-chaos_Ydu6Hdnj.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 269.6 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\miraculous-grandiaper-season-6-episode-14_WEqp4g7h.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 243.9 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\miraculous-ladybug-a-fairy-good-night-season-6-episode-17_M1IqG0Eu.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 266.5 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\miraculous-ladybug-sadnansi-season-6-episode-23_Q1xPxy3O.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 278.1 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\miraculous-ladybug-vampigami-season-6-episode-8-online-free_fLFmVvsz.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 328.7 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\Miraculous-S6-EP-19-Riginarazione-English-Dub.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 300.6 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\Miraculous-s6-ep-20-Heartfixer-English-Dub.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 372.7 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\Miraculous-S6-Ep-21-The-Chained-Titans.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: 	    Neue Datei		 273.2 m	G:\Movies Tempor�r\Miraculous Tales of Ladybug & Cat Noir\Miraculouse s6 e16 noe.mp4
+[08:37:14] Job #7: 100%
+[08:37:14] Job #7: ------------------------------------------------------------------------------
+[08:37:14] Job #7:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:37:14] Job #7: Verzeich.:         1         1         1         0         0         0
+[08:37:14] Job #7:   Dateien:        22        22         0         0         0         0
+[08:37:15] Job #7:     Bytes:   5.698 g   5.698 g         0         0         0         0
+[08:37:15] Job #7:    Zeiten:   0:21:51   0:00:55                       0:00:00   0:00:02
+[08:37:15] Job #7: Geschwindigkeit:           109�626�850 Bytes/Sek.
+[08:37:15] Job #7: Geschwindigkeit:              6272,899 Megabytes/Min.
+[08:37:15] Job #7:    Beendet: Sonntag, 3. Mai 2026 08:37:14
+[08:37:15] Job #7 erfolgreich abgeschlossen (Code 1).
+[08:37:15] Kopiervorgang abgeschlossen.
+[08:37:15] Gemessene Transfergeschwindigkeit gespeichert: 97 MB/s.
+[08:37:15] Automatischer Plex-Refresh erfolgreich ausgelöst.

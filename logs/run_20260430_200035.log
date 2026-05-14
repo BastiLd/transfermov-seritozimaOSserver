@@ -1,0 +1,3783 @@
+[20:00:35] Kopiervorgang gestartet.
+[20:00:35] Starte Job #1: G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02
+[20:00:35] robocopy robocopy G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:00:36] Job #1: -------------------------------------------------------------------------------
+[20:00:36] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:00:36] Job #1: -------------------------------------------------------------------------------
+[20:00:36] Job #1:   Gestartet: Donnerstag, 30. April 2026 20:00:36
+[20:00:36] Job #1:    Quelle : G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E01 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265 DUAL-BiOMA\
+[20:00:36] Job #1:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E01 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 DUAL - BiOMA\Season 02\
+[20:00:36] Job #1:     Dateien : *.*
+[20:00:36] Job #1:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:00:36] Job #1: ------------------------------------------------------------------------------
+[20:00:36] Job #1: ------------------------------------------------------------------------------
+[20:00:36] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:00:36] Job #1: Verzeich.:         1         1         1         0         0         0
+[20:00:36] Job #1:   Dateien:         2         0         2         0         0         0
+[20:00:36] Job #1:     Bytes:   5.209 g         0   5.209 g         0         0         0
+[20:00:36] Job #1:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[20:00:36] Job #1:    Beendet: Donnerstag, 30. April 2026 20:00:36
+[20:00:36] Job #1 ohne Änderungen beendet (Code 0).
+[20:00:36] Starte Job #2: G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02
+[20:00:36] robocopy robocopy G:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:00:36] Job #2: -------------------------------------------------------------------------------
+[20:00:36] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:00:36] Job #2: -------------------------------------------------------------------------------
+[20:00:36] Job #2:   Gestartet: Donnerstag, 30. April 2026 20:00:36
+[20:00:37] Job #2:    Quelle : G:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune\
+[20:00:37] Job #2:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02\
+[20:00:37] Job #2:     Dateien : *.*
+[20:00:37] Job #2:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:00:37] Job #2: ------------------------------------------------------------------------------
+[20:00:37] Job #2: ------------------------------------------------------------------------------
+[20:00:37] Job #2:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:00:37] Job #2: Verzeich.:         1         1         1         0         0         0
+[20:00:37] Job #2:   Dateien:         1         0         1         0         0         0
+[20:00:37] Job #2:     Bytes:   5.043 g         0   5.043 g         0         0         0
+[20:00:37] Job #2:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[20:00:37] Job #2:    Beendet: Donnerstag, 30. April 2026 20:00:36
+[20:00:37] Job #2 ohne Änderungen beendet (Code 0).
+[20:00:37] Starte Job #3: C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune -> S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02
+[20:00:37] robocopy robocopy C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:00:37] Job #3: -------------------------------------------------------------------------------
+[20:00:37] Job #3:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:00:37] Job #3: -------------------------------------------------------------------------------
+[20:00:37] Job #3:   Gestartet: Donnerstag, 30. April 2026 20:00:37
+[20:00:37] Job #3:    Quelle : C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\
+[20:00:37] Job #3:      Ziel : S:\SM-MOONDOOM\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02\
+[20:00:37] Job #3:     Dateien : *.*
+[20:00:37] Job #3:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:00:37] Job #3: ------------------------------------------------------------------------------
+[20:00:37] Job #3: 	         �lter		   4.5 g	C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune.mkv
+[20:00:37] Job #3:   0%
+[20:00:38] Job #3:   1%
+[20:00:39] Job #3:   2%
+[20:00:39] Job #3:   3%
+[20:00:40] Job #3:   4%
+[20:00:40] Job #3:   5%
+[20:00:40] Job #3:   6%
+[20:00:40] Job #3:   7%
+[20:00:41] Job #3:   8%
+[20:00:41] Job #3:   9%
+[20:00:42] Job #3:  10%
+[20:00:42] Job #3:  11%
+[20:00:43] Job #3:  12%
+[20:00:43] Job #3:  13%
+[20:00:43] Job #3:  14%
+[20:00:44] Job #3:  15%
+[20:00:44] Job #3:  16%
+[20:00:45] Job #3:  17%
+[20:00:45] Job #3:  18%
+[20:00:46] Job #3:  19%
+[20:00:46] Job #3:  20%
+[20:00:46] Job #3:  21%
+[20:00:47] Job #3:  22%
+[20:00:47] Job #3:  23%
+[20:00:48] Job #3:  24%
+[20:00:48] Job #3:  25%
+[20:00:48] Job #3:  26%
+[20:00:49] Job #3:  27%
+[20:00:49] Job #3:  28%
+[20:00:49] Job #3:  29%
+[20:00:50] Job #3:  30%
+[20:00:50] Job #3:  31%
+[20:00:51] Job #3:  32%
+[20:00:51] Job #3:  33%
+[20:00:52] Job #3:  34%
+[20:00:52] Job #3:  35%
+[20:00:52] Job #3:  36%
+[20:00:53] Job #3:  37%
+[20:00:54] Job #3:  38%
+[20:00:54] Job #3:  39%
+[20:00:54] Job #3:  40%
+[20:00:55] Job #3:  41%
+[20:00:55] Job #3:  42%
+[20:00:55] Job #3:  43%
+[20:00:56] Job #3:  44%
+[20:00:56] Job #3:  45%
+[20:00:57] Job #3:  46%
+[20:00:57] Job #3:  47%
+[20:00:58] Job #3:  48%
+[20:00:58] Job #3:  49%
+[20:00:58] Job #3:  50%
+[20:00:59] Job #3:  51%
+[20:00:59] Job #3:  52%
+[20:00:59] Job #3:  53%
+[20:01:00] Job #3:  54%
+[20:01:01] Job #3:  55%
+[20:01:01] Job #3:  56%
+[20:01:01] Job #3:  57%
+[20:01:02] Job #3:  58%
+[20:01:02] Job #3:  59%
+[20:01:03] Job #3:  60%
+[20:01:03] Job #3:  61%
+[20:01:03] Job #3:  62%
+[20:01:04] Job #3:  63%
+[20:01:04] Job #3:  64%
+[20:01:05] Job #3:  65%
+[20:01:05] Job #3:  66%
+[20:01:06] Job #3:  67%
+[20:01:06] Job #3:  68%
+[20:01:06] Job #3:  69%
+[20:01:07] Job #3:  70%
+[20:01:07] Job #3:  71%
+[20:01:08] Job #3:  72%
+[20:01:08] Job #3:  73%
+[20:01:09] Job #3:  74%
+[20:01:09] Job #3:  75%
+[20:01:09] Job #3:  76%
+[20:01:10] Job #3:  77%
+[20:01:10] Job #3:  78%
+[20:01:10] Job #3:  79%
+[20:01:11] Job #3:  80%
+[20:01:11] Job #3:  81%
+[20:01:12] Job #3:  82%
+[20:01:12] Job #3:  83%
+[20:01:12] Job #3:  84%
+[20:01:13] Job #3:  85%
+[20:01:13] Job #3:  86%
+[20:01:14] Job #3:  87%
+[20:01:14] Job #3:  88%
+[20:01:14] Job #3:  89%
+[20:01:15] Job #3:  90%
+[20:01:16] Job #3:  91%
+[20:01:16] Job #3:  92%
+[20:01:16] Job #3:  93%
+[20:01:17] Job #3:  94%
+[20:01:17] Job #3:  95%
+[20:01:18] Job #3:  96%
+[20:01:18] Job #3:  97%
+[20:01:18] Job #3:  98%
+[20:01:19] Job #3:  99%
+[20:01:20] Job #3: 100%
+[20:01:21] Job #3: ------------------------------------------------------------------------------
+[20:01:21] Job #3:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:01:21] Job #3: Verzeich.:         1         1         1         0         0         0
+[20:01:21] Job #3:   Dateien:         3         1         2         0         0         0
+[20:01:21] Job #3:     Bytes:   4.595 g   4.595 g     1.4 k         0         0         0
+[20:01:21] Job #3:    Zeiten:   0:01:23   0:00:20                       0:00:00   0:00:20
+[20:01:21] Job #3: Geschwindigkeit:           236�803�251 Bytes/Sek.
+[20:01:21] Job #3: Geschwindigkeit:             13549,991 Megabytes/Min.
+[20:01:21] Job #3:    Beendet: Donnerstag, 30. April 2026 20:01:18
+[20:01:23] Job #3 erfolgreich abgeschlossen (Code 1).
+[20:01:27] Starte Job #4: C:\Movies\Avengers\transformers-prime_202602 -> S:\SM-MOONDOOM\Series\transformers - prime 202602
+[20:01:27] robocopy robocopy C:\Movies\Avengers\transformers-prime_202602 S:\SM-MOONDOOM\Series\transformers - prime 202602 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:01:27] Job #4: -------------------------------------------------------------------------------
+[20:01:27] Job #4:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:01:27] Job #4: -------------------------------------------------------------------------------
+[20:01:27] Job #4:   Gestartet: Donnerstag, 30. April 2026 20:01:19
+[20:01:27] Job #4:    Quelle : C:\Movies\Avengers\transformers-prime_202602\
+[20:01:27] Job #4:      Ziel : S:\SM-MOONDOOM\Series\transformers - prime 202602\
+[20:01:27] Job #4:     Dateien : *.*
+[20:01:27] Job #4:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:01:27] Job #4: ------------------------------------------------------------------------------
+[20:01:27] Job #4: ------------------------------------------------------------------------------
+[20:01:27] Job #4:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:01:27] Job #4: Verzeich.:         4         4         4         0         0         0
+[20:01:27] Job #4:   Dateien:        63         0        63         0         0         0
+[20:01:27] Job #4:     Bytes:   7.700 g         0   7.700 g         0         0         0
+[20:01:27] Job #4:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[20:01:27] Job #4:    Beendet: Donnerstag, 30. April 2026 20:01:19
+[20:01:28] Job #4 ohne Änderungen beendet (Code 0).
+[20:01:31] Starte Job #5: G:\Movies Temporär\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) -> S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01
+[20:01:31] robocopy robocopy G:\Movies Temporär\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:01:31] Job #5: -------------------------------------------------------------------------------
+[20:01:31] Job #5:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:01:31] Job #5: -------------------------------------------------------------------------------
+[20:01:31] Job #5:   Gestartet: Donnerstag, 30. April 2026 20:01:19
+[20:01:31] Job #5:    Quelle : G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\
+[20:01:31] Job #5:      Ziel : S:\SM-MOONDOOM\Series\The Punisher (2017) S01 - S02 (1080p DSNP WEB - DL x265 10bit EAC3 Atmos 5 1 Ghost)\Season 01\
+[20:01:32] Job #5:     Dateien : *.*
+[20:01:32] Job #5:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:01:32] Job #5: ------------------------------------------------------------------------------
+[20:01:32] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E01 - 3AM (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:01:32] Job #5:   0%
+[20:01:32] Job #5:   1%
+[20:01:33] Job #5:   2%
+[20:01:34] Job #5:   3%
+[20:01:35] Job #5:   4%
+[20:01:37] Job #5:   5%
+[20:01:38] Job #5:   6%
+[20:01:39] Job #5:   7%
+[20:01:40] Job #5:   8%
+[20:01:41] Job #5:   9%
+[20:01:42] Job #5:  10%
+[20:01:43] Job #5:  11%
+[20:01:44] Job #5:  12%
+[20:01:46] Job #5:  13%
+[20:01:47] Job #5:  14%
+[20:01:48] Job #5:  15%
+[20:01:49] Job #5:  16%
+[20:01:50] Job #5:  17%
+[20:01:52] Job #5:  18%
+[20:01:53] Job #5:  19%
+[20:01:54] Job #5:  20%
+[20:01:55] Job #5:  21%
+[20:01:57] Job #5:  22%
+[20:01:58] Job #5:  23%
+[20:01:59] Job #5:  24%
+[20:02:00] Job #5:  25%
+[20:02:01] Job #5:  26%
+[20:02:02] Job #5:  27%
+[20:02:04] Job #5:  28%
+[20:02:05] Job #5:  29%
+[20:02:07] Job #5:  30%
+[20:02:10] Job #5:  31%
+[20:02:11] Job #5:  32%
+[20:02:12] Job #5:  33%
+[20:02:13] Job #5:  34%
+[20:02:15] Job #5:  35%
+[20:02:16] Job #5:  36%
+[20:02:17] Job #5:  37%
+[20:02:18] Job #5:  38%
+[20:02:20] Job #5:  39%
+[20:02:21] Job #5:  40%
+[20:02:22] Job #5:  41%
+[20:02:24] Job #5:  42%
+[20:02:26] Job #5:  43%
+[20:02:27] Job #5:  44%
+[20:02:28] Job #5:  45%
+[20:02:30] Job #5:  46%
+[20:02:32] Job #5:  47%
+[20:02:33] Job #5:  48%
+[20:02:34] Job #5:  49%
+[20:02:36] Job #5:  50%
+[20:02:37] Job #5:  51%
+[20:02:39] Job #5:  52%
+[20:02:40] Job #5:  53%
+[20:02:42] Job #5:  54%
+[20:02:43] Job #5:  55%
+[20:02:45] Job #5:  56%
+[20:02:46] Job #5:  57%
+[20:02:47] Job #5:  58%
+[20:02:49] Job #5:  59%
+[20:02:50] Job #5:  60%
+[20:02:52] Job #5:  61%
+[20:02:53] Job #5:  62%
+[20:02:55] Job #5:  63%
+[20:02:56] Job #5:  64%
+[20:02:58] Job #5:  65%
+[20:02:59] Job #5:  66%
+[20:03:01] Job #5:  67%
+[20:03:02] Job #5:  68%
+[20:03:03] Job #5:  69%
+[20:03:05] Job #5:  70%
+[20:03:06] Job #5:  71%
+[20:03:08] Job #5:  72%
+[20:03:09] Job #5:  73%
+[20:03:10] Job #5:  74%
+[20:03:12] Job #5:  75%
+[20:03:13] Job #5:  76%
+[20:03:15] Job #5:  77%
+[20:03:16] Job #5:  78%
+[20:03:18] Job #5:  79%
+[20:03:19] Job #5:  80%
+[20:03:21] Job #5:  81%
+[20:03:22] Job #5:  82%
+[20:03:24] Job #5:  83%
+[20:03:25] Job #5:  84%
+[20:03:27] Job #5:  85%
+[20:03:28] Job #5:  86%
+[20:03:29] Job #5:  87%
+[20:03:31] Job #5:  88%
+[20:03:33] Job #5:  89%
+[20:03:34] Job #5:  90%
+[20:03:36] Job #5:  91%
+[20:03:37] Job #5:  92%
+[20:03:38] Job #5:  93%
+[20:03:40] Job #5:  94%
+[20:03:41] Job #5:  95%
+[20:03:42] Job #5:  96%
+[20:03:43] Job #5:  97%
+[20:03:44] Job #5:  98%
+[20:03:48] Job #5:  99%
+[20:03:50] Job #5: 100%
+[20:03:51] Job #5: 	         �lter		   2.2 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E02 - Two Dead Men (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:03:51] Job #5:  93%
+[20:03:52] Job #5:  94%
+[20:03:53] Job #5:  95%
+[20:03:54] Job #5:  96%
+[20:03:55] Job #5:  97%
+[20:03:56] Job #5:  98%
+[20:04:00] Job #5:  99%
+[20:04:01] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   2.2 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E03 - Kandahar (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   1.9 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E04 - Resupply (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E05 - Gunner (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E06 - The Judas Goat (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   1.9 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E07 - Crosshairs (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E08 - Cold Steel (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5: 100%
+[20:04:02] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E09 - Front Toward Enemy (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:04:02] Job #5:  12%
+[20:04:03] Job #5:  13%
+[20:04:04] Job #5:  14%
+[20:04:05] Job #5:  15%
+[20:04:06] Job #5:  16%
+[20:04:08] Job #5:  17%
+[20:04:09] Job #5:  18%
+[20:04:11] Job #5:  19%
+[20:04:13] Job #5:  20%
+[20:04:14] Job #5:  21%
+[20:04:16] Job #5:  22%
+[20:04:17] Job #5:  23%
+[20:04:19] Job #5:  24%
+[20:04:20] Job #5:  25%
+[20:04:22] Job #5:  26%
+[20:04:23] Job #5:  27%
+[20:04:25] Job #5:  28%
+[20:04:27] Job #5:  29%
+[20:04:28] Job #5:  30%
+[20:04:30] Job #5:  31%
+[20:04:31] Job #5:  32%
+[20:04:33] Job #5:  33%
+[20:04:34] Job #5:  34%
+[20:04:36] Job #5:  35%
+[20:04:37] Job #5:  36%
+[20:04:39] Job #5:  37%
+[20:04:41] Job #5:  38%
+[20:04:42] Job #5:  39%
+[20:04:43] Job #5:  40%
+[20:04:45] Job #5:  41%
+[20:04:47] Job #5:  42%
+[20:04:48] Job #5:  43%
+[20:04:49] Job #5:  44%
+[20:04:51] Job #5:  45%
+[20:04:53] Job #5:  46%
+[20:04:54] Job #5:  47%
+[20:04:56] Job #5:  48%
+[20:04:57] Job #5:  49%
+[20:04:59] Job #5:  50%
+[20:05:01] Job #5:  51%
+[20:05:02] Job #5:  52%
+[20:05:03] Job #5:  53%
+[20:05:05] Job #5:  54%
+[20:05:06] Job #5:  55%
+[20:05:08] Job #5:  56%
+[20:05:10] Job #5:  57%
+[20:05:11] Job #5:  58%
+[20:05:12] Job #5:  59%
+[20:05:14] Job #5:  60%
+[20:05:15] Job #5:  61%
+[20:05:17] Job #5:  62%
+[20:05:19] Job #5:  63%
+[20:05:20] Job #5:  64%
+[20:05:22] Job #5:  65%
+[20:05:23] Job #5:  66%
+[20:05:25] Job #5:  67%
+[20:05:26] Job #5:  68%
+[20:05:28] Job #5:  69%
+[20:05:29] Job #5:  70%
+[20:05:31] Job #5:  71%
+[20:05:32] Job #5:  72%
+[20:05:33] Job #5:  73%
+[20:05:35] Job #5:  74%
+[20:05:37] Job #5:  75%
+[20:05:38] Job #5:  76%
+[20:05:40] Job #5:  77%
+[20:05:41] Job #5:  78%
+[20:05:43] Job #5:  79%
+[20:05:44] Job #5:  80%
+[20:05:46] Job #5:  81%
+[20:05:48] Job #5:  82%
+[20:05:49] Job #5:  83%
+[20:05:50] Job #5:  84%
+[20:05:52] Job #5:  85%
+[20:05:54] Job #5:  86%
+[20:05:55] Job #5:  87%
+[20:05:56] Job #5:  88%
+[20:05:58] Job #5:  89%
+[20:06:00] Job #5:  90%
+[20:06:01] Job #5:  91%
+[20:06:03] Job #5:  92%
+[20:06:04] Job #5:  93%
+[20:06:05] Job #5:  94%
+[20:06:07] Job #5:  95%
+[20:06:08] Job #5:  96%
+[20:06:10] Job #5:  97%
+[20:06:11] Job #5:  98%
+[20:06:16] Job #5:  99%
+[20:06:17] Job #5: 100%
+[20:06:18] Job #5: 	         �lter		   1.9 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E10 - Virtue of the Vicious (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:18] Job #5: 100%
+[20:06:18] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E11 - Danger Close (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:19] Job #5:  99%
+[20:06:20] Job #5: 100%
+[20:06:21] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E12 - Home (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:23] Job #5:  99%
+[20:06:24] Job #5: 100%
+[20:06:25] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S01\The Punisher (2017) - S01E13 - Memento Mori (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:25] Job #5:  95%
+[20:06:26] Job #5:  96%
+[20:06:27] Job #5:  97%
+[20:06:28] Job #5:  98%
+[20:06:33] Job #5:  99%
+[20:06:33] Job #5: 100%
+[20:06:34] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E01 - Roadhouse Blues (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:34] Job #5: 100%
+[20:06:34] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E02 - Fight or Flight (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:35] Job #5:  97%
+[20:06:35] Job #5:  98%
+[20:06:38] Job #5:  99%
+[20:06:39] Job #5: 100%
+[20:06:40] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E03 - Trouble the Water (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:40] Job #5: 100%
+[20:06:40] Job #5: 	         �lter		   2.2 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E04 - Scar Tissue (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:06:40] Job #5:  18%
+[20:06:41] Job #5:  19%
+[20:06:42] Job #5:  20%
+[20:06:43] Job #5:  21%
+[20:06:45] Job #5:  22%
+[20:06:47] Job #5:  23%
+[20:06:49] Job #5:  24%
+[20:06:50] Job #5:  25%
+[20:06:52] Job #5:  26%
+[20:06:53] Job #5:  27%
+[20:06:55] Job #5:  28%
+[20:06:57] Job #5:  29%
+[20:06:58] Job #5:  30%
+[20:07:00] Job #5:  31%
+[20:07:02] Job #5:  32%
+[20:07:03] Job #5:  33%
+[20:07:05] Job #5:  34%
+[20:07:06] Job #5:  35%
+[20:07:08] Job #5:  36%
+[20:07:10] Job #5:  37%
+[20:07:11] Job #5:  38%
+[20:07:13] Job #5:  39%
+[20:07:15] Job #5:  40%
+[20:07:16] Job #5:  41%
+[20:07:18] Job #5:  42%
+[20:07:20] Job #5:  43%
+[20:07:21] Job #5:  44%
+[20:07:23] Job #5:  45%
+[20:07:24] Job #5:  46%
+[20:07:26] Job #5:  47%
+[20:07:28] Job #5:  48%
+[20:07:30] Job #5:  49%
+[20:07:31] Job #5:  50%
+[20:07:33] Job #5:  51%
+[20:07:34] Job #5:  52%
+[20:07:36] Job #5:  53%
+[20:07:37] Job #5:  54%
+[20:07:39] Job #5:  55%
+[20:07:41] Job #5:  56%
+[20:07:42] Job #5:  57%
+[20:07:44] Job #5:  58%
+[20:07:46] Job #5:  59%
+[20:07:47] Job #5:  60%
+[20:07:49] Job #5:  61%
+[20:07:51] Job #5:  62%
+[20:07:52] Job #5:  63%
+[20:07:54] Job #5:  64%
+[20:07:56] Job #5:  65%
+[20:07:57] Job #5:  66%
+[20:07:59] Job #5:  67%
+[20:08:01] Job #5:  68%
+[20:08:02] Job #5:  69%
+[20:08:03] Job #5:  70%
+[20:08:05] Job #5:  71%
+[20:08:07] Job #5:  72%
+[20:08:08] Job #5:  73%
+[20:08:10] Job #5:  74%
+[20:08:12] Job #5:  75%
+[20:08:13] Job #5:  76%
+[20:08:15] Job #5:  77%
+[20:08:17] Job #5:  78%
+[20:08:18] Job #5:  79%
+[20:08:20] Job #5:  80%
+[20:08:22] Job #5:  81%
+[20:08:23] Job #5:  82%
+[20:08:25] Job #5:  83%
+[20:08:27] Job #5:  84%
+[20:08:28] Job #5:  85%
+[20:08:30] Job #5:  86%
+[20:08:31] Job #5:  87%
+[20:08:33] Job #5:  88%
+[20:08:35] Job #5:  89%
+[20:08:36] Job #5:  90%
+[20:08:38] Job #5:  91%
+[20:08:40] Job #5:  92%
+[20:08:42] Job #5:  93%
+[20:08:43] Job #5:  94%
+[20:08:45] Job #5:  95%
+[20:08:46] Job #5:  96%
+[20:08:48] Job #5:  97%
+[20:08:49] Job #5:  98%
+[20:08:52] Job #5:  99%
+[20:08:53] Job #5: 100%
+[20:08:53] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E05 - One-Eyed Jacks (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:08:53] Job #5: 100%
+[20:08:53] Job #5: 	         �lter		   2.2 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E06 - Nakazat (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:08:53] Job #5:  96%
+[20:08:54] Job #5:  97%
+[20:08:55] Job #5:  98%
+[20:08:58] Job #5:  99%
+[20:08:58] Job #5: 100%
+[20:08:59] Job #5: 	         �lter		   2.0 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E07 - One Bad Day (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:08:59] Job #5: 100%
+[20:08:59] Job #5: 	         �lter		   1.9 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E08 - My Brother's Keeper (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:08:59] Job #5: 100%
+[20:08:59] Job #5: 	         �lter		   2.2 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E09 - Flustercluck (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:08:59] Job #5:  92%
+[20:09:00] Job #5:  93%
+[20:09:00] Job #5:  94%
+[20:09:01] Job #5:  95%
+[20:09:02] Job #5:  96%
+[20:09:03] Job #5:  97%
+[20:09:03] Job #5:  98%
+[20:09:06] Job #5:  99%
+[20:09:06] Job #5: 100%
+[20:09:07] Job #5: 	         �lter		   1.8 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E10 - The Dark Hearts of Men (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:09:07] Job #5: 100%
+[20:09:07] Job #5: 	         �lter		   2.1 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E11 - The Abyss (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:09:07] Job #5: 100%
+[20:09:07] Job #5: 	         �lter		   1.9 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E12 - Collision Course (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:09:07] Job #5:  20%
+[20:09:07] Job #5:  21%
+[20:09:07] Job #5:  22%
+[20:09:07] Job #5:  23%
+[20:09:08] Job #5:  24%
+[20:09:08] Job #5:  25%
+[20:09:08] Job #5:  26%
+[20:09:09] Job #5:  27%
+[20:09:09] Job #5:  28%
+[20:09:09] Job #5:  29%
+[20:09:10] Job #5:  30%
+[20:09:10] Job #5:  31%
+[20:09:10] Job #5:  32%
+[20:09:11] Job #5:  33%
+[20:09:11] Job #5:  34%
+[20:09:11] Job #5:  35%
+[20:09:12] Job #5:  36%
+[20:09:12] Job #5:  37%
+[20:09:12] Job #5:  38%
+[20:09:13] Job #5:  39%
+[20:09:13] Job #5:  40%
+[20:09:14] Job #5:  41%
+[20:09:14] Job #5:  42%
+[20:09:14] Job #5:  43%
+[20:09:15] Job #5:  44%
+[20:09:15] Job #5:  45%
+[20:09:15] Job #5:  46%
+[20:09:16] Job #5:  47%
+[20:09:16] Job #5:  48%
+[20:09:17] Job #5:  49%
+[20:09:17] Job #5:  50%
+[20:09:17] Job #5:  51%
+[20:09:18] Job #5:  52%
+[20:09:18] Job #5:  53%
+[20:09:18] Job #5:  54%
+[20:09:19] Job #5:  55%
+[20:09:19] Job #5:  56%
+[20:09:19] Job #5:  57%
+[20:09:20] Job #5:  58%
+[20:09:20] Job #5:  59%
+[20:09:20] Job #5:  60%
+[20:09:21] Job #5:  61%
+[20:09:21] Job #5:  62%
+[20:09:21] Job #5:  63%
+[20:09:22] Job #5:  64%
+[20:09:22] Job #5:  65%
+[20:09:23] Job #5:  66%
+[20:09:23] Job #5:  67%
+[20:09:23] Job #5:  68%
+[20:09:24] Job #5:  69%
+[20:09:24] Job #5:  70%
+[20:09:24] Job #5:  71%
+[20:09:25] Job #5:  72%
+[20:09:25] Job #5:  73%
+[20:09:25] Job #5:  74%
+[20:09:26] Job #5:  75%
+[20:09:26] Job #5:  76%
+[20:09:26] Job #5:  77%
+[20:09:27] Job #5:  78%
+[20:09:27] Job #5:  79%
+[20:09:27] Job #5:  80%
+[20:09:28] Job #5:  81%
+[20:09:28] Job #5:  82%
+[20:09:29] Job #5:  83%
+[20:09:29] Job #5:  84%
+[20:09:29] Job #5:  85%
+[20:09:30] Job #5:  86%
+[20:09:30] Job #5:  87%
+[20:09:30] Job #5:  88%
+[20:09:31] Job #5:  89%
+[20:09:31] Job #5:  90%
+[20:09:31] Job #5:  91%
+[20:09:32] Job #5:  92%
+[20:09:32] Job #5:  93%
+[20:09:33] Job #5:  94%
+[20:09:33] Job #5:  95%
+[20:09:33] Job #5:  96%
+[20:09:34] Job #5:  97%
+[20:09:34] Job #5:  98%
+[20:09:36] Job #5:  99%
+[20:09:36] Job #5: 100%
+[20:09:36] Job #5: 	         �lter		   2.2 g	G:\Movies Tempor�r\The Punisher (2017) S01-S02 (1080p DSNP WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost)\The Punisher (2017) S02\The Punisher (2017) - S02E13 - The Whirlwind (1080p DSNP WEB-DL x265 Ghost).mkv
+[20:09:36] Job #5:  84%
+[20:09:36] Job #5:  85%
+[20:09:36] Job #5:  86%
+[20:09:37] Job #5:  87%
+[20:09:37] Job #5:  88%
+[20:09:37] Job #5:  89%
+[20:09:37] Job #5:  90%
+[20:09:37] Job #5:  91%
+[20:09:38] Job #5:  92%
+[20:09:38] Job #5:  93%
+[20:09:38] Job #5:  94%
+[20:09:38] Job #5:  95%
+[20:09:38] Job #5:  96%
+[20:09:39] Job #5:  97%
+[20:09:39] Job #5:  98%
+[20:09:41] Job #5:  99%
+[20:09:41] Job #5: 100%
+[20:09:41] Job #5: ------------------------------------------------------------------------------
+[20:09:41] Job #5:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:09:41] Job #5: Verzeich.:         5         5         5         0         0         0
+[20:09:41] Job #5:   Dateien:        70        26        44         0         0         0
+[20:09:41] Job #5:     Bytes:  55.140 g  54.688 g  462.78 m         0         0         0
+[20:09:41] Job #5:    Zeiten:   1:10:50   0:07:22                       0:00:00   0:00:59
+[20:09:41] Job #5: Geschwindigkeit:           132�686�043 Bytes/Sek.
+[20:09:41] Job #5: Geschwindigkeit:              7592,356 Megabytes/Min.
+[20:09:41] Job #5:    Beendet: Donnerstag, 30. April 2026 20:09:41
+[20:09:41] Job #5 erfolgreich abgeschlossen (Code 1).
+[20:09:41] Starte Job #6: G:\Movies Temporär\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros) -> S:\SM-MOONDOOM\Series\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB - DL x265 HEVC 10bit DDP 5 1 Vyndros)\Season 01
+[20:09:41] robocopy robocopy G:\Movies Temporär\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros) S:\SM-MOONDOOM\Series\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB - DL x265 HEVC 10bit DDP 5 1 Vyndros)\Season 01 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:09:42] Job #6: -------------------------------------------------------------------------------
+[20:09:42] Job #6:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:09:42] Job #6: -------------------------------------------------------------------------------
+[20:09:42] Job #6:   Gestartet: Donnerstag, 30. April 2026 20:09:42
+[20:09:42] Job #6:    Quelle : G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\
+[20:09:42] Job #6:      Ziel : S:\SM-MOONDOOM\Series\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB - DL x265 HEVC 10bit DDP 5 1 Vyndros)\Season 01\
+[20:09:42] Job #6:     Dateien : *.*
+[20:09:42] Job #6:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:09:42] Job #6: ------------------------------------------------------------------------------
+[20:09:42] Job #6: 	         �lter		   2.1 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E01.Heaven's.Half.Hour.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:09:44] Job #6:   0%
+[20:09:45] Job #6:   1%
+[20:09:47] Job #6:   2%
+[20:09:49] Job #6:   3%
+[20:09:50] Job #6:   4%
+[20:09:52] Job #6:   5%
+[20:09:54] Job #6:   6%
+[20:09:55] Job #6:   7%
+[20:09:56] Job #6:   8%
+[20:09:58] Job #6:   9%
+[20:09:59] Job #6:  10%
+[20:10:01] Job #6:  11%
+[20:10:02] Job #6:  12%
+[20:10:04] Job #6:  13%
+[20:10:06] Job #6:  14%
+[20:10:07] Job #6:  15%
+[20:10:09] Job #6:  16%
+[20:10:10] Job #6:  17%
+[20:10:12] Job #6:  18%
+[20:10:13] Job #6:  19%
+[20:10:14] Job #6:  20%
+[20:10:16] Job #6:  21%
+[20:10:18] Job #6:  22%
+[20:10:19] Job #6:  23%
+[20:10:20] Job #6:  24%
+[20:10:22] Job #6:  25%
+[20:10:24] Job #6:  26%
+[20:10:25] Job #6:  27%
+[20:10:27] Job #6:  28%
+[20:10:28] Job #6:  29%
+[20:10:30] Job #6:  30%
+[20:10:31] Job #6:  31%
+[20:10:33] Job #6:  32%
+[20:10:34] Job #6:  33%
+[20:10:36] Job #6:  34%
+[20:10:38] Job #6:  35%
+[20:10:39] Job #6:  36%
+[20:10:40] Job #6:  37%
+[20:10:42] Job #6:  38%
+[20:10:44] Job #6:  39%
+[20:10:45] Job #6:  40%
+[20:10:47] Job #6:  41%
+[20:10:48] Job #6:  42%
+[20:10:49] Job #6:  43%
+[20:10:51] Job #6:  44%
+[20:10:53] Job #6:  45%
+[20:10:54] Job #6:  46%
+[20:10:55] Job #6:  47%
+[20:10:57] Job #6:  48%
+[20:10:58] Job #6:  49%
+[20:11:00] Job #6:  50%
+[20:11:02] Job #6:  51%
+[20:11:03] Job #6:  52%
+[20:11:05] Job #6:  53%
+[20:11:07] Job #6:  54%
+[20:11:08] Job #6:  55%
+[20:11:09] Job #6:  56%
+[20:11:11] Job #6:  57%
+[20:11:13] Job #6:  58%
+[20:11:14] Job #6:  59%
+[20:11:15] Job #6:  60%
+[20:11:17] Job #6:  61%
+[20:11:19] Job #6:  62%
+[20:11:20] Job #6:  63%
+[20:11:22] Job #6:  64%
+[20:11:23] Job #6:  65%
+[20:11:25] Job #6:  66%
+[20:11:26] Job #6:  67%
+[20:11:28] Job #6:  68%
+[20:11:29] Job #6:  69%
+[20:11:30] Job #6:  70%
+[20:11:31] Job #6:  71%
+[20:11:33] Job #6:  72%
+[20:11:33] Job #6:  73%
+[20:11:34] Job #6:  74%
+[20:11:35] Job #6:  75%
+[20:11:36] Job #6:  76%
+[20:11:37] Job #6:  77%
+[20:11:38] Job #6:  78%
+[20:11:39] Job #6:  79%
+[20:11:40] Job #6:  80%
+[20:11:41] Job #6:  81%
+[20:11:42] Job #6:  82%
+[20:11:42] Job #6:  83%
+[20:11:43] Job #6:  84%
+[20:11:45] Job #6:  85%
+[20:11:45] Job #6:  86%
+[20:11:46] Job #6:  87%
+[20:11:46] Job #6:  88%
+[20:11:47] Job #6:  89%
+[20:11:47] Job #6:  90%
+[20:11:48] Job #6:  91%
+[20:11:48] Job #6:  92%
+[20:11:49] Job #6:  93%
+[20:11:49] Job #6:  94%
+[20:11:50] Job #6:  95%
+[20:11:50] Job #6:  96%
+[20:11:50] Job #6:  97%
+[20:11:51] Job #6:  98%
+[20:11:52] Job #6:  99%
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.9 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E02.Optics.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.5 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E03.The.Hollow.of.His.Hand.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.7 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E04.Sic.Semper.Systema.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.4 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E05.With.Interest.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.5 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E06.Excessive.Force.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.4 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E07.Art.for.Art's.Sake.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.7 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E08.Isle.of.Joy.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6: 100%
+[20:11:53] Job #6: 	         �lter		   1.9 g	G:\Movies Tempor�r\Daredevil Born Again (2025) Season 1 S01 (2160p HDR DSNP WEB-DL x265 HEVC 10bit DDP 5.1 Vyndros)\Daredevil.Born.Again.S01E09.Straight.to.Hell.2160p.10bit.DSNP.WEB-DL.DDP5.1.HEVC-Vyndros.mkv
+[20:11:53] Job #6:  30%
+[20:11:53] Job #6:  31%
+[20:11:53] Job #6:  33%
+[20:11:53] Job #6:  34%
+[20:11:54] Job #6:  35%
+[20:11:54] Job #6:  36%
+[20:11:54] Job #6:  37%
+[20:11:54] Job #6:  38%
+[20:11:54] Job #6:  40%
+[20:11:54] Job #6:  41%
+[20:11:55] Job #6:  42%
+[20:11:55] Job #6:  43%
+[20:11:55] Job #6:  44%
+[20:11:55] Job #6:  45%
+[20:11:56] Job #6:  47%
+[20:11:56] Job #6:  48%
+[20:11:56] Job #6:  49%
+[20:11:56] Job #6:  50%
+[20:11:56] Job #6:  51%
+[20:11:56] Job #6:  52%
+[20:11:57] Job #6:  53%
+[20:11:57] Job #6:  55%
+[20:11:57] Job #6:  56%
+[20:11:57] Job #6:  57%
+[20:11:57] Job #6:  58%
+[20:11:58] Job #6:  59%
+[20:11:58] Job #6:  60%
+[20:11:58] Job #6:  62%
+[20:11:58] Job #6:  63%
+[20:11:59] Job #6:  64%
+[20:11:59] Job #6:  65%
+[20:11:59] Job #6:  66%
+[20:11:59] Job #6:  67%
+[20:11:59] Job #6:  69%
+[20:12:00] Job #6:  70%
+[20:12:00] Job #6:  71%
+[20:12:00] Job #6:  72%
+[20:12:00] Job #6:  73%
+[20:12:00] Job #6:  74%
+[20:12:01] Job #6:  76%
+[20:12:01] Job #6:  77%
+[20:12:01] Job #6:  78%
+[20:12:01] Job #6:  79%
+[20:12:01] Job #6:  80%
+[20:12:02] Job #6:  81%
+[20:12:02] Job #6:  82%
+[20:12:02] Job #6:  84%
+[20:12:02] Job #6:  85%
+[20:12:02] Job #6:  86%
+[20:12:03] Job #6:  87%
+[20:12:03] Job #6:  88%
+[20:12:03] Job #6:  89%
+[20:12:03] Job #6:  90%
+[20:12:03] Job #6:  92%
+[20:12:04] Job #6:  93%
+[20:12:04] Job #6:  94%
+[20:12:04] Job #6:  95%
+[20:12:04] Job #6:  96%
+[20:12:05] Job #6:  97%
+[20:12:07] Job #6:  99%
+[20:12:07] Job #6: 100%
+[20:12:07] Job #6: ------------------------------------------------------------------------------
+[20:12:07] Job #6:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:12:07] Job #6: Verzeich.:         1         1         1         0         0         0
+[20:12:07] Job #6:   Dateien:         9         9         0         0         0         0
+[20:12:07] Job #6:     Bytes:  15.475 g  15.475 g         0         0         0         0
+[20:12:07] Job #6:    Zeiten:   0:18:47   0:02:06                       0:00:00   0:00:18
+[20:12:07] Job #6: Geschwindigkeit:           131�172�513 Bytes/Sek.
+[20:12:07] Job #6: Geschwindigkeit:              7505,751 Megabytes/Min.
+[20:12:07] Job #6:    Beendet: Donnerstag, 30. April 2026 20:12:07
+[20:12:08] Job #6 erfolgreich abgeschlossen (Code 1).
+[20:12:13] Starte Job #7: C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK -> S:\SM-MOONDOOM\Series\The Newsroom (2012) Season 1 - 3 S01 - S03 (1080p BluRay x265 HEVC 10bit AAC 5 1 Silence) REPACK
+[20:12:13] robocopy robocopy C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK S:\SM-MOONDOOM\Series\The Newsroom (2012) Season 1 - 3 S01 - S03 (1080p BluRay x265 HEVC 10bit AAC 5 1 Silence) REPACK /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:12:13] Job #7: -------------------------------------------------------------------------------
+[20:12:13] Job #7:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:12:13] Job #7: -------------------------------------------------------------------------------
+[20:12:13] Job #7:   Gestartet: Donnerstag, 30. April 2026 20:12:07
+[20:12:13] Job #7:    Quelle : C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\
+[20:12:13] Job #7:      Ziel : S:\SM-MOONDOOM\Series\The Newsroom (2012) Season 1 - 3 S01 - S03 (1080p BluRay x265 HEVC 10bit AAC 5 1 Silence) REPACK\
+[20:12:13] Job #7:     Dateien : *.*
+[20:12:13] Job #7:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:12:13] Job #7: ------------------------------------------------------------------------------
+[20:12:13] Job #7: 	    Neue Datei		   3.1 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E01 - We Just Decided To (1080p BluRay x265 Silence).mkv
+[20:12:13] Job #7:   0%
+[20:12:13] Job #7:   1%
+[20:12:14] Job #7:   2%
+[20:12:16] Job #7:   3%
+[20:12:18] Job #7:   4%
+[20:12:20] Job #7:   5%
+[20:12:22] Job #7:   6%
+[20:12:25] Job #7:   7%
+[20:12:27] Job #7:   8%
+[20:12:29] Job #7:   9%
+[20:12:31] Job #7:  10%
+[20:12:34] Job #7:  11%
+[20:12:36] Job #7:  12%
+[20:12:38] Job #7:  13%
+[20:12:40] Job #7:  14%
+[20:12:43] Job #7:  15%
+[20:12:45] Job #7:  16%
+[20:12:47] Job #7:  17%
+[20:12:49] Job #7:  18%
+[20:12:51] Job #7:  19%
+[20:12:54] Job #7:  20%
+[20:12:56] Job #7:  21%
+[20:12:58] Job #7:  22%
+[20:13:00] Job #7:  23%
+[20:13:03] Job #7:  24%
+[20:13:05] Job #7:  25%
+[20:13:07] Job #7:  26%
+[20:13:09] Job #7:  27%
+[20:13:12] Job #7:  28%
+[20:13:14] Job #7:  29%
+[20:13:16] Job #7:  30%
+[20:13:18] Job #7:  31%
+[20:13:21] Job #7:  32%
+[20:13:23] Job #7:  33%
+[20:13:25] Job #7:  34%
+[20:13:27] Job #7:  35%
+[20:13:29] Job #7:  36%
+[20:13:31] Job #7:  37%
+[20:13:34] Job #7:  38%
+[20:13:36] Job #7:  39%
+[20:13:38] Job #7:  40%
+[20:13:40] Job #7:  41%
+[20:13:43] Job #7:  42%
+[20:13:45] Job #7:  43%
+[20:13:47] Job #7:  44%
+[20:13:50] Job #7:  45%
+[20:13:52] Job #7:  46%
+[20:13:54] Job #7:  47%
+[20:13:56] Job #7:  48%
+[20:13:59] Job #7:  49%
+[20:14:00] Job #7:  50%
+[20:14:03] Job #7:  51%
+[20:14:05] Job #7:  52%
+[20:14:07] Job #7:  53%
+[20:14:09] Job #7:  54%
+[20:14:10] Job #7:  55%
+[20:14:12] Job #7:  56%
+[20:14:14] Job #7:  57%
+[20:14:16] Job #7:  58%
+[20:14:18] Job #7:  59%
+[20:14:20] Job #7:  60%
+[20:14:22] Job #7:  61%
+[20:14:23] Job #7:  62%
+[20:14:26] Job #7:  63%
+[20:14:28] Job #7:  64%
+[20:14:29] Job #7:  65%
+[20:14:31] Job #7:  66%
+[20:14:34] Job #7:  67%
+[20:14:36] Job #7:  68%
+[20:14:38] Job #7:  69%
+[20:14:40] Job #7:  70%
+[20:14:42] Job #7:  71%
+[20:14:45] Job #7:  72%
+[20:14:47] Job #7:  73%
+[20:14:49] Job #7:  74%
+[20:14:51] Job #7:  75%
+[20:14:53] Job #7:  76%
+[20:14:55] Job #7:  77%
+[20:14:57] Job #7:  78%
+[20:15:00] Job #7:  79%
+[20:15:02] Job #7:  80%
+[20:15:04] Job #7:  81%
+[20:15:06] Job #7:  82%
+[20:15:08] Job #7:  83%
+[20:15:11] Job #7:  84%
+[20:15:13] Job #7:  85%
+[20:15:15] Job #7:  86%
+[20:15:17] Job #7:  87%
+[20:15:20] Job #7:  88%
+[20:15:22] Job #7:  89%
+[20:15:24] Job #7:  90%
+[20:15:26] Job #7:  91%
+[20:15:28] Job #7:  92%
+[20:15:30] Job #7:  93%
+[20:15:33] Job #7:  94%
+[20:15:35] Job #7:  95%
+[20:15:37] Job #7:  96%
+[20:15:39] Job #7:  97%
+[20:15:42] Job #7:  98%
+[20:15:48] Job #7:  99%
+[20:15:49] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   1.9 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E02 - News Night 2.0 (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   1.6 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E03 - The 112th Congress (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E04 - I'll Try to Fix You (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E05 - Amen (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   1.8 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E06 - Bullies (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   1.6 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E07 - 5 1 (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   2.1 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E08 - The Blackout Part I Tragedy Porn (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7: 100%
+[20:15:50] Job #7: 	    Neue Datei		   2.0 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E09 - The Blackout Part II Mock Debate (1080p BluRay x265 Silence).mkv
+[20:15:50] Job #7:  66%
+[20:15:52] Job #7:  67%
+[20:15:53] Job #7:  68%
+[20:15:54] Job #7:  69%
+[20:15:55] Job #7:  70%
+[20:15:56] Job #7:  71%
+[20:15:57] Job #7:  72%
+[20:15:59] Job #7:  73%
+[20:16:00] Job #7:  74%
+[20:16:02] Job #7:  75%
+[20:16:03] Job #7:  76%
+[20:16:05] Job #7:  77%
+[20:16:06] Job #7:  78%
+[20:16:08] Job #7:  79%
+[20:16:09] Job #7:  80%
+[20:16:11] Job #7:  81%
+[20:16:13] Job #7:  82%
+[20:16:14] Job #7:  83%
+[20:16:15] Job #7:  84%
+[20:16:16] Job #7:  85%
+[20:16:17] Job #7:  86%
+[20:16:19] Job #7:  87%
+[20:16:20] Job #7:  88%
+[20:16:21] Job #7:  89%
+[20:16:23] Job #7:  90%
+[20:16:25] Job #7:  91%
+[20:16:26] Job #7:  92%
+[20:16:27] Job #7:  93%
+[20:16:29] Job #7:  94%
+[20:16:30] Job #7:  95%
+[20:16:31] Job #7:  96%
+[20:16:33] Job #7:  97%
+[20:16:34] Job #7:  98%
+[20:16:39] Job #7:  99%
+[20:16:40] Job #7: 100%
+[20:16:41] Job #7: 	    Neue Datei		   2.3 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 1\The Newsroom (2012) - S01E10 - The Greater Fool (1080p BluRay x265 Silence).mkv
+[20:16:41] Job #7:  91%
+[20:16:42] Job #7:  92%
+[20:16:43] Job #7:  93%
+[20:16:44] Job #7:  94%
+[20:16:45] Job #7:  95%
+[20:16:47] Job #7:  96%
+[20:16:48] Job #7:  97%
+[20:16:50] Job #7:  98%
+[20:16:58] Job #7:  99%
+[20:16:59] Job #7: 100%
+[20:17:00] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E01 - First Thing We Do, Let's Kill All the Lawyers (1080p BluRay x265 Silence).mkv
+[20:17:00] Job #7: 100%
+[20:17:00] Job #7: 	    Neue Datei		   1.5 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E02 - The Genoa Tip (1080p BluRay x265 Silence).mkv
+[20:17:00] Job #7: 100%
+[20:17:00] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E03 - Willie Pete (1080p BluRay x265 Silence).mkv
+[20:17:00] Job #7: 100%
+[20:17:00] Job #7: 	    Neue Datei		   1.9 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E04 - Unintended Consequences (1080p BluRay x265 Silence).mkv
+[20:17:00] Job #7: 100%
+[20:17:00] Job #7: 	    Neue Datei		   1.6 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E05 - News Night with Will McAvoy (1080p BluRay x265 Silence).mkv
+[20:17:00] Job #7: 100%
+[20:17:00] Job #7: 	    Neue Datei		   1.4 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E06 - One Step Too Many (1080p BluRay x265 Silence).mkv
+[20:17:00] Job #7:  69%
+[20:17:01] Job #7:  70%
+[20:17:02] Job #7:  71%
+[20:17:03] Job #7:  72%
+[20:17:05] Job #7:  73%
+[20:17:06] Job #7:  74%
+[20:17:07] Job #7:  75%
+[20:17:08] Job #7:  76%
+[20:17:09] Job #7:  77%
+[20:17:10] Job #7:  78%
+[20:17:11] Job #7:  79%
+[20:17:12] Job #7:  80%
+[20:17:14] Job #7:  81%
+[20:17:15] Job #7:  82%
+[20:17:16] Job #7:  83%
+[20:17:18] Job #7:  84%
+[20:17:19] Job #7:  85%
+[20:17:20] Job #7:  86%
+[20:17:21] Job #7:  87%
+[20:17:22] Job #7:  88%
+[20:17:23] Job #7:  89%
+[20:17:24] Job #7:  90%
+[20:17:25] Job #7:  91%
+[20:17:26] Job #7:  92%
+[20:17:27] Job #7:  93%
+[20:17:29] Job #7:  94%
+[20:17:30] Job #7:  95%
+[20:17:31] Job #7:  96%
+[20:17:32] Job #7:  97%
+[20:17:33] Job #7:  98%
+[20:17:34] Job #7:  99%
+[20:17:35] Job #7: 100%
+[20:17:36] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E07 - Red Team III (1080p BluRay x265 Silence).mkv
+[20:17:36] Job #7:  64%
+[20:17:37] Job #7:  65%
+[20:17:39] Job #7:  66%
+[20:17:40] Job #7:  67%
+[20:17:41] Job #7:  68%
+[20:17:43] Job #7:  69%
+[20:17:44] Job #7:  70%
+[20:17:45] Job #7:  71%
+[20:17:46] Job #7:  72%
+[20:17:47] Job #7:  73%
+[20:17:48] Job #7:  74%
+[20:17:49] Job #7:  75%
+[20:17:50] Job #7:  76%
+[20:17:51] Job #7:  77%
+[20:17:53] Job #7:  78%
+[20:17:54] Job #7:  79%
+[20:17:55] Job #7:  80%
+[20:17:57] Job #7:  81%
+[20:17:58] Job #7:  82%
+[20:17:59] Job #7:  83%
+[20:18:00] Job #7:  84%
+[20:18:01] Job #7:  85%
+[20:18:02] Job #7:  86%
+[20:18:03] Job #7:  87%
+[20:18:05] Job #7:  88%
+[20:18:06] Job #7:  89%
+[20:18:08] Job #7:  90%
+[20:18:10] Job #7:  91%
+[20:18:11] Job #7:  92%
+[20:18:12] Job #7:  93%
+[20:18:13] Job #7:  94%
+[20:18:14] Job #7:  95%
+[20:18:15] Job #7:  96%
+[20:18:16] Job #7:  97%
+[20:18:17] Job #7:  98%
+[20:18:18] Job #7:  99%
+[20:18:19] Job #7: 100%
+[20:18:20] Job #7: 	    Neue Datei		   1.5 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E08 - Election Night (1) (1080p BluRay x265 Silence).mkv
+[20:18:20] Job #7: 100%
+[20:18:20] Job #7: 	    Neue Datei		   1.8 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 2\The Newsroom (2012) - S02E09 - Election Night (2) (1080p BluRay x265 Silence) REPACK.mkv
+[20:18:20] Job #7:  81%
+[20:18:22] Job #7:  82%
+[20:18:23] Job #7:  83%
+[20:18:24] Job #7:  84%
+[20:18:25] Job #7:  85%
+[20:18:26] Job #7:  86%
+[20:18:27] Job #7:  87%
+[20:18:28] Job #7:  88%
+[20:18:29] Job #7:  89%
+[20:18:32] Job #7:  90%
+[20:18:33] Job #7:  91%
+[20:18:34] Job #7:  92%
+[20:18:35] Job #7:  93%
+[20:18:36] Job #7:  94%
+[20:18:37] Job #7:  95%
+[20:18:38] Job #7:  96%
+[20:18:39] Job #7:  97%
+[20:18:40] Job #7:  98%
+[20:18:46] Job #7:  99%
+[20:18:47] Job #7: 100%
+[20:18:48] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 3\The Newsroom (2012) - S03E01 - Boston (1080p BluRay x265 Silence).mkv
+[20:18:48] Job #7: 100%
+[20:18:48] Job #7: 	    Neue Datei		   2.2 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 3\The Newsroom (2012) - S03E02 - Run (1080p BluRay x265 Silence).mkv
+[20:18:48] Job #7:  78%
+[20:18:49] Job #7:  79%
+[20:18:49] Job #7:  80%
+[20:18:50] Job #7:  81%
+[20:18:51] Job #7:  82%
+[20:18:51] Job #7:  83%
+[20:18:52] Job #7:  84%
+[20:18:54] Job #7:  85%
+[20:18:54] Job #7:  86%
+[20:18:55] Job #7:  87%
+[20:18:56] Job #7:  88%
+[20:18:57] Job #7:  89%
+[20:18:58] Job #7:  90%
+[20:18:59] Job #7:  91%
+[20:18:59] Job #7:  92%
+[20:19:01] Job #7:  93%
+[20:19:01] Job #7:  94%
+[20:19:02] Job #7:  95%
+[20:19:03] Job #7:  96%
+[20:19:04] Job #7:  97%
+[20:19:05] Job #7:  98%
+[20:19:08] Job #7:  99%
+[20:19:09] Job #7: 100%
+[20:19:09] Job #7: 	    Neue Datei		   1.5 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 3\The Newsroom (2012) - S03E03 - Main Justice (1080p BluRay x265 Silence).mkv
+[20:19:09] Job #7: 100%
+[20:19:09] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 3\The Newsroom (2012) - S03E04 - Contempt (1080p BluRay x265 Silence).mkv
+[20:19:09] Job #7: 100%
+[20:19:09] Job #7: 	    Neue Datei		   1.7 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 3\The Newsroom (2012) - S03E05 - Oh Shenandoah (1080p BluRay x265 Silence).mkv
+[20:19:09] Job #7:  87%
+[20:19:10] Job #7:  88%
+[20:19:11] Job #7:  89%
+[20:19:11] Job #7:  90%
+[20:19:12] Job #7:  91%
+[20:19:12] Job #7:  92%
+[20:19:12] Job #7:  93%
+[20:19:13] Job #7:  94%
+[20:19:14] Job #7:  95%
+[20:19:14] Job #7:  96%
+[20:19:15] Job #7:  97%
+[20:19:15] Job #7:  98%
+[20:19:16] Job #7:  99%
+[20:19:16] Job #7: 100%
+[20:19:17] Job #7: 	    Neue Datei		   1.8 g	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Season 3\The Newsroom (2012) - S03E06 - What Kind of Day Has It Been (1080p BluRay x265 Silence).mkv
+[20:19:17] Job #7:  69%
+[20:19:17] Job #7:  70%
+[20:19:18] Job #7:  71%
+[20:19:18] Job #7:  72%
+[20:19:18] Job #7:  74%
+[20:19:18] Job #7:  75%
+[20:19:18] Job #7:  77%
+[20:19:19] Job #7:  78%
+[20:19:19] Job #7:  79%
+[20:19:19] Job #7:  80%
+[20:19:19] Job #7:  81%
+[20:19:19] Job #7:  83%
+[20:19:20] Job #7:  84%
+[20:19:20] Job #7:  85%
+[20:19:20] Job #7:  86%
+[20:19:20] Job #7:  88%
+[20:19:20] Job #7:  89%
+[20:19:21] Job #7:  90%
+[20:19:21] Job #7:  91%
+[20:19:21] Job #7:  92%
+[20:19:21] Job #7:  94%
+[20:19:21] Job #7:  95%
+[20:19:22] Job #7:  96%
+[20:19:22] Job #7:  97%
+[20:19:22] Job #7:  98%
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  88.2 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Mission Control.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		 332.2 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Roundtable.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		   5.3 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Deleted Scenes\The 112th Congress.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  33.1 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Deleted Scenes\The Blackout - Part II Mock Debate.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  28.3 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Deleted Scenes\The Greater Fool.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  36.6 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Deleted Scenes\We Just Decided To.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  47.0 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\5-1.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  19.9 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\Amen.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  46.3 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\Bullies.mkv
+[20:19:22] Job #7: 100%
+[20:19:22] Job #7: 	    Neue Datei		  41.4 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\I'll Try to Fix You.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  38.1 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\News Night 2.0.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  40.9 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\The 112th Congress.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  34.2 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\The Blackout - Part I Tragedy Porn.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  51.2 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\The Blackout Part II.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  31.5 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\The Greater Fool.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  79.3 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 1\Inside the Episode\We Just Decided.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  36.3 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 3\Inside the Episode\Boston.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  39.0 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 3\Inside the Episode\Contempt.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  30.0 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 3\Inside the Episode\Main Justice.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  74.5 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 3\Inside the Episode\Oh Shenandoah.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  44.7 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 3\Inside the Episode\Run.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  48.7 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 3\Inside the Episode\What Kind of Day Has It Been.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  11.5 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Deleted Scene\Election Night, Part II.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  14.7 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Deleted Scene\First Thing We Do, Let's Kill All the Lawyers.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  33.2 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\Election Night, Part I.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  61.1 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\Election Night, Part II.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  24.9 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\First Thing We Do, Let's Kill All the Lawyers.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  29.9 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\News Night with Will McAvoy.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  27.0 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\One Step Too Many.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  44.1 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\Red Team III.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  43.5 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\The Genoa Tip.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  28.1 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\Unintended Consequences.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: 	    Neue Datei		  28.2 m	C:\Movies\Avengers\The Newsroom (2012) Season 1-3 S01-S03 (1080p BluRay x265 HEVC 10bit AAC 5.1 Silence) REPACK\Featurettes\Season 2\Inside the Episode\Willie Pete.mkv
+[20:19:23] Job #7: 100%
+[20:19:23] Job #7: ------------------------------------------------------------------------------
+[20:19:23] Job #7:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:19:23] Job #7: Verzeich.:        13        13         1         0         0         0
+[20:19:23] Job #7:   Dateien:        58        58         0         0         0         0
+[20:19:23] Job #7:     Bytes:  47.889 g  47.889 g         0         0         0         0
+[20:19:23] Job #7:    Zeiten:   1:04:15   0:06:25                       0:00:00   0:00:49
+[20:19:23] Job #7: Geschwindigkeit:           133�301�975 Bytes/Sek.
+[20:19:23] Job #7: Geschwindigkeit:              7627,600 Megabytes/Min.
+[20:19:23] Job #7:    Beendet: Donnerstag, 30. April 2026 20:19:22
+[20:19:23] Job #7 erfolgreich abgeschlossen (Code 1).
+[20:19:23] Starte Job #8: C:\Movies\Avengers\Frozen II (2019) [2160p] [4K] [BluRay] [5.1] [YTS.MX]\Frozen.II.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv -> S:\SM-MOONDOOM\Movies\Frozen.II.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:19:23] robocopy robocopy C:\Movies\Avengers\Frozen II (2019) [2160p] [4K] [BluRay] [5.1] [YTS.MX] S:\SM-MOONDOOM\Movies Frozen.II.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:19:23] Job #8: -------------------------------------------------------------------------------
+[20:19:23] Job #8:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:19:23] Job #8: -------------------------------------------------------------------------------
+[20:19:23] Job #8:   Gestartet: Donnerstag, 30. April 2026 20:19:22
+[20:19:23] Job #8:    Quelle : C:\Movies\Avengers\Frozen II (2019) [2160p] [4K] [BluRay] [5.1] [YTS.MX]\
+[20:19:23] Job #8:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:19:23] Job #8:     Dateien : Frozen.II.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:19:23] Job #8:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:19:23] Job #8: ------------------------------------------------------------------------------
+[20:19:23] Job #8: 	    Neue Datei		   3.4 g	C:\Movies\Avengers\Frozen II (2019) [2160p] [4K] [BluRay] [5.1] [YTS.MX]\Frozen.II.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:19:23] Job #8:   1%
+[20:19:24] Job #8:   2%
+[20:19:24] Job #8:   3%
+[20:19:24] Job #8:   4%
+[20:19:24] Job #8:   5%
+[20:19:24] Job #8:   6%
+[20:19:25] Job #8:   7%
+[20:19:26] Job #8:   8%
+[20:19:26] Job #8:   9%
+[20:19:26] Job #8:  10%
+[20:19:27] Job #8:  11%
+[20:19:27] Job #8:  12%
+[20:19:27] Job #8:  13%
+[20:19:27] Job #8:  14%
+[20:19:27] Job #8:  15%
+[20:19:28] Job #8:  16%
+[20:19:28] Job #8:  17%
+[20:19:29] Job #8:  18%
+[20:19:29] Job #8:  19%
+[20:19:29] Job #8:  20%
+[20:19:30] Job #8:  21%
+[20:19:30] Job #8:  22%
+[20:19:30] Job #8:  23%
+[20:19:30] Job #8:  24%
+[20:19:31] Job #8:  25%
+[20:19:31] Job #8:  26%
+[20:19:31] Job #8:  27%
+[20:19:31] Job #8:  28%
+[20:19:32] Job #8:  29%
+[20:19:32] Job #8:  30%
+[20:19:32] Job #8:  31%
+[20:19:33] Job #8:  32%
+[20:19:33] Job #8:  33%
+[20:19:33] Job #8:  34%
+[20:19:34] Job #8:  35%
+[20:19:34] Job #8:  36%
+[20:19:34] Job #8:  37%
+[20:19:35] Job #8:  38%
+[20:19:35] Job #8:  39%
+[20:19:35] Job #8:  40%
+[20:19:35] Job #8:  41%
+[20:19:36] Job #8:  42%
+[20:19:36] Job #8:  43%
+[20:19:37] Job #8:  44%
+[20:19:37] Job #8:  45%
+[20:19:37] Job #8:  46%
+[20:19:38] Job #8:  47%
+[20:19:38] Job #8:  48%
+[20:19:38] Job #8:  49%
+[20:19:39] Job #8:  50%
+[20:19:39] Job #8:  51%
+[20:19:39] Job #8:  52%
+[20:19:39] Job #8:  53%
+[20:19:40] Job #8:  54%
+[20:19:40] Job #8:  55%
+[20:19:40] Job #8:  56%
+[20:19:41] Job #8:  57%
+[20:19:41] Job #8:  58%
+[20:19:41] Job #8:  59%
+[20:19:41] Job #8:  60%
+[20:19:42] Job #8:  61%
+[20:19:42] Job #8:  62%
+[20:19:43] Job #8:  63%
+[20:19:43] Job #8:  64%
+[20:19:43] Job #8:  65%
+[20:19:44] Job #8:  66%
+[20:19:44] Job #8:  67%
+[20:19:44] Job #8:  68%
+[20:19:44] Job #8:  69%
+[20:19:45] Job #8:  70%
+[20:19:45] Job #8:  71%
+[20:19:45] Job #8:  72%
+[20:19:46] Job #8:  73%
+[20:19:46] Job #8:  74%
+[20:19:46] Job #8:  75%
+[20:19:47] Job #8:  76%
+[20:19:47] Job #8:  77%
+[20:19:47] Job #8:  78%
+[20:19:47] Job #8:  79%
+[20:19:48] Job #8:  80%
+[20:19:48] Job #8:  81%
+[20:19:48] Job #8:  82%
+[20:19:49] Job #8:  83%
+[20:19:49] Job #8:  84%
+[20:19:50] Job #8:  85%
+[20:19:50] Job #8:  86%
+[20:19:50] Job #8:  87%
+[20:19:51] Job #8:  88%
+[20:19:51] Job #8:  89%
+[20:19:51] Job #8:  90%
+[20:19:51] Job #8:  91%
+[20:19:52] Job #8:  92%
+[20:19:52] Job #8:  93%
+[20:19:52] Job #8:  94%
+[20:19:52] Job #8:  95%
+[20:19:53] Job #8:  96%
+[20:19:53] Job #8:  97%
+[20:19:53] Job #8:  98%
+[20:19:54] Job #8:  99%
+[20:19:54] Job #8: 100%
+[20:19:54] Job #8: ------------------------------------------------------------------------------
+[20:19:54] Job #8:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:19:54] Job #8: Verzeich.:         1         1         1         0         0         0
+[20:19:54] Job #8:   Dateien:         1         1         0         0         0         0
+[20:19:54] Job #8:     Bytes:   3.452 g   3.452 g         0         0         0         0
+[20:19:54] Job #8:    Zeiten:   0:01:02   0:00:15                       0:00:00   0:00:15
+[20:19:54] Job #8: Geschwindigkeit:           236�509�387 Bytes/Sek.
+[20:19:54] Job #8: Geschwindigkeit:             13533,176 Megabytes/Min.
+[20:19:54] Job #8:    Beendet: Donnerstag, 30. April 2026 20:19:54
+[20:19:54] Job #8 erfolgreich abgeschlossen (Code 1).
+[20:19:54] Starte Job #9: C:\Movies\Avengers\The.Legend.of.Aang.The.Last.Airbender.2026.1080p.10bit.WEBRip.2CH.x265.HEVC-KIA.mkv -> S:\SM-MOONDOOM\Movies\The.Legend.of.Aang.The.Last.Airbender.2026.1080p.10bit.WEBRip.2CH.x265.HEVC-KIA.mkv
+[20:19:54] robocopy robocopy C:\Movies\Avengers S:\SM-MOONDOOM\Movies The.Legend.of.Aang.The.Last.Airbender.2026.1080p.10bit.WEBRip.2CH.x265.HEVC-KIA.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:19:54] Job #9: -------------------------------------------------------------------------------
+[20:19:54] Job #9:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:19:54] Job #9: -------------------------------------------------------------------------------
+[20:19:54] Job #9:   Gestartet: Donnerstag, 30. April 2026 20:19:54
+[20:19:54] Job #9:    Quelle : C:\Movies\Avengers\
+[20:19:54] Job #9:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:19:54] Job #9:     Dateien : The.Legend.of.Aang.The.Last.Airbender.2026.1080p.10bit.WEBRip.2CH.x265.HEVC-KIA.mkv
+[20:19:54] Job #9:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:19:54] Job #9: ------------------------------------------------------------------------------
+[20:19:54] Job #9: 	    Neue Datei		   1.3 g	C:\Movies\Avengers\The.Legend.of.Aang.The.Last.Airbender.2026.1080p.10bit.WEBRip.2CH.x265.HEVC-KIA.mkv
+[20:19:55] Job #9:   0%
+[20:19:55] Job #9:   2%
+[20:19:55] Job #9:   4%
+[20:19:55] Job #9:   6%
+[20:19:55] Job #9:   8%
+[20:19:56] Job #9:   9%
+[20:19:56] Job #9:  11%
+[20:19:56] Job #9:  13%
+[20:19:56] Job #9:  14%
+[20:19:56] Job #9:  16%
+[20:19:56] Job #9:  18%
+[20:19:57] Job #9:  19%
+[20:19:57] Job #9:  21%
+[20:19:57] Job #9:  23%
+[20:19:58] Job #9:  25%
+[20:19:58] Job #9:  26%
+[20:19:58] Job #9:  28%
+[20:19:58] Job #9:  30%
+[20:19:58] Job #9:  32%
+[20:19:59] Job #9:  33%
+[20:19:59] Job #9:  35%
+[20:19:59] Job #9:  37%
+[20:19:59] Job #9:  38%
+[20:19:59] Job #9:  40%
+[20:19:59] Job #9:  42%
+[20:19:59] Job #9:  43%
+[20:20:00] Job #9:  45%
+[20:20:00] Job #9:  47%
+[20:20:00] Job #9:  49%
+[20:20:00] Job #9:  50%
+[20:20:00] Job #9:  52%
+[20:20:01] Job #9:  54%
+[20:20:01] Job #9:  55%
+[20:20:02] Job #9:  57%
+[20:20:02] Job #9:  59%
+[20:20:02] Job #9:  60%
+[20:20:02] Job #9:  62%
+[20:20:02] Job #9:  64%
+[20:20:02] Job #9:  66%
+[20:20:02] Job #9:  67%
+[20:20:03] Job #9:  69%
+[20:20:03] Job #9:  71%
+[20:20:03] Job #9:  72%
+[20:20:03] Job #9:  74%
+[20:20:03] Job #9:  76%
+[20:20:04] Job #9:  78%
+[20:20:04] Job #9:  79%
+[20:20:04] Job #9:  81%
+[20:20:04] Job #9:  83%
+[20:20:04] Job #9:  84%
+[20:20:05] Job #9:  86%
+[20:20:05] Job #9:  88%
+[20:20:05] Job #9:  89%
+[20:20:05] Job #9:  91%
+[20:20:05] Job #9:  93%
+[20:20:06] Job #9:  95%
+[20:20:06] Job #9:  96%
+[20:20:06] Job #9:  98%
+[20:20:06] Job #9: 100%
+[20:20:06] Job #9: ------------------------------------------------------------------------------
+[20:20:06] Job #9:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:20:06] Job #9: Verzeich.:         1         1         1         0         0         0
+[20:20:06] Job #9:   Dateien:         1         1         0         0         0         0
+[20:20:06] Job #9:     Bytes:   1.316 g   1.316 g         0         0         0         0
+[20:20:06] Job #9:    Zeiten:   0:00:23   0:00:05                       0:00:00   0:00:06
+[20:20:06] Job #9: Geschwindigkeit:           235�791�618 Bytes/Sek.
+[20:20:06] Job #9: Geschwindigkeit:             13492,104 Megabytes/Min.
+[20:20:07] Job #9:    Beendet: Donnerstag, 30. April 2026 20:20:06
+[20:20:07] Job #9 erfolgreich abgeschlossen (Code 1).
+[20:20:07] Starte Job #10: C:\Movies\Avengers\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR.mkv -> S:\SM-MOONDOOM\Movies\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR.mkv
+[20:20:07] robocopy robocopy C:\Movies\Avengers\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR S:\SM-MOONDOOM\Movies Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:20:07] Job #10: -------------------------------------------------------------------------------
+[20:20:07] Job #10:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:20:07] Job #10: -------------------------------------------------------------------------------
+[20:20:07] Job #10:   Gestartet: Donnerstag, 30. April 2026 20:20:06
+[20:20:07] Job #10:    Quelle : C:\Movies\Avengers\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR\
+[20:20:07] Job #10:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:20:07] Job #10:     Dateien : Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR.mkv
+[20:20:07] Job #10:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:20:07] Job #10: ------------------------------------------------------------------------------
+[20:20:07] Job #10: 	    Neue Datei		  18.8 g	C:\Movies\Avengers\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR\Zootopia.2.2025.2160p.iT.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-BYNDR.mkv
+[20:20:08] Job #10:   0%
+[20:20:10] Job #10:   1%
+[20:20:11] Job #10:   2%
+[20:20:13] Job #10:   3%
+[20:20:15] Job #10:   4%
+[20:20:16] Job #10:   5%
+[20:20:18] Job #10:   6%
+[20:20:20] Job #10:   7%
+[20:20:22] Job #10:   8%
+[20:20:23] Job #10:   9%
+[20:20:25] Job #10:  10%
+[20:20:27] Job #10:  11%
+[20:20:29] Job #10:  12%
+[20:20:30] Job #10:  13%
+[20:20:32] Job #10:  14%
+[20:20:34] Job #10:  15%
+[20:20:35] Job #10:  16%
+[20:20:37] Job #10:  17%
+[20:20:39] Job #10:  18%
+[20:20:40] Job #10:  19%
+[20:20:42] Job #10:  20%
+[20:20:44] Job #10:  21%
+[20:20:46] Job #10:  22%
+[20:20:47] Job #10:  23%
+[20:20:49] Job #10:  24%
+[20:20:51] Job #10:  25%
+[20:20:52] Job #10:  26%
+[20:20:54] Job #10:  27%
+[20:20:56] Job #10:  28%
+[20:20:57] Job #10:  29%
+[20:20:59] Job #10:  30%
+[20:21:01] Job #10:  31%
+[20:21:03] Job #10:  32%
+[20:21:04] Job #10:  33%
+[20:21:06] Job #10:  34%
+[20:21:08] Job #10:  35%
+[20:21:09] Job #10:  36%
+[20:21:11] Job #10:  37%
+[20:21:13] Job #10:  38%
+[20:21:15] Job #10:  39%
+[20:21:16] Job #10:  40%
+[20:21:18] Job #10:  41%
+[20:21:20] Job #10:  42%
+[20:21:22] Job #10:  43%
+[20:21:23] Job #10:  44%
+[20:21:25] Job #10:  45%
+[20:21:27] Job #10:  46%
+[20:21:28] Job #10:  47%
+[20:21:30] Job #10:  48%
+[20:21:32] Job #10:  49%
+[20:21:33] Job #10:  50%
+[20:21:35] Job #10:  51%
+[20:21:37] Job #10:  52%
+[20:21:38] Job #10:  53%
+[20:21:40] Job #10:  54%
+[20:21:42] Job #10:  55%
+[20:21:44] Job #10:  56%
+[20:21:45] Job #10:  57%
+[20:21:47] Job #10:  58%
+[20:21:49] Job #10:  59%
+[20:21:50] Job #10:  60%
+[20:21:52] Job #10:  61%
+[20:21:54] Job #10:  62%
+[20:21:56] Job #10:  63%
+[20:21:57] Job #10:  64%
+[20:21:59] Job #10:  65%
+[20:22:01] Job #10:  66%
+[20:22:03] Job #10:  67%
+[20:22:04] Job #10:  68%
+[20:22:06] Job #10:  69%
+[20:22:08] Job #10:  70%
+[20:22:09] Job #10:  71%
+[20:22:11] Job #10:  72%
+[20:22:13] Job #10:  73%
+[20:22:14] Job #10:  74%
+[20:22:16] Job #10:  75%
+[20:22:18] Job #10:  76%
+[20:22:20] Job #10:  77%
+[20:22:21] Job #10:  78%
+[20:22:23] Job #10:  79%
+[20:22:25] Job #10:  80%
+[20:22:26] Job #10:  81%
+[20:22:28] Job #10:  82%
+[20:22:30] Job #10:  83%
+[20:22:32] Job #10:  84%
+[20:22:33] Job #10:  85%
+[20:22:35] Job #10:  86%
+[20:22:37] Job #10:  87%
+[20:22:38] Job #10:  88%
+[20:22:40] Job #10:  89%
+[20:22:42] Job #10:  90%
+[20:22:44] Job #10:  91%
+[20:22:45] Job #10:  92%
+[20:22:47] Job #10:  93%
+[20:22:49] Job #10:  94%
+[20:22:50] Job #10:  95%
+[20:22:52] Job #10:  96%
+[20:22:54] Job #10:  97%
+[20:22:55] Job #10:  98%
+[20:22:57] Job #10:  99%
+[20:22:57] Job #10: 100%
+[20:22:57] Job #10: ------------------------------------------------------------------------------
+[20:22:57] Job #10:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:22:57] Job #10: Verzeich.:         1         1         1         0         0         0
+[20:22:57] Job #10:   Dateien:         1         1         0         0         0         0
+[20:22:57] Job #10:     Bytes:  18.874 g  18.874 g         0         0         0         0
+[20:22:57] Job #10:    Zeiten:   0:05:41   0:01:25                       0:00:00   0:01:25
+[20:22:57] Job #10: Geschwindigkeit:           237�131�468 Bytes/Sek.
+[20:22:57] Job #10: Geschwindigkeit:             13568,771 Megabytes/Min.
+[20:22:57] Job #10:    Beendet: Donnerstag, 30. April 2026 20:22:57
+[20:22:57] Job #10 erfolgreich abgeschlossen (Code 1).
+[20:22:57] Starte Job #11: D:\Movies\Watch Five Nights at Freddy's 2 - GGFlix.mp4 -> S:\SM-MOONDOOM\Movies\Watch Five Nights at Freddy's 2 - GGFlix.mp4
+[20:22:57] robocopy robocopy D:\Movies S:\SM-MOONDOOM\Movies Watch Five Nights at Freddy's 2 - GGFlix.mp4 /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:22:57] Job #11: -------------------------------------------------------------------------------
+[20:22:57] Job #11:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:22:57] Job #11: -------------------------------------------------------------------------------
+[20:22:57] Job #11:   Gestartet: Donnerstag, 30. April 2026 20:22:57
+[20:22:57] Job #11:    Quelle : D:\Movies\
+[20:22:57] Job #11:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:22:57] Job #11:     Dateien : Watch Five Nights at Freddy's 2 - GGFlix.mp4
+[20:22:57] Job #11:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:22:57] Job #11: ------------------------------------------------------------------------------
+[20:22:57] Job #11: 	    Neue Datei		   1.4 g	D:\Movies\Watch Five Nights at Freddy's 2 - GGFlix.mp4
+[20:22:58] Job #11:   0%
+[20:22:58] Job #11:   1%
+[20:22:58] Job #11:   2%
+[20:22:58] Job #11:   4%
+[20:22:58] Job #11:   5%
+[20:22:59] Job #11:   7%
+[20:22:59] Job #11:   8%
+[20:22:59] Job #11:  10%
+[20:23:00] Job #11:  12%
+[20:23:00] Job #11:  13%
+[20:23:00] Job #11:  15%
+[20:23:00] Job #11:  16%
+[20:23:00] Job #11:  18%
+[20:23:00] Job #11:  19%
+[20:23:00] Job #11:  21%
+[20:23:01] Job #11:  22%
+[20:23:01] Job #11:  24%
+[20:23:01] Job #11:  25%
+[20:23:02] Job #11:  27%
+[20:23:02] Job #11:  28%
+[20:23:02] Job #11:  30%
+[20:23:02] Job #11:  31%
+[20:23:02] Job #11:  33%
+[20:23:02] Job #11:  34%
+[20:23:02] Job #11:  36%
+[20:23:03] Job #11:  38%
+[20:23:03] Job #11:  39%
+[20:23:03] Job #11:  41%
+[20:23:04] Job #11:  42%
+[20:23:04] Job #11:  44%
+[20:23:04] Job #11:  45%
+[20:23:04] Job #11:  47%
+[20:23:04] Job #11:  48%
+[20:23:04] Job #11:  50%
+[20:23:04] Job #11:  51%
+[20:23:05] Job #11:  53%
+[20:23:05] Job #11:  54%
+[20:23:05] Job #11:  56%
+[20:23:05] Job #11:  58%
+[20:23:05] Job #11:  59%
+[20:23:06] Job #11:  61%
+[20:23:06] Job #11:  62%
+[20:23:06] Job #11:  64%
+[20:23:07] Job #11:  65%
+[20:23:07] Job #11:  67%
+[20:23:07] Job #11:  68%
+[20:23:07] Job #11:  70%
+[20:23:07] Job #11:  71%
+[20:23:08] Job #11:  73%
+[20:23:08] Job #11:  74%
+[20:23:08] Job #11:  76%
+[20:23:08] Job #11:  77%
+[20:23:08] Job #11:  79%
+[20:23:08] Job #11:  80%
+[20:23:09] Job #11:  82%
+[20:23:09] Job #11:  83%
+[20:23:09] Job #11:  85%
+[20:23:09] Job #11:  87%
+[20:23:09] Job #11:  88%
+[20:23:09] Job #11:  90%
+[20:23:10] Job #11:  91%
+[20:23:10] Job #11:  93%
+[20:23:10] Job #11:  94%
+[20:23:11] Job #11:  96%
+[20:23:11] Job #11:  97%
+[20:23:11] Job #11:  99%
+[20:23:11] Job #11: 100%
+[20:23:11] Job #11: ------------------------------------------------------------------------------
+[20:23:11] Job #11:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:23:11] Job #11: Verzeich.:         1         1         1         0         0         0
+[20:23:11] Job #11:   Dateien:         1         1         0         0         0         0
+[20:23:11] Job #11:     Bytes:   1.465 g   1.465 g         0         0         0         0
+[20:23:11] Job #11:    Zeiten:   0:00:26   0:00:06                       0:00:00   0:00:06
+[20:23:11] Job #11: Geschwindigkeit:           235�681�140 Bytes/Sek.
+[20:23:11] Job #11: Geschwindigkeit:             13485,783 Megabytes/Min.
+[20:23:11] Job #11:    Beendet: Donnerstag, 30. April 2026 20:23:11
+[20:23:11] Job #11 erfolgreich abgeschlossen (Code 1).
+[20:23:12] Starte Job #12: D:\Movies\Yes.Day.2021.HDR.2160p.WEBRip.x265-iNTENSO.mkv -> S:\SM-MOONDOOM\Movies\Yes.Day.2021.HDR.2160p.WEBRip.x265-iNTENSO.mkv
+[20:23:12] robocopy robocopy D:\Movies S:\SM-MOONDOOM\Movies Yes.Day.2021.HDR.2160p.WEBRip.x265-iNTENSO.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:23:12] Job #12: -------------------------------------------------------------------------------
+[20:23:12] Job #12:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:23:12] Job #12: -------------------------------------------------------------------------------
+[20:23:12] Job #12:   Gestartet: Donnerstag, 30. April 2026 20:23:11
+[20:23:12] Job #12:    Quelle : D:\Movies\
+[20:23:12] Job #12:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:23:12] Job #12:     Dateien : Yes.Day.2021.HDR.2160p.WEBRip.x265-iNTENSO.mkv
+[20:23:12] Job #12:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:23:12] Job #12: ------------------------------------------------------------------------------
+[20:23:12] Job #12: 	    Neue Datei		  11.2 g	D:\Movies\Yes.Day.2021.HDR.2160p.WEBRip.x265-iNTENSO.mkv
+[20:23:12] Job #12:   0%
+[20:23:13] Job #12:   1%
+[20:23:14] Job #12:   2%
+[20:23:15] Job #12:   3%
+[20:23:16] Job #12:   4%
+[20:23:17] Job #12:   5%
+[20:23:18] Job #12:   6%
+[20:23:19] Job #12:   7%
+[20:23:20] Job #12:   8%
+[20:23:21] Job #12:   9%
+[20:23:22] Job #12:  10%
+[20:23:23] Job #12:  11%
+[20:23:24] Job #12:  12%
+[20:23:25] Job #12:  13%
+[20:23:26] Job #12:  14%
+[20:23:27] Job #12:  15%
+[20:23:29] Job #12:  16%
+[20:23:29] Job #12:  17%
+[20:23:31] Job #12:  18%
+[20:23:32] Job #12:  19%
+[20:23:32] Job #12:  20%
+[20:23:34] Job #12:  21%
+[20:23:35] Job #12:  22%
+[20:23:36] Job #12:  23%
+[20:23:37] Job #12:  24%
+[20:23:38] Job #12:  25%
+[20:23:39] Job #12:  26%
+[20:23:40] Job #12:  27%
+[20:23:41] Job #12:  28%
+[20:23:42] Job #12:  29%
+[20:23:43] Job #12:  30%
+[20:23:44] Job #12:  31%
+[20:23:45] Job #12:  32%
+[20:23:46] Job #12:  33%
+[20:23:47] Job #12:  34%
+[20:23:48] Job #12:  35%
+[20:23:49] Job #12:  36%
+[20:23:50] Job #12:  37%
+[20:23:51] Job #12:  38%
+[20:23:52] Job #12:  39%
+[20:23:53] Job #12:  40%
+[20:23:54] Job #12:  41%
+[20:23:55] Job #12:  42%
+[20:23:56] Job #12:  43%
+[20:23:57] Job #12:  44%
+[20:23:58] Job #12:  45%
+[20:23:59] Job #12:  46%
+[20:24:00] Job #12:  47%
+[20:24:01] Job #12:  48%
+[20:24:02] Job #12:  49%
+[20:24:03] Job #12:  50%
+[20:24:04] Job #12:  51%
+[20:24:05] Job #12:  52%
+[20:24:06] Job #12:  53%
+[20:24:08] Job #12:  54%
+[20:24:09] Job #12:  55%
+[20:24:10] Job #12:  56%
+[20:24:11] Job #12:  57%
+[20:24:12] Job #12:  58%
+[20:24:13] Job #12:  59%
+[20:24:14] Job #12:  60%
+[20:24:15] Job #12:  61%
+[20:24:16] Job #12:  62%
+[20:24:17] Job #12:  63%
+[20:24:18] Job #12:  64%
+[20:24:19] Job #12:  65%
+[20:24:20] Job #12:  66%
+[20:24:21] Job #12:  67%
+[20:24:22] Job #12:  68%
+[20:24:23] Job #12:  69%
+[20:24:24] Job #12:  70%
+[20:24:25] Job #12:  71%
+[20:24:26] Job #12:  72%
+[20:24:27] Job #12:  73%
+[20:24:28] Job #12:  74%
+[20:24:29] Job #12:  75%
+[20:24:30] Job #12:  76%
+[20:24:31] Job #12:  77%
+[20:24:32] Job #12:  78%
+[20:24:33] Job #12:  79%
+[20:24:34] Job #12:  80%
+[20:24:35] Job #12:  81%
+[20:24:36] Job #12:  82%
+[20:24:37] Job #12:  83%
+[20:24:38] Job #12:  84%
+[20:24:39] Job #12:  85%
+[20:24:41] Job #12:  86%
+[20:24:42] Job #12:  87%
+[20:24:42] Job #12:  88%
+[20:24:43] Job #12:  89%
+[20:24:45] Job #12:  90%
+[20:24:45] Job #12:  91%
+[20:24:46] Job #12:  92%
+[20:24:48] Job #12:  93%
+[20:24:49] Job #12:  94%
+[20:24:50] Job #12:  95%
+[20:24:51] Job #12:  96%
+[20:24:52] Job #12:  97%
+[20:24:53] Job #12:  98%
+[20:24:54] Job #12:  99%
+[20:24:54] Job #12: 100%
+[20:24:54] Job #12: ------------------------------------------------------------------------------
+[20:24:54] Job #12:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:24:54] Job #12: Verzeich.:         1         1         1         0         0         0
+[20:24:54] Job #12:   Dateien:         1         1         0         0         0         0
+[20:24:54] Job #12:     Bytes:  11.294 g  11.294 g         0         0         0         0
+[20:24:54] Job #12:    Zeiten:   0:03:25   0:00:51                       0:00:00   0:00:51
+[20:24:54] Job #12: Geschwindigkeit:           235�837�384 Bytes/Sek.
+[20:24:54] Job #12: Geschwindigkeit:             13494,724 Megabytes/Min.
+[20:24:54] Job #12:    Beendet: Donnerstag, 30. April 2026 20:24:54
+[20:24:54] Job #12 erfolgreich abgeschlossen (Code 1).
+[20:24:55] Starte Job #13: D:\Movie\Avangers\Avengers.Endgame.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv -> S:\SM-MOONDOOM\Movies\Avengers.Endgame.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:24:55] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Avengers.Endgame.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:24:55] Job #13: -------------------------------------------------------------------------------
+[20:24:55] Job #13:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:24:55] Job #13: -------------------------------------------------------------------------------
+[20:24:55] Job #13:   Gestartet: Donnerstag, 30. April 2026 20:24:54
+[20:24:55] Job #13:    Quelle : D:\Movie\Avangers\
+[20:24:55] Job #13:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:24:55] Job #13:     Dateien : Avengers.Endgame.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:24:55] Job #13:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:24:55] Job #13: ------------------------------------------------------------------------------
+[20:24:55] Job #13: 	    Neue Datei		   5.2 g	D:\Movie\Avangers\Avengers.Endgame.2019.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:24:55] Job #13:   0%
+[20:24:55] Job #13:   1%
+[20:24:56] Job #13:   2%
+[20:24:56] Job #13:   3%
+[20:24:57] Job #13:   4%
+[20:24:57] Job #13:   5%
+[20:24:58] Job #13:   6%
+[20:24:58] Job #13:   7%
+[20:24:59] Job #13:   8%
+[20:24:59] Job #13:   9%
+[20:24:59] Job #13:  10%
+[20:25:00] Job #13:  11%
+[20:25:00] Job #13:  12%
+[20:25:01] Job #13:  13%
+[20:25:01] Job #13:  14%
+[20:25:02] Job #13:  15%
+[20:25:03] Job #13:  16%
+[20:25:03] Job #13:  17%
+[20:25:03] Job #13:  18%
+[20:25:04] Job #13:  19%
+[20:25:04] Job #13:  20%
+[20:25:05] Job #13:  21%
+[20:25:05] Job #13:  22%
+[20:25:06] Job #13:  23%
+[20:25:06] Job #13:  24%
+[20:25:07] Job #13:  25%
+[20:25:07] Job #13:  26%
+[20:25:08] Job #13:  27%
+[20:25:08] Job #13:  28%
+[20:25:08] Job #13:  29%
+[20:25:09] Job #13:  30%
+[20:25:10] Job #13:  31%
+[20:25:10] Job #13:  32%
+[20:25:11] Job #13:  33%
+[20:25:11] Job #13:  34%
+[20:25:11] Job #13:  35%
+[20:25:12] Job #13:  36%
+[20:25:13] Job #13:  37%
+[20:25:13] Job #13:  38%
+[20:25:14] Job #13:  39%
+[20:25:14] Job #13:  40%
+[20:25:14] Job #13:  41%
+[20:25:15] Job #13:  42%
+[20:25:15] Job #13:  43%
+[20:25:16] Job #13:  44%
+[20:25:16] Job #13:  45%
+[20:25:17] Job #13:  46%
+[20:25:17] Job #13:  47%
+[20:25:18] Job #13:  48%
+[20:25:18] Job #13:  49%
+[20:25:19] Job #13:  50%
+[20:25:19] Job #13:  51%
+[20:25:19] Job #13:  52%
+[20:25:20] Job #13:  53%
+[20:25:20] Job #13:  54%
+[20:25:21] Job #13:  55%
+[20:25:21] Job #13:  56%
+[20:25:22] Job #13:  57%
+[20:25:23] Job #13:  58%
+[20:25:23] Job #13:  59%
+[20:25:23] Job #13:  60%
+[20:25:24] Job #13:  61%
+[20:25:24] Job #13:  62%
+[20:25:25] Job #13:  63%
+[20:25:25] Job #13:  64%
+[20:25:26] Job #13:  65%
+[20:25:26] Job #13:  66%
+[20:25:27] Job #13:  67%
+[20:25:27] Job #13:  68%
+[20:25:28] Job #13:  69%
+[20:25:29] Job #13:  70%
+[20:25:30] Job #13:  71%
+[20:25:30] Job #13:  72%
+[20:25:30] Job #13:  73%
+[20:25:31] Job #13:  74%
+[20:25:32] Job #13:  75%
+[20:25:32] Job #13:  76%
+[20:25:33] Job #13:  77%
+[20:25:34] Job #13:  78%
+[20:25:34] Job #13:  79%
+[20:25:35] Job #13:  80%
+[20:25:36] Job #13:  81%
+[20:25:36] Job #13:  82%
+[20:25:37] Job #13:  83%
+[20:25:37] Job #13:  84%
+[20:25:38] Job #13:  85%
+[20:25:39] Job #13:  86%
+[20:25:39] Job #13:  87%
+[20:25:40] Job #13:  88%
+[20:25:40] Job #13:  89%
+[20:25:41] Job #13:  90%
+[20:25:41] Job #13:  91%
+[20:25:42] Job #13:  92%
+[20:25:42] Job #13:  93%
+[20:25:43] Job #13:  94%
+[20:25:44] Job #13:  95%
+[20:25:44] Job #13:  96%
+[20:25:45] Job #13:  97%
+[20:25:45] Job #13:  98%
+[20:25:45] Job #13:  99%
+[20:25:45] Job #13: 100%
+[20:25:45] Job #13: ------------------------------------------------------------------------------
+[20:25:45] Job #13:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:25:45] Job #13: Verzeich.:         1         1         1         0         0         0
+[20:25:45] Job #13:   Dateien:         1         1         0         0         0         0
+[20:25:45] Job #13:     Bytes:   5.263 g   5.263 g         0         0         0         0
+[20:25:45] Job #13:    Zeiten:   0:01:41   0:00:25                       0:00:00   0:00:25
+[20:25:45] Job #13: Geschwindigkeit:           221�925�632 Bytes/Sek.
+[20:25:45] Job #13: Geschwindigkeit:             12698,687 Megabytes/Min.
+[20:25:45] Job #13:    Beendet: Donnerstag, 30. April 2026 20:25:45
+[20:25:45] Job #13 erfolgreich abgeschlossen (Code 1).
+[20:25:46] Starte Job #14: D:\Movie\Avangers\Avengers.Infinity.War.2018.Bluray.2160p.AV1.HDR10.AC3.5.1-UH.mkv -> S:\SM-MOONDOOM\Movies\Avengers.Infinity.War.2018.Bluray.2160p.AV1.HDR10.AC3.5.1-UH.mkv
+[20:25:46] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Avengers.Infinity.War.2018.Bluray.2160p.AV1.HDR10.AC3.5.1-UH.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:25:46] Job #14: -------------------------------------------------------------------------------
+[20:25:46] Job #14:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:25:46] Job #14: -------------------------------------------------------------------------------
+[20:25:46] Job #14:   Gestartet: Donnerstag, 30. April 2026 20:25:45
+[20:25:46] Job #14:    Quelle : D:\Movie\Avangers\
+[20:25:46] Job #14:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:25:46] Job #14:     Dateien : Avengers.Infinity.War.2018.Bluray.2160p.AV1.HDR10.AC3.5.1-UH.mkv
+[20:25:46] Job #14:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:25:46] Job #14: ------------------------------------------------------------------------------
+[20:25:46] Job #14: 	    Neue Datei		  14.3 g	D:\Movie\Avangers\Avengers.Infinity.War.2018.Bluray.2160p.AV1.HDR10.AC3.5.1-UH.mkv
+[20:25:47] Job #14:   0%
+[20:25:48] Job #14:   1%
+[20:25:49] Job #14:   2%
+[20:25:50] Job #14:   3%
+[20:25:52] Job #14:   4%
+[20:25:53] Job #14:   5%
+[20:25:54] Job #14:   6%
+[20:25:56] Job #14:   7%
+[20:25:57] Job #14:   8%
+[20:25:58] Job #14:   9%
+[20:26:00] Job #14:  10%
+[20:26:01] Job #14:  11%
+[20:26:02] Job #14:  12%
+[20:26:04] Job #14:  13%
+[20:26:05] Job #14:  14%
+[20:26:06] Job #14:  15%
+[20:26:07] Job #14:  16%
+[20:26:09] Job #14:  17%
+[20:26:10] Job #14:  18%
+[20:26:11] Job #14:  19%
+[20:26:13] Job #14:  20%
+[20:26:14] Job #14:  21%
+[20:26:15] Job #14:  22%
+[20:26:17] Job #14:  23%
+[20:26:18] Job #14:  24%
+[20:26:19] Job #14:  25%
+[20:26:20] Job #14:  26%
+[20:26:22] Job #14:  27%
+[20:26:23] Job #14:  28%
+[20:26:24] Job #14:  29%
+[20:26:26] Job #14:  30%
+[20:26:27] Job #14:  31%
+[20:26:28] Job #14:  32%
+[20:26:30] Job #14:  33%
+[20:26:31] Job #14:  34%
+[20:26:32] Job #14:  35%
+[20:26:33] Job #14:  36%
+[20:26:35] Job #14:  37%
+[20:26:36] Job #14:  38%
+[20:26:38] Job #14:  39%
+[20:26:39] Job #14:  40%
+[20:26:40] Job #14:  41%
+[20:26:41] Job #14:  42%
+[20:26:43] Job #14:  43%
+[20:26:44] Job #14:  44%
+[20:26:45] Job #14:  45%
+[20:26:47] Job #14:  46%
+[20:26:48] Job #14:  47%
+[20:26:49] Job #14:  48%
+[20:26:50] Job #14:  49%
+[20:26:52] Job #14:  50%
+[20:26:53] Job #14:  51%
+[20:26:55] Job #14:  52%
+[20:26:56] Job #14:  53%
+[20:26:58] Job #14:  54%
+[20:26:59] Job #14:  55%
+[20:27:00] Job #14:  56%
+[20:27:01] Job #14:  57%
+[20:27:03] Job #14:  58%
+[20:27:04] Job #14:  59%
+[20:27:05] Job #14:  60%
+[20:27:07] Job #14:  61%
+[20:27:08] Job #14:  62%
+[20:27:09] Job #14:  63%
+[20:27:11] Job #14:  64%
+[20:27:12] Job #14:  65%
+[20:27:13] Job #14:  66%
+[20:27:14] Job #14:  67%
+[20:27:16] Job #14:  68%
+[20:27:17] Job #14:  69%
+[20:27:18] Job #14:  70%
+[20:27:20] Job #14:  71%
+[20:27:21] Job #14:  72%
+[20:27:22] Job #14:  73%
+[20:27:24] Job #14:  74%
+[20:27:25] Job #14:  75%
+[20:27:26] Job #14:  76%
+[20:27:27] Job #14:  77%
+[20:27:29] Job #14:  78%
+[20:27:30] Job #14:  79%
+[20:27:31] Job #14:  80%
+[20:27:33] Job #14:  81%
+[20:27:34] Job #14:  82%
+[20:27:35] Job #14:  83%
+[20:27:37] Job #14:  84%
+[20:27:38] Job #14:  85%
+[20:27:39] Job #14:  86%
+[20:27:41] Job #14:  87%
+[20:27:42] Job #14:  88%
+[20:27:43] Job #14:  89%
+[20:27:45] Job #14:  90%
+[20:27:46] Job #14:  91%
+[20:27:47] Job #14:  92%
+[20:27:48] Job #14:  93%
+[20:27:50] Job #14:  94%
+[20:27:51] Job #14:  95%
+[20:27:52] Job #14:  96%
+[20:27:54] Job #14:  97%
+[20:27:55] Job #14:  98%
+[20:27:56] Job #14:  99%
+[20:27:56] Job #14: 100%
+[20:27:56] Job #14: ------------------------------------------------------------------------------
+[20:27:56] Job #14:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:27:56] Job #14: Verzeich.:         1         1         1         0         0         0
+[20:27:56] Job #14:   Dateien:         1         1         0         0         0         0
+[20:27:56] Job #14:     Bytes:  14.375 g  14.375 g         0         0         0         0
+[20:27:56] Job #14:    Zeiten:   0:04:21   0:01:05                       0:00:00   0:01:05
+[20:27:56] Job #14: Geschwindigkeit:           235�754�837 Bytes/Sek.
+[20:27:56] Job #14: Geschwindigkeit:             13490,000 Megabytes/Min.
+[20:27:56] Job #14:    Beendet: Donnerstag, 30. April 2026 20:27:56
+[20:27:56] Job #14 erfolgreich abgeschlossen (Code 1).
+[20:27:56] Starte Job #15: D:\Movie\Avangers\Captain.America.Civil.War.2016.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv -> S:\SM-MOONDOOM\Movies\Captain.America.Civil.War.2016.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:27:56] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Captain.America.Civil.War.2016.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:27:58] Job #15: -------------------------------------------------------------------------------
+[20:27:58] Job #15:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:27:58] Job #15: -------------------------------------------------------------------------------
+[20:27:58] Job #15:   Gestartet: Donnerstag, 30. April 2026 20:27:57
+[20:27:58] Job #15:    Quelle : D:\Movie\Avangers\
+[20:27:58] Job #15:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:27:58] Job #15:     Dateien : Captain.America.Civil.War.2016.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:27:58] Job #15:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:27:58] Job #15: ------------------------------------------------------------------------------
+[20:27:58] Job #15: 	    Neue Datei		   6.8 g	D:\Movie\Avangers\Captain.America.Civil.War.2016.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:27:58] Job #15:   0%
+[20:27:58] Job #15:   1%
+[20:27:59] Job #15:   2%
+[20:28:00] Job #15:   3%
+[20:28:00] Job #15:   4%
+[20:28:01] Job #15:   5%
+[20:28:02] Job #15:   6%
+[20:28:02] Job #15:   7%
+[20:28:03] Job #15:   8%
+[20:28:03] Job #15:   9%
+[20:28:04] Job #15:  10%
+[20:28:05] Job #15:  11%
+[20:28:05] Job #15:  12%
+[20:28:06] Job #15:  13%
+[20:28:06] Job #15:  14%
+[20:28:07] Job #15:  15%
+[20:28:08] Job #15:  16%
+[20:28:08] Job #15:  17%
+[20:28:09] Job #15:  18%
+[20:28:10] Job #15:  19%
+[20:28:10] Job #15:  20%
+[20:28:11] Job #15:  21%
+[20:28:11] Job #15:  22%
+[20:28:12] Job #15:  23%
+[20:28:13] Job #15:  24%
+[20:28:13] Job #15:  25%
+[20:28:14] Job #15:  26%
+[20:28:14] Job #15:  27%
+[20:28:15] Job #15:  28%
+[20:28:16] Job #15:  29%
+[20:28:16] Job #15:  30%
+[20:28:17] Job #15:  31%
+[20:28:18] Job #15:  32%
+[20:28:18] Job #15:  33%
+[20:28:19] Job #15:  34%
+[20:28:20] Job #15:  35%
+[20:28:20] Job #15:  36%
+[20:28:21] Job #15:  37%
+[20:28:21] Job #15:  38%
+[20:28:22] Job #15:  39%
+[20:28:23] Job #15:  40%
+[20:28:23] Job #15:  41%
+[20:28:24] Job #15:  42%
+[20:28:24] Job #15:  43%
+[20:28:25] Job #15:  44%
+[20:28:26] Job #15:  45%
+[20:28:26] Job #15:  46%
+[20:28:27] Job #15:  47%
+[20:28:28] Job #15:  48%
+[20:28:28] Job #15:  49%
+[20:28:29] Job #15:  50%
+[20:28:30] Job #15:  51%
+[20:28:30] Job #15:  52%
+[20:28:31] Job #15:  53%
+[20:28:32] Job #15:  54%
+[20:28:32] Job #15:  55%
+[20:28:33] Job #15:  56%
+[20:28:33] Job #15:  57%
+[20:28:34] Job #15:  58%
+[20:28:34] Job #15:  59%
+[20:28:35] Job #15:  60%
+[20:28:36] Job #15:  61%
+[20:28:36] Job #15:  62%
+[20:28:37] Job #15:  63%
+[20:28:38] Job #15:  64%
+[20:28:38] Job #15:  65%
+[20:28:39] Job #15:  66%
+[20:28:41] Job #15:  67%
+[20:28:41] Job #15:  68%
+[20:28:41] Job #15:  69%
+[20:28:42] Job #15:  70%
+[20:28:42] Job #15:  71%
+[20:28:43] Job #15:  72%
+[20:28:43] Job #15:  73%
+[20:28:44] Job #15:  74%
+[20:28:44] Job #15:  75%
+[20:28:45] Job #15:  76%
+[20:28:46] Job #15:  77%
+[20:28:47] Job #15:  78%
+[20:28:47] Job #15:  79%
+[20:28:47] Job #15:  80%
+[20:28:48] Job #15:  81%
+[20:28:49] Job #15:  82%
+[20:28:49] Job #15:  83%
+[20:28:50] Job #15:  84%
+[20:28:51] Job #15:  85%
+[20:28:51] Job #15:  86%
+[20:28:52] Job #15:  87%
+[20:28:52] Job #15:  88%
+[20:28:53] Job #15:  89%
+[20:28:54] Job #15:  90%
+[20:28:54] Job #15:  91%
+[20:28:55] Job #15:  92%
+[20:28:56] Job #15:  93%
+[20:28:56] Job #15:  94%
+[20:28:57] Job #15:  95%
+[20:28:57] Job #15:  96%
+[20:28:58] Job #15:  97%
+[20:28:59] Job #15:  98%
+[20:29:00] Job #15:  99%
+[20:29:00] Job #15: 100%
+[20:29:00] Job #15: ------------------------------------------------------------------------------
+[20:29:00] Job #15:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:29:00] Job #15: Verzeich.:         1         1         1         0         0         0
+[20:29:00] Job #15:   Dateien:         1         1         0         0         0         0
+[20:29:00] Job #15:     Bytes:   6.860 g   6.860 g         0         0         0         0
+[20:29:00] Job #15:    Zeiten:   0:02:04   0:00:31                       0:00:00   0:00:31
+[20:29:00] Job #15: Geschwindigkeit:           236�402�242 Bytes/Sek.
+[20:29:00] Job #15: Geschwindigkeit:             13527,045 Megabytes/Min.
+[20:29:00] Job #15:    Beendet: Donnerstag, 30. April 2026 20:28:59
+[20:29:00] Job #15 erfolgreich abgeschlossen (Code 1).
+[20:29:00] Starte Job #16: D:\Movie\Avangers\doctor.strange.2016.2160p.uhd.bluray.x265-terminal.mkv -> S:\SM-MOONDOOM\Movies\doctor.strange.2016.2160p.uhd.bluray.x265-terminal.mkv
+[20:29:00] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies doctor.strange.2016.2160p.uhd.bluray.x265-terminal.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:29:00] Job #16: -------------------------------------------------------------------------------
+[20:29:00] Job #16:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:29:00] Job #16: -------------------------------------------------------------------------------
+[20:29:00] Job #16:   Gestartet: Donnerstag, 30. April 2026 20:29:00
+[20:29:00] Job #16:    Quelle : D:\Movie\Avangers\
+[20:29:00] Job #16:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:29:00] Job #16:     Dateien : doctor.strange.2016.2160p.uhd.bluray.x265-terminal.mkv
+[20:29:00] Job #16:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:29:00] Job #16: ------------------------------------------------------------------------------
+[20:29:00] Job #16: 	    Neue Datei		   8.7 g	D:\Movie\Avangers\doctor.strange.2016.2160p.uhd.bluray.x265-terminal.mkv
+[20:29:01] Job #16:   0%
+[20:29:01] Job #16:   1%
+[20:29:02] Job #16:   2%
+[20:29:03] Job #16:   3%
+[20:29:04] Job #16:   4%
+[20:29:05] Job #16:   5%
+[20:29:06] Job #16:   6%
+[20:29:06] Job #16:   7%
+[20:29:07] Job #16:   8%
+[20:29:08] Job #16:   9%
+[20:29:09] Job #16:  10%
+[20:29:10] Job #16:  11%
+[20:29:10] Job #16:  12%
+[20:29:11] Job #16:  13%
+[20:29:12] Job #16:  14%
+[20:29:13] Job #16:  15%
+[20:29:13] Job #16:  16%
+[20:29:14] Job #16:  17%
+[20:29:15] Job #16:  18%
+[20:29:16] Job #16:  19%
+[20:29:17] Job #16:  20%
+[20:29:18] Job #16:  21%
+[20:29:18] Job #16:  22%
+[20:29:19] Job #16:  23%
+[20:29:20] Job #16:  24%
+[20:29:21] Job #16:  25%
+[20:29:22] Job #16:  26%
+[20:29:22] Job #16:  27%
+[20:29:23] Job #16:  28%
+[20:29:24] Job #16:  29%
+[20:29:25] Job #16:  30%
+[20:29:25] Job #16:  31%
+[20:29:26] Job #16:  32%
+[20:29:27] Job #16:  33%
+[20:29:28] Job #16:  34%
+[20:29:29] Job #16:  35%
+[20:29:29] Job #16:  36%
+[20:29:30] Job #16:  37%
+[20:29:31] Job #16:  38%
+[20:29:32] Job #16:  39%
+[20:29:33] Job #16:  40%
+[20:29:33] Job #16:  41%
+[20:29:34] Job #16:  42%
+[20:29:35] Job #16:  43%
+[20:29:36] Job #16:  44%
+[20:29:37] Job #16:  45%
+[20:29:37] Job #16:  46%
+[20:29:38] Job #16:  47%
+[20:29:39] Job #16:  48%
+[20:29:40] Job #16:  49%
+[20:29:40] Job #16:  50%
+[20:29:41] Job #16:  51%
+[20:29:42] Job #16:  52%
+[20:29:43] Job #16:  53%
+[20:29:44] Job #16:  54%
+[20:29:45] Job #16:  55%
+[20:29:45] Job #16:  56%
+[20:29:46] Job #16:  57%
+[20:29:47] Job #16:  58%
+[20:29:48] Job #16:  59%
+[20:29:48] Job #16:  60%
+[20:29:49] Job #16:  61%
+[20:29:50] Job #16:  62%
+[20:29:51] Job #16:  63%
+[20:29:52] Job #16:  64%
+[20:29:52] Job #16:  65%
+[20:29:53] Job #16:  66%
+[20:29:54] Job #16:  67%
+[20:29:55] Job #16:  68%
+[20:29:56] Job #16:  69%
+[20:29:56] Job #16:  70%
+[20:29:57] Job #16:  71%
+[20:29:58] Job #16:  72%
+[20:29:59] Job #16:  73%
+[20:30:00] Job #16:  74%
+[20:30:00] Job #16:  75%
+[20:30:01] Job #16:  76%
+[20:30:02] Job #16:  77%
+[20:30:03] Job #16:  78%
+[20:30:04] Job #16:  79%
+[20:30:04] Job #16:  80%
+[20:30:05] Job #16:  81%
+[20:30:06] Job #16:  82%
+[20:30:07] Job #16:  83%
+[20:30:08] Job #16:  84%
+[20:30:09] Job #16:  85%
+[20:30:09] Job #16:  86%
+[20:30:10] Job #16:  87%
+[20:30:11] Job #16:  88%
+[20:30:12] Job #16:  89%
+[20:30:12] Job #16:  90%
+[20:30:13] Job #16:  91%
+[20:30:14] Job #16:  92%
+[20:30:15] Job #16:  93%
+[20:30:16] Job #16:  94%
+[20:30:16] Job #16:  95%
+[20:30:17] Job #16:  96%
+[20:30:18] Job #16:  97%
+[20:30:19] Job #16:  98%
+[20:30:19] Job #16:  99%
+[20:30:19] Job #16: 100%
+[20:30:19] Job #16: ------------------------------------------------------------------------------
+[20:30:20] Job #16:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:30:20] Job #16: Verzeich.:         1         1         1         0         0         0
+[20:30:20] Job #16:   Dateien:         1         1         0         0         0         0
+[20:30:20] Job #16:     Bytes:   8.767 g   8.767 g         0         0         0         0
+[20:30:20] Job #16:    Zeiten:   0:02:39   0:00:39                       0:00:00   0:00:39
+[20:30:20] Job #16: Geschwindigkeit:           236�613�987 Bytes/Sek.
+[20:30:20] Job #16: Geschwindigkeit:             13539,161 Megabytes/Min.
+[20:30:20] Job #16:    Beendet: Donnerstag, 30. April 2026 20:30:19
+[20:30:20] Job #16 erfolgreich abgeschlossen (Code 1).
+[20:30:20] Starte Job #17: D:\Movie\Avangers\Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.WEB-DL.DDP5.1.Atmos.HDR.H.265-EVO.mkv -> S:\SM-MOONDOOM\Movies\Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.WEB-DL.DDP5.1.Atmos.HDR.H.265-EVO.mkv
+[20:30:20] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.WEB-DL.DDP5.1.Atmos.HDR.H.265-EVO.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:30:20] Job #17: -------------------------------------------------------------------------------
+[20:30:20] Job #17:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:30:20] Job #17: -------------------------------------------------------------------------------
+[20:30:20] Job #17:   Gestartet: Donnerstag, 30. April 2026 20:30:20
+[20:30:20] Job #17:    Quelle : D:\Movie\Avangers\
+[20:30:20] Job #17:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:30:20] Job #17:     Dateien : Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.WEB-DL.DDP5.1.Atmos.HDR.H.265-EVO.mkv
+[20:30:20] Job #17:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:30:20] Job #17: ------------------------------------------------------------------------------
+[20:30:20] Job #17: 	    Neue Datei		  21.9 g	D:\Movie\Avangers\Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.WEB-DL.DDP5.1.Atmos.HDR.H.265-EVO.mkv
+[20:30:22] Job #17:   0%
+[20:30:25] Job #17:   1%
+[20:30:27] Job #17:   2%
+[20:30:29] Job #17:   3%
+[20:30:31] Job #17:   4%
+[20:30:34] Job #17:   5%
+[20:30:36] Job #17:   6%
+[20:30:38] Job #17:   7%
+[20:30:41] Job #17:   8%
+[20:30:43] Job #17:   9%
+[20:30:45] Job #17:  10%
+[20:30:47] Job #17:  11%
+[20:30:50] Job #17:  12%
+[20:30:52] Job #17:  13%
+[20:30:54] Job #17:  14%
+[20:30:56] Job #17:  15%
+[20:30:58] Job #17:  16%
+[20:31:01] Job #17:  17%
+[20:31:03] Job #17:  18%
+[20:31:05] Job #17:  19%
+[20:31:07] Job #17:  20%
+[20:31:10] Job #17:  21%
+[20:31:12] Job #17:  22%
+[20:31:14] Job #17:  23%
+[20:31:17] Job #17:  24%
+[20:31:19] Job #17:  25%
+[20:31:21] Job #17:  26%
+[20:31:23] Job #17:  27%
+[20:31:25] Job #17:  28%
+[20:31:28] Job #17:  29%
+[20:31:30] Job #17:  30%
+[20:31:32] Job #17:  31%
+[20:31:35] Job #17:  32%
+[20:31:37] Job #17:  33%
+[20:31:39] Job #17:  34%
+[20:31:41] Job #17:  35%
+[20:31:44] Job #17:  36%
+[20:31:46] Job #17:  37%
+[20:31:48] Job #17:  38%
+[20:31:51] Job #17:  39%
+[20:31:53] Job #17:  40%
+[20:31:55] Job #17:  41%
+[20:31:58] Job #17:  42%
+[20:32:00] Job #17:  43%
+[20:32:02] Job #17:  44%
+[20:32:05] Job #17:  45%
+[20:32:07] Job #17:  46%
+[20:32:09] Job #17:  47%
+[20:32:12] Job #17:  48%
+[20:32:14] Job #17:  49%
+[20:32:16] Job #17:  50%
+[20:32:18] Job #17:  51%
+[20:32:21] Job #17:  52%
+[20:32:23] Job #17:  53%
+[20:32:25] Job #17:  54%
+[20:32:28] Job #17:  55%
+[20:32:30] Job #17:  56%
+[20:32:32] Job #17:  57%
+[20:32:35] Job #17:  58%
+[20:32:37] Job #17:  59%
+[20:32:39] Job #17:  60%
+[20:32:42] Job #17:  61%
+[20:32:44] Job #17:  62%
+[20:32:46] Job #17:  63%
+[20:32:48] Job #17:  64%
+[20:32:51] Job #17:  65%
+[20:32:53] Job #17:  66%
+[20:32:55] Job #17:  67%
+[20:32:58] Job #17:  68%
+[20:33:00] Job #17:  69%
+[20:33:02] Job #17:  70%
+[20:33:05] Job #17:  71%
+[20:33:07] Job #17:  72%
+[20:33:10] Job #17:  73%
+[20:33:12] Job #17:  74%
+[20:33:14] Job #17:  75%
+[20:33:16] Job #17:  76%
+[20:33:19] Job #17:  77%
+[20:33:21] Job #17:  78%
+[20:33:24] Job #17:  79%
+[20:33:26] Job #17:  80%
+[20:33:28] Job #17:  81%
+[20:33:31] Job #17:  82%
+[20:33:33] Job #17:  83%
+[20:33:36] Job #17:  84%
+[20:33:38] Job #17:  85%
+[20:33:40] Job #17:  86%
+[20:33:43] Job #17:  87%
+[20:33:45] Job #17:  88%
+[20:33:47] Job #17:  89%
+[20:33:50] Job #17:  90%
+[20:33:52] Job #17:  91%
+[20:33:54] Job #17:  92%
+[20:33:57] Job #17:  93%
+[20:33:59] Job #17:  94%
+[20:34:02] Job #17:  95%
+[20:34:04] Job #17:  96%
+[20:34:06] Job #17:  97%
+[20:34:08] Job #17:  98%
+[20:34:11] Job #17:  99%
+[20:34:11] Job #17: 100%
+[20:34:11] Job #17: ------------------------------------------------------------------------------
+[20:34:11] Job #17:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:34:11] Job #17: Verzeich.:         1         1         1         0         0         0
+[20:34:11] Job #17:   Dateien:         1         1         0         0         0         0
+[20:34:11] Job #17:     Bytes:  21.988 g  21.988 g         0         0         0         0
+[20:34:11] Job #17:    Zeiten:   0:07:41   0:01:55                       0:00:00   0:01:55
+[20:34:11] Job #17: Geschwindigkeit:           204�460�287 Bytes/Sek.
+[20:34:11] Job #17: Geschwindigkeit:             11699,312 Megabytes/Min.
+[20:34:11] Job #17:    Beendet: Donnerstag, 30. April 2026 20:34:11
+[20:34:11] Job #17 erfolgreich abgeschlossen (Code 1).
+[20:34:11] Starte Job #18: D:\Movie\Avangers\Iron.Man.2.2010.2160p.UHD.BluRay.X265-IAMABLE.mkv -> S:\SM-MOONDOOM\Movies\Iron.Man.2.2010.2160p.UHD.BluRay.X265-IAMABLE.mkv
+[20:34:11] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Iron.Man.2.2010.2160p.UHD.BluRay.X265-IAMABLE.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:34:11] Job #18: -------------------------------------------------------------------------------
+[20:34:11] Job #18:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:34:12] Job #18: -------------------------------------------------------------------------------
+[20:34:12] Job #18:   Gestartet: Donnerstag, 30. April 2026 20:34:11
+[20:34:12] Job #18:    Quelle : D:\Movie\Avangers\
+[20:34:12] Job #18:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:34:12] Job #18:     Dateien : Iron.Man.2.2010.2160p.UHD.BluRay.X265-IAMABLE.mkv
+[20:34:12] Job #18:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:34:12] Job #18: ------------------------------------------------------------------------------
+[20:34:12] Job #18: 	    Neue Datei		  19.6 g	D:\Movie\Avangers\Iron.Man.2.2010.2160p.UHD.BluRay.X265-IAMABLE.mkv
+[20:34:13] Job #18:   0%
+[20:34:15] Job #18:   1%
+[20:34:17] Job #18:   2%
+[20:34:19] Job #18:   3%
+[20:34:20] Job #18:   4%
+[20:34:22] Job #18:   5%
+[20:34:24] Job #18:   6%
+[20:34:26] Job #18:   7%
+[20:34:28] Job #18:   8%
+[20:34:29] Job #18:   9%
+[20:34:31] Job #18:  10%
+[20:34:33] Job #18:  11%
+[20:34:35] Job #18:  12%
+[20:34:36] Job #18:  13%
+[20:34:38] Job #18:  14%
+[20:34:40] Job #18:  15%
+[20:34:42] Job #18:  16%
+[20:34:44] Job #18:  17%
+[20:34:45] Job #18:  18%
+[20:34:47] Job #18:  19%
+[20:34:49] Job #18:  20%
+[20:34:51] Job #18:  21%
+[20:34:53] Job #18:  22%
+[20:34:54] Job #18:  23%
+[20:34:56] Job #18:  24%
+[20:34:58] Job #18:  25%
+[20:35:00] Job #18:  26%
+[20:35:01] Job #18:  27%
+[20:35:03] Job #18:  28%
+[20:35:05] Job #18:  29%
+[20:35:07] Job #18:  30%
+[20:35:09] Job #18:  31%
+[20:35:10] Job #18:  32%
+[20:35:12] Job #18:  33%
+[20:35:14] Job #18:  34%
+[20:35:16] Job #18:  35%
+[20:35:17] Job #18:  36%
+[20:35:19] Job #18:  37%
+[20:35:21] Job #18:  38%
+[20:35:23] Job #18:  39%
+[20:35:25] Job #18:  40%
+[20:35:26] Job #18:  41%
+[20:35:28] Job #18:  42%
+[20:35:30] Job #18:  43%
+[20:35:32] Job #18:  44%
+[20:35:34] Job #18:  45%
+[20:35:35] Job #18:  46%
+[20:35:37] Job #18:  47%
+[20:35:39] Job #18:  48%
+[20:35:41] Job #18:  49%
+[20:35:43] Job #18:  50%
+[20:35:44] Job #18:  51%
+[20:35:46] Job #18:  52%
+[20:35:48] Job #18:  53%
+[20:35:50] Job #18:  54%
+[20:35:51] Job #18:  55%
+[20:35:53] Job #18:  56%
+[20:35:55] Job #18:  57%
+[20:35:57] Job #18:  58%
+[20:35:59] Job #18:  59%
+[20:36:00] Job #18:  60%
+[20:36:02] Job #18:  61%
+[20:36:04] Job #18:  62%
+[20:36:06] Job #18:  63%
+[20:36:07] Job #18:  64%
+[20:36:09] Job #18:  65%
+[20:36:11] Job #18:  66%
+[20:36:13] Job #18:  67%
+[20:36:15] Job #18:  68%
+[20:36:17] Job #18:  69%
+[20:36:18] Job #18:  70%
+[20:36:20] Job #18:  71%
+[20:36:22] Job #18:  72%
+[20:36:24] Job #18:  73%
+[20:36:26] Job #18:  74%
+[20:36:27] Job #18:  75%
+[20:36:29] Job #18:  76%
+[20:36:31] Job #18:  77%
+[20:36:33] Job #18:  78%
+[20:36:35] Job #18:  79%
+[20:36:36] Job #18:  80%
+[20:36:38] Job #18:  81%
+[20:36:40] Job #18:  82%
+[20:36:42] Job #18:  83%
+[20:36:45] Job #18:  84%
+[20:36:47] Job #18:  85%
+[20:36:49] Job #18:  86%
+[20:36:51] Job #18:  87%
+[20:36:53] Job #18:  88%
+[20:36:55] Job #18:  89%
+[20:36:57] Job #18:  90%
+[20:36:59] Job #18:  91%
+[20:37:01] Job #18:  92%
+[20:37:02] Job #18:  93%
+[20:37:04] Job #18:  94%
+[20:37:06] Job #18:  95%
+[20:37:08] Job #18:  96%
+[20:37:10] Job #18:  97%
+[20:37:11] Job #18:  98%
+[20:37:13] Job #18:  99%
+[20:37:13] Job #18: 100%
+[20:37:13] Job #18: ------------------------------------------------------------------------------
+[20:37:13] Job #18:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:37:13] Job #18: Verzeich.:         1         1         1         0         0         0
+[20:37:13] Job #18:   Dateien:         1         1         0         0         0         0
+[20:37:13] Job #18:     Bytes:  19.625 g  19.625 g         0         0         0         0
+[20:37:13] Job #18:    Zeiten:   0:06:03   0:01:30                       0:00:00   0:01:30
+[20:37:13] Job #18: Geschwindigkeit:           231�772�844 Bytes/Sek.
+[20:37:13] Job #18: Geschwindigkeit:             13262,148 Megabytes/Min.
+[20:37:13] Job #18:    Beendet: Donnerstag, 30. April 2026 20:37:13
+[20:37:13] Job #18 erfolgreich abgeschlossen (Code 1).
+[20:37:14] Starte Job #19: D:\Movie\Avangers\Spider-Man Far from Home 2019.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv -> S:\SM-MOONDOOM\Movies\Spider-Man Far from Home 2019.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv
+[20:37:14] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Spider-Man Far from Home 2019.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:37:14] Job #19: -------------------------------------------------------------------------------
+[20:37:14] Job #19:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:37:14] Job #19: -------------------------------------------------------------------------------
+[20:37:14] Job #19:   Gestartet: Donnerstag, 30. April 2026 20:37:14
+[20:37:14] Job #19:    Quelle : D:\Movie\Avangers\
+[20:37:14] Job #19:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:37:14] Job #19:     Dateien : Spider-Man Far from Home 2019.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv
+[20:37:14] Job #19:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:37:14] Job #19: ------------------------------------------------------------------------------
+[20:37:14] Job #19: 	    Neue Datei		  18.2 g	D:\Movie\Avangers\Spider-Man Far from Home 2019.MULTi.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC-DDR.mkv
+[20:37:16] Job #19:   0%
+[20:37:17] Job #19:   1%
+[20:37:19] Job #19:   2%
+[20:37:21] Job #19:   3%
+[20:37:22] Job #19:   4%
+[20:37:24] Job #19:   5%
+[20:37:26] Job #19:   6%
+[20:37:27] Job #19:   7%
+[20:37:29] Job #19:   8%
+[20:37:30] Job #19:   9%
+[20:37:32] Job #19:  10%
+[20:37:34] Job #19:  11%
+[20:37:36] Job #19:  12%
+[20:37:37] Job #19:  13%
+[20:37:39] Job #19:  14%
+[20:37:40] Job #19:  15%
+[20:37:42] Job #19:  16%
+[20:37:44] Job #19:  17%
+[20:37:46] Job #19:  18%
+[20:37:48] Job #19:  19%
+[20:37:49] Job #19:  20%
+[20:37:51] Job #19:  21%
+[20:37:53] Job #19:  22%
+[20:37:54] Job #19:  23%
+[20:37:56] Job #19:  24%
+[20:37:58] Job #19:  25%
+[20:37:59] Job #19:  26%
+[20:38:01] Job #19:  27%
+[20:38:03] Job #19:  28%
+[20:38:05] Job #19:  29%
+[20:38:07] Job #19:  30%
+[20:38:09] Job #19:  31%
+[20:38:10] Job #19:  32%
+[20:38:12] Job #19:  33%
+[20:38:14] Job #19:  34%
+[20:38:15] Job #19:  35%
+[20:38:17] Job #19:  36%
+[20:38:19] Job #19:  37%
+[20:38:21] Job #19:  38%
+[20:38:23] Job #19:  39%
+[20:38:24] Job #19:  40%
+[20:38:26] Job #19:  41%
+[20:38:28] Job #19:  42%
+[20:38:30] Job #19:  43%
+[20:38:31] Job #19:  44%
+[20:38:33] Job #19:  45%
+[20:38:35] Job #19:  46%
+[20:38:37] Job #19:  47%
+[20:38:38] Job #19:  48%
+[20:38:40] Job #19:  49%
+[20:38:42] Job #19:  50%
+[20:38:44] Job #19:  51%
+[20:38:45] Job #19:  52%
+[20:38:47] Job #19:  53%
+[20:38:49] Job #19:  54%
+[20:38:51] Job #19:  55%
+[20:38:53] Job #19:  56%
+[20:38:54] Job #19:  57%
+[20:38:56] Job #19:  58%
+[20:38:57] Job #19:  59%
+[20:38:59] Job #19:  60%
+[20:39:01] Job #19:  61%
+[20:39:02] Job #19:  62%
+[20:39:04] Job #19:  63%
+[20:39:06] Job #19:  64%
+[20:39:07] Job #19:  65%
+[20:39:09] Job #19:  66%
+[20:39:11] Job #19:  67%
+[20:39:12] Job #19:  68%
+[20:39:14] Job #19:  69%
+[20:39:16] Job #19:  70%
+[20:39:17] Job #19:  71%
+[20:39:19] Job #19:  72%
+[20:39:21] Job #19:  73%
+[20:39:22] Job #19:  74%
+[20:39:24] Job #19:  75%
+[20:39:26] Job #19:  76%
+[20:39:28] Job #19:  77%
+[20:39:30] Job #19:  78%
+[20:39:31] Job #19:  79%
+[20:39:33] Job #19:  80%
+[20:39:35] Job #19:  81%
+[20:39:36] Job #19:  82%
+[20:39:38] Job #19:  83%
+[20:39:40] Job #19:  84%
+[20:39:42] Job #19:  85%
+[20:39:44] Job #19:  86%
+[20:39:45] Job #19:  87%
+[20:39:47] Job #19:  88%
+[20:39:49] Job #19:  89%
+[20:39:51] Job #19:  90%
+[20:39:52] Job #19:  91%
+[20:39:54] Job #19:  92%
+[20:39:56] Job #19:  93%
+[20:39:58] Job #19:  94%
+[20:39:59] Job #19:  95%
+[20:40:01] Job #19:  96%
+[20:40:03] Job #19:  97%
+[20:40:05] Job #19:  98%
+[20:40:06] Job #19:  99%
+[20:40:06] Job #19: 100%
+[20:40:06] Job #19: ------------------------------------------------------------------------------
+[20:40:06] Job #19:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:40:06] Job #19: Verzeich.:         1         1         1         0         0         0
+[20:40:06] Job #19:   Dateien:         1         1         0         0         0         0
+[20:40:06] Job #19:     Bytes:  18.209 g  18.209 g         0         0         0         0
+[20:40:06] Job #19:    Zeiten:   0:05:44   0:01:26                       0:00:00   0:01:26
+[20:40:06] Job #19: Geschwindigkeit:           226�727�817 Bytes/Sek.
+[20:40:06] Job #19: Geschwindigkeit:             12973,470 Megabytes/Min.
+[20:40:06] Job #19:    Beendet: Donnerstag, 30. April 2026 20:40:06
+[20:40:06] Job #19 erfolgreich abgeschlossen (Code 1).
+[20:40:07] Starte Job #20: D:\Movie\Avangers\Spider-Man.Homecoming.2017.2160p.UHD.BluRay.x265-TERMiNAL.mkv -> S:\SM-MOONDOOM\Movies\Spider-Man.Homecoming.2017.2160p.UHD.BluRay.x265-TERMiNAL.mkv
+[20:40:07] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Spider-Man.Homecoming.2017.2160p.UHD.BluRay.x265-TERMiNAL.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:40:07] Job #20: -------------------------------------------------------------------------------
+[20:40:07] Job #20:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:40:07] Job #20: -------------------------------------------------------------------------------
+[20:40:07] Job #20:   Gestartet: Donnerstag, 30. April 2026 20:40:07
+[20:40:07] Job #20:    Quelle : D:\Movie\Avangers\
+[20:40:07] Job #20:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:40:07] Job #20:     Dateien : Spider-Man.Homecoming.2017.2160p.UHD.BluRay.x265-TERMiNAL.mkv
+[20:40:07] Job #20:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:40:07] Job #20: ------------------------------------------------------------------------------
+[20:40:07] Job #20: 	    Neue Datei		  19.3 g	D:\Movie\Avangers\Spider-Man.Homecoming.2017.2160p.UHD.BluRay.x265-TERMiNAL.mkv
+[20:40:09] Job #20:   0%
+[20:40:10] Job #20:   1%
+[20:40:12] Job #20:   2%
+[20:40:14] Job #20:   3%
+[20:40:16] Job #20:   4%
+[20:40:18] Job #20:   5%
+[20:40:20] Job #20:   6%
+[20:40:22] Job #20:   7%
+[20:40:24] Job #20:   8%
+[20:40:26] Job #20:   9%
+[20:40:27] Job #20:  10%
+[20:40:29] Job #20:  11%
+[20:40:31] Job #20:  12%
+[20:40:33] Job #20:  13%
+[20:40:35] Job #20:  14%
+[20:40:36] Job #20:  15%
+[20:40:38] Job #20:  16%
+[20:40:40] Job #20:  17%
+[20:40:42] Job #20:  18%
+[20:40:43] Job #20:  19%
+[20:40:45] Job #20:  20%
+[20:40:47] Job #20:  21%
+[20:40:49] Job #20:  22%
+[20:40:51] Job #20:  23%
+[20:40:52] Job #20:  24%
+[20:40:54] Job #20:  25%
+[20:40:56] Job #20:  26%
+[20:40:58] Job #20:  27%
+[20:40:59] Job #20:  28%
+[20:41:01] Job #20:  29%
+[20:41:03] Job #20:  30%
+[20:41:05] Job #20:  31%
+[20:41:06] Job #20:  32%
+[20:41:08] Job #20:  33%
+[20:41:10] Job #20:  34%
+[20:41:12] Job #20:  35%
+[20:41:13] Job #20:  36%
+[20:41:15] Job #20:  37%
+[20:41:17] Job #20:  38%
+[20:41:19] Job #20:  39%
+[20:41:21] Job #20:  40%
+[20:41:22] Job #20:  41%
+[20:41:24] Job #20:  42%
+[20:41:26] Job #20:  43%
+[20:41:28] Job #20:  44%
+[20:41:29] Job #20:  45%
+[20:41:31] Job #20:  46%
+[20:41:33] Job #20:  47%
+[20:41:34] Job #20:  48%
+[20:41:36] Job #20:  49%
+[20:41:38] Job #20:  50%
+[20:41:40] Job #20:  51%
+[20:41:42] Job #20:  52%
+[20:41:43] Job #20:  53%
+[20:41:45] Job #20:  54%
+[20:41:47] Job #20:  55%
+[20:41:49] Job #20:  56%
+[20:41:50] Job #20:  57%
+[20:41:52] Job #20:  58%
+[20:41:54] Job #20:  59%
+[20:41:56] Job #20:  60%
+[20:41:57] Job #20:  61%
+[20:41:59] Job #20:  62%
+[20:42:01] Job #20:  63%
+[20:42:03] Job #20:  64%
+[20:42:04] Job #20:  65%
+[20:42:06] Job #20:  66%
+[20:42:08] Job #20:  67%
+[20:42:10] Job #20:  68%
+[20:42:11] Job #20:  69%
+[20:42:13] Job #20:  70%
+[20:42:15] Job #20:  71%
+[20:42:17] Job #20:  72%
+[20:42:18] Job #20:  73%
+[20:42:20] Job #20:  74%
+[20:42:22] Job #20:  75%
+[20:42:24] Job #20:  76%
+[20:42:26] Job #20:  77%
+[20:42:27] Job #20:  78%
+[20:42:29] Job #20:  79%
+[20:42:31] Job #20:  80%
+[20:42:33] Job #20:  81%
+[20:42:34] Job #20:  82%
+[20:42:36] Job #20:  83%
+[20:42:38] Job #20:  84%
+[20:42:40] Job #20:  85%
+[20:42:41] Job #20:  86%
+[20:42:43] Job #20:  87%
+[20:42:45] Job #20:  88%
+[20:42:47] Job #20:  89%
+[20:42:48] Job #20:  90%
+[20:42:50] Job #20:  91%
+[20:42:52] Job #20:  92%
+[20:42:54] Job #20:  93%
+[20:42:55] Job #20:  94%
+[20:42:57] Job #20:  95%
+[20:42:59] Job #20:  96%
+[20:43:01] Job #20:  97%
+[20:43:03] Job #20:  98%
+[20:43:04] Job #20:  99%
+[20:43:04] Job #20: 100%
+[20:43:05] Job #20: ------------------------------------------------------------------------------
+[20:43:05] Job #20:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:43:05] Job #20: Verzeich.:         1         1         1         0         0         0
+[20:43:05] Job #20:   Dateien:         1         1         0         0         0         0
+[20:43:05] Job #20:     Bytes:  19.342 g  19.342 g         0         0         0         0
+[20:43:05] Job #20:    Zeiten:   0:05:55   0:01:28                       0:00:00   0:01:28
+[20:43:05] Job #20: Geschwindigkeit:           233�751�174 Bytes/Sek.
+[20:43:05] Job #20: Geschwindigkeit:             13375,350 Megabytes/Min.
+[20:43:05] Job #20:    Beendet: Donnerstag, 30. April 2026 20:43:04
+[20:43:05] Job #20 erfolgreich abgeschlossen (Code 1).
+[20:43:05] Starte Job #21: D:\Movie\Avangers\Spider-Man.No.Way.Home.2022.2160p.UHD.BluRay.TrueHD.7.1.Atmos.HDR.x265-EVO.mkv -> S:\SM-MOONDOOM\Movies\Spider-Man.No.Way.Home.2022.2160p.UHD.BluRay.TrueHD.7.1.Atmos.HDR.x265-EVO.mkv
+[20:43:05] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Spider-Man.No.Way.Home.2022.2160p.UHD.BluRay.TrueHD.7.1.Atmos.HDR.x265-EVO.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:43:05] Job #21: -------------------------------------------------------------------------------
+[20:43:05] Job #21:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:43:05] Job #21: -------------------------------------------------------------------------------
+[20:43:05] Job #21:   Gestartet: Donnerstag, 30. April 2026 20:43:05
+[20:43:05] Job #21:    Quelle : D:\Movie\Avangers\
+[20:43:05] Job #21:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:43:05] Job #21:     Dateien : Spider-Man.No.Way.Home.2022.2160p.UHD.BluRay.TrueHD.7.1.Atmos.HDR.x265-EVO.mkv
+[20:43:05] Job #21:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:43:05] Job #21: ------------------------------------------------------------------------------
+[20:43:05] Job #21: 	    Neue Datei		  24.1 g	D:\Movie\Avangers\Spider-Man.No.Way.Home.2022.2160p.UHD.BluRay.TrueHD.7.1.Atmos.HDR.x265-EVO.mkv
+[20:43:07] Job #21:   0%
+[20:43:09] Job #21:   1%
+[20:43:12] Job #21:   2%
+[20:43:14] Job #21:   3%
+[20:43:16] Job #21:   4%
+[20:43:18] Job #21:   5%
+[20:43:21] Job #21:   6%
+[20:43:23] Job #21:   7%
+[20:43:25] Job #21:   8%
+[20:43:27] Job #21:   9%
+[20:43:29] Job #21:  10%
+[20:43:31] Job #21:  11%
+[20:43:33] Job #21:  12%
+[20:43:36] Job #21:  13%
+[20:43:38] Job #21:  14%
+[20:43:40] Job #21:  15%
+[20:43:42] Job #21:  16%
+[20:43:45] Job #21:  17%
+[20:43:47] Job #21:  18%
+[20:43:49] Job #21:  19%
+[20:43:51] Job #21:  20%
+[20:43:53] Job #21:  21%
+[20:43:55] Job #21:  22%
+[20:43:58] Job #21:  23%
+[20:44:00] Job #21:  24%
+[20:44:02] Job #21:  25%
+[20:44:04] Job #21:  26%
+[20:44:06] Job #21:  27%
+[20:44:09] Job #21:  28%
+[20:44:11] Job #21:  29%
+[20:44:13] Job #21:  30%
+[20:44:15] Job #21:  31%
+[20:44:17] Job #21:  32%
+[20:44:20] Job #21:  33%
+[20:44:22] Job #21:  34%
+[20:44:24] Job #21:  35%
+[20:44:26] Job #21:  36%
+[20:44:28] Job #21:  37%
+[20:44:31] Job #21:  38%
+[20:44:33] Job #21:  39%
+[20:44:35] Job #21:  40%
+[20:44:37] Job #21:  41%
+[20:44:39] Job #21:  42%
+[20:44:42] Job #21:  43%
+[20:44:44] Job #21:  44%
+[20:44:46] Job #21:  45%
+[20:44:48] Job #21:  46%
+[20:44:50] Job #21:  47%
+[20:44:52] Job #21:  48%
+[20:44:55] Job #21:  49%
+[20:44:57] Job #21:  50%
+[20:44:59] Job #21:  51%
+[20:45:01] Job #21:  52%
+[20:45:03] Job #21:  53%
+[20:45:06] Job #21:  54%
+[20:45:08] Job #21:  55%
+[20:45:10] Job #21:  56%
+[20:45:12] Job #21:  57%
+[20:45:14] Job #21:  58%
+[20:45:17] Job #21:  59%
+[20:45:19] Job #21:  60%
+[20:45:21] Job #21:  61%
+[20:45:23] Job #21:  62%
+[20:45:25] Job #21:  63%
+[20:45:27] Job #21:  64%
+[20:45:30] Job #21:  65%
+[20:45:32] Job #21:  66%
+[20:45:34] Job #21:  67%
+[20:45:36] Job #21:  68%
+[20:45:38] Job #21:  69%
+[20:45:41] Job #21:  70%
+[20:45:43] Job #21:  71%
+[20:45:45] Job #21:  72%
+[20:45:47] Job #21:  73%
+[20:45:49] Job #21:  74%
+[20:45:52] Job #21:  75%
+[20:45:54] Job #21:  76%
+[20:45:56] Job #21:  77%
+[20:45:58] Job #21:  78%
+[20:46:00] Job #21:  79%
+[20:46:02] Job #21:  80%
+[20:46:05] Job #21:  81%
+[20:46:07] Job #21:  82%
+[20:46:09] Job #21:  83%
+[20:46:11] Job #21:  84%
+[20:46:13] Job #21:  85%
+[20:46:15] Job #21:  86%
+[20:46:18] Job #21:  87%
+[20:46:20] Job #21:  88%
+[20:46:22] Job #21:  89%
+[20:46:24] Job #21:  90%
+[20:46:27] Job #21:  91%
+[20:46:29] Job #21:  92%
+[20:46:31] Job #21:  93%
+[20:46:33] Job #21:  94%
+[20:46:35] Job #21:  95%
+[20:46:37] Job #21:  96%
+[20:46:40] Job #21:  97%
+[20:46:42] Job #21:  98%
+[20:46:44] Job #21:  99%
+[20:46:44] Job #21: 100%
+[20:46:44] Job #21: ------------------------------------------------------------------------------
+[20:46:44] Job #21:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:46:44] Job #21: Verzeich.:         1         1         1         0         0         0
+[20:46:44] Job #21:   Dateien:         1         1         0         0         0         0
+[20:46:44] Job #21:     Bytes:  24.133 g  24.133 g         0         0         0         0
+[20:46:44] Job #21:    Zeiten:   0:07:17   0:01:49                       0:00:00   0:01:49
+[20:46:44] Job #21: Geschwindigkeit:           236�673�108 Bytes/Sek.
+[20:46:44] Job #21: Geschwindigkeit:             13542,544 Megabytes/Min.
+[20:46:44] Job #21:    Beendet: Donnerstag, 30. April 2026 20:46:44
+[20:46:44] Job #21 erfolgreich abgeschlossen (Code 1).
+[20:46:44] Starte Job #22: D:\Movie\Avangers\Thunderbolts.2025.2160p.iT.WEB-DL.DV.HDR10+[Ben The Men].mp4 -> S:\SM-MOONDOOM\Movies\Thunderbolts.2025.2160p.iT.WEB-DL.DV.HDR10+[Ben The Men].mp4
+[20:46:44] robocopy robocopy D:\Movie\Avangers S:\SM-MOONDOOM\Movies Thunderbolts.2025.2160p.iT.WEB-DL.DV.HDR10+[Ben The Men].mp4 /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:46:45] Job #22: -------------------------------------------------------------------------------
+[20:46:45] Job #22:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:46:45] Job #22: -------------------------------------------------------------------------------
+[20:46:45] Job #22:   Gestartet: Donnerstag, 30. April 2026 20:46:44
+[20:46:45] Job #22:    Quelle : D:\Movie\Avangers\
+[20:46:45] Job #22:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:46:45] Job #22:     Dateien : Thunderbolts.2025.2160p.iT.WEB-DL.DV.HDR10+[Ben The Men].mp4
+[20:46:45] Job #22:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:46:45] Job #22: ------------------------------------------------------------------------------
+[20:46:45] Job #22: 	    Neue Datei		  24.0 g	D:\Movie\Avangers\Thunderbolts.2025.2160p.iT.WEB-DL.DV.HDR10+[Ben The Men].mp4
+[20:46:47] Job #22:   0%
+[20:46:49] Job #22:   1%
+[20:46:52] Job #22:   2%
+[20:46:54] Job #22:   3%
+[20:46:56] Job #22:   4%
+[20:46:58] Job #22:   5%
+[20:47:01] Job #22:   6%
+[20:47:03] Job #22:   7%
+[20:47:05] Job #22:   8%
+[20:47:07] Job #22:   9%
+[20:47:09] Job #22:  10%
+[20:47:12] Job #22:  11%
+[20:47:14] Job #22:  12%
+[20:47:16] Job #22:  13%
+[20:47:18] Job #22:  14%
+[20:47:21] Job #22:  15%
+[20:47:23] Job #22:  16%
+[20:47:25] Job #22:  17%
+[20:47:27] Job #22:  18%
+[20:47:30] Job #22:  19%
+[20:47:32] Job #22:  20%
+[20:47:34] Job #22:  21%
+[20:47:36] Job #22:  22%
+[20:47:39] Job #22:  23%
+[20:47:41] Job #22:  24%
+[20:47:43] Job #22:  25%
+[20:47:45] Job #22:  26%
+[20:47:48] Job #22:  27%
+[20:47:50] Job #22:  28%
+[20:47:52] Job #22:  29%
+[20:47:54] Job #22:  30%
+[20:47:57] Job #22:  31%
+[20:47:59] Job #22:  32%
+[20:48:01] Job #22:  33%
+[20:48:04] Job #22:  34%
+[20:48:06] Job #22:  35%
+[20:48:09] Job #22:  36%
+[20:48:11] Job #22:  37%
+[20:48:13] Job #22:  38%
+[20:48:15] Job #22:  39%
+[20:48:18] Job #22:  40%
+[20:48:20] Job #22:  41%
+[20:48:23] Job #22:  42%
+[20:48:25] Job #22:  43%
+[20:48:27] Job #22:  44%
+[20:48:30] Job #22:  45%
+[20:48:32] Job #22:  46%
+[20:48:34] Job #22:  47%
+[20:48:37] Job #22:  48%
+[20:48:39] Job #22:  49%
+[20:48:41] Job #22:  50%
+[20:48:44] Job #22:  51%
+[20:48:46] Job #22:  52%
+[20:48:48] Job #22:  53%
+[20:48:51] Job #22:  54%
+[20:48:53] Job #22:  55%
+[20:48:55] Job #22:  56%
+[20:48:58] Job #22:  57%
+[20:49:00] Job #22:  58%
+[20:49:02] Job #22:  59%
+[20:49:05] Job #22:  60%
+[20:49:07] Job #22:  61%
+[20:49:09] Job #22:  62%
+[20:49:12] Job #22:  63%
+[20:49:14] Job #22:  64%
+[20:49:16] Job #22:  65%
+[20:49:19] Job #22:  66%
+[20:49:21] Job #22:  67%
+[20:49:23] Job #22:  68%
+[20:49:26] Job #22:  69%
+[20:49:28] Job #22:  70%
+[20:49:30] Job #22:  71%
+[20:49:33] Job #22:  72%
+[20:49:35] Job #22:  73%
+[20:49:38] Job #22:  74%
+[20:49:40] Job #22:  75%
+[20:49:42] Job #22:  76%
+[20:49:44] Job #22:  77%
+[20:49:47] Job #22:  78%
+[20:49:49] Job #22:  79%
+[20:49:52] Job #22:  80%
+[20:49:54] Job #22:  81%
+[20:49:56] Job #22:  82%
+[20:49:59] Job #22:  83%
+[20:50:01] Job #22:  84%
+[20:50:03] Job #22:  85%
+[20:50:06] Job #22:  86%
+[20:50:08] Job #22:  87%
+[20:50:10] Job #22:  88%
+[20:50:13] Job #22:  89%
+[20:50:15] Job #22:  90%
+[20:50:17] Job #22:  91%
+[20:50:20] Job #22:  92%
+[20:50:22] Job #22:  93%
+[20:50:24] Job #22:  94%
+[20:50:27] Job #22:  95%
+[20:50:29] Job #22:  96%
+[20:50:31] Job #22:  97%
+[20:50:34] Job #22:  98%
+[20:50:36] Job #22:  99%
+[20:50:36] Job #22: 100%
+[20:50:36] Job #22: ------------------------------------------------------------------------------
+[20:50:36] Job #22:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:50:36] Job #22: Verzeich.:         1         1         1         0         0         0
+[20:50:36] Job #22:   Dateien:         1         1         0         0         0         0
+[20:50:36] Job #22:     Bytes:  24.026 g  24.026 g         0         0         0         0
+[20:50:36] Job #22:    Zeiten:   0:07:43   0:01:55                       0:00:00   0:01:55
+[20:50:36] Job #22: Geschwindigkeit:           222�867�107 Bytes/Sek.
+[20:50:36] Job #22: Geschwindigkeit:             12752,559 Megabytes/Min.
+[20:50:36] Job #22:    Beendet: Donnerstag, 30. April 2026 20:50:36
+[20:50:36] Job #22 erfolgreich abgeschlossen (Code 1).
+[20:50:36] Starte Job #23: D:\Movie\Batman\batman.begins.2005.2160p.uhd.bluray.x265-terminal.mkv -> S:\SM-MOONDOOM\Movies\batman.begins.2005.2160p.uhd.bluray.x265-terminal.mkv
+[20:50:36] robocopy robocopy D:\Movie\Batman S:\SM-MOONDOOM\Movies batman.begins.2005.2160p.uhd.bluray.x265-terminal.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:50:37] Job #23: -------------------------------------------------------------------------------
+[20:50:37] Job #23:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:50:37] Job #23: -------------------------------------------------------------------------------
+[20:50:37] Job #23:   Gestartet: Donnerstag, 30. April 2026 20:50:36
+[20:50:37] Job #23:    Quelle : D:\Movie\Batman\
+[20:50:37] Job #23:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:50:37] Job #23:     Dateien : batman.begins.2005.2160p.uhd.bluray.x265-terminal.mkv
+[20:50:37] Job #23:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:50:37] Job #23: ------------------------------------------------------------------------------
+[20:50:37] Job #23: 	    Neue Datei		  21.6 g	D:\Movie\Batman\batman.begins.2005.2160p.uhd.bluray.x265-terminal.mkv
+[20:50:39] Job #23:   0%
+[20:50:41] Job #23:   1%
+[20:50:42] Job #23:   2%
+[20:50:45] Job #23:   3%
+[20:50:47] Job #23:   4%
+[20:50:48] Job #23:   5%
+[20:50:50] Job #23:   6%
+[20:50:52] Job #23:   7%
+[20:50:54] Job #23:   8%
+[20:50:56] Job #23:   9%
+[20:50:58] Job #23:  10%
+[20:51:00] Job #23:  11%
+[20:51:02] Job #23:  12%
+[20:51:04] Job #23:  13%
+[20:51:06] Job #23:  14%
+[20:51:08] Job #23:  15%
+[20:51:10] Job #23:  16%
+[20:51:12] Job #23:  17%
+[20:51:14] Job #23:  18%
+[20:51:16] Job #23:  19%
+[20:51:18] Job #23:  20%
+[20:51:20] Job #23:  21%
+[20:51:22] Job #23:  22%
+[20:51:24] Job #23:  23%
+[20:51:26] Job #23:  24%
+[20:51:28] Job #23:  25%
+[20:51:30] Job #23:  26%
+[20:51:31] Job #23:  27%
+[20:51:34] Job #23:  28%
+[20:51:36] Job #23:  29%
+[20:51:37] Job #23:  30%
+[20:51:39] Job #23:  31%
+[20:51:41] Job #23:  32%
+[20:51:43] Job #23:  33%
+[20:51:45] Job #23:  34%
+[20:51:47] Job #23:  35%
+[20:51:49] Job #23:  36%
+[20:51:51] Job #23:  37%
+[20:51:53] Job #23:  38%
+[20:51:55] Job #23:  39%
+[20:51:57] Job #23:  40%
+[20:51:59] Job #23:  41%
+[20:52:01] Job #23:  42%
+[20:52:03] Job #23:  43%
+[20:52:05] Job #23:  44%
+[20:52:07] Job #23:  45%
+[20:52:09] Job #23:  46%
+[20:52:11] Job #23:  47%
+[20:52:13] Job #23:  48%
+[20:52:15] Job #23:  49%
+[20:52:17] Job #23:  50%
+[20:52:19] Job #23:  51%
+[20:52:21] Job #23:  52%
+[20:52:23] Job #23:  53%
+[20:52:25] Job #23:  54%
+[20:52:27] Job #23:  55%
+[20:52:29] Job #23:  56%
+[20:52:31] Job #23:  57%
+[20:52:33] Job #23:  58%
+[20:52:35] Job #23:  59%
+[20:52:37] Job #23:  60%
+[20:52:38] Job #23:  61%
+[20:52:40] Job #23:  62%
+[20:52:43] Job #23:  63%
+[20:52:44] Job #23:  64%
+[20:52:46] Job #23:  65%
+[20:52:48] Job #23:  66%
+[20:52:50] Job #23:  67%
+[20:52:52] Job #23:  68%
+[20:52:54] Job #23:  69%
+[20:52:56] Job #23:  70%
+[20:52:58] Job #23:  71%
+[20:53:00] Job #23:  72%
+[20:53:02] Job #23:  73%
+[20:53:04] Job #23:  74%
+[20:53:06] Job #23:  75%
+[20:53:08] Job #23:  76%
+[20:53:10] Job #23:  77%
+[20:53:12] Job #23:  78%
+[20:53:14] Job #23:  79%
+[20:53:16] Job #23:  80%
+[20:53:18] Job #23:  81%
+[20:53:20] Job #23:  82%
+[20:53:22] Job #23:  83%
+[20:53:24] Job #23:  84%
+[20:53:26] Job #23:  85%
+[20:53:28] Job #23:  86%
+[20:53:29] Job #23:  87%
+[20:53:31] Job #23:  88%
+[20:53:33] Job #23:  89%
+[20:53:35] Job #23:  90%
+[20:53:37] Job #23:  91%
+[20:53:39] Job #23:  92%
+[20:53:41] Job #23:  93%
+[20:53:43] Job #23:  94%
+[20:53:45] Job #23:  95%
+[20:53:47] Job #23:  96%
+[20:53:49] Job #23:  97%
+[20:53:51] Job #23:  98%
+[20:53:53] Job #23:  99%
+[20:53:53] Job #23: 100%
+[20:53:53] Job #23: ------------------------------------------------------------------------------
+[20:53:53] Job #23:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:53:53] Job #23: Verzeich.:         1         1         1         0         0         0
+[20:53:53] Job #23:   Dateien:         1         1         0         0         0         0
+[20:53:53] Job #23:     Bytes:  21.665 g  21.665 g         0         0         0         0
+[20:53:53] Job #23:    Zeiten:   0:06:32   0:01:38                       0:00:00   0:01:38
+[20:53:53] Job #23: Geschwindigkeit:           236�787�290 Bytes/Sek.
+[20:53:53] Job #23: Geschwindigkeit:             13549,077 Megabytes/Min.
+[20:53:53] Job #23:    Beendet: Donnerstag, 30. April 2026 20:53:53
+[20:53:53] Job #23 erfolgreich abgeschlossen (Code 1).
+[20:53:53] Starte Job #24: D:\Movie\Batman\The.Dark.Knight.2008.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv -> S:\SM-MOONDOOM\Movies\The.Dark.Knight.2008.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:53:53] robocopy robocopy D:\Movie\Batman S:\SM-MOONDOOM\Movies The.Dark.Knight.2008.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:53:54] Job #24: -------------------------------------------------------------------------------
+[20:53:54] Job #24:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:53:54] Job #24: -------------------------------------------------------------------------------
+[20:53:54] Job #24:   Gestartet: Donnerstag, 30. April 2026 20:53:53
+[20:53:54] Job #24:    Quelle : D:\Movie\Batman\
+[20:53:54] Job #24:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:53:54] Job #24:     Dateien : The.Dark.Knight.2008.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:53:54] Job #24:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:53:54] Job #24: ------------------------------------------------------------------------------
+[20:53:54] Job #24: 	    Neue Datei		   7.5 g	D:\Movie\Batman\The.Dark.Knight.2008.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].mkv
+[20:53:54] Job #24:   0%
+[20:53:55] Job #24:   1%
+[20:53:56] Job #24:   2%
+[20:53:56] Job #24:   3%
+[20:53:57] Job #24:   4%
+[20:53:58] Job #24:   5%
+[20:53:58] Job #24:   6%
+[20:53:59] Job #24:   7%
+[20:54:00] Job #24:   8%
+[20:54:00] Job #24:   9%
+[20:54:01] Job #24:  10%
+[20:54:02] Job #24:  11%
+[20:54:02] Job #24:  12%
+[20:54:03] Job #24:  13%
+[20:54:04] Job #24:  14%
+[20:54:05] Job #24:  15%
+[20:54:05] Job #24:  16%
+[20:54:06] Job #24:  17%
+[20:54:07] Job #24:  18%
+[20:54:07] Job #24:  19%
+[20:54:08] Job #24:  20%
+[20:54:08] Job #24:  21%
+[20:54:09] Job #24:  22%
+[20:54:10] Job #24:  23%
+[20:54:11] Job #24:  24%
+[20:54:11] Job #24:  25%
+[20:54:12] Job #24:  26%
+[20:54:13] Job #24:  27%
+[20:54:13] Job #24:  28%
+[20:54:14] Job #24:  29%
+[20:54:15] Job #24:  30%
+[20:54:15] Job #24:  31%
+[20:54:16] Job #24:  32%
+[20:54:17] Job #24:  33%
+[20:54:18] Job #24:  34%
+[20:54:18] Job #24:  35%
+[20:54:19] Job #24:  36%
+[20:54:19] Job #24:  37%
+[20:54:20] Job #24:  38%
+[20:54:21] Job #24:  39%
+[20:54:22] Job #24:  40%
+[20:54:22] Job #24:  41%
+[20:54:23] Job #24:  42%
+[20:54:24] Job #24:  43%
+[20:54:25] Job #24:  44%
+[20:54:26] Job #24:  45%
+[20:54:26] Job #24:  46%
+[20:54:26] Job #24:  47%
+[20:54:27] Job #24:  48%
+[20:54:28] Job #24:  49%
+[20:54:29] Job #24:  50%
+[20:54:29] Job #24:  51%
+[20:54:30] Job #24:  52%
+[20:54:30] Job #24:  53%
+[20:54:31] Job #24:  54%
+[20:54:32] Job #24:  55%
+[20:54:32] Job #24:  56%
+[20:54:33] Job #24:  57%
+[20:54:34] Job #24:  58%
+[20:54:35] Job #24:  59%
+[20:54:35] Job #24:  60%
+[20:54:36] Job #24:  61%
+[20:54:37] Job #24:  62%
+[20:54:37] Job #24:  63%
+[20:54:38] Job #24:  64%
+[20:54:39] Job #24:  65%
+[20:54:39] Job #24:  66%
+[20:54:40] Job #24:  67%
+[20:54:41] Job #24:  68%
+[20:54:41] Job #24:  69%
+[20:54:42] Job #24:  70%
+[20:54:43] Job #24:  71%
+[20:54:43] Job #24:  72%
+[20:54:44] Job #24:  73%
+[20:54:45] Job #24:  74%
+[20:54:45] Job #24:  75%
+[20:54:46] Job #24:  76%
+[20:54:47] Job #24:  77%
+[20:54:47] Job #24:  78%
+[20:54:48] Job #24:  79%
+[20:54:49] Job #24:  80%
+[20:54:50] Job #24:  81%
+[20:54:50] Job #24:  82%
+[20:54:51] Job #24:  83%
+[20:54:51] Job #24:  84%
+[20:54:52] Job #24:  85%
+[20:54:53] Job #24:  86%
+[20:54:54] Job #24:  87%
+[20:54:54] Job #24:  88%
+[20:54:55] Job #24:  89%
+[20:54:56] Job #24:  90%
+[20:54:56] Job #24:  91%
+[20:54:57] Job #24:  92%
+[20:54:58] Job #24:  93%
+[20:54:58] Job #24:  94%
+[20:54:59] Job #24:  95%
+[20:55:00] Job #24:  96%
+[20:55:01] Job #24:  97%
+[20:55:01] Job #24:  98%
+[20:55:02] Job #24:  99%
+[20:55:02] Job #24: 100%
+[20:55:02] Job #24: ------------------------------------------------------------------------------
+[20:55:02] Job #24:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:55:02] Job #24: Verzeich.:         1         1         1         0         0         0
+[20:55:02] Job #24:   Dateien:         1         1         0         0         0         0
+[20:55:02] Job #24:     Bytes:   7.523 g   7.523 g         0         0         0         0
+[20:55:02] Job #24:    Zeiten:   0:02:16   0:00:34                       0:00:00   0:00:34
+[20:55:02] Job #24: Geschwindigkeit:           236�236�403 Bytes/Sek.
+[20:55:02] Job #24: Geschwindigkeit:             13517,556 Megabytes/Min.
+[20:55:02] Job #24:    Beendet: Donnerstag, 30. April 2026 20:55:02
+[20:55:02] Job #24 erfolgreich abgeschlossen (Code 1).
+[20:55:02] Starte Job #25: D:\Movie\Batman\the.dark.knight.rises.2012.rerip.2160p.uhd.bluray.x265-terminal.mkv -> S:\SM-MOONDOOM\Movies\the.dark.knight.rises.2012.rerip.2160p.uhd.bluray.x265-terminal.mkv
+[20:55:02] robocopy robocopy D:\Movie\Batman S:\SM-MOONDOOM\Movies the.dark.knight.rises.2012.rerip.2160p.uhd.bluray.x265-terminal.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:55:03] Job #25: -------------------------------------------------------------------------------
+[20:55:03] Job #25:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:55:03] Job #25: -------------------------------------------------------------------------------
+[20:55:03] Job #25:   Gestartet: Donnerstag, 30. April 2026 20:55:02
+[20:55:03] Job #25:    Quelle : D:\Movie\Batman\
+[20:55:03] Job #25:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:55:03] Job #25:     Dateien : the.dark.knight.rises.2012.rerip.2160p.uhd.bluray.x265-terminal.mkv
+[20:55:03] Job #25:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:55:03] Job #25: ------------------------------------------------------------------------------
+[20:55:03] Job #25: 	    Neue Datei		  23.5 g	D:\Movie\Batman\the.dark.knight.rises.2012.rerip.2160p.uhd.bluray.x265-terminal.mkv
+[20:55:05] Job #25:   0%
+[20:55:07] Job #25:   1%
+[20:55:09] Job #25:   2%
+[20:55:11] Job #25:   3%
+[20:55:13] Job #25:   4%
+[20:55:15] Job #25:   5%
+[20:55:18] Job #25:   6%
+[20:55:20] Job #25:   7%
+[20:55:22] Job #25:   8%
+[20:55:24] Job #25:   9%
+[20:55:26] Job #25:  10%
+[20:55:28] Job #25:  11%
+[20:55:30] Job #25:  12%
+[20:55:32] Job #25:  13%
+[20:55:34] Job #25:  14%
+[20:55:37] Job #25:  15%
+[20:55:39] Job #25:  16%
+[20:55:41] Job #25:  17%
+[20:55:43] Job #25:  18%
+[20:55:45] Job #25:  19%
+[20:55:47] Job #25:  20%
+[20:55:49] Job #25:  21%
+[20:55:52] Job #25:  22%
+[20:55:54] Job #25:  23%
+[20:55:56] Job #25:  24%
+[20:55:58] Job #25:  25%
+[20:56:00] Job #25:  26%
+[20:56:02] Job #25:  27%
+[20:56:04] Job #25:  28%
+[20:56:07] Job #25:  29%
+[20:56:09] Job #25:  30%
+[20:56:11] Job #25:  31%
+[20:56:13] Job #25:  32%
+[20:56:15] Job #25:  33%
+[20:56:17] Job #25:  34%
+[20:56:19] Job #25:  35%
+[20:56:21] Job #25:  36%
+[20:56:24] Job #25:  37%
+[20:56:26] Job #25:  38%
+[20:56:28] Job #25:  39%
+[20:56:30] Job #25:  40%
+[20:56:32] Job #25:  41%
+[20:56:34] Job #25:  42%
+[20:56:37] Job #25:  43%
+[20:56:39] Job #25:  44%
+[20:56:41] Job #25:  45%
+[20:56:43] Job #25:  46%
+[20:56:45] Job #25:  47%
+[20:56:47] Job #25:  48%
+[20:56:49] Job #25:  49%
+[20:56:51] Job #25:  50%
+[20:56:54] Job #25:  51%
+[20:56:56] Job #25:  52%
+[20:56:58] Job #25:  53%
+[20:57:00] Job #25:  54%
+[20:57:02] Job #25:  55%
+[20:57:04] Job #25:  56%
+[20:57:07] Job #25:  57%
+[20:57:09] Job #25:  58%
+[20:57:11] Job #25:  59%
+[20:57:13] Job #25:  60%
+[20:57:15] Job #25:  61%
+[20:57:17] Job #25:  62%
+[20:57:19] Job #25:  63%
+[20:57:22] Job #25:  64%
+[20:57:24] Job #25:  65%
+[20:57:26] Job #25:  66%
+[20:57:28] Job #25:  67%
+[20:57:30] Job #25:  68%
+[20:57:32] Job #25:  69%
+[20:57:34] Job #25:  70%
+[20:57:36] Job #25:  71%
+[20:57:38] Job #25:  72%
+[20:57:41] Job #25:  73%
+[20:57:43] Job #25:  74%
+[20:57:45] Job #25:  75%
+[20:57:47] Job #25:  76%
+[20:57:49] Job #25:  77%
+[20:57:51] Job #25:  78%
+[20:57:53] Job #25:  79%
+[20:57:56] Job #25:  80%
+[20:57:58] Job #25:  81%
+[20:58:00] Job #25:  82%
+[20:58:02] Job #25:  83%
+[20:58:04] Job #25:  84%
+[20:58:06] Job #25:  85%
+[20:58:08] Job #25:  86%
+[20:58:10] Job #25:  87%
+[20:58:13] Job #25:  88%
+[20:58:15] Job #25:  89%
+[20:58:17] Job #25:  90%
+[20:58:19] Job #25:  91%
+[20:58:21] Job #25:  92%
+[20:58:23] Job #25:  93%
+[20:58:25] Job #25:  94%
+[20:58:28] Job #25:  95%
+[20:58:30] Job #25:  96%
+[20:58:32] Job #25:  97%
+[20:58:34] Job #25:  98%
+[20:58:36] Job #25:  99%
+[20:58:36] Job #25: 100%
+[20:58:36] Job #25: ------------------------------------------------------------------------------
+[20:58:36] Job #25:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[20:58:36] Job #25: Verzeich.:         1         1         1         0         0         0
+[20:58:36] Job #25:   Dateien:         1         1         0         0         0         0
+[20:58:36] Job #25:     Bytes:  23.539 g  23.539 g         0         0         0         0
+[20:58:36] Job #25:    Zeiten:   0:07:07   0:01:46                       0:00:00   0:01:46
+[20:58:36] Job #25: Geschwindigkeit:           236�427�220 Bytes/Sek.
+[20:58:36] Job #25: Geschwindigkeit:             13528,474 Megabytes/Min.
+[20:58:36] Job #25:    Beendet: Donnerstag, 30. April 2026 20:58:36
+[20:58:36] Job #25 erfolgreich abgeschlossen (Code 1).
+[20:58:36] Starte Job #26: G:\Movies Temporär\Extraction.2.2023.2160p.NF.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-FLUX.mkv -> S:\SM-MOONDOOM\Movies\Extraction.2.2023.2160p.NF.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-FLUX.mkv
+[20:58:36] robocopy robocopy G:\Movies Temporär S:\SM-MOONDOOM\Movies Extraction.2.2023.2160p.NF.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-FLUX.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[20:58:37] Job #26: -------------------------------------------------------------------------------
+[20:58:37] Job #26:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[20:58:37] Job #26: -------------------------------------------------------------------------------
+[20:58:37] Job #26:   Gestartet: Donnerstag, 30. April 2026 20:58:37
+[20:58:37] Job #26:    Quelle : G:\Movies Tempor�r\
+[20:58:37] Job #26:      Ziel : S:\SM-MOONDOOM\Movies\
+[20:58:37] Job #26:     Dateien : Extraction.2.2023.2160p.NF.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-FLUX.mkv
+[20:58:37] Job #26:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[20:58:37] Job #26: ------------------------------------------------------------------------------
+[20:58:37] Job #26: 	    Neue Datei		  17.0 g	G:\Movies Tempor�r\Extraction.2.2023.2160p.NF.WEB-DL.DDP5.1.Atmos.DV.HDR.H.265-FLUX.mkv
+[20:58:38] Job #26:   0%
+[20:58:40] Job #26:   1%
+[20:58:41] Job #26:   2%
+[20:58:43] Job #26:   3%
+[20:58:45] Job #26:   4%
+[20:58:46] Job #26:   5%
+[20:58:48] Job #26:   6%
+[20:58:49] Job #26:   7%
+[20:58:51] Job #26:   8%
+[20:58:52] Job #26:   9%
+[20:58:54] Job #26:  10%
+[20:58:55] Job #26:  11%
+[20:58:57] Job #26:  12%
+[20:58:58] Job #26:  13%
+[20:59:00] Job #26:  14%
+[20:59:01] Job #26:  15%
+[20:59:03] Job #26:  16%
+[20:59:05] Job #26:  17%
+[20:59:06] Job #26:  18%
+[20:59:08] Job #26:  19%
+[20:59:09] Job #26:  20%
+[20:59:11] Job #26:  21%
+[20:59:12] Job #26:  22%
+[20:59:14] Job #26:  23%
+[20:59:16] Job #26:  24%
+[20:59:17] Job #26:  25%
+[20:59:19] Job #26:  26%
+[20:59:20] Job #26:  27%
+[20:59:22] Job #26:  28%
+[20:59:23] Job #26:  29%
+[20:59:25] Job #26:  30%
+[20:59:26] Job #26:  31%
+[20:59:28] Job #26:  32%
+[20:59:29] Job #26:  33%
+[20:59:31] Job #26:  34%
+[20:59:32] Job #26:  35%
+[20:59:34] Job #26:  36%
+[20:59:36] Job #26:  37%
+[20:59:37] Job #26:  38%
+[20:59:39] Job #26:  39%
+[20:59:40] Job #26:  40%
+[20:59:42] Job #26:  41%
+[20:59:43] Job #26:  42%
+[20:59:45] Job #26:  43%
+[20:59:47] Job #26:  44%
+[20:59:48] Job #26:  45%
+[20:59:49] Job #26:  46%
+[20:59:51] Job #26:  47%
+[20:59:53] Job #26:  48%
+[20:59:54] Job #26:  49%
+[20:59:56] Job #26:  50%
+[20:59:57] Job #26:  51%
+[20:59:59] Job #26:  52%
+[21:00:00] Job #26:  53%
+[21:00:02] Job #26:  54%
+[21:00:03] Job #26:  55%
+[21:00:05] Job #26:  56%
+[21:00:07] Job #26:  57%
+[21:00:08] Job #26:  58%
+[21:00:10] Job #26:  59%
+[21:00:11] Job #26:  60%
+[21:00:13] Job #26:  61%
+[21:00:14] Job #26:  62%
+[21:00:16] Job #26:  63%
+[21:00:17] Job #26:  64%
+[21:00:19] Job #26:  65%
+[21:00:20] Job #26:  66%
+[21:00:22] Job #26:  67%
+[21:00:23] Job #26:  68%
+[21:00:25] Job #26:  69%
+[21:00:27] Job #26:  70%
+[21:00:28] Job #26:  71%
+[21:00:30] Job #26:  72%
+[21:00:31] Job #26:  73%
+[21:00:33] Job #26:  74%
+[21:00:34] Job #26:  75%
+[21:00:36] Job #26:  76%
+[21:00:37] Job #26:  77%
+[21:00:39] Job #26:  78%
+[21:00:40] Job #26:  79%
+[21:00:42] Job #26:  80%
+[21:00:44] Job #26:  81%
+[21:00:45] Job #26:  82%
+[21:00:47] Job #26:  83%
+[21:00:48] Job #26:  84%
+[21:00:50] Job #26:  85%
+[21:00:51] Job #26:  86%
+[21:00:53] Job #26:  87%
+[21:00:54] Job #26:  88%
+[21:00:56] Job #26:  89%
+[21:00:58] Job #26:  90%
+[21:00:59] Job #26:  91%
+[21:01:01] Job #26:  92%
+[21:01:02] Job #26:  93%
+[21:01:04] Job #26:  94%
+[21:01:05] Job #26:  95%
+[21:01:07] Job #26:  96%
+[21:01:08] Job #26:  97%
+[21:01:10] Job #26:  98%
+[21:01:11] Job #26:  99%
+[21:01:11] Job #26: 100%
+[21:01:12] Job #26: ------------------------------------------------------------------------------
+[21:01:12] Job #26:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[21:01:12] Job #26: Verzeich.:         1         1         1         0         0         0
+[21:01:12] Job #26:   Dateien:         1         1         0         0         0         0
+[21:01:12] Job #26:     Bytes:  17.091 g  17.091 g         0         0         0         0
+[21:01:12] Job #26:    Zeiten:   0:05:09   0:01:17                       0:00:00   0:01:17
+[21:01:12] Job #26: Geschwindigkeit:           237�137�845 Bytes/Sek.
+[21:01:12] Job #26: Geschwindigkeit:             13569,137 Megabytes/Min.
+[21:01:12] Job #26:    Beendet: Donnerstag, 30. April 2026 21:01:11
+[21:01:12] Job #26 erfolgreich abgeschlossen (Code 1).
+[21:01:12] Starte Job #27: G:\Movies Temporär\extraction.2020.2160p.web.h265-slot.mkv -> S:\SM-MOONDOOM\Movies\extraction.2020.2160p.web.h265-slot.mkv
+[21:01:12] robocopy robocopy G:\Movies Temporär S:\SM-MOONDOOM\Movies extraction.2020.2160p.web.h265-slot.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[21:01:12] Job #27: -------------------------------------------------------------------------------
+[21:01:12] Job #27:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[21:01:12] Job #27: -------------------------------------------------------------------------------
+[21:01:12] Job #27:   Gestartet: Donnerstag, 30. April 2026 21:01:12
+[21:01:12] Job #27:    Quelle : G:\Movies Tempor�r\
+[21:01:12] Job #27:      Ziel : S:\SM-MOONDOOM\Movies\
+[21:01:12] Job #27:     Dateien : extraction.2020.2160p.web.h265-slot.mkv
+[21:01:12] Job #27:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[21:01:12] Job #27: ------------------------------------------------------------------------------
+[21:01:12] Job #27: 	    Neue Datei		  10.2 g	G:\Movies Tempor�r\extraction.2020.2160p.web.h265-slot.mkv
+[21:01:13] Job #27:   0%
+[21:01:14] Job #27:   1%
+[21:01:15] Job #27:   2%
+[21:01:16] Job #27:   3%
+[21:01:17] Job #27:   4%
+[21:01:18] Job #27:   5%
+[21:01:19] Job #27:   6%
+[21:01:19] Job #27:   7%
+[21:01:20] Job #27:   8%
+[21:01:21] Job #27:   9%
+[21:01:22] Job #27:  10%
+[21:01:23] Job #27:  11%
+[21:01:24] Job #27:  12%
+[21:01:25] Job #27:  13%
+[21:01:26] Job #27:  14%
+[21:01:27] Job #27:  15%
+[21:01:28] Job #27:  16%
+[21:01:29] Job #27:  17%
+[21:01:30] Job #27:  18%
+[21:01:31] Job #27:  19%
+[21:01:32] Job #27:  20%
+[21:01:32] Job #27:  21%
+[21:01:33] Job #27:  22%
+[21:01:34] Job #27:  23%
+[21:01:35] Job #27:  24%
+[21:01:36] Job #27:  25%
+[21:01:37] Job #27:  26%
+[21:01:38] Job #27:  27%
+[21:01:39] Job #27:  28%
+[21:01:40] Job #27:  29%
+[21:01:41] Job #27:  30%
+[21:01:42] Job #27:  31%
+[21:01:43] Job #27:  32%
+[21:01:44] Job #27:  33%
+[21:01:45] Job #27:  34%
+[21:01:45] Job #27:  35%
+[21:01:46] Job #27:  36%
+[21:01:47] Job #27:  37%
+[21:01:48] Job #27:  38%
+[21:01:49] Job #27:  39%
+[21:01:50] Job #27:  40%
+[21:01:51] Job #27:  41%
+[21:01:52] Job #27:  42%
+[21:01:53] Job #27:  43%
+[21:01:54] Job #27:  44%
+[21:01:55] Job #27:  45%
+[21:01:56] Job #27:  46%
+[21:01:57] Job #27:  47%
+[21:01:58] Job #27:  48%
+[21:01:58] Job #27:  49%
+[21:02:00] Job #27:  50%
+[21:02:00] Job #27:  51%
+[21:02:01] Job #27:  52%
+[21:02:02] Job #27:  53%
+[21:02:03] Job #27:  54%
+[21:02:04] Job #27:  55%
+[21:02:05] Job #27:  56%
+[21:02:06] Job #27:  57%
+[21:02:07] Job #27:  58%
+[21:02:08] Job #27:  59%
+[21:02:09] Job #27:  60%
+[21:02:10] Job #27:  61%
+[21:02:11] Job #27:  62%
+[21:02:12] Job #27:  63%
+[21:02:12] Job #27:  64%
+[21:02:13] Job #27:  65%
+[21:02:14] Job #27:  66%
+[21:02:15] Job #27:  67%
+[21:02:16] Job #27:  68%
+[21:02:17] Job #27:  69%
+[21:02:18] Job #27:  70%
+[21:02:19] Job #27:  71%
+[21:02:20] Job #27:  72%
+[21:02:21] Job #27:  73%
+[21:02:22] Job #27:  74%
+[21:02:23] Job #27:  75%
+[21:02:24] Job #27:  76%
+[21:02:25] Job #27:  77%
+[21:02:25] Job #27:  78%
+[21:02:26] Job #27:  79%
+[21:02:28] Job #27:  80%
+[21:02:28] Job #27:  81%
+[21:02:29] Job #27:  82%
+[21:02:30] Job #27:  83%
+[21:02:31] Job #27:  84%
+[21:02:32] Job #27:  85%
+[21:02:33] Job #27:  86%
+[21:02:34] Job #27:  87%
+[21:02:35] Job #27:  88%
+[21:02:36] Job #27:  89%
+[21:02:37] Job #27:  90%
+[21:02:38] Job #27:  91%
+[21:02:38] Job #27:  92%
+[21:02:39] Job #27:  93%
+[21:02:40] Job #27:  94%
+[21:02:41] Job #27:  95%
+[21:02:42] Job #27:  96%
+[21:02:43] Job #27:  97%
+[21:02:44] Job #27:  98%
+[21:02:45] Job #27:  99%
+[21:02:45] Job #27: 100%
+[21:02:45] Job #27: ------------------------------------------------------------------------------
+[21:02:45] Job #27:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[21:02:45] Job #27: Verzeich.:         1         1         1         0         0         0
+[21:02:45] Job #27:   Dateien:         1         1         0         0         0         0
+[21:02:45] Job #27:     Bytes:  10.279 g  10.279 g         0         0         0         0
+[21:02:45] Job #27:    Zeiten:   0:03:06   0:00:46                       0:00:00   0:00:46
+[21:02:45] Job #27: Geschwindigkeit:           237�130�379 Bytes/Sek.
+[21:02:45] Job #27: Geschwindigkeit:             13568,709 Megabytes/Min.
+[21:02:45] Job #27:    Beendet: Donnerstag, 30. April 2026 21:02:45
+[21:02:45] Job #27 erfolgreich abgeschlossen (Code 1).
+[21:02:45] Starte Job #28: G:\Movies Temporär\Spider-Man.Across.The.Spider-Verse.2023.REAL.HDR.2160p.WEB.h265-ETHEL.mkv -> S:\SM-MOONDOOM\Movies\Spider-Man.Across.The.Spider-Verse.2023.REAL.HDR.2160p.WEB.h265-ETHEL.mkv
+[21:02:45] robocopy robocopy G:\Movies Temporär S:\SM-MOONDOOM\Movies Spider-Man.Across.The.Spider-Verse.2023.REAL.HDR.2160p.WEB.h265-ETHEL.mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[21:02:46] Job #28: -------------------------------------------------------------------------------
+[21:02:46] Job #28:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[21:02:46] Job #28: -------------------------------------------------------------------------------
+[21:02:46] Job #28:   Gestartet: Donnerstag, 30. April 2026 21:02:45
+[21:02:46] Job #28:    Quelle : G:\Movies Tempor�r\
+[21:02:46] Job #28:      Ziel : S:\SM-MOONDOOM\Movies\
+[21:02:46] Job #28:     Dateien : Spider-Man.Across.The.Spider-Verse.2023.REAL.HDR.2160p.WEB.h265-ETHEL.mkv
+[21:02:46] Job #28:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[21:02:46] Job #28: ------------------------------------------------------------------------------
+[21:02:46] Job #28: 	    Neue Datei		  23.7 g	G:\Movies Tempor�r\Spider-Man.Across.The.Spider-Verse.2023.REAL.HDR.2160p.WEB.h265-ETHEL.mkv
+[21:02:48] Job #28:   0%
+[21:02:50] Job #28:   1%
+[21:02:52] Job #28:   2%
+[21:02:54] Job #28:   3%
+[21:02:56] Job #28:   4%
+[21:02:58] Job #28:   5%
+[21:03:01] Job #28:   6%
+[21:03:03] Job #28:   7%
+[21:03:05] Job #28:   8%
+[21:03:07] Job #28:   9%
+[21:03:09] Job #28:  10%
+[21:03:11] Job #28:  11%
+[21:03:14] Job #28:  12%
+[21:03:16] Job #28:  13%
+[21:03:18] Job #28:  14%
+[21:03:20] Job #28:  15%
+[21:03:22] Job #28:  16%
+[21:03:24] Job #28:  17%
+[21:03:26] Job #28:  18%
+[21:03:29] Job #28:  19%
+[21:03:31] Job #28:  20%
+[21:03:33] Job #28:  21%
+[21:03:35] Job #28:  22%
+[21:03:37] Job #28:  23%
+[21:03:39] Job #28:  24%
+[21:03:41] Job #28:  25%
+[21:03:44] Job #28:  26%
+[21:03:46] Job #28:  27%
+[21:03:48] Job #28:  28%
+[21:03:50] Job #28:  29%
+[21:03:52] Job #28:  30%
+[21:03:54] Job #28:  31%
+[21:03:56] Job #28:  32%
+[21:03:59] Job #28:  33%
+[21:04:01] Job #28:  34%
+[21:04:03] Job #28:  35%
+[21:04:05] Job #28:  36%
+[21:04:07] Job #28:  37%
+[21:04:09] Job #28:  38%
+[21:04:11] Job #28:  39%
+[21:04:14] Job #28:  40%
+[21:04:16] Job #28:  41%
+[21:04:18] Job #28:  42%
+[21:04:20] Job #28:  43%
+[21:04:22] Job #28:  44%
+[21:04:24] Job #28:  45%
+[21:04:26] Job #28:  46%
+[21:04:29] Job #28:  47%
+[21:04:31] Job #28:  48%
+[21:04:33] Job #28:  49%
+[21:04:35] Job #28:  50%
+[21:04:37] Job #28:  51%
+[21:04:39] Job #28:  52%
+[21:04:42] Job #28:  53%
+[21:04:44] Job #28:  54%
+[21:04:46] Job #28:  55%
+[21:04:48] Job #28:  56%
+[21:04:50] Job #28:  57%
+[21:04:52] Job #28:  58%
+[21:04:54] Job #28:  59%
+[21:04:57] Job #28:  60%
+[21:04:59] Job #28:  61%
+[21:05:01] Job #28:  62%
+[21:05:03] Job #28:  63%
+[21:05:05] Job #28:  64%
+[21:05:07] Job #28:  65%
+[21:05:09] Job #28:  66%
+[21:05:12] Job #28:  67%
+[21:05:14] Job #28:  68%
+[21:05:16] Job #28:  69%
+[21:05:18] Job #28:  70%
+[21:05:20] Job #28:  71%
+[21:05:22] Job #28:  72%
+[21:05:25] Job #28:  73%
+[21:05:27] Job #28:  74%
+[21:05:29] Job #28:  75%
+[21:05:31] Job #28:  76%
+[21:05:33] Job #28:  77%
+[21:05:35] Job #28:  78%
+[21:05:37] Job #28:  79%
+[21:05:40] Job #28:  80%
+[21:05:42] Job #28:  81%
+[21:05:44] Job #28:  82%
+[21:05:46] Job #28:  83%
+[21:05:48] Job #28:  84%
+[21:05:50] Job #28:  85%
+[21:05:52] Job #28:  86%
+[21:05:55] Job #28:  87%
+[21:05:57] Job #28:  88%
+[21:05:59] Job #28:  89%
+[21:06:01] Job #28:  90%
+[21:06:03] Job #28:  91%
+[21:06:05] Job #28:  92%
+[21:06:08] Job #28:  93%
+[21:06:10] Job #28:  94%
+[21:06:12] Job #28:  95%
+[21:06:14] Job #28:  96%
+[21:06:16] Job #28:  97%
+[21:06:18] Job #28:  98%
+[21:06:20] Job #28:  99%
+[21:06:20] Job #28: 100%
+[21:06:20] Job #28: ------------------------------------------------------------------------------
+[21:06:20] Job #28:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[21:06:20] Job #28: Verzeich.:         1         1         1         0         0         0
+[21:06:20] Job #28:   Dateien:         1         1         0         0         0         0
+[21:06:20] Job #28:     Bytes:  23.725 g  23.725 g         0         0         0         0
+[21:06:20] Job #28:    Zeiten:   0:07:09   0:01:47                       0:00:00   0:01:47
+[21:06:20] Job #28: Geschwindigkeit:           237�139�126 Bytes/Sek.
+[21:06:20] Job #28: Geschwindigkeit:             13569,210 Megabytes/Min.
+[21:06:20] Job #28:    Beendet: Donnerstag, 30. April 2026 21:06:20
+[21:06:20] Job #28 erfolgreich abgeschlossen (Code 1).
+[21:06:20] Kopiervorgang abgeschlossen.
+[21:06:20] Gemessene Transfergeschwindigkeit gespeichert: 111 MB/s.
+[21:06:21] Automatischer Plex-Refresh erfolgreich ausgelöst.

@@ -1,0 +1,131 @@
+[18:16:24] Kopiervorgang gestartet.
+[18:16:25] Starte Job #2: C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune -> Y:\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02
+[18:16:25] robocopy robocopy C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune Y:\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02 /E /MT:32 /J /R:1 /W:1 /Z /FFT /TEE
+[18:16:25] Job #2: -------------------------------------------------------------------------------
+[18:16:25] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[18:16:25] Job #2: -------------------------------------------------------------------------------
+[18:16:25] Job #2:   Gestartet: Mittwoch, 29. April 2026 18:16:25
+[18:16:25] Job #2:    Quelle : C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\
+[18:16:25] Job #2:      Ziel : Y:\Series\www UIndex org - Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR10Plus H 265 - Kitsune\Season 02\
+[18:16:25] Job #2:     Dateien : *.*
+[18:16:25] Job #2:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /Z /J /MT:32 /R:1 /W:1
+[18:16:25] Job #2: ------------------------------------------------------------------------------
+[18:16:25] Job #2: 	    Neue Datei		   4.5 g	C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune.mkv
+[18:16:28] Job #2:   0%
+[18:16:30] Job #2:   1%
+[18:16:32] Job #2:   2%
+[18:16:35] Job #2:   3%
+[18:16:37] Job #2:   4%
+[18:16:39] Job #2:   5%
+[18:16:42] Job #2:   6%
+[18:16:44] Job #2:   7%
+[18:16:46] Job #2:   8%
+[18:16:49] Job #2:   9%
+[18:16:51] Job #2:  10%
+[18:16:53] Job #2:  11%
+[18:16:55] Job #2:  12%
+[18:16:57] Job #2:  13%
+[18:17:01] Job #2:  14%
+[18:17:05] Job #2:  15%
+[18:17:08] Job #2:  16%
+[18:17:11] Job #2:  17%
+[18:17:13] Job #2:  18%
+[18:17:15] Job #2:  19%
+[18:17:20] Job #2:  20%
+[18:17:22] Job #2:  21%
+[18:17:24] Job #2:  22%
+[18:17:27] Job #2:  23%
+[18:17:29] Job #2:  24%
+[18:17:33] Job #2:  25%
+[18:17:36] Job #2:  26%
+[18:17:38] Job #2:  27%
+[18:17:41] Job #2:  28%
+[18:17:44] Job #2:  29%
+[18:17:47] Job #2:  30%
+[18:17:49] Job #2:  31%
+[18:17:54] Job #2:  32%
+[18:17:57] Job #2:  33%
+[18:18:01] Job #2:  34%
+[18:18:04] Job #2:  35%
+[18:18:07] Job #2:  36%
+[18:18:11] Job #2:  37%
+[18:18:14] Job #2:  38%
+[18:18:18] Job #2:  39%
+[18:18:22] Job #2:  40%
+[18:18:24] Job #2:  41%
+[18:18:28] Job #2:  42%
+[18:18:31] Job #2:  43%
+[18:18:36] Job #2:  44%
+[18:18:42] Job #2:  45%
+[18:18:46] Job #2:  46%
+[18:18:49] Job #2:  47%
+[18:18:55] Job #2:  48%
+[18:19:02] Job #2:  49%
+[18:19:05] Job #2:  50%
+[18:19:09] Job #2:  51%
+[18:19:17] Job #2:  52%
+[18:19:22] Job #2:  53%
+[18:19:25] Job #2:  54%
+[18:19:36] Job #2:  55%
+[18:19:41] Job #2:  56%
+[18:19:48] Job #2:  57%
+[18:19:55] Job #2:  58%
+[18:19:59] Job #2:  59%
+[18:20:06] Job #2:  60%
+[18:20:11] Job #2:  61%
+[18:20:17] Job #2:  62%
+[18:20:24] Job #2:  63%
+[18:20:30] Job #2:  64%
+[18:20:33] Job #2:  65%
+[18:20:38] Job #2:  66%
+[18:20:48] Job #2:  67%
+[18:20:50] Job #2:  68%
+[18:20:57] Job #2:  69%
+[18:21:05] Job #2:  70%
+[18:21:08] Job #2:  71%
+[18:21:17] Job #2:  72%
+[18:21:21] Job #2:  73%
+[18:21:28] Job #2:  74%
+[18:21:36] Job #2:  75%
+[18:21:43] Job #2:  76%
+[18:21:46] Job #2:  77%
+[18:21:50] Job #2:  78%
+[18:21:59] Job #2:  79%
+[18:22:02] Job #2:  80%
+[18:22:05] Job #2:  81%
+[18:22:12] Job #2:  82%
+[18:22:18] Job #2:  83%
+[18:22:21] Job #2:  84%
+[18:22:28] Job #2:  85%
+[18:22:34] Job #2:  86%
+[18:22:42] Job #2:  87%
+[18:22:49] Job #2:  88%
+[18:22:53] Job #2:  89%
+[18:22:57] Job #2:  90%
+[18:23:03] Job #2:  91%
+[18:23:10] Job #2:  92%
+[18:23:12] Job #2:  93%
+[18:23:20] Job #2:  94%
+[18:23:24] Job #2:  95%
+[18:23:30] Job #2:  96%
+[18:23:40] Job #2:  97%
+[18:23:44] Job #2:  98%
+[18:23:49] Job #2:  99%
+[18:23:49] Job #2: 100%
+[18:23:49] Job #2: 	    Neue Datei		    1330	C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune.mkv.nfo
+[18:23:49] Job #2: 100%
+[18:23:49] Job #2: 	    Neue Datei		     127	C:\Movies\Avengers\www.UIndex.org    -    Daredevil Born Again S02E07 The Hateful Darkness 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR10Plus H 265-Kitsune\Torrent Downloaded From     UIndex.org      .txt
+[18:23:49] Job #2: 100%
+[18:23:49] Job #2: ------------------------------------------------------------------------------
+[18:23:49] Job #2:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[18:23:49] Job #2: Verzeich.:         1         1         1         0         0         0
+[18:23:49] Job #2:   Dateien:         3         3         0         0         0         0
+[18:23:49] Job #2:     Bytes:   4.595 g   4.595 g         0         0         0         0
+[18:23:49] Job #2:    Zeiten:   0:14:46   0:03:41                       0:00:00   0:03:41
+[18:23:49] Job #2: Geschwindigkeit:           22�251�237 Bytes/Sek.
+[18:23:49] Job #2: Geschwindigkeit:             1273,226 Megabytes/Min.
+[18:23:49] Job #2:    Beendet: Mittwoch, 29. April 2026 18:23:48
+[18:23:49] Job #2 erfolgreich abgeschlossen (Code 1).
+[18:23:49] Kopiervorgang abgeschlossen.
+[18:23:49] Gemessene Transfergeschwindigkeit gespeichert: 11 MB/s.
+[18:23:49] Automatischer Plex-Refresh erfolgreich ausgelöst.

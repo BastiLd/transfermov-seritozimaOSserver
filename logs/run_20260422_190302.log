@@ -1,0 +1,127 @@
+[19:03:02] Kopiervorgang gestartet.
+[19:03:03] Starte Job #1: S:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune -> Y:\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02
+[19:03:03] robocopy robocopy S:\Movies Temporär\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune Y:\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02 /E /MT:32 /J /R:1 /W:1 /Z /FFT /TEE
+[19:03:03] Job #1: -------------------------------------------------------------------------------
+[19:03:03] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[19:03:03] Job #1: -------------------------------------------------------------------------------
+[19:03:03] Job #1:   Gestartet: Mittwoch, 22. April 2026 19:03:03
+[19:03:03] Job #1:    Quelle : S:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune\
+[19:03:03] Job #1:      Ziel : Y:\Series\www UIndex org - Daredevil Born Again S02E06 Requiem 2160p DSNP WEB - DL DDP5 1 Atmos DV HDR H 265 - Kitsune\Season 02\
+[19:03:03] Job #1:     Dateien : *.*
+[19:03:03] Job #1:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /Z /J /MT:32 /R:1 /W:1
+[19:03:03] Job #1: ------------------------------------------------------------------------------
+[19:03:03] Job #1: 	    Neue Datei		   5.0 g	S:\Movies Tempor�r\www.UIndex.org    -    Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune\Daredevil Born Again S02E06 Requiem 2160p DSNP WEB-DL DDP5 1 Atmos DV HDR H 265-Kitsune.mkv
+[19:03:06] Job #1:   0%
+[19:03:08] Job #1:   1%
+[19:03:10] Job #1:   2%
+[19:03:13] Job #1:   3%
+[19:03:15] Job #1:   4%
+[19:03:17] Job #1:   5%
+[19:03:20] Job #1:   6%
+[19:03:22] Job #1:   7%
+[19:03:24] Job #1:   8%
+[19:03:27] Job #1:   9%
+[19:03:29] Job #1:  10%
+[19:03:31] Job #1:  11%
+[19:03:34] Job #1:  12%
+[19:03:36] Job #1:  13%
+[19:03:38] Job #1:  14%
+[19:03:41] Job #1:  15%
+[19:03:43] Job #1:  16%
+[19:03:45] Job #1:  17%
+[19:03:48] Job #1:  18%
+[19:03:50] Job #1:  19%
+[19:03:52] Job #1:  20%
+[19:03:55] Job #1:  21%
+[19:03:57] Job #1:  22%
+[19:03:59] Job #1:  23%
+[19:04:02] Job #1:  24%
+[19:04:04] Job #1:  25%
+[19:04:06] Job #1:  26%
+[19:04:09] Job #1:  27%
+[19:04:11] Job #1:  28%
+[19:04:13] Job #1:  29%
+[19:04:16] Job #1:  30%
+[19:04:19] Job #1:  31%
+[19:04:23] Job #1:  32%
+[19:04:28] Job #1:  33%
+[19:04:33] Job #1:  34%
+[19:04:37] Job #1:  35%
+[19:04:40] Job #1:  36%
+[19:04:44] Job #1:  37%
+[19:04:47] Job #1:  38%
+[19:04:51] Job #1:  39%
+[19:04:55] Job #1:  40%
+[19:04:58] Job #1:  41%
+[19:05:01] Job #1:  42%
+[19:05:05] Job #1:  43%
+[19:05:08] Job #1:  44%
+[19:05:13] Job #1:  45%
+[19:05:16] Job #1:  46%
+[19:05:21] Job #1:  47%
+[19:05:26] Job #1:  48%
+[19:05:30] Job #1:  49%
+[19:05:36] Job #1:  50%
+[19:05:39] Job #1:  51%
+[19:05:43] Job #1:  52%
+[19:05:46] Job #1:  53%
+[19:05:49] Job #1:  54%
+[19:05:52] Job #1:  55%
+[19:05:59] Job #1:  56%
+[19:06:02] Job #1:  57%
+[19:06:07] Job #1:  58%
+[19:06:12] Job #1:  59%
+[19:06:17] Job #1:  60%
+[19:06:21] Job #1:  61%
+[19:06:26] Job #1:  62%
+[19:06:29] Job #1:  63%
+[19:06:33] Job #1:  64%
+[19:06:41] Job #1:  65%
+[19:06:45] Job #1:  66%
+[19:06:48] Job #1:  67%
+[19:06:51] Job #1:  68%
+[19:06:56] Job #1:  69%
+[19:06:59] Job #1:  70%
+[19:07:05] Job #1:  71%
+[19:07:09] Job #1:  72%
+[19:07:15] Job #1:  73%
+[19:07:18] Job #1:  74%
+[19:07:24] Job #1:  75%
+[19:07:29] Job #1:  76%
+[19:07:35] Job #1:  77%
+[19:07:41] Job #1:  78%
+[19:07:44] Job #1:  79%
+[19:07:49] Job #1:  80%
+[19:07:52] Job #1:  81%
+[19:07:56] Job #1:  82%
+[19:07:59] Job #1:  83%
+[19:08:04] Job #1:  84%
+[19:08:10] Job #1:  85%
+[19:08:13] Job #1:  86%
+[19:08:16] Job #1:  87%
+[19:08:20] Job #1:  88%
+[19:08:26] Job #1:  89%
+[19:08:32] Job #1:  90%
+[19:08:39] Job #1:  91%
+[19:08:43] Job #1:  92%
+[19:08:46] Job #1:  93%
+[19:08:51] Job #1:  94%
+[19:08:54] Job #1:  95%
+[19:08:57] Job #1:  96%
+[19:09:03] Job #1:  97%
+[19:09:08] Job #1:  98%
+[19:09:13] Job #1:  99%
+[19:09:13] Job #1: 100%
+[19:09:13] Job #1: ------------------------------------------------------------------------------
+[19:09:13] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[19:09:13] Job #1: Verzeich.:         1         1         1         0         0         0
+[19:09:13] Job #1:   Dateien:         1         1         0         0         0         0
+[19:09:13] Job #1:     Bytes:   5.043 g   5.043 g         0         0         0         0
+[19:09:13] Job #1:    Zeiten:   0:12:20   0:03:05                       0:00:00   0:03:05
+[19:09:13] Job #1: Geschwindigkeit:           29�271�968 Bytes/Sek.
+[19:09:13] Job #1: Geschwindigkeit:             1674,955 Megabytes/Min.
+[19:09:13] Job #1:    Beendet: Mittwoch, 22. April 2026 19:09:13
+[19:09:13] Job #1 erfolgreich abgeschlossen (Code 1).
+[19:09:13] Kopiervorgang abgeschlossen.
+[19:09:13] Gemessene Transfergeschwindigkeit gespeichert: 14 MB/s.
+[19:09:14] Automatischer Plex-Refresh erfolgreich ausgelöst.

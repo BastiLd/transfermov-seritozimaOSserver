@@ -1,0 +1,373 @@
+[23:41:29] Kopiervorgang gestartet.
+[23:41:30] Starte Job #3: G:\Movies Temporär\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne.mkv -> T:\TO-MOONDOOM\Movies\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne.mkv
+[23:41:30] robocopy robocopy G:\Movies Temporär\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne T:\TO-MOONDOOM\Movies Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne.mkv /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[23:41:30] Job #3: -------------------------------------------------------------------------------
+[23:41:30] Job #3:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[23:41:30] Job #3: -------------------------------------------------------------------------------
+[23:41:30] Job #3:   Gestartet: Freitag, 1. Mai 2026 23:41:30
+[23:41:30] Job #3:    Quelle : G:\Movies Tempor�r\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne\
+[23:41:30] Job #3:      Ziel : T:\TO-MOONDOOM\Movies\
+[23:41:30] Job #3:     Dateien : Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne.mkv
+[23:41:30] Job #3:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[23:41:30] Job #3: ------------------------------------------------------------------------------
+[23:41:30] Job #3: 	    Neue Datei		  20.1 g	G:\Movies Tempor�r\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne\Iron.Man.3.2013.UHD.BluRay.2160p.x265.HDR.DTS.5.1[En.Hi]-DTOne.mkv
+[23:41:32] Job #3:   0%
+[23:41:34] Job #3:   1%
+[23:41:36] Job #3:   2%
+[23:41:38] Job #3:   3%
+[23:41:39] Job #3:   4%
+[23:41:41] Job #3:   5%
+[23:41:43] Job #3:   6%
+[23:41:45] Job #3:   7%
+[23:41:47] Job #3:   8%
+[23:41:48] Job #3:   9%
+[23:41:50] Job #3:  10%
+[23:41:52] Job #3:  11%
+[23:41:54] Job #3:  12%
+[23:41:56] Job #3:  13%
+[23:41:58] Job #3:  14%
+[23:41:59] Job #3:  15%
+[23:42:01] Job #3:  16%
+[23:42:03] Job #3:  17%
+[23:42:05] Job #3:  18%
+[23:42:07] Job #3:  19%
+[23:42:09] Job #3:  20%
+[23:42:10] Job #3:  21%
+[23:42:12] Job #3:  22%
+[23:42:14] Job #3:  23%
+[23:42:16] Job #3:  24%
+[23:42:18] Job #3:  25%
+[23:42:20] Job #3:  26%
+[23:42:22] Job #3:  27%
+[23:42:24] Job #3:  28%
+[23:42:25] Job #3:  29%
+[23:42:27] Job #3:  30%
+[23:42:29] Job #3:  31%
+[23:42:31] Job #3:  32%
+[23:42:33] Job #3:  33%
+[23:42:34] Job #3:  34%
+[23:42:36] Job #3:  35%
+[23:42:38] Job #3:  36%
+[23:42:40] Job #3:  37%
+[23:42:42] Job #3:  38%
+[23:42:44] Job #3:  39%
+[23:42:45] Job #3:  40%
+[23:42:47] Job #3:  41%
+[23:42:49] Job #3:  42%
+[23:42:51] Job #3:  43%
+[23:42:53] Job #3:  44%
+[23:42:55] Job #3:  45%
+[23:42:56] Job #3:  46%
+[23:42:58] Job #3:  47%
+[23:43:00] Job #3:  48%
+[23:43:02] Job #3:  49%
+[23:43:04] Job #3:  50%
+[23:43:06] Job #3:  51%
+[23:43:07] Job #3:  52%
+[23:43:09] Job #3:  53%
+[23:43:11] Job #3:  54%
+[23:43:13] Job #3:  55%
+[23:43:15] Job #3:  56%
+[23:43:17] Job #3:  57%
+[23:43:18] Job #3:  58%
+[23:43:20] Job #3:  59%
+[23:43:22] Job #3:  60%
+[23:43:24] Job #3:  61%
+[23:43:26] Job #3:  62%
+[23:43:27] Job #3:  63%
+[23:43:29] Job #3:  64%
+[23:43:31] Job #3:  65%
+[23:43:33] Job #3:  66%
+[23:43:35] Job #3:  67%
+[23:43:37] Job #3:  68%
+[23:43:38] Job #3:  69%
+[23:43:40] Job #3:  70%
+[23:43:42] Job #3:  71%
+[23:43:44] Job #3:  72%
+[23:43:46] Job #3:  73%
+[23:43:47] Job #3:  74%
+[23:43:49] Job #3:  75%
+[23:43:51] Job #3:  76%
+[23:43:53] Job #3:  77%
+[23:43:55] Job #3:  78%
+[23:43:57] Job #3:  79%
+[23:43:58] Job #3:  80%
+[23:44:00] Job #3:  81%
+[23:44:02] Job #3:  82%
+[23:44:04] Job #3:  83%
+[23:44:06] Job #3:  84%
+[23:44:08] Job #3:  85%
+[23:44:09] Job #3:  86%
+[23:44:11] Job #3:  87%
+[23:44:13] Job #3:  88%
+[23:44:15] Job #3:  89%
+[23:44:17] Job #3:  90%
+[23:44:19] Job #3:  91%
+[23:44:20] Job #3:  92%
+[23:44:22] Job #3:  93%
+[23:44:24] Job #3:  94%
+[23:44:26] Job #3:  95%
+[23:44:28] Job #3:  96%
+[23:44:30] Job #3:  97%
+[23:44:31] Job #3:  98%
+[23:44:35] Job #3:  99%
+[23:44:35] Job #3: 100%
+[23:44:35] Job #3: ------------------------------------------------------------------------------
+[23:44:35] Job #3:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[23:44:35] Job #3: Verzeich.:         1         1         1         0         0         0
+[23:44:35] Job #3:   Dateien:         1         1         0         0         0         0
+[23:44:35] Job #3:     Bytes:  20.179 g  20.179 g         0         0         0         0
+[23:44:35] Job #3:    Zeiten:   0:06:09   0:01:32                       0:00:00   0:01:32
+[23:44:35] Job #3: Geschwindigkeit:           234�670�861 Bytes/Sek.
+[23:44:35] Job #3: Geschwindigkeit:             13427,975 Megabytes/Min.
+[23:44:35] Job #3:    Beendet: Freitag, 1. Mai 2026 23:44:35
+[23:44:35] Job #3 erfolgreich abgeschlossen (Code 1).
+[23:44:35] Starte Job #5: G:\Movies Temporär\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA.mkv -> T:\TO-MOONDOOM\Movies\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA.mkv
+[23:44:35] robocopy robocopy G:\Movies Temporär\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA T:\TO-MOONDOOM\Movies Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA.mkv /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[23:44:35] Job #5: -------------------------------------------------------------------------------
+[23:44:35] Job #5:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[23:44:35] Job #5: -------------------------------------------------------------------------------
+[23:44:35] Job #5:   Gestartet: Freitag, 1. Mai 2026 23:44:35
+[23:44:35] Job #5:    Quelle : G:\Movies Tempor�r\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA\
+[23:44:35] Job #5:      Ziel : T:\TO-MOONDOOM\Movies\
+[23:44:35] Job #5:     Dateien : Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA.mkv
+[23:44:35] Job #5:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[23:44:35] Job #5: ------------------------------------------------------------------------------
+[23:44:35] Job #5: 	    Neue Datei		   2.9 g	G:\Movies Tempor�r\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA\Black.Panther.2018.2160p.10bit.HDR.BluRay.8CH.x265.HEVC-PSA.mkv
+[23:44:37] Job #5:   0%
+[23:44:37] Job #5:   1%
+[23:44:37] Job #5:   2%
+[23:44:37] Job #5:   3%
+[23:44:37] Job #5:   4%
+[23:44:37] Job #5:   5%
+[23:44:37] Job #5:   6%
+[23:44:38] Job #5:   7%
+[23:44:38] Job #5:   8%
+[23:44:39] Job #5:   9%
+[23:44:39] Job #5:  10%
+[23:44:39] Job #5:  11%
+[23:44:39] Job #5:  12%
+[23:44:40] Job #5:  13%
+[23:44:40] Job #5:  14%
+[23:44:40] Job #5:  15%
+[23:44:40] Job #5:  16%
+[23:44:40] Job #5:  17%
+[23:44:41] Job #5:  18%
+[23:44:41] Job #5:  19%
+[23:44:41] Job #5:  20%
+[23:44:41] Job #5:  21%
+[23:44:42] Job #5:  22%
+[23:44:42] Job #5:  23%
+[23:44:42] Job #5:  24%
+[23:44:43] Job #5:  25%
+[23:44:43] Job #5:  26%
+[23:44:43] Job #5:  27%
+[23:44:43] Job #5:  28%
+[23:44:43] Job #5:  29%
+[23:44:44] Job #5:  30%
+[23:44:45] Job #5:  31%
+[23:44:45] Job #5:  32%
+[23:44:45] Job #5:  33%
+[23:44:45] Job #5:  34%
+[23:44:45] Job #5:  35%
+[23:44:45] Job #5:  36%
+[23:44:46] Job #5:  37%
+[23:44:46] Job #5:  38%
+[23:44:47] Job #5:  39%
+[23:44:47] Job #5:  40%
+[23:44:47] Job #5:  41%
+[23:44:47] Job #5:  42%
+[23:44:48] Job #5:  43%
+[23:44:48] Job #5:  44%
+[23:44:48] Job #5:  45%
+[23:44:48] Job #5:  46%
+[23:44:49] Job #5:  47%
+[23:44:49] Job #5:  48%
+[23:44:49] Job #5:  49%
+[23:44:50] Job #5:  50%
+[23:44:50] Job #5:  51%
+[23:44:50] Job #5:  52%
+[23:44:50] Job #5:  53%
+[23:44:50] Job #5:  54%
+[23:44:51] Job #5:  55%
+[23:44:51] Job #5:  56%
+[23:44:51] Job #5:  57%
+[23:44:51] Job #5:  58%
+[23:44:51] Job #5:  59%
+[23:44:52] Job #5:  60%
+[23:44:52] Job #5:  61%
+[23:44:53] Job #5:  62%
+[23:44:53] Job #5:  63%
+[23:44:53] Job #5:  64%
+[23:44:53] Job #5:  65%
+[23:44:54] Job #5:  66%
+[23:44:54] Job #5:  67%
+[23:44:54] Job #5:  68%
+[23:44:54] Job #5:  69%
+[23:44:54] Job #5:  70%
+[23:44:55] Job #5:  71%
+[23:44:55] Job #5:  72%
+[23:44:55] Job #5:  73%
+[23:44:55] Job #5:  74%
+[23:44:56] Job #5:  75%
+[23:44:56] Job #5:  76%
+[23:44:56] Job #5:  77%
+[23:44:56] Job #5:  78%
+[23:44:57] Job #5:  79%
+[23:44:57] Job #5:  80%
+[23:44:58] Job #5:  81%
+[23:44:58] Job #5:  82%
+[23:44:58] Job #5:  83%
+[23:44:59] Job #5:  84%
+[23:44:59] Job #5:  85%
+[23:44:59] Job #5:  86%
+[23:45:00] Job #5:  87%
+[23:45:00] Job #5:  88%
+[23:45:00] Job #5:  89%
+[23:45:00] Job #5:  90%
+[23:45:00] Job #5:  91%
+[23:45:00] Job #5:  92%
+[23:45:01] Job #5:  93%
+[23:45:01] Job #5:  94%
+[23:45:01] Job #5:  95%
+[23:45:02] Job #5:  96%
+[23:45:02] Job #5:  97%
+[23:45:02] Job #5:  98%
+[23:45:02] Job #5:  99%
+[23:45:02] Job #5: 100%
+[23:45:02] Job #5: ------------------------------------------------------------------------------
+[23:45:02] Job #5:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[23:45:02] Job #5: Verzeich.:         1         1         1         0         0         0
+[23:45:02] Job #5:   Dateien:         1         1         0         0         0         0
+[23:45:02] Job #5:     Bytes:   2.946 g   2.946 g         0         0         0         0
+[23:45:02] Job #5:    Zeiten:   0:00:53   0:00:13                       0:00:00   0:00:13
+[23:45:02] Job #5: Geschwindigkeit:           235�127�891 Bytes/Sek.
+[23:45:02] Job #5: Geschwindigkeit:             13454,126 Megabytes/Min.
+[23:45:02] Job #5:    Beendet: Freitag, 1. Mai 2026 23:45:02
+[23:45:03] Job #5 erfolgreich abgeschlossen (Code 1).
+[23:45:03] Starte Job #4: G:\Movies Temporär\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB.mkv -> T:\TO-MOONDOOM\Movies\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB.mkv
+[23:45:03] robocopy robocopy G:\Movies Temporär\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB T:\TO-MOONDOOM\Movies Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB.mkv /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[23:45:03] Job #4: -------------------------------------------------------------------------------
+[23:45:03] Job #4:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[23:45:03] Job #4: -------------------------------------------------------------------------------
+[23:45:03] Job #4:   Gestartet: Freitag, 1. Mai 2026 23:45:03
+[23:45:03] Job #4:    Quelle : G:\Movies Tempor�r\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB\
+[23:45:03] Job #4:      Ziel : T:\TO-MOONDOOM\Movies\
+[23:45:03] Job #4:     Dateien : Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB.mkv
+[23:45:03] Job #4:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[23:45:03] Job #4: ------------------------------------------------------------------------------
+[23:45:03] Job #4: 	    Neue Datei		  20.6 g	G:\Movies Tempor�r\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB\Black Panther Wakanda Forever 2022 4K UHD BluRay 2160p HDR10 DTS-HD MA TrueHD 7.1 Atmos x265-MgB.mkv
+[23:45:05] Job #4:   0%
+[23:45:07] Job #4:   1%
+[23:45:09] Job #4:   2%
+[23:45:10] Job #4:   3%
+[23:45:12] Job #4:   4%
+[23:45:14] Job #4:   5%
+[23:45:16] Job #4:   6%
+[23:45:18] Job #4:   7%
+[23:45:20] Job #4:   8%
+[23:45:22] Job #4:   9%
+[23:45:24] Job #4:  10%
+[23:45:25] Job #4:  11%
+[23:45:27] Job #4:  12%
+[23:45:29] Job #4:  13%
+[23:45:31] Job #4:  14%
+[23:45:33] Job #4:  15%
+[23:45:35] Job #4:  16%
+[23:45:37] Job #4:  17%
+[23:45:39] Job #4:  18%
+[23:45:40] Job #4:  19%
+[23:45:42] Job #4:  20%
+[23:45:44] Job #4:  21%
+[23:45:46] Job #4:  22%
+[23:45:48] Job #4:  23%
+[23:45:50] Job #4:  24%
+[23:45:52] Job #4:  25%
+[23:45:54] Job #4:  26%
+[23:45:55] Job #4:  27%
+[23:45:57] Job #4:  28%
+[23:45:59] Job #4:  29%
+[23:46:01] Job #4:  30%
+[23:46:03] Job #4:  31%
+[23:46:05] Job #4:  32%
+[23:46:07] Job #4:  33%
+[23:46:08] Job #4:  34%
+[23:46:10] Job #4:  35%
+[23:46:12] Job #4:  36%
+[23:46:14] Job #4:  37%
+[23:46:16] Job #4:  38%
+[23:46:18] Job #4:  39%
+[23:46:20] Job #4:  40%
+[23:46:21] Job #4:  41%
+[23:46:24] Job #4:  42%
+[23:46:25] Job #4:  43%
+[23:46:27] Job #4:  44%
+[23:46:29] Job #4:  45%
+[23:46:31] Job #4:  46%
+[23:46:33] Job #4:  47%
+[23:46:35] Job #4:  48%
+[23:46:36] Job #4:  49%
+[23:46:38] Job #4:  50%
+[23:46:40] Job #4:  51%
+[23:46:42] Job #4:  52%
+[23:46:44] Job #4:  53%
+[23:46:46] Job #4:  54%
+[23:46:48] Job #4:  55%
+[23:46:50] Job #4:  56%
+[23:46:52] Job #4:  57%
+[23:46:53] Job #4:  58%
+[23:46:55] Job #4:  59%
+[23:46:57] Job #4:  60%
+[23:46:59] Job #4:  61%
+[23:47:01] Job #4:  62%
+[23:47:03] Job #4:  63%
+[23:47:04] Job #4:  64%
+[23:47:06] Job #4:  65%
+[23:47:08] Job #4:  66%
+[23:47:10] Job #4:  67%
+[23:47:12] Job #4:  68%
+[23:47:14] Job #4:  69%
+[23:47:16] Job #4:  70%
+[23:47:18] Job #4:  71%
+[23:47:20] Job #4:  72%
+[23:47:21] Job #4:  73%
+[23:47:23] Job #4:  74%
+[23:47:25] Job #4:  75%
+[23:47:27] Job #4:  76%
+[23:47:29] Job #4:  77%
+[23:47:31] Job #4:  78%
+[23:47:33] Job #4:  79%
+[23:47:34] Job #4:  80%
+[23:47:36] Job #4:  81%
+[23:47:38] Job #4:  82%
+[23:47:40] Job #4:  83%
+[23:47:42] Job #4:  84%
+[23:47:44] Job #4:  85%
+[23:47:46] Job #4:  86%
+[23:47:48] Job #4:  87%
+[23:47:49] Job #4:  88%
+[23:47:51] Job #4:  89%
+[23:47:53] Job #4:  90%
+[23:47:55] Job #4:  91%
+[23:47:57] Job #4:  92%
+[23:47:59] Job #4:  93%
+[23:48:01] Job #4:  94%
+[23:48:03] Job #4:  95%
+[23:48:04] Job #4:  96%
+[23:48:06] Job #4:  97%
+[23:48:08] Job #4:  98%
+[23:48:16] Job #4:  99%
+[23:48:16] Job #4: 100%
+[23:48:16] Job #4: ------------------------------------------------------------------------------
+[23:48:16] Job #4:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[23:48:16] Job #4: Verzeich.:         1         1         1         0         0         0
+[23:48:16] Job #4:   Dateien:         1         1         0         0         0         0
+[23:48:16] Job #4:     Bytes:  20.656 g  20.656 g         0         0         0         0
+[23:48:16] Job #4:    Zeiten:   0:06:25   0:01:36                       0:00:00   0:01:36
+[23:48:16] Job #4: Geschwindigkeit:           230�034�392 Bytes/Sek.
+[23:48:16] Job #4: Geschwindigkeit:             13162,674 Megabytes/Min.
+[23:48:16] Job #4:    Beendet: Freitag, 1. Mai 2026 23:48:16
+[23:48:16] Job #4 erfolgreich abgeschlossen (Code 1).
+[23:48:16] Kopiervorgang abgeschlossen.
+[23:48:16] Gemessene Transfergeschwindigkeit gespeichert: 110 MB/s.
+[23:48:16] Automatischer Plex-Refresh erfolgreich ausgelöst.

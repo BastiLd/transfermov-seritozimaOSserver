@@ -1,0 +1,194 @@
+[13:59:20] Kopiervorgang gestartet.
+[13:59:20] Starte Job #1: C:\Movies\Avengers\Five Nights At Freddys (2023) [2160p] [4K] [WEB] [5.1] [YTS.MX]\Five.Nights.At.Freddys.2023.2160p.4K.WEB.x265.10bit.AAC5.1-[YTS.MX].mkv -> S:\SM-MOONDOOM\Movies\Five.Nights.At.Freddys.2023.2160p.4K.WEB.x265.10bit.AAC5.1-[YTS.MX].mkv
+[13:59:20] robocopy robocopy C:\Movies\Avengers\Five Nights At Freddys (2023) [2160p] [4K] [WEB] [5.1] [YTS.MX] S:\SM-MOONDOOM\Movies Five.Nights.At.Freddys.2023.2160p.4K.WEB.x265.10bit.AAC5.1-[YTS.MX].mkv /MT:8 /J /R:1 /W:1 /FFT /TEE
+[13:59:21] Job #1: -------------------------------------------------------------------------------
+[13:59:21] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[13:59:21] Job #1: -------------------------------------------------------------------------------
+[13:59:21] Job #1:   Gestartet: Freitag, 1. Mai 2026 13:59:21
+[13:59:21] Job #1:    Quelle : C:\Movies\Avengers\Five Nights At Freddys (2023) [2160p] [4K] [WEB] [5.1] [YTS.MX]\
+[13:59:21] Job #1:      Ziel : S:\SM-MOONDOOM\Movies\
+[13:59:21] Job #1:     Dateien : Five.Nights.At.Freddys.2023.2160p.4K.WEB.x265.10bit.AAC5.1-[YTS.MX].mkv
+[13:59:21] Job #1:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[13:59:21] Job #1: ------------------------------------------------------------------------------
+[13:59:21] Job #1: 	    Neue Datei		   4.8 g	C:\Movies\Avengers\Five Nights At Freddys (2023) [2160p] [4K] [WEB] [5.1] [YTS.MX]\Five.Nights.At.Freddys.2023.2160p.4K.WEB.x265.10bit.AAC5.1-[YTS.MX].mkv
+[13:59:22] Job #1:   0%
+[13:59:22] Job #1:   1%
+[13:59:23] Job #1:   2%
+[13:59:23] Job #1:   3%
+[13:59:24] Job #1:   4%
+[13:59:24] Job #1:   5%
+[13:59:24] Job #1:   6%
+[13:59:25] Job #1:   7%
+[13:59:26] Job #1:   8%
+[13:59:26] Job #1:   9%
+[13:59:26] Job #1:  10%
+[13:59:27] Job #1:  11%
+[13:59:27] Job #1:  12%
+[13:59:28] Job #1:  13%
+[13:59:28] Job #1:  14%
+[13:59:29] Job #1:  15%
+[13:59:29] Job #1:  16%
+[13:59:29] Job #1:  17%
+[13:59:30] Job #1:  18%
+[13:59:31] Job #1:  19%
+[13:59:31] Job #1:  20%
+[13:59:31] Job #1:  21%
+[13:59:32] Job #1:  22%
+[13:59:32] Job #1:  23%
+[13:59:33] Job #1:  24%
+[13:59:33] Job #1:  25%
+[13:59:34] Job #1:  26%
+[13:59:34] Job #1:  27%
+[13:59:34] Job #1:  28%
+[13:59:35] Job #1:  29%
+[13:59:35] Job #1:  30%
+[13:59:36] Job #1:  31%
+[13:59:37] Job #1:  32%
+[13:59:37] Job #1:  33%
+[13:59:37] Job #1:  34%
+[13:59:38] Job #1:  35%
+[13:59:38] Job #1:  36%
+[13:59:39] Job #1:  37%
+[13:59:39] Job #1:  38%
+[13:59:39] Job #1:  39%
+[13:59:40] Job #1:  40%
+[13:59:40] Job #1:  41%
+[13:59:41] Job #1:  42%
+[13:59:42] Job #1:  43%
+[13:59:42] Job #1:  44%
+[13:59:42] Job #1:  45%
+[13:59:43] Job #1:  46%
+[13:59:43] Job #1:  47%
+[13:59:44] Job #1:  48%
+[13:59:44] Job #1:  49%
+[13:59:44] Job #1:  50%
+[13:59:45] Job #1:  51%
+[13:59:46] Job #1:  52%
+[13:59:46] Job #1:  53%
+[13:59:47] Job #1:  54%
+[13:59:47] Job #1:  55%
+[13:59:47] Job #1:  56%
+[13:59:48] Job #1:  57%
+[13:59:48] Job #1:  58%
+[13:59:49] Job #1:  59%
+[13:59:49] Job #1:  60%
+[13:59:50] Job #1:  61%
+[13:59:50] Job #1:  62%
+[13:59:51] Job #1:  63%
+[13:59:51] Job #1:  64%
+[13:59:51] Job #1:  65%
+[13:59:52] Job #1:  66%
+[13:59:52] Job #1:  67%
+[13:59:53] Job #1:  68%
+[13:59:53] Job #1:  69%
+[13:59:54] Job #1:  70%
+[13:59:54] Job #1:  71%
+[13:59:55] Job #1:  72%
+[13:59:55] Job #1:  73%
+[13:59:56] Job #1:  74%
+[13:59:56] Job #1:  75%
+[13:59:56] Job #1:  76%
+[13:59:57] Job #1:  77%
+[13:59:58] Job #1:  78%
+[13:59:58] Job #1:  79%
+[13:59:59] Job #1:  80%
+[13:59:59] Job #1:  81%
+[13:59:59] Job #1:  82%
+[14:00:00] Job #1:  83%
+[14:00:00] Job #1:  84%
+[14:00:01] Job #1:  85%
+[14:00:01] Job #1:  86%
+[14:00:02] Job #1:  87%
+[14:00:02] Job #1:  88%
+[14:00:03] Job #1:  89%
+[14:00:03] Job #1:  90%
+[14:00:03] Job #1:  91%
+[14:00:04] Job #1:  92%
+[14:00:05] Job #1:  93%
+[14:00:05] Job #1:  94%
+[14:00:05] Job #1:  95%
+[14:00:06] Job #1:  96%
+[14:00:06] Job #1:  97%
+[14:00:07] Job #1:  98%
+[14:00:07] Job #1:  99%
+[14:00:07] Job #1: 100%
+[14:00:07] Job #1: ------------------------------------------------------------------------------
+[14:00:07] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[14:00:07] Job #1: Verzeich.:         1         1         1         0         0         0
+[14:00:07] Job #1:   Dateien:         1         1         0         0         0         0
+[14:00:07] Job #1:     Bytes:   4.884 g   4.884 g         0         0         0         0
+[14:00:07] Job #1:    Zeiten:   0:01:32   0:00:23                       0:00:00   0:00:23
+[14:00:07] Job #1: Geschwindigkeit:           227�885�279 Bytes/Sek.
+[14:00:07] Job #1: Geschwindigkeit:             13039,700 Megabytes/Min.
+[14:00:07] Job #1:    Beendet: Freitag, 1. Mai 2026 14:00:07
+[14:00:07] Job #1 erfolgreich abgeschlossen (Code 1).
+[14:00:07] Kopiervorgang abgeschlossen.
+[14:00:07] Gemessene Transfergeschwindigkeit gespeichert: 106 MB/s.
+[14:00:07] Automatischer Plex-Refresh erfolgreich ausgelöst.
+[14:03:41] Starte 1-GB-Geschwindigkeitstest.
+[14:03:42] Speed-Test: -------------------------------------------------------------------------------
+[14:03:42] Speed-Test:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[14:03:42] Speed-Test: -------------------------------------------------------------------------------
+[14:03:42] Speed-Test:   Gestartet: Freitag, 1. Mai 2026 14:03:42
+[14:03:42] Speed-Test:    Quelle : D:\Cursour\Neuer Ordner\tmp_probe\
+[14:03:42] Speed-Test:      Ziel : T:\TO-MOONDOOM\Movies\_PlexTransferSpeedProbe\
+[14:03:42] Speed-Test:     Dateien : plex_transfer_probe_1gb.bin
+[14:03:42] Speed-Test:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[14:03:42] Speed-Test: ------------------------------------------------------------------------------
+[14:03:42] Speed-Test: 	    Neue Datei		   1.0 g	D:\Cursour\Neuer Ordner\tmp_probe\plex_transfer_probe_1gb.bin
+[14:03:45] Speed-Test:   0%
+[14:03:45] Speed-Test:   2%
+[14:03:45] Speed-Test:   4%
+[14:03:45] Speed-Test:   7%
+[14:03:45] Speed-Test:   9%
+[14:03:46] Speed-Test:  11%
+[14:03:46] Speed-Test:  13%
+[14:03:46] Speed-Test:  15%
+[14:03:46] Speed-Test:  17%
+[14:03:47] Speed-Test:  20%
+[14:03:47] Speed-Test:  22%
+[14:03:47] Speed-Test:  24%
+[14:03:47] Speed-Test:  26%
+[14:03:47] Speed-Test:  28%
+[14:03:48] Speed-Test:  30%
+[14:03:48] Speed-Test:  32%
+[14:03:48] Speed-Test:  34%
+[14:03:48] Speed-Test:  37%
+[14:03:48] Speed-Test:  39%
+[14:03:49] Speed-Test:  41%
+[14:03:49] Speed-Test:  43%
+[14:03:49] Speed-Test:  45%
+[14:03:49] Speed-Test:  48%
+[14:03:50] Speed-Test:  50%
+[14:03:50] Speed-Test:  54%
+[14:03:50] Speed-Test:  56%
+[14:03:50] Speed-Test:  58%
+[14:03:50] Speed-Test:  60%
+[14:03:51] Speed-Test:  63%
+[14:03:51] Speed-Test:  65%
+[14:03:51] Speed-Test:  67%
+[14:03:51] Speed-Test:  69%
+[14:03:51] Speed-Test:  71%
+[14:03:52] Speed-Test:  73%
+[14:03:52] Speed-Test:  76%
+[14:03:52] Speed-Test:  78%
+[14:03:52] Speed-Test:  80%
+[14:03:52] Speed-Test:  82%
+[14:03:53] Speed-Test:  84%
+[14:03:53] Speed-Test:  86%
+[14:03:53] Speed-Test:  88%
+[14:03:53] Speed-Test:  91%
+[14:03:53] Speed-Test:  93%
+[14:03:54] Speed-Test:  95%
+[14:03:54] Speed-Test:  97%
+[14:03:54] Speed-Test:  99%
+[14:03:54] Speed-Test: 100%
+[14:03:54] Speed-Test: ------------------------------------------------------------------------------
+[14:03:54] Speed-Test:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[14:03:54] Speed-Test: Verzeich.:         1         1         1         0         0         0
+[14:03:54] Speed-Test:   Dateien:         1         1         0         0         0         0
+[14:03:54] Speed-Test:     Bytes:   1.000 g   1.000 g         0         0         0         0
+[14:03:54] Speed-Test:    Zeiten:   0:00:24   0:00:06                       0:00:00   0:00:06
+[14:03:54] Speed-Test: Geschwindigkeit:           177�419�336 Bytes/Sek.
+[14:03:54] Speed-Test: Geschwindigkeit:             10152,016 Megabytes/Min.
+[14:03:54] Speed-Test:    Beendet: Freitag, 1. Mai 2026 14:03:54

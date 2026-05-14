@@ -1,0 +1,738 @@
+[08:27:18] Kopiervorgang gestartet.
+[08:27:18] Starte Job #1: C:\Users\basti\Videos\4K Video Downloader+\(4k) Transformers Prime Beast Hunters Predacons Rising.mp4 -> T:\TO-MOONDOOM\Movies\(4k) Transformers Prime Beast Hunters Predacons Rising.mp4
+[08:27:18] robocopy robocopy C:\Users\basti\Videos\4K Video Downloader+ T:\TO-MOONDOOM\Movies (4k) Transformers Prime Beast Hunters Predacons Rising.mp4 /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:27:19] Job #1: -------------------------------------------------------------------------------
+[08:27:19] Job #1:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:27:19] Job #1: -------------------------------------------------------------------------------
+[08:27:19] Job #1:   Gestartet: Sonntag, 3. Mai 2026 08:27:19
+[08:27:19] Job #1:    Quelle : C:\Users\basti\Videos\4K Video Downloader+\
+[08:27:19] Job #1:      Ziel : T:\TO-MOONDOOM\Movies\
+[08:27:19] Job #1:     Dateien : (4k) Transformers Prime Beast Hunters Predacons Rising.mp4
+[08:27:19] Job #1:   Optionen: /FFT /TEE /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:27:19] Job #1: ------------------------------------------------------------------------------
+[08:27:19] Job #1: 	    Neue Datei		   1.5 g	C:\Users\basti\Videos\4K Video Downloader+\(4k) Transformers Prime Beast Hunters Predacons Rising.mp4
+[08:27:19] Job #1:   0%
+[08:27:19] Job #1:   2%
+[08:27:19] Job #1:   3%
+[08:27:20] Job #1:   4%
+[08:27:20] Job #1:   6%
+[08:27:20] Job #1:   7%
+[08:27:20] Job #1:   9%
+[08:27:20] Job #1:  10%
+[08:27:21] Job #1:  12%
+[08:27:21] Job #1:  13%
+[08:27:21] Job #1:  15%
+[08:27:21] Job #1:  16%
+[08:27:22] Job #1:  17%
+[08:27:22] Job #1:  19%
+[08:27:22] Job #1:  20%
+[08:27:22] Job #1:  22%
+[08:27:22] Job #1:  23%
+[08:27:22] Job #1:  25%
+[08:27:23] Job #1:  26%
+[08:27:23] Job #1:  28%
+[08:27:23] Job #1:  29%
+[08:27:23] Job #1:  30%
+[08:27:24] Job #1:  32%
+[08:27:24] Job #1:  33%
+[08:27:24] Job #1:  35%
+[08:27:24] Job #1:  36%
+[08:27:24] Job #1:  38%
+[08:27:25] Job #1:  39%
+[08:27:25] Job #1:  40%
+[08:27:25] Job #1:  42%
+[08:27:25] Job #1:  43%
+[08:27:25] Job #1:  45%
+[08:27:25] Job #1:  46%
+[08:27:26] Job #1:  48%
+[08:27:26] Job #1:  49%
+[08:27:26] Job #1:  51%
+[08:27:26] Job #1:  52%
+[08:27:27] Job #1:  53%
+[08:27:27] Job #1:  55%
+[08:27:27] Job #1:  56%
+[08:27:27] Job #1:  58%
+[08:27:27] Job #1:  59%
+[08:27:28] Job #1:  61%
+[08:27:28] Job #1:  62%
+[08:27:28] Job #1:  63%
+[08:27:28] Job #1:  65%
+[08:27:28] Job #1:  66%
+[08:27:29] Job #1:  68%
+[08:27:29] Job #1:  69%
+[08:27:29] Job #1:  71%
+[08:27:29] Job #1:  72%
+[08:27:29] Job #1:  73%
+[08:27:30] Job #1:  75%
+[08:27:30] Job #1:  76%
+[08:27:30] Job #1:  78%
+[08:27:30] Job #1:  79%
+[08:27:30] Job #1:  81%
+[08:27:31] Job #1:  82%
+[08:27:31] Job #1:  83%
+[08:27:31] Job #1:  85%
+[08:27:31] Job #1:  86%
+[08:27:31] Job #1:  88%
+[08:27:32] Job #1:  89%
+[08:27:32] Job #1:  91%
+[08:27:32] Job #1:  92%
+[08:27:32] Job #1:  94%
+[08:27:33] Job #1:  95%
+[08:27:33] Job #1:  96%
+[08:27:33] Job #1:  98%
+[08:27:33] Job #1:  99%
+[08:27:33] Job #1: 100%
+[08:27:33] Job #1: ------------------------------------------------------------------------------
+[08:27:33] Job #1:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:27:33] Job #1: Verzeich.:         1         1         1         0         0         0
+[08:27:33] Job #1:   Dateien:         1         1         0         0         0         0
+[08:27:33] Job #1:     Bytes:   1.562 g   1.562 g         0         0         0         0
+[08:27:33] Job #1:    Zeiten:   0:00:28   0:00:07                       0:00:00   0:00:07
+[08:27:33] Job #1: Geschwindigkeit:           232�959�276 Bytes/Sek.
+[08:27:33] Job #1: Geschwindigkeit:             13330,037 Megabytes/Min.
+[08:27:33] Job #1:    Beendet: Sonntag, 3. Mai 2026 08:27:33
+[08:27:33] Job #1 erfolgreich abgeschlossen (Code 1).
+[08:27:33] Starte Job #2: C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i_c] -> T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i c]\Season 01
+[08:27:33] robocopy robocopy C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i_c] T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i c]\Season 01 /E /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:27:34] Job #2: -------------------------------------------------------------------------------
+[08:27:34] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:27:34] Job #2: -------------------------------------------------------------------------------
+[08:27:34] Job #2:   Gestartet: Sonntag, 3. Mai 2026 08:27:34
+[08:27:34] Job #2:    Quelle : C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i_c]\
+[08:27:34] Job #2:      Ziel : T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 1 Complete 720p NF WEBRip x264 [i c]\Season 01\
+[08:27:34] Job #2:     Dateien : *.*
+[08:27:34] Job #2:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:27:34] Job #2: ------------------------------------------------------------------------------
+[08:27:34] Job #2: ------------------------------------------------------------------------------
+[08:27:34] Job #2:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:27:34] Job #2: Verzeich.:         1         1         1         0         0         0
+[08:27:34] Job #2:   Dateien:        26         0        26         0         0         0
+[08:27:34] Job #2:     Bytes:   8.853 g         0   8.853 g         0         0         0
+[08:27:34] Job #2:    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+[08:27:34] Job #2:    Beendet: Sonntag, 3. Mai 2026 08:27:34
+[08:27:34] Job #2 ohne Änderungen beendet (Code 0).
+[08:27:34] Starte Job #3: C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c] -> T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i c]\Season 02
+[08:27:34] robocopy robocopy C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c] T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i c]\Season 02 /E /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:27:34] Job #3: -------------------------------------------------------------------------------
+[08:27:34] Job #3:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:27:34] Job #3: -------------------------------------------------------------------------------
+[08:27:34] Job #3:   Gestartet: Sonntag, 3. Mai 2026 08:27:34
+[08:27:34] Job #3:    Quelle : C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\
+[08:27:34] Job #3:      Ziel : T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i c]\Season 02\
+[08:27:34] Job #3:     Dateien : *.*
+[08:27:34] Job #3:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:27:34] Job #3: ------------------------------------------------------------------------------
+[08:27:34] Job #3: 	    Neue Datei		 279.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E01 The Collector.mkv
+[08:27:34] Job #3:   0%
+[08:27:35] Job #3:   2%
+[08:27:38] Job #3:   3%
+[08:27:42] Job #3:   4%
+[08:27:45] Job #3:   5%
+[08:27:51] Job #3:   6%
+[08:27:54] Job #3:   7%
+[08:27:58] Job #3:   8%
+[08:28:03] Job #3:   9%
+[08:28:06] Job #3:  10%
+[08:28:10] Job #3:  11%
+[08:28:15] Job #3:  12%
+[08:28:19] Job #3:  13%
+[08:28:22] Job #3:  14%
+[08:28:28] Job #3:  15%
+[08:28:31] Job #3:  16%
+[08:28:35] Job #3:  17%
+[08:28:41] Job #3:  18%
+[08:28:52] Job #3:  19%
+[08:28:53] Job #3:  20%
+[08:28:53] Job #3:  21%
+[08:28:53] Job #3:  22%
+[08:28:53] Job #3:  23%
+[08:28:53] Job #3:  24%
+[08:28:53] Job #3:  25%
+[08:28:53] Job #3:  26%
+[08:28:53] Job #3:  27%
+[08:28:53] Job #3:  28%
+[08:28:53] Job #3:  29%
+[08:28:54] Job #3:  30%
+[08:28:57] Job #3:  31%
+[08:29:01] Job #3:  32%
+[08:29:04] Job #3:  33%
+[08:29:10] Job #3:  34%
+[08:29:14] Job #3:  35%
+[08:29:17] Job #3:  36%
+[08:29:23] Job #3:  37%
+[08:29:27] Job #3:  38%
+[08:29:30] Job #3:  39%
+[08:29:36] Job #3:  40%
+[08:29:39] Job #3:  41%
+[08:29:43] Job #3:  42%
+[08:29:49] Job #3:  43%
+[08:29:52] Job #3:  44%
+[08:29:56] Job #3:  45%
+[08:30:07] Job #3:  46%
+[08:30:13] Job #3:  47%
+[08:30:20] Job #3:  48%
+[08:30:21] Job #3:  49%
+[08:30:21] Job #3:  50%
+[08:30:21] Job #3:  51%
+[08:30:21] Job #3:  53%
+[08:30:21] Job #3:  54%
+[08:30:21] Job #3:  55%
+[08:30:21] Job #3:  56%
+[08:30:21] Job #3:  57%
+[08:30:21] Job #3:  59%
+[08:30:22] Job #3:  60%
+[08:30:26] Job #3:  61%
+[08:30:31] Job #3:  62%
+[08:30:35] Job #3:  63%
+[08:30:39] Job #3:  64%
+[08:30:44] Job #3:  65%
+[08:30:48] Job #3:  66%
+[08:30:52] Job #3:  67%
+[08:30:57] Job #3:  68%
+[08:31:01] Job #3:  69%
+[08:31:05] Job #3:  70%
+[08:31:10] Job #3:  71%
+[08:31:14] Job #3:  72%
+[08:31:17] Job #3:  73%
+[08:31:23] Job #3:  74%
+[08:31:29] Job #3:  75%
+[08:31:38] Job #3:  76%
+[08:31:45] Job #3:  77%
+[08:31:46] Job #3:  79%
+[08:31:46] Job #3:  80%
+[08:31:46] Job #3:  81%
+[08:31:47] Job #3:  82%
+[08:31:47] Job #3:  83%
+[08:31:47] Job #3:  84%
+[08:31:47] Job #3:  85%
+[08:31:47] Job #3:  86%
+[08:31:47] Job #3:  87%
+[08:31:47] Job #3:  88%
+[08:31:47] Job #3:  89%
+[08:31:47] Job #3:  90%
+[08:31:50] Job #3:  91%
+[08:31:54] Job #3:  92%
+[08:31:59] Job #3:  93%
+[08:32:03] Job #3:  94%
+[08:32:07] Job #3:  95%
+[08:32:13] Job #3:  96%
+[08:32:16] Job #3:  97%
+[08:32:20] Job #3:  98%
+[08:32:26] Job #3:  99%
+[08:32:30] Job #3: 100%
+[08:32:34] Job #3: 	    Neue Datei		 283.0 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E02 Despair Bear.mkv
+[08:32:34] Job #3: 100%
+[08:32:34] Job #3: 	    Neue Datei		 286.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E03 Prime Queen.mkv
+[08:32:34] Job #3: 100%
+[08:32:34] Job #3: 	    Neue Datei		 274.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E04 Befana.mkv
+[08:32:34] Job #3: 100%
+[08:32:34] Job #3: 	    Neue Datei		 340.4 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E05 Riposte.mkv
+[08:32:34] Job #3:  99%
+[08:32:40] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 323.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E06 Robostus.mkv
+[08:32:43] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 311.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E07 Gigantitan.mkv
+[08:32:43] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 333.4 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E08 The Dark Owl.mkv
+[08:32:43] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 294.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E09 Glaciator.mkv
+[08:32:43] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 297.4 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E10 Sapotis.mkv
+[08:32:43] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 314.0 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E11 Gorizilla.mkv
+[08:32:43] Job #3: 100%
+[08:32:43] Job #3: 	    Neue Datei		 327.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E12 Captain Hardrock.mkv
+[08:32:43] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 321.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E13 Zombizou.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 316.3 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E14 Syren.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 304.6 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E15 Frightningale.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 330.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E16 Troublemaker.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 305.8 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E17 Anansi.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 293.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E18 Sandboy.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 297.0 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E19 Reverser.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 281.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E20 Frozer.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 300.0 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E21 Style Queen (Queen's Battle - Part 1).mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 307.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E22 Queen Wasp (Queen's Battle - Part 2).mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 272.3 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E23 Malediktator.mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 303.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E24 Catalyst (Heroes' Day - Part 1).mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: 	    Neue Datei		 365.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 2 Complete 720p NF WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S02E25 Mayura (Heroes' Day - Part 2).mkv
+[08:32:44] Job #3: 100%
+[08:32:44] Job #3: ------------------------------------------------------------------------------
+[08:32:44] Job #3:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:32:44] Job #3: Verzeich.:         1         1         1         0         0         0
+[08:32:44] Job #3:   Dateien:        25        25         0         0         0         0
+[08:32:44] Job #3:     Bytes:   7.485 g   7.485 g         0         0         0         0
+[08:32:44] Job #3:    Zeiten:   0:34:10   0:01:15                       0:00:00   0:00:03
+[08:32:44] Job #3: Geschwindigkeit:           105�789�481 Bytes/Sek.
+[08:32:44] Job #3: Geschwindigkeit:              6053,323 Megabytes/Min.
+[08:32:44] Job #3:    Beendet: Sonntag, 3. Mai 2026 08:28:53
+[08:32:48] Job #3 erfolgreich abgeschlossen (Code 1).
+[08:33:04] Starte Job #4: C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c] -> T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB - DL x264 [i c]\Season 03
+[08:33:04] robocopy robocopy C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c] T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB - DL x264 [i c]\Season 03 /E /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:33:04] Job #4: -------------------------------------------------------------------------------
+[08:33:04] Job #4:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:33:04] Job #4: -------------------------------------------------------------------------------
+[08:33:04] Job #4:   Gestartet: Sonntag, 3. Mai 2026 08:28:53
+[08:33:04] Job #4:    Quelle : C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\
+[08:33:04] Job #4:      Ziel : T:\TO-MOONDOOM\Series\Miraculous - Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB - DL x264 [i c]\Season 03\
+[08:33:04] Job #4:     Dateien : *.*
+[08:33:04] Job #4:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:33:04] Job #4: ------------------------------------------------------------------------------
+[08:33:04] Job #4: 	    Neue Datei		 333.8 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E01 Backwarder.mkv
+[08:33:04] Job #4:   0%
+[08:33:04] Job #4:   2%
+[08:33:04] Job #4:   4%
+[08:33:04] Job #4:   5%
+[08:33:05] Job #4:   6%
+[08:33:05] Job #4:   7%
+[08:33:05] Job #4:   8%
+[08:33:05] Job #4:   9%
+[08:33:05] Job #4:  10%
+[08:33:05] Job #4:  11%
+[08:33:05] Job #4:  12%
+[08:33:05] Job #4:  13%
+[08:33:05] Job #4:  14%
+[08:33:05] Job #4:  15%
+[08:33:05] Job #4:  16%
+[08:33:05] Job #4:  17%
+[08:33:05] Job #4:  18%
+[08:33:05] Job #4:  19%
+[08:33:05] Job #4:  21%
+[08:33:05] Job #4:  22%
+[08:33:05] Job #4:  23%
+[08:33:05] Job #4:  24%
+[08:33:05] Job #4:  26%
+[08:33:05] Job #4:  28%
+[08:33:05] Job #4:  29%
+[08:33:05] Job #4:  30%
+[08:33:05] Job #4:  31%
+[08:33:05] Job #4:  33%
+[08:33:05] Job #4:  34%
+[08:33:05] Job #4:  35%
+[08:33:05] Job #4:  36%
+[08:33:05] Job #4:  38%
+[08:33:05] Job #4:  40%
+[08:33:05] Job #4:  41%
+[08:33:05] Job #4:  42%
+[08:33:05] Job #4:  43%
+[08:33:05] Job #4:  45%
+[08:33:05] Job #4:  46%
+[08:33:05] Job #4:  47%
+[08:33:05] Job #4:  48%
+[08:33:05] Job #4:  50%
+[08:33:05] Job #4:  52%
+[08:33:05] Job #4:  53%
+[08:33:05] Job #4:  54%
+[08:33:05] Job #4:  55%
+[08:33:05] Job #4:  57%
+[08:33:05] Job #4:  58%
+[08:33:05] Job #4:  59%
+[08:33:05] Job #4:  60%
+[08:33:05] Job #4:  62%
+[08:33:06] Job #4:  64%
+[08:33:06] Job #4:  65%
+[08:33:06] Job #4:  66%
+[08:33:06] Job #4:  67%
+[08:33:06] Job #4:  68%
+[08:33:06] Job #4:  69%
+[08:33:06] Job #4:  70%
+[08:33:06] Job #4:  71%
+[08:33:06] Job #4:  72%
+[08:33:06] Job #4:  73%
+[08:33:06] Job #4:  74%
+[08:33:06] Job #4:  76%
+[08:33:06] Job #4:  77%
+[08:33:06] Job #4:  78%
+[08:33:06] Job #4:  79%
+[08:33:06] Job #4:  81%
+[08:33:06] Job #4:  82%
+[08:33:06] Job #4:  83%
+[08:33:06] Job #4:  84%
+[08:33:06] Job #4:  85%
+[08:33:06] Job #4:  86%
+[08:33:06] Job #4:  88%
+[08:33:06] Job #4:  89%
+[08:33:06] Job #4:  90%
+[08:33:06] Job #4:  91%
+[08:33:06] Job #4:  93%
+[08:33:06] Job #4:  94%
+[08:33:06] Job #4:  95%
+[08:33:06] Job #4:  96%
+[08:33:06] Job #4:  97%
+[08:33:06] Job #4:  98%
+[08:33:06] Job #4:  99%
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 269.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E02 Weredad.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 298.4 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E03 Chameleon.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 339.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E04 Animaestro.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 318.6 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E05 Bakerix.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 318.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E06 Silencer.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 261.0 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E07 Oblivio.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 303.3 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E08 Stormy Weather 2.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 342.5 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E09 Reflekdoll.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 330.4 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E10 Oni-Chan.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 332.6 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E11 Miraculer.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 336.2 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E12 The Puppeteer 2.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 344.2 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E13 Desperada.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 286.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E14 Startrain.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 265.9 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E15 Kwamibuster.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 315.4 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E16 Feast.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 319.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E17 Ikari Gozen.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 314.9 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E18 Timetagger.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 322.2 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E19 Party Crasher.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 273.8 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E20 Gamer 2.0.mkv
+[08:33:06] Job #4: 100%
+[08:33:06] Job #4: 	    Neue Datei		 316.6 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E21 Cat Blanc.mkv
+[08:33:06] Job #4: 100%
+[08:33:07] Job #4: 	    Neue Datei		 261.8 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E22 F�lix.mkv
+[08:33:07] Job #4: 100%
+[08:33:07] Job #4: 	    Neue Datei		 283.1 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E23 Ladybug.mkv
+[08:33:07] Job #4: 100%
+[08:33:07] Job #4: 	    Neue Datei		 350.7 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E24 Chris Master.mkv
+[08:33:07] Job #4: 100%
+[08:33:07] Job #4: 	    Neue Datei		 332.9 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E25 Heart Hunter (The battle of the Miraculous - part. 1).mkv
+[08:33:07] Job #4: 100%
+[08:33:07] Job #4: 	    Neue Datei		 365.8 m	C:\Movies\Avengers\Miraculous-Tales of Ladybug and Cat Noir 2015 Season 3 Complete 720p NF WEB-DL x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S03E26 Miracle Queen (The battle of the Miraculous - part. 2).mkv
+[08:33:07] Job #4: 100%
+[08:33:07] Job #4: ------------------------------------------------------------------------------
+[08:33:07] Job #4:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:33:07] Job #4: Verzeich.:         1         1         1         0         0         0
+[08:33:07] Job #4:   Dateien:        26        26         0         0         0         0
+[08:33:07] Job #4:     Bytes:   7.948 g   7.948 g         0         0         0         0
+[08:33:07] Job #4:    Zeiten:   0:39:03   0:01:24                       0:00:00   0:00:03
+[08:33:07] Job #4: Geschwindigkeit:           100�994�170 Bytes/Sek.
+[08:33:07] Job #4: Geschwindigkeit:              5778,933 Megabytes/Min.
+[08:33:07] Job #4:    Beendet: Sonntag, 3. Mai 2026 08:30:21
+[08:33:07] Job #4 erfolgreich abgeschlossen (Code 1).
+[08:33:07] Starte Job #5: C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c] -> T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i c]\Season 04
+[08:33:07] robocopy robocopy C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c] T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i c]\Season 04 /E /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:33:07] Job #5: -------------------------------------------------------------------------------
+[08:33:07] Job #5:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:33:07] Job #5: -------------------------------------------------------------------------------
+[08:33:07] Job #5:   Gestartet: Sonntag, 3. Mai 2026 08:30:21
+[08:33:07] Job #5:    Quelle : C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\
+[08:33:07] Job #5:      Ziel : T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i c]\Season 04\
+[08:33:07] Job #5:     Dateien : *.*
+[08:33:07] Job #5:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:33:07] Job #5: ------------------------------------------------------------------------------
+[08:33:07] Job #5: 	    Neue Datei		 304.6 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E01 Truth.mkv
+[08:33:07] Job #5:   0%
+[08:33:07] Job #5:   2%
+[08:33:07] Job #5:   3%
+[08:33:07] Job #5:   4%
+[08:33:07] Job #5:   5%
+[08:33:07] Job #5:   7%
+[08:33:07] Job #5:   8%
+[08:33:07] Job #5:   9%
+[08:33:07] Job #5:  10%
+[08:33:07] Job #5:  12%
+[08:33:07] Job #5:  13%
+[08:33:07] Job #5:  14%
+[08:33:07] Job #5:  15%
+[08:33:07] Job #5:  16%
+[08:33:07] Job #5:  17%
+[08:33:07] Job #5:  18%
+[08:33:07] Job #5:  19%
+[08:33:07] Job #5:  21%
+[08:33:07] Job #5:  23%
+[08:33:07] Job #5:  24%
+[08:33:07] Job #5:  26%
+[08:33:07] Job #5:  28%
+[08:33:07] Job #5:  29%
+[08:33:07] Job #5:  31%
+[08:33:07] Job #5:  32%
+[08:33:07] Job #5:  34%
+[08:33:07] Job #5:  36%
+[08:33:07] Job #5:  37%
+[08:33:07] Job #5:  39%
+[08:33:07] Job #5:  40%
+[08:33:07] Job #5:  42%
+[08:33:07] Job #5:  44%
+[08:33:08] Job #5:  45%
+[08:33:08] Job #5:  47%
+[08:33:08] Job #5:  49%
+[08:33:08] Job #5:  50%
+[08:33:08] Job #5:  52%
+[08:33:08] Job #5:  53%
+[08:33:08] Job #5:  54%
+[08:33:08] Job #5:  55%
+[08:33:08] Job #5:  57%
+[08:33:08] Job #5:  58%
+[08:33:08] Job #5:  60%
+[08:33:08] Job #5:  61%
+[08:33:08] Job #5:  63%
+[08:33:08] Job #5:  65%
+[08:33:08] Job #5:  66%
+[08:33:08] Job #5:  68%
+[08:33:08] Job #5:  70%
+[08:33:08] Job #5:  71%
+[08:33:08] Job #5:  73%
+[08:33:08] Job #5:  74%
+[08:33:08] Job #5:  76%
+[08:33:08] Job #5:  78%
+[08:33:08] Job #5:  79%
+[08:33:08] Job #5:  81%
+[08:33:08] Job #5:  82%
+[08:33:08] Job #5:  83%
+[08:33:08] Job #5:  84%
+[08:33:08] Job #5:  86%
+[08:33:08] Job #5:  87%
+[08:33:08] Job #5:  89%
+[08:33:08] Job #5:  91%
+[08:33:08] Job #5:  92%
+[08:33:08] Job #5:  93%
+[08:33:08] Job #5:  94%
+[08:33:08] Job #5:  96%
+[08:33:08] Job #5:  97%
+[08:33:08] Job #5:  99%
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 284.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E02 Lies.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 326.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E03 Gang of Secrets.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 329.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E04 Mr. Pigeon 72.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 306.7 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E05 Furious Fu.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 340.7 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E06 Sole Crusher.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 316.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E07 Queen Banana.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 311.5 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E08 Guiltrip.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 349.5 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E09 Crocoduel.mkv
+[08:33:08] Job #5: 100%
+[08:33:08] Job #5: 	    Neue Datei		 261.5 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E10 Optigami.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 260.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E11 Sentibubbler.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 283.6 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E12 Rocketear.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 367.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E13 Mega Leech.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 303.3 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E14 Wishmaker.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 376.9 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E15 Hack-San.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 284.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E16 Simpleman.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 285.9 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E17 Glaciator 2.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 331.1 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E18 Dearest Family.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 290.7 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E19 Ephemeral.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 273.1 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E20 Gabriel Agreste.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 309.8 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E21 Psycomedian.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 250.6 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E22 Kuro Neko.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 393.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E23 Penalteam.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 303.6 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E24 Qilin.mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 315.2 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E25 Risk (Shadow Moth's Final Attack - Part 1).mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: 	    Neue Datei		 343.3 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 4 Complete 720p HULU WEBRip x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir S04E26 Strikeback (Shadow Moth's Final Attack - Part 2).mkv
+[08:33:09] Job #5: 100%
+[08:33:09] Job #5: ------------------------------------------------------------------------------
+[08:33:09] Job #5:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:33:09] Job #5: Verzeich.:         1         1         1         0         0         0
+[08:33:09] Job #5:   Dateien:        26        26         0         0         0         0
+[08:33:09] Job #5:     Bytes:   7.913 g   7.913 g         0         0         0         0
+[08:33:09] Job #5:    Zeiten:   0:38:08   0:01:22                       0:00:00   0:00:03
+[08:33:09] Job #5: Geschwindigkeit:           103�166�622 Bytes/Sek.
+[08:33:09] Job #5: Geschwindigkeit:              5903,242 Megabytes/Min.
+[08:33:09] Job #5:    Beendet: Sonntag, 3. Mai 2026 08:31:47
+[08:33:09] Job #5 erfolgreich abgeschlossen (Code 1).
+[08:33:09] Starte Job #6: C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c] -> T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB - DL 720p x264 [i c]\Season 01
+[08:33:09] robocopy robocopy C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c] T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB - DL 720p x264 [i c]\Season 01 /E /MT:32 /J /R:1 /W:1 /FFT /TEE /XC /XN /XO
+[08:33:09] Job #6: -------------------------------------------------------------------------------
+[08:33:09] Job #6:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[08:33:09] Job #6: -------------------------------------------------------------------------------
+[08:33:09] Job #6:   Gestartet: Sonntag, 3. Mai 2026 08:31:47
+[08:33:09] Job #6:    Quelle : C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\
+[08:33:09] Job #6:      Ziel : T:\TO-MOONDOOM\Series\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB - DL 720p x264 [i c]\Season 01\
+[08:33:09] Job #6:     Dateien : *.*
+[08:33:09] Job #6:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /XO /XN /XC /MT:32 /R:1 /W:1
+[08:33:09] Job #6: ------------------------------------------------------------------------------
+[08:33:09] Job #6: 	    Neue Datei		 317.7 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S00E53 - Action.mkv
+[08:33:09] Job #6:   0%
+[08:33:09] Job #6:   2%
+[08:33:09] Job #6:   4%
+[08:33:09] Job #6:   5%
+[08:33:09] Job #6:   6%
+[08:33:09] Job #6:   7%
+[08:33:09] Job #6:   9%
+[08:33:09] Job #6:  10%
+[08:33:09] Job #6:  11%
+[08:33:09] Job #6:  12%
+[08:33:09] Job #6:  14%
+[08:33:09] Job #6:  15%
+[08:33:09] Job #6:  16%
+[08:33:09] Job #6:  17%
+[08:33:09] Job #6:  18%
+[08:33:09] Job #6:  19%
+[08:33:09] Job #6:  20%
+[08:33:09] Job #6:  22%
+[08:33:09] Job #6:  24%
+[08:33:09] Job #6:  25%
+[08:33:09] Job #6:  26%
+[08:33:10] Job #6:  27%
+[08:33:10] Job #6:  28%
+[08:33:10] Job #6:  29%
+[08:33:10] Job #6:  30%
+[08:33:10] Job #6:  32%
+[08:33:10] Job #6:  33%
+[08:33:10] Job #6:  34%
+[08:33:10] Job #6:  35%
+[08:33:10] Job #6:  37%
+[08:33:10] Job #6:  38%
+[08:33:10] Job #6:  39%
+[08:33:10] Job #6:  40%
+[08:33:10] Job #6:  41%
+[08:33:10] Job #6:  42%
+[08:33:10] Job #6:  43%
+[08:33:10] Job #6:  44%
+[08:33:10] Job #6:  45%
+[08:33:10] Job #6:  47%
+[08:33:10] Job #6:  48%
+[08:33:10] Job #6:  49%
+[08:33:10] Job #6:  50%
+[08:33:10] Job #6:  52%
+[08:33:10] Job #6:  53%
+[08:33:10] Job #6:  54%
+[08:33:10] Job #6:  55%
+[08:33:10] Job #6:  56%
+[08:33:10] Job #6:  57%
+[08:33:10] Job #6:  58%
+[08:33:10] Job #6:  59%
+[08:33:10] Job #6:  60%
+[08:33:10] Job #6:  62%
+[08:33:10] Job #6:  63%
+[08:33:10] Job #6:  64%
+[08:33:10] Job #6:  65%
+[08:33:10] Job #6:  67%
+[08:33:10] Job #6:  68%
+[08:33:10] Job #6:  69%
+[08:33:10] Job #6:  70%
+[08:33:10] Job #6:  72%
+[08:33:10] Job #6:  73%
+[08:33:10] Job #6:  74%
+[08:33:10] Job #6:  75%
+[08:33:10] Job #6:  76%
+[08:33:10] Job #6:  77%
+[08:33:10] Job #6:  78%
+[08:33:10] Job #6:  79%
+[08:33:10] Job #6:  80%
+[08:33:11] Job #6:  82%
+[08:33:11] Job #6:  83%
+[08:33:11] Job #6:  84%
+[08:33:11] Job #6:  85%
+[08:33:11] Job #6:  87%
+[08:33:11] Job #6:  88%
+[08:33:11] Job #6:  89%
+[08:33:11] Job #6:  90%
+[08:33:11] Job #6:  92%
+[08:33:11] Job #6:  93%
+[08:33:11] Job #6:  95%
+[08:33:11] Job #6:  97%
+[08:33:11] Job #6:  98%
+[08:33:11] Job #6:  99%
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 339.1 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E01 - Evolution.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 326.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E02 - Multiplication.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 265.6 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E03 - Destruction.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 297.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E04 - Jubilation.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 287.3 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E05 - Determination.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 298.3 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E06 - Passion.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 295.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E07 - Reunion.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 286.9 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E08 - Illusion.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 255.4 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E09 - Elation.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 270.5 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E10 - Transmission (The Kwamis' Choice - Part 1).mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 283.1 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E11 - Deflagration (The Kwamis' Choice - Part 2).mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 286.7 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E12 - Perfection.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 288.8 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E13 - Migration.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 286.9 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E14 - Derision.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 234.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E15 - Intuition.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 305.2 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E16 - Protection.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 257.6 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E17 - Adoration.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 285.8 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E18 - Emotion.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 262.3 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E19 - Pretension.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 281.0 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E20 - Revelation.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 264.8 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E21 - Confrontation.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 268.2 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E22 - Collusion.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 249.5 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E23 - Revolution.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 273.8 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E24 - Representation.mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 239.8 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E25 - Conformation (The Last Day - Part 1).mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: 	    Neue Datei		 360.2 m	C:\Movies\Avengers\Miraculous Tales of Ladybug and Cat Noir 2015 Season 5 WEB-DL 720p x264 [i_c]\Miraculous Tales of Ladybug & Cat Noir - S05E26 - Re-Creation (The Last Day - Part 2).mkv
+[08:33:11] Job #6: 100%
+[08:33:11] Job #6: ------------------------------------------------------------------------------
+[08:33:11] Job #6:            Insgesamt   Kopiert�bersprungenKeine �bereinstimmung    FEHLER    Extras
+[08:33:11] Job #6: Verzeich.:         1         1         1         0         0         0
+[08:33:11] Job #6:   Dateien:        27        27         0         0         0         0
+[08:33:11] Job #6:     Bytes:   7.489 g   7.489 g         0         0         0         0
+[08:33:11] Job #6:    Zeiten:   0:35:59   0:01:14                       0:00:00   0:00:02
+[08:33:11] Job #6: Geschwindigkeit:           107�565�756 Bytes/Sek.
+[08:33:11] Job #6: Geschwindigkeit:              6154,962 Megabytes/Min.
+[08:33:11] Job #6:    Beendet: Sonntag, 3. Mai 2026 08:33:05
+[08:33:11] Job #6 erfolgreich abgeschlossen (Code 1).
+[08:33:11] Kopiervorgang abgeschlossen.
+[08:33:11] Gemessene Transfergeschwindigkeit gespeichert: 94 MB/s.
+[08:33:12] Automatischer Plex-Refresh erfolgreich ausgelöst.

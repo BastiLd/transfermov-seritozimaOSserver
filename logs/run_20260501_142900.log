@@ -1,0 +1,29 @@
+[14:29:00] Kopiervorgang gestartet.
+[14:29:01] Starte Job #2: C:\Movies\Avengers\Avatar - The Last Airbender (2005 - 2008) [1080p] -> T:\TO-MOONDOOM\Series\Avatar - The Last Airbender (2005 - 2008) [1080p]\Season 01
+[14:29:01] robocopy robocopy C:\Movies\Avengers\Avatar - The Last Airbender (2005 - 2008) [1080p] T:\TO-MOONDOOM\Series\Avatar - The Last Airbender (2005 - 2008) [1080p]\Season 01 /E /MT:8 /J /R:1 /W:1 /FFT /TEE
+[14:29:01] Job #2: -------------------------------------------------------------------------------
+[14:29:01] Job #2:    ROBOCOPY     ::     Robustes Dateikopieren f�r Windows
+[14:29:01] Job #2: -------------------------------------------------------------------------------
+[14:29:01] Job #2:   Gestartet: Freitag, 1. Mai 2026 14:29:01
+[14:29:01] Job #2:    Quelle : C:\Movies\Avengers\Avatar - The Last Airbender (2005 - 2008) [1080p]\
+[14:29:01] Job #2:      Ziel : T:\TO-MOONDOOM\Series\Avatar - The Last Airbender (2005 - 2008) [1080p]\Season 01\
+[14:29:01] Job #2:     Dateien : *.*
+[14:29:01] Job #2:   Optionen: *.* /FFT /TEE /S /E /DCOPY:DA /COPY:DAT /J /MT:8 /R:1 /W:1
+[14:29:01] Job #2: ------------------------------------------------------------------------------
+[14:29:01] Job #2: 	    Neue Datei		 288.1 m	C:\Movies\Avengers\Avatar - The Last Airbender (2005 - 2008) [1080p]\Book One - Water\Avatar - The Last Airbender - S01E01 - The Boy in the Iceberg.mkv
+[14:29:02] Job #2:   2%
+[14:29:03] Job #2:   3%
+[14:29:04] Job #2:   5%
+[14:29:05] Job #2:   7%
+[14:29:06] Job #2:   8%
+[14:29:07] Job #2:  11%
+[14:29:09] Job #2:  13%
+[14:29:10] Job #2:  16%
+[14:29:11] Job #2:  18%
+[14:29:13] Job #2:  19%
+[14:29:14] Job #2:  22%
+[14:29:15] Job #2:  24%
+[14:29:16] Job #2:  27%
+[14:29:17] Job #2:  30%
+[14:29:18] Job #2:  32%
+[14:29:19] Job #2:  33%

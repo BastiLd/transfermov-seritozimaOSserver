@@ -280,6 +280,12 @@ function progressToFraction(progress) {
   return Math.max(0, Math.min(1, Number(raw) / 100));
 }
 
+function jobCompletionFraction(job) {
+  if (job.status === "Kopiert" || isSkipped(job) || isFailed(job)) return 1;
+  if (job.status === "Kopiert...") return progressToFraction(job.progress);
+  return 0;
+}
+
 function shortPath(value, max = 78) {
   const raw = String(value || "");
   if (raw.length <= max) return raw;
@@ -663,7 +669,13 @@ function refreshStatus() {
   const skipped = state.jobs.filter(isSkipped).length;
   const failed = state.jobs.filter(isFailed).length;
   const completed = success + skipped + failed;
-  const fraction = total ? completed / total : 0;
+  const totalBytes = state.jobs.reduce((sum, job) => sum + Math.max(Number(job.size_bytes || 0), 0), 0);
+  const doneBytes = state.jobs.reduce((sum, job) => sum + Math.max(Number(job.size_bytes || 0), 0) * jobCompletionFraction(job), 0);
+  const fraction = totalBytes > 0
+    ? doneBytes / totalBytes
+    : total
+      ? state.jobs.reduce((sum, job) => sum + jobCompletionFraction(job), 0) / total
+      : 0;
   els.overallProgress.style.width = `${Math.round(fraction * 100)}%`;
   setText(els.overallProgressText, `${Math.round(fraction * 100)}% abgeschlossen`);
   setText(els.summary, total ? `Erfolgreich ${success} | Übersprungen ${skipped} | Fehlgeschlagen ${failed}` : "Noch keine Kopiervorgänge gestartet.");

@@ -295,13 +295,17 @@ function movieTitleFromStem(stem) {
   return normalizeTitle(stem.replace(/\b(19\d{2}|20\d{2})\b/g, ""), "Film");
 }
 
-function uniquePathForPreview(targetPath, sourcePath) {
+function uniquePathForPreview(targetPath, sourcePath, reservedTargets = null) {
   if (path.resolve(targetPath).toLowerCase() === path.resolve(sourcePath).toLowerCase()) return targetPath;
-  if (!fs.existsSync(targetPath)) return targetPath;
+  const isFree = (candidate) => {
+    const key = path.resolve(candidate).toLowerCase();
+    return !fs.existsSync(candidate) && !(reservedTargets && reservedTargets.has(key));
+  };
+  if (isFree(targetPath)) return targetPath;
   const parsed = path.parse(targetPath);
   let index = 2;
   let candidate = path.join(parsed.dir, `${parsed.name} (${index})${parsed.ext}`);
-  while (fs.existsSync(candidate)) {
+  while (!isFree(candidate)) {
     index += 1;
     candidate = path.join(parsed.dir, `${parsed.name} (${index})${parsed.ext}`);
   }
@@ -399,7 +403,8 @@ function renamePreviewForFile(filePath, context) {
     label = movieBase;
   }
 
-  target = uniquePathForPreview(target, filePath);
+  target = uniquePathForPreview(target, filePath, context.reservedTargets);
+  context.reservedTargets?.add(path.resolve(target).toLowerCase());
   const previewJob = {
     source: filePath,
     target,
@@ -434,6 +439,7 @@ function createRenamePreview(paths, options = {}) {
   const mediaType = options.mediaType || "auto";
   const movieYear = options.movieYear || "";
   const explicitShowName = options.showName || "";
+  const reservedTargets = new Set();
 
   for (const item of paths || []) {
     try {
@@ -458,7 +464,8 @@ function createRenamePreview(paths, options = {}) {
           seriesRoot: expandHome(config.series_root),
           plexUrl: config.plex_url,
           moviesSectionId: config.movies_section_id,
-          seriesSectionId: config.series_section_id
+          seriesSectionId: config.series_section_id,
+          reservedTargets
         }));
       }
     } catch (error) {
@@ -479,21 +486,28 @@ async function startRename(jobs, options = {}) {
   appendLog("Umbenennen gestartet.", false);
 
   const results = [];
+  const reservedTargets = new Set();
   for (const job of jobs) {
     const source = path.resolve(job.source || "");
-    const target = path.resolve(job.target || "");
+    let target = path.resolve(job.target || "");
     try {
       if (!fs.existsSync(source)) throw new Error("Quelle nicht gefunden.");
       if (!target) throw new Error("Ziel fehlt.");
       if (source.toLowerCase() === target.toLowerCase()) {
+        reservedTargets.add(source.toLowerCase());
         results.push({ ...job, final_path: source, status: "Unverändert" });
         appendLog(`Unverändert: ${source}`, false);
         continue;
       }
-      if (fs.existsSync(target)) throw new Error(`Ziel existiert bereits: ${target}`);
+      const plannedTarget = target;
+      target = path.resolve(uniquePathForPreview(target, source, reservedTargets));
+      reservedTargets.add(target.toLowerCase());
+      if (target.toLowerCase() !== plannedTarget.toLowerCase()) {
+        appendLog(`Ziel bereits belegt, nutze eindeutigen Namen: ${plannedTarget} -> ${target}`, false);
+      }
       ensureDir(path.dirname(target));
       fs.renameSync(source, target);
-      results.push({ ...job, final_path: target, status: "Umbenannt" });
+      results.push({ ...job, target, final_path: target, status: "Umbenannt" });
       appendLog(`Umbenannt: ${source} -> ${target}`, false);
     } catch (error) {
       results.push({ ...job, final_path: source, status: "Fehler", error: error.message });
@@ -964,7 +978,7 @@ async function runSingleJob(job, config) {
 
       child.stdout.on("data", (chunk) => {
         stdoutBuffer += chunk.toString("utf8");
-        const lines = stdoutBuffer.split(/\r?\n/);
+        const lines = stdoutBuffer.split(/\r(?!\n)|\r?\n/);
         stdoutBuffer = lines.pop() || "";
         lines.forEach(consumeLine);
       });
