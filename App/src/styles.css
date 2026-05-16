@@ -881,6 +881,75 @@ h1, h2, p {
   font-weight: 900;
 }
 
+.format-choice-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.format-choice {
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.format-choice small {
+  color: var(--muted);
+}
+
+.series-season-add {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.8fr) minmax(220px, 1.1fr) minmax(240px, 1.2fr) minmax(120px, 0.6fr) auto;
+  gap: 10px;
+  align-items: end;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card-solid) 70%, transparent);
+}
+
+.series-season-add label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.series-season-add input {
+  min-height: 38px;
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--entry);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.series-batch-list {
+  display: grid;
+  gap: 8px;
+}
+
+.series-batch-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) minmax(220px, 1fr) minmax(120px, 0.6fr);
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card-soft) 80%, transparent);
+}
+
+.series-batch-row.needs-review {
+  border-color: color-mix(in srgb, var(--warning) 58%, var(--border));
+}
+
+.series-batch-row small {
+  color: var(--muted);
+}
+
 .workspace {
   display: flex;
   min-width: 0;
@@ -1245,9 +1314,9 @@ tr.selected {
   display: grid;
   place-items: center;
   padding: 24px;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
+  background: rgba(0, 0, 0, 0.84);
+  backdrop-filter: blur(64px);
+  -webkit-backdrop-filter: blur(64px);
   opacity: 1;
   transition: opacity 200ms ease;
 }

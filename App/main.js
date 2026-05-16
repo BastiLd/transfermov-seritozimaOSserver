@@ -516,7 +516,7 @@ async function startRename(jobs, options = {}) {
   }
 
   running = false;
-  const successJobs = results.filter((job) => ["Umbenannt", "Unveraendert", "Unverändert"].includes(job.status));
+  const successJobs = results.filter((job) => ["Umbenannt", "Unverändert"].includes(job.status));
   const failed = results.length - successJobs.length;
   let refresh = { movies_ok: false, series_ok: false };
   if (options.refreshAfter && successJobs.length) {
@@ -620,6 +620,9 @@ async function searchMetadata(query, mediaType, context = {}) {
   const type = mediaType === "Serie" ? "Serie" : mediaType === "Film" ? "Film" : "auto";
   const endpoint = type === "Serie" ? "/search/tv" : type === "Film" ? "/search/movie" : "/search/multi";
   const params = { query: normalizedQuery, page: 1, include_adult: false };
+  const year = String(context?.year || "").match(/^(19\d{2}|20\d{2})$/)?.[1] || "";
+  if (year && type === "Serie") params.first_air_date_year = year;
+  if (year && type === "Film") params.year = year;
   const response = await tmdbRequest(endpoint, params);
   const rawResults = (response.results || [])
     .filter((item) => type !== "auto" || ["movie", "tv"].includes(item.media_type))
@@ -772,7 +775,7 @@ function targetStorageSummary(jobs) {
   const config = loadConfig();
   const buckets = new Map();
   for (const job of jobs || []) {
-    if (!job || ["Kopiert", "Uebersprungen", "Übersprungen"].includes(job.status) || String(job.status || "").startsWith("Fehler")) continue;
+    if (!job || ["Kopiert", "Übersprungen"].includes(job.status) || String(job.status || "").startsWith("Fehler")) continue;
     const root = expandHome(job.media_type === "Film" ? config.movies_root : config.series_root);
     if (!root) continue;
     const current = buckets.get(root) || { root, planned_bytes: 0 };
@@ -928,7 +931,7 @@ function validateRoots(config) {
 
 function pendingJobPayload(jobs) {
   return jobs
-      .filter((job) => !["Kopiert", "Uebersprungen", "Übersprungen"].includes(job.status))
+      .filter((job) => !["Kopiert", "Übersprungen"].includes(job.status))
     .map((job) => ({
       source: job.source,
       target: job.target,
@@ -1078,7 +1081,7 @@ async function startCopy(jobs, options = {}) {
   const config = loadConfig();
   validateRoots(config);
 
-  const copyJobs = jobs.filter((job) => !["Kopiert", "Uebersprungen", "Übersprungen"].includes(job.status));
+  const copyJobs = jobs.filter((job) => !["Kopiert", "Übersprungen"].includes(job.status));
   if (!copyJobs.length) throw new Error("Es gibt keine offenen Jobs.");
 
   running = true;
@@ -1097,7 +1100,7 @@ async function startCopy(jobs, options = {}) {
   appendLog("Kopiervorgang abgeschlossen.", false);
   const latestJobs = await mainWindow.webContents.executeJavaScript("window.__plexTransferGetJobsForMain && window.__plexTransferGetJobsForMain()", true).catch(() => jobs);
   const success = latestJobs.filter((job) => job.status === "Kopiert").length;
-  const skipped = latestJobs.filter((job) => ["Uebersprungen", "Übersprungen"].includes(job.status)).length;
+  const skipped = latestJobs.filter((job) => ["Übersprungen"].includes(job.status)).length;
   const failed = latestJobs.filter((job) => String(job.status || "").startsWith("Fehler")).length;
   const copiedBytes = latestJobs.filter((job) => job.status === "Kopiert").reduce((sum, job) => sum + Number(job.size_bytes || 0), 0);
 

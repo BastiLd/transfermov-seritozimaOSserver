@@ -252,13 +252,11 @@ function formatEta(secondsTotal) {
 }
 
 function normalizeStatus(status) {
-  if (status === "Uebersprungen") return "Übersprungen";
-  if (status === "Unveraendert") return "Unverändert";
   return String(status || "");
 }
 
 function isSkipped(job) {
-  return ["Uebersprungen", "Übersprungen"].includes(job.status);
+  return ["Übersprungen"].includes(job.status);
 }
 
 function isFailed(job) {
@@ -427,7 +425,7 @@ async function setWorkflowMode(mode) {
   state.workflowMode = mode;
   await api.setWorkflowMode(mode);
   showWorkflowView(mode);
-  const labels = { transfer: "Übertragen", rename: "Umbenennen", combo: "Beides", picker: "Plex Transfer" };
+  const labels = { transfer: "Übertragen", rename: "Umbenennen", combo: "Umbenennen + Übertragen", picker: "Plex Transfer" };
   setText($("subtitle"), mode === "combo" ? "Erst Plex-konform umbenennen, dann übertragen" : mode === "rename" ? "Lokales Plex-konformes Umbenennen" : "Lokaler Plex-/NAS-Kopierworkflow mit Robocopy");
   setGlobalStatus("Bereit", `${labels[mode] || "Workflow"} bereit.`);
 }
@@ -595,13 +593,21 @@ function renderJobs() {
 
 function refreshActiveRows() {
   els.activeRows.innerHTML = "";
-  const activeJobs = state.jobs.filter((job) => state.activeJobIds.has(job.id)).slice(0, 2);
+  const activeJobs = state.jobs
+    .filter((job) => state.activeJobIds.has(job.id) || job.status === "Kopiert...")
+    .sort((a, b) => {
+      const activeA = state.activeJobIds.has(a.id) ? 0 : 1;
+      const activeB = state.activeJobIds.has(b.id) ? 0 : 1;
+      return activeA - activeB || state.jobs.indexOf(a) - state.jobs.indexOf(b);
+    })
+    .slice(0, 2);
   for (const job of activeJobs) {
+    const percent = Math.max(0, Math.min(100, Math.round(progressToFraction(job.progress) * 100)));
     const row = document.createElement("div");
     row.className = "active-row";
     row.innerHTML = `
-      <div class="row-heading"><strong>${escapeHtml(shortPath(basename(job.source), 42))}</strong><span>${escapeHtml(job.progress || "0%")}</span></div>
-      <div class="progress-track"><div class="progress-fill" style="width:${progressToFraction(job.progress) * 100}%"></div></div>
+      <div class="row-heading"><strong>${escapeHtml(shortPath(basename(job.source), 42))}</strong><span>${percent}%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div>
     `;
     els.activeRows.appendChild(row);
   }
@@ -676,8 +682,9 @@ function refreshStatus() {
     : total
       ? state.jobs.reduce((sum, job) => sum + jobCompletionFraction(job), 0) / total
       : 0;
-  els.overallProgress.style.width = `${Math.round(fraction * 100)}%`;
-  setText(els.overallProgressText, `${Math.round(fraction * 100)}% abgeschlossen`);
+  const percent = Math.max(0, Math.min(100, Math.round(fraction * 100)));
+  els.overallProgress.style.width = `${percent}%`;
+  setText(els.overallProgressText, `${percent}% abgeschlossen`);
   setText(els.summary, total ? `Erfolgreich ${success} | Übersprungen ${skipped} | Fehlgeschlagen ${failed}` : "Noch keine Kopiervorgänge gestartet.");
 
   const open = state.jobs.filter(isOpenJob);
@@ -688,9 +695,9 @@ function refreshStatus() {
   refreshTargetStorage();
 }
 
-async function refreshTargetStorage() {
+async function refreshTargetStorage(jobs = state.jobs) {
   const requestId = ++state.storageRequestId;
-  const open = state.jobs.filter(isOpenJob);
+  const open = jobs.filter(isOpenJob);
   if (!open.length) {
     state.storageWarnings = [];
     setText(els.targetSpace, state.jobs.length ? "Ziel frei: nichts offen" : "-");
@@ -698,7 +705,7 @@ async function refreshTargetStorage() {
   }
   setText(els.targetSpace, "Speicher wird geprüft...");
   try {
-    const result = await api.getTargetStorage(state.jobs);
+    const result = await api.getTargetStorage(jobs);
     if (requestId !== state.storageRequestId) return;
     state.storageWarnings = (result || []).filter((item) => !item.ok);
     const lines = (result || []).map((item) => {
@@ -824,8 +831,70 @@ function showMessage(title, message, isError = false) {
   });
 }
 
-async function showCopyPreview() {
-  const items = state.jobs.filter(isOpenJob).map((job) => `
+function extensionLabel(ext) {
+  return String(ext || "").replace(/^\./, "").toUpperCase() || "Ohne Endung";
+}
+
+function jobExtension(job) {
+  return (String(job?.source || job?.target || "").match(/\.([^.\\/]+)$/)?.[0] || "").toLowerCase();
+}
+
+function openJobsForFormatChoice(jobs) {
+  return (jobs || []).filter(isOpenJob);
+}
+
+async function chooseTransferFormats(jobs, title = "Dateiformate übertragen") {
+  const openJobs = openJobsForFormatChoice(jobs);
+  const extensions = [...new Set(openJobs.map(jobExtension).filter(Boolean))].sort();
+  if (extensions.length <= 1) return openJobs;
+  const rows = extensions.map((ext) => {
+    const count = openJobs.filter((job) => jobExtension(job) === ext).length;
+    return `
+      <label class="check-card format-choice">
+        <input type="checkbox" data-format="${escapeHtml(ext)}" checked>
+        <span>${escapeHtml(extensionLabel(ext))}</span>
+        <small>${count} Datei${count === 1 ? "" : "en"}</small>
+      </label>
+    `;
+  }).join("");
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal small";
+    modal.innerHTML = `
+      <div class="modal-header"><h2>${escapeHtml(title)}</h2></div>
+      <div class="modal-body">
+        <p>Wähle aus, welche Dateiformate in diesem Lauf verarbeitet werden. Nicht gewählte Dateien bleiben unverändert in der Liste.</p>
+        <div class="format-choice-list">${rows}</div>
+      </div>
+      <div class="modal-footer">
+        <button data-role="cancel">Abbrechen</button>
+        <button data-role="all">Alle Formate</button>
+        <button data-role="continue" class="primary">Auswahl übernehmen</button>
+      </div>
+    `;
+    const close = (value) => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve(value);
+    };
+    modal.querySelector('[data-role="cancel"]').addEventListener("click", () => close(null));
+    modal.querySelector('[data-role="all"]').addEventListener("click", () => close(openJobs));
+    modal.querySelector('[data-role="continue"]').addEventListener("click", () => {
+      const selected = new Set([...modal.querySelectorAll("[data-format]:checked")].map((input) => input.dataset.format));
+      if (!selected.size) {
+        showToast("Keine Formate ausgewählt", "Bitte mindestens ein Format auswählen.", true);
+        return;
+      }
+      close(openJobs.filter((job) => selected.has(jobExtension(job))));
+    });
+    els.modalHost.appendChild(modal);
+  });
+}
+
+async function showCopyPreview(jobs = state.jobs.filter(isOpenJob)) {
+  const items = jobs.map((job) => `
     <div class="preview-item">
       <strong>${escapeHtml(job.media_type)} · ${escapeHtml(basename(job.source))}</strong>
       <span>Quelle: ${escapeHtml(job.source)}</span>
@@ -855,8 +924,8 @@ async function offerSpeedTest() {
   });
 }
 
-async function confirmStorageWarnings() {
-  await refreshTargetStorage();
+async function confirmStorageWarnings(jobs = state.jobs) {
+  await refreshTargetStorage(jobs);
   if (!state.storageWarnings.length) return true;
   const body = state.storageWarnings.map((item) => {
     const text = item.root ? `${item.root}: ${item.error || "zu wenig freier Speicher"}` : item.error;
@@ -873,7 +942,7 @@ async function confirmStorageWarnings() {
   });
 }
 
-async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", refreshAfter = undefined) {
+async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", refreshAfter = undefined, chooseFormats = true) {
   if (state.running || state.speedTestRunning) {
     await showMessage("Plex Transfer", "Es läuft bereits ein Vorgang.");
     return;
@@ -886,7 +955,15 @@ async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", ref
     await showMessage("Plex Transfer", "Es gibt keine offenen Jobs.");
     return;
   }
-  if (!(await confirmStorageWarnings())) return;
+  const jobsToCopy = chooseFormats
+    ? await chooseTransferFormats(state.jobs, workflow === "combo" ? "Dateiformate für Übertragung wählen" : "Dateiformate übertragen")
+    : state.jobs.filter(isOpenJob);
+  if (!jobsToCopy) return;
+  if (!jobsToCopy.length) {
+    await showMessage("Plex Transfer", "Für die gewählten Formate gibt es keine offenen Jobs.");
+    return;
+  }
+  if (!(await confirmStorageWarnings(jobsToCopy))) return;
   if (!skipSpeedPrompt && Number(state.config.last_measured_bytes_per_sec || 0) <= 0) {
     const decision = await offerSpeedTest();
     if (decision === "cancel") return;
@@ -895,14 +972,15 @@ async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", ref
       return;
     }
   }
-  if (!(await showCopyPreview())) {
+  if (!(await showCopyPreview(jobsToCopy))) {
     setText(els.lastAction, "Kopiervorgang abgebrochen.");
     return;
   }
   state.running = true;
   state.activeJobIds.clear();
+  const selectedIds = new Set(jobsToCopy.map((job) => job.id));
   for (const job of state.jobs) {
-    if (isOpenJob(job)) {
+    if (selectedIds.has(job.id) && isOpenJob(job)) {
       job.status = "Wartet";
       job.progress = "0%";
       job.live_speed_bytes_per_sec = 0;
@@ -915,7 +993,7 @@ async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", ref
   setText(els.lastAction, "Robocopy-Worker gestartet.");
   setMascotState("busy");
   renderJobs();
-  await api.startCopy(state.jobs, { workflow, refreshAfter });
+  await api.startCopy(jobsToCopy, { workflow, refreshAfter });
 }
 
 async function cancelCopyFlow() {
@@ -1107,18 +1185,84 @@ function sanitizeTmdbQuery(value) {
     .trim();
 }
 
+function sanitizeSeriesSearchQuery(raw) {
+  const source = String(raw ?? "");
+  const year = source.match(/\b(19\d{2}|20\d{2})\b/)?.[1] || "";
+  const query = source
+    .replace(/\b[\p{L}\p{N}_]*\d[\p{L}\p{N}_]*\b/gu, " ")
+    .replace(/[^\p{L}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return { query, year };
+}
+
+function normalizedEpisodeText(raw) {
+  return String(raw || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\b[\p{L}\p{N}_]*\d[\p{L}\p{N}_]*\b/gu, " ")
+    .replace(/[^\p{L}\s]/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function detectEpisodeReference(raw) {
+  const text = String(raw || "");
+  const patterns = [
+    /(?:s|season|staffel)[\s._-]*(\d{1,2})[\s._-]*(?:e|ep|episode|folge)[\s._-]*(\d{1,3})/i,
+    /(\d{1,2})x(\d{1,3})/i,
+    /(?:^|[^\d])(\d{1,3})(?=\s*[-._ ]|$)/i
+  ];
+  for (const pattern of patterns) {
+    const match = pattern.exec(text);
+    if (!match) continue;
+    return {
+      season: pattern === patterns[2] ? null : Number(match[1]),
+      episode: Number(pattern === patterns[2] ? match[1] : match[2])
+    };
+  }
+  return { season: null, episode: null };
+}
+
+function detectEpisodeReferenceForJob(job) {
+  const fromSource = detectEpisodeReference(basename(job.source));
+  if (fromSource.episode) return fromSource;
+  return detectEpisodeReference(job.label || basename(job.target));
+}
+
+function episodeSimilarity(job, episode) {
+  const jobText = normalizedEpisodeText(`${job.label || ""} ${basename(job.source)}`);
+  const episodeText = normalizedEpisodeText(episode.title || "");
+  if (!jobText || !episodeText) return 0;
+  const jobWords = new Set(jobText.split(" ").filter((word) => word.length > 2));
+  const episodeWords = episodeText.split(" ").filter((word) => word.length > 2);
+  if (!jobWords.size || !episodeWords.length) return 0;
+  const hits = episodeWords.filter((word) => jobWords.has(word)).length;
+  return hits / Math.max(jobWords.size, episodeWords.length);
+}
+
+function episodeDisplay(seasonNumber, episode) {
+  return `${episodeCode(seasonNumber, episode.episode)} - ${episode.title || `Folge ${episode.episode}`}`;
+}
+
 function commonSeriesQuery(kind, jobs) {
   const options = renameOptions(kind);
-  if (options.showName) return sanitizeTmdbQuery(expandSeriesAlias(options.showName));
+  if (options.showName) return expandSeriesAlias(options.showName);
   const counts = new Map();
   for (const job of jobs) {
     if (job.media_type !== "Serie") continue;
     const text = stripEpisodeFromSeriesText(job.label || basename(job.source));
     if (!text) continue;
-    const expanded = sanitizeTmdbQuery(expandSeriesAlias(text));
-    counts.set(expanded, (counts.get(expanded) || 0) + 1);
+    const expanded = expandSeriesAlias(text);
+    const info = sanitizeSeriesSearchQuery(expanded);
+    if (!info.query) continue;
+    const key = `${info.query}\u0000${info.year}`;
+    const current = counts.get(key) || { raw: expanded, count: 0 };
+    current.count += 1;
+    counts.set(key, current);
   }
-  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "";
+  return [...counts.values()].sort((a, b) => b.count - a.count)[0]?.raw || "";
 }
 
 function renderRenamePreview(kind) {
@@ -1192,39 +1336,253 @@ function replaceJobForKind(kind, index, job) {
   renderRenamePreview(kind);
 }
 
-async function applySeriesMetadataToAll(kind, result) {
+async function loadSeriesEpisodeCatalog(tmdbId) {
+  const details = await api.getMetadataDetails(tmdbId, "Serie");
+  const seasons = [];
+  for (const season of (details.seasons || []).filter((item) => Number(item.season_number) > 0)) {
+    const seasonNumber = Number(season.season_number);
+    const seasonData = await api.getSeasonMetadata(tmdbId, seasonNumber).catch(() => null);
+    seasons.push({
+      season: seasonNumber,
+      label: season.name || `Staffel ${seasonNumber}`,
+      episodes: seasonData?.episodes || []
+    });
+  }
+  return { details, seasons };
+}
+
+function allCatalogEpisodes(catalog) {
+  return catalog.seasons.flatMap((season) => season.episodes.map((episode) => ({ season: season.season, episode })));
+}
+
+function buildSeriesBatchMapping(seriesEntries, catalog) {
+  const allEpisodes = allCatalogEpisodes(catalog);
+  return seriesEntries.map(({ job, index }) => {
+    const detected = detectEpisodeReferenceForJob(job);
+    let season = Number(detected.season || job.season || 1);
+    let episode = null;
+    let note = "manuell prüfen";
+    if (detected.episode) {
+      episode = allEpisodes.find((item) => item.season === season && Number(item.episode.episode) === Number(detected.episode))?.episode || null;
+      if (!episode && !detected.season) {
+        const fallback = allEpisodes.find((item) => Number(item.episode.episode) === Number(detected.episode));
+        if (fallback) {
+          season = fallback.season;
+          episode = fallback.episode;
+        }
+      }
+      if (episode) note = "aus Nummer erkannt";
+    }
+    if (!episode) {
+      const best = allEpisodes
+        .map((item) => ({ ...item, score: episodeSimilarity(job, item.episode) }))
+        .sort((a, b) => b.score - a.score)[0];
+      if (best && best.score >= 0.34) {
+        season = best.season;
+        episode = best.episode;
+        note = "aus Titel erkannt";
+      }
+    }
+    return { index, job, season, episode, selected: Boolean(episode), note };
+  });
+}
+
+function uniqueMappedTarget(target, usedTargets) {
+  const raw = String(target || "");
+  if (!raw || !usedTargets.has(raw.toLowerCase())) return raw;
+  const dot = raw.lastIndexOf(".");
+  const slash = Math.max(raw.lastIndexOf("\\"), raw.lastIndexOf("/"));
+  const hasExt = dot > slash;
+  const base = hasExt ? raw.slice(0, dot) : raw;
+  const ext = hasExt ? raw.slice(dot) : "";
+  let count = 2;
+  let candidate = `${base} (${count})${ext}`;
+  while (usedTargets.has(candidate.toLowerCase())) {
+    count += 1;
+    candidate = `${base} (${count})${ext}`;
+  }
+  return candidate;
+}
+
+async function applySeriesBatchMapping(kind, result, mappings) {
   const jobs = jobListForKind(kind);
   const updatedJobs = [...jobs];
+  const usedTargets = new Set(jobs.map((job) => String(job.target || "").toLowerCase()));
   let changed = 0;
-  for (let index = 0; index < jobs.length; index += 1) {
-    const job = jobs[index];
-    if (job.media_type !== "Serie") continue;
-    const season = Number(job.season || result.season || 1);
-    const episodeNumber = Number(job.episode || result.episode || 1);
-    let episodeTitle = "";
-    if (season && episodeNumber) {
-      const episode = await api.getEpisodeMetadata(result.id, season, episodeNumber).catch(() => null);
-      episodeTitle = episode?.title || "";
-    }
+  for (const mapping of mappings) {
+    if (!mapping.selected || !mapping.episode) continue;
+    const job = jobs[mapping.index];
+    if (!job) continue;
+    usedTargets.delete(String(job.target || "").toLowerCase());
     const metadata = {
       ...result,
       media_type: "Serie",
-      season,
-      episode: episodeNumber,
-      episode_title: episodeTitle || `Episode ${episodeNumber}`,
-      tmdb_episode_title: episodeTitle || `Episode ${episodeNumber}`
+      season: mapping.season,
+      episode: Number(mapping.episode.episode),
+      episode_title: mapping.episode.title || `Episode ${mapping.episode.episode}`,
+      tmdb_episode_title: mapping.episode.title || `Episode ${mapping.episode.episode}`
     };
-    updatedJobs[index] = await api.applyMetadataToRenameJob(job, metadata);
+    const updated = await api.applyMetadataToRenameJob(job, metadata);
+    updated.target = uniqueMappedTarget(updated.target, usedTargets);
+    usedTargets.add(String(updated.target || "").toLowerCase());
+    updatedJobs[mapping.index] = updated;
     changed += 1;
   }
   if (kind === "combo") state.comboJobs = updatedJobs;
   else state.renameJobs = updatedJobs;
   renderRenamePreview(kind);
-  setGlobalStatus("Bereit", `${changed} Serien-Folgen mit TMDb abgeglichen.`);
-  showToast("TMDb abgeglichen", `${changed} Folgen aktualisiert.`);
+  setGlobalStatus("Bereit", `${changed} Serien-Folgen zugeordnet.`);
+  showToast("Serie automatisch zugeordnet", `${changed} Folgen aktualisiert.`);
 }
 
-async function showBatchSeriesResults(kind, query, results) {
+async function showSeriesMappingDialog(kind, result, seriesEntries) {
+  const catalog = await loadSeriesEpisodeCatalog(result.id);
+  let mappings = buildSeriesBatchMapping(seriesEntries, catalog);
+  const allEpisodes = allCatalogEpisodes(catalog);
+  let batchFilesPerEpisode = 1;
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal series-batch-modal";
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
+    const renderRows = () => mappings.map((mapping, mapIndex) => `
+      <div class="series-batch-row ${mapping.episode ? "" : "needs-review"}">
+        <label class="check-label"><input type="checkbox" data-map-selected="${mapIndex}" ${mapping.selected ? "checked" : ""}> ${escapeHtml(shortPath(basename(mapping.job.source), 58))}</label>
+        <span>${mapping.episode ? escapeHtml(episodeDisplay(mapping.season, mapping.episode)) : "manuell prüfen"}</span>
+        <small>${escapeHtml(mapping.note)}</small>
+      </div>
+    `).join("");
+    const optionHtml = (items, selected, valueFn, labelFn) => items.map((item) => {
+      const value = valueFn(item);
+      const active = String(value) === String(selected);
+      return `<button type="button" class="custom-select-option${active ? " active" : ""}" data-value="${escapeHtml(value)}">${escapeHtml(labelFn(item))}</button>`;
+    }).join("");
+    const bindCustomSelect = (role, onChange) => {
+      const root = modal.querySelector(`[data-role="${role}-custom"]`);
+      const trigger = modal.querySelector(`[data-role="${role}-trigger"]`);
+      const popover = modal.querySelector(`[data-role="${role}-popover"]`);
+      if (!root || !trigger || !popover) return;
+      trigger.addEventListener("click", () => {
+        const isOpen = root.classList.toggle("open");
+        popover.classList.toggle("hidden", !isOpen);
+        trigger.setAttribute("aria-expanded", String(isOpen));
+      });
+      root.querySelectorAll("[data-value]").forEach((button) => {
+        button.addEventListener("click", () => {
+          onChange(button.dataset.value);
+          root.classList.remove("open");
+          popover.classList.add("hidden");
+          trigger.setAttribute("aria-expanded", "false");
+          render();
+        });
+      });
+      root.addEventListener("focusout", (event) => {
+        if (!root.contains(event.relatedTarget)) {
+          root.classList.remove("open");
+          popover.classList.add("hidden");
+          trigger.setAttribute("aria-expanded", "false");
+        }
+      });
+    };
+    const render = () => {
+      const batchSeason = Number(modal.dataset.batchSeason || catalog.seasons[0]?.season || 1);
+      const batchStartFile = Number(modal.dataset.batchStartFile || 0);
+      const seasonEpisodesForSelect = catalog.seasons.find((season) => season.season === batchSeason)?.episodes || [];
+      const fallbackStartEpisode = seasonEpisodesForSelect[0] ? `${batchSeason}:${seasonEpisodesForSelect[0].episode}` : (allEpisodes[0] ? `${allEpisodes[0].season}:${allEpisodes[0].episode.episode}` : "");
+      const batchStartEpisode = modal.dataset.batchStartEpisode?.startsWith(`${batchSeason}:`) ? modal.dataset.batchStartEpisode : fallbackStartEpisode;
+      const seasonItems = catalog.seasons;
+      const fileItems = mappings.map((mapping, index) => ({ index, label: shortPath(basename(mapping.job.source), 48) }));
+      const episodeItems = seasonEpisodesForSelect.map((episode) => ({ value: `${batchSeason}:${episode.episode}`, label: episodeDisplay(batchSeason, episode) }));
+      const selectedSeasonLabel = seasonItems.find((season) => season.season === batchSeason)?.label || `Staffel ${batchSeason}`;
+      const selectedFileLabel = fileItems.find((item) => item.index === batchStartFile)?.label || "Erste Datei";
+      const selectedEpisodeLabel = episodeItems.find((item) => item.value === batchStartEpisode)?.label || "Erste Folge";
+      modal.innerHTML = `
+        <div class="modal-header"><h2>Serie automatisch zuordnen</h2></div>
+        <div class="modal-body">
+          <div class="metadata-query">
+            <span>Gewählte Serie</span>
+            <strong>${escapeHtml(result.title)}${result.year ? ` (${escapeHtml(result.year)})` : ""}</strong>
+            <p>${mappings.filter((item) => item.episode).length} von ${mappings.length} Dateien haben eine Zuordnung.</p>
+          </div>
+          <div class="series-season-add">
+            <label>Staffel
+              <div class="custom-episode-select" data-role="batch-season-custom">
+                <button type="button" class="custom-select-trigger" data-role="batch-season-trigger" aria-haspopup="listbox" aria-expanded="false"><span>${escapeHtml(selectedSeasonLabel)}</span><span aria-hidden="true">▾</span></button>
+                <div class="custom-select-popover hidden" data-role="batch-season-popover"><div class="custom-select-list">${optionHtml(seasonItems, batchSeason, (season) => season.season, (season) => `${season.label} (${season.episodes.length} Folgen)`)}</div></div>
+              </div>
+            </label>
+            <label>Erste Datei
+              <div class="custom-episode-select" data-role="batch-start-file-custom">
+                <button type="button" class="custom-select-trigger" data-role="batch-start-file-trigger" aria-haspopup="listbox" aria-expanded="false"><span>${escapeHtml(selectedFileLabel)}</span><span aria-hidden="true">▾</span></button>
+                <div class="custom-select-popover hidden" data-role="batch-start-file-popover"><div class="custom-select-list">${optionHtml(fileItems, batchStartFile, (item) => item.index, (item) => item.label)}</div></div>
+              </div>
+            </label>
+            <label>Erste Folge
+              <div class="custom-episode-select" data-role="batch-start-episode-custom">
+                <button type="button" class="custom-select-trigger" data-role="batch-start-episode-trigger" aria-haspopup="listbox" aria-expanded="false"><span>${escapeHtml(selectedEpisodeLabel)}</span><span aria-hidden="true">▾</span></button>
+                <div class="custom-select-popover hidden" data-role="batch-start-episode-popover"><div class="custom-select-list">${optionHtml(episodeItems, batchStartEpisode, (item) => item.value, (item) => item.label)}</div></div>
+              </div>
+            </label>
+            <label>Dateien pro Folge
+              <input data-role="batch-files-per-episode" type="number" min="1" max="20" value="${batchFilesPerEpisode}">
+            </label>
+            <button data-role="batch-add-season">Staffel hinzufügen</button>
+          </div>
+          <div class="series-batch-list">${renderRows()}</div>
+        </div>
+        <div class="modal-footer">
+          <button data-role="close">Abbrechen</button>
+          <button data-role="apply" class="primary">Zuordnung übernehmen</button>
+        </div>
+      `;
+      modal.querySelectorAll("[data-map-selected]").forEach((input) => {
+        input.addEventListener("change", () => {
+          mappings[Number(input.dataset.mapSelected)].selected = input.checked;
+        });
+      });
+      bindCustomSelect("batch-season", (value) => {
+        modal.dataset.batchSeason = value;
+        delete modal.dataset.batchStartEpisode;
+      });
+      bindCustomSelect("batch-start-file", (value) => { modal.dataset.batchStartFile = value; });
+      bindCustomSelect("batch-start-episode", (value) => { modal.dataset.batchStartEpisode = value; });
+      modal.querySelector('[data-role="batch-files-per-episode"]').addEventListener("input", (event) => {
+        batchFilesPerEpisode = Math.max(1, Math.min(20, Number(event.target.value || 1)));
+      });
+      modal.querySelector('[data-role="batch-add-season"]').addEventListener("click", () => {
+        const startIndex = Number(modal.dataset.batchStartFile || 0);
+        const [seasonRaw, episodeRaw] = String(modal.dataset.batchStartEpisode || "").split(":");
+        const selectedSeason = Number(modal.dataset.batchSeason || seasonRaw || 1);
+        const startEpisode = Number(episodeRaw || 1);
+        const filesPerEpisode = Math.max(1, Math.min(20, Number(batchFilesPerEpisode || 1)));
+        const seasonEpisodes = catalog.seasons.find((season) => season.season === selectedSeason)?.episodes || [];
+        const startEpisodeIndex = seasonEpisodes.findIndex((episode) => Number(episode.episode) === startEpisode);
+        if (startEpisodeIndex < 0) return;
+        for (let index = startIndex; index < mappings.length; index += 1) {
+          const episodeOffset = Math.floor((index - startIndex) / filesPerEpisode);
+          const episode = seasonEpisodes[startEpisodeIndex + episodeOffset];
+          if (!episode) break;
+          mappings[index] = { ...mappings[index], season: selectedSeason, episode, selected: true, note: `ab Startfolge fortlaufend (${filesPerEpisode} pro Folge)` };
+        }
+        render();
+      });
+      modal.querySelector('[data-role="close"]').addEventListener("click", close);
+      modal.querySelector('[data-role="apply"]').addEventListener("click", async () => {
+        await applySeriesBatchMapping(kind, result, mappings);
+        close();
+      });
+    };
+    els.modalHost.appendChild(modal);
+    render();
+  });
+}
+
+async function showBatchSeriesResults(kind, queryInfo, results, seriesEntries) {
   let visible = (results || []).filter((result) => result.media_type === "Serie");
   if (!visible.length) throw new Error("Keine Serien-Treffer gefunden.");
   return new Promise((resolve) => {
@@ -1232,6 +1590,11 @@ async function showBatchSeriesResults(kind, query, results) {
     els.modalHost.classList.remove("hidden");
     const modal = document.createElement("div");
     modal.className = "modal metadata-modal";
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
     const renderBody = () => visible.map((result, resultIndex) => `
       <div class="metadata-result">
         ${result.poster_url ? `<img src="${escapeHtml(result.poster_url)}" alt="">` : `<div class="metadata-poster-empty">TMDb</div>`}
@@ -1241,24 +1604,77 @@ async function showBatchSeriesResults(kind, query, results) {
           <p>${escapeHtml(result.overview || "Keine Beschreibung vorhanden.")}</p>
         </div>
         <div class="metadata-actions">
-          <button data-action="accept-all" data-index="${resultIndex}" class="primary">Für alle übernehmen</button>
+          <button data-action="select-series" data-index="${resultIndex}" class="primary">Serie auswählen</button>
           <button data-action="wrong" data-index="${resultIndex}">Falsch</button>
           <button data-action="details" data-index="${resultIndex}">Mehr Infos</button>
         </div>
       </div>
-    `).join("") || `<p>Keine weiteren Treffer. Starte eine manuelle Suche.</p>`;
+    `).join("") || `<p>Keine weiteren Treffer. Starte eine neue Suche.</p>`;
+    const render = () => {
+      modal.innerHTML = `
+        <div class="modal-header"><h2>Serie für automatische Zuordnung wählen</h2></div>
+        <div class="modal-body">
+          <div class="metadata-query">
+            <span>TMDb Suche nur mit Buchstaben</span>
+            <strong>${escapeHtml(queryInfo.query)}</strong>
+            ${queryInfo.year ? `<p>Jahr als Filter: ${escapeHtml(queryInfo.year)}</p>` : ""}
+          </div>
+          <div class="metadata-detail-slot"></div>
+          <div class="metadata-results">${renderBody()}</div>
+        </div>
+        <div class="modal-footer">
+          <button data-action="close">Schließen</button>
+        </div>
+      `;
+      modal.querySelectorAll("[data-action]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const action = button.dataset.action;
+          if (action === "close") return close();
+          const result = visible[Number(button.dataset.index)];
+          if (!result) return;
+          if (action === "wrong") {
+            visible = visible.filter((item) => item.id !== result.id);
+            render();
+            return;
+          }
+          if (action === "details") {
+            modal.querySelector(".metadata-detail-slot").innerHTML = await metadataDetailsHtml(result, { season: 1, episode: 1 });
+            return;
+          }
+          if (action === "select-series") {
+            await showSeriesMappingDialog(kind, result, seriesEntries);
+            resolve();
+          }
+        });
+      });
+    };
+    els.modalHost.appendChild(modal);
+    render();
+  });
+}
+
+async function openSeriesSearchDialog(kind, initialQueryInfo, seriesEntries) {
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal";
     modal.innerHTML = `
-      <div class="modal-header"><h2>Serie für alle Folgen wählen</h2></div>
+      <div class="modal-header"><h2>Serie automatisch zuordnen</h2></div>
       <div class="modal-body">
         <div class="metadata-query">
-          <span>TMDb Suche ohne Jahr</span>
-          <strong>${escapeHtml(query)}</strong>
+          <span>Serienname eingeben. Automatisch gesucht wird nur mit Buchstaben.</span>
+          <strong data-role="sanitized-query">${escapeHtml(initialQueryInfo.query || "-")}</strong>
+          <p data-role="sanitized-year">${initialQueryInfo.year ? `Jahr als Filter: ${escapeHtml(initialQueryInfo.year)}` : "Kein Jahrfilter erkannt."}</p>
         </div>
-        <div class="metadata-detail-slot"></div>
-        <div class="metadata-results">${renderBody()}</div>
+        <div class="metadata-search-bar">
+          <input data-role="series-query-input" type="search" value="${escapeHtml(initialQueryInfo.raw || initialQueryInfo.query || "")}" placeholder="Serienname">
+          <button data-role="series-query-search" class="primary">Suchen</button>
+        </div>
+        <div data-role="series-query-results" class="metadata-results"></div>
       </div>
       <div class="modal-footer">
-        <button data-action="close">Später bearbeiten</button>
+        <button data-role="close">Schließen</button>
       </div>
     `;
     const close = () => {
@@ -1266,60 +1682,64 @@ async function showBatchSeriesResults(kind, query, results) {
       els.modalHost.innerHTML = "";
       resolve();
     };
-    const wireButtons = () => {
-      modal.querySelectorAll("[data-action]").forEach((button) => {
-        button.addEventListener("click", async () => {
-          const action = button.dataset.action;
-          if (action === "close") {
-            close();
-            return;
-          }
-          const result = visible[Number(button.dataset.index)];
-          if (!result) return;
-          if (action === "wrong") {
-            visible = visible.filter((item) => item.id !== result.id);
-            modal.querySelector(".metadata-results").innerHTML = renderBody();
-            wireButtons();
-            return;
-          }
-          if (action === "details") {
-            modal.querySelector(".metadata-detail-slot").innerHTML = await metadataDetailsHtml(result, { season: 1, episode: 1 });
-            return;
-          }
-          if (action === "accept-all") {
-            button.disabled = true;
-            button.textContent = "Übernehme...";
-            await applySeriesMetadataToAll(kind, result);
-            close();
-          }
-        });
-      });
+    const input = modal.querySelector('[data-role="series-query-input"]');
+    const queryLabel = modal.querySelector('[data-role="sanitized-query"]');
+    const yearLabel = modal.querySelector('[data-role="sanitized-year"]');
+    const resultsHost = modal.querySelector('[data-role="series-query-results"]');
+    const updateHint = () => {
+      const info = sanitizeSeriesSearchQuery(input.value);
+      queryLabel.textContent = info.query || "-";
+      yearLabel.textContent = info.year ? `Jahr als Filter: ${info.year}` : "Kein Jahrfilter erkannt.";
+      return info;
+    };
+    const runSearch = async () => {
+      const queryInfo = updateHint();
+      if (!queryInfo.query) {
+        resultsHost.innerHTML = `<p class="status-error">Bitte einen Seriennamen mit Buchstaben eingeben.</p>`;
+        return;
+      }
+      resultsHost.innerHTML = "<p>TMDb Suche läuft...</p>";
+      try {
+        setGlobalStatus("Bereit", "TMDb Serien-Suche läuft...");
+        const response = await api.searchMetadata(queryInfo.query, "Serie", { year: queryInfo.year });
+        if (!(response.results || []).some((result) => result.media_type === "Serie")) {
+          throw new Error("Keine Serien-Treffer gefunden.");
+        }
+        els.modalHost.classList.add("hidden");
+        els.modalHost.innerHTML = "";
+        await showBatchSeriesResults(kind, queryInfo, response.results || [], seriesEntries);
+        setGlobalStatus("Bereit", "TMDb Serien-Suche abgeschlossen.");
+        resolve();
+      } catch (error) {
+        const message = cleanErrorMessage(error);
+        appendLog(`Automatische Serienzuordnung fehlgeschlagen: ${message}`, true);
+        resultsHost.innerHTML = `<p class="status-error">${escapeHtml(message)}</p>`;
+        setGlobalStatus("Fehler", "Serienzuordnung fehlgeschlagen.");
+      }
     };
     els.modalHost.appendChild(modal);
-    wireButtons();
+    input.addEventListener("input", updateHint);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") runSearch();
+    });
+    modal.querySelector('[data-role="series-query-search"]').addEventListener("click", runSearch);
+    modal.querySelector('[data-role="close"]').addEventListener("click", close);
+    input.focus();
+    input.select();
+    updateHint();
   });
 }
 
 async function autoSearchMetadataForKind(kind, force = false) {
   const jobs = jobListForKind(kind);
-  const seriesJobs = jobs.filter((job) => job.media_type === "Serie");
-  if (!seriesJobs.length) {
-    if (force) await showMessage("TMDb Abgleich", "Keine Serien-Folgen in der Vorschau.");
+  const seriesEntries = jobs.map((job, index) => ({ job, index })).filter(({ job }) => job.media_type === "Serie");
+  if (!seriesEntries.length) {
+    if (force) await showMessage("Serie automatisch zuordnen", "Keine Serien-Folgen in der Vorschau.");
     return;
   }
-  const query = commonSeriesQuery(kind, seriesJobs);
-  if (!query) return;
-  try {
-    setGlobalStatus("Bereit", "TMDb Serien-Suche läuft...");
-    const response = await api.searchMetadata(query, "Serie", {});
-    await showBatchSeriesResults(kind, query, response.results || []);
-    setGlobalStatus("Bereit", "TMDb Serien-Suche abgeschlossen.");
-  } catch (error) {
-    const message = cleanErrorMessage(error);
-    appendLog(`Automatischer TMDb Abgleich fehlgeschlagen: ${message}`, true);
-    setGlobalStatus(force ? "Fehler" : "Bereit", force ? "TMDb Abgleich fehlgeschlagen." : "TMDb Abgleich bereit.");
-    if (force) await showMessage("TMDb Abgleich", message, true);
-  }
+  const rawQuery = commonSeriesQuery(kind, seriesEntries.map(({ job }) => job));
+  const queryInfo = { ...sanitizeSeriesSearchQuery(rawQuery), raw: rawQuery };
+  await openSeriesSearchDialog(kind, queryInfo, seriesEntries);
 }
 
 async function metadataDetailsHtml(result, job) {
@@ -2006,12 +2426,18 @@ async function startRenameOnly() {
 
 async function startComboFlow() {
   if (!state.comboJobs.length) {
-    await showMessage("Beides", "Es gibt keine Umbenennen-Vorschau.");
+    await showMessage("Umbenennen + Übertragen", "Es gibt keine Umbenennen-Vorschau.");
+    return;
+  }
+  const selectedRenameJobs = await chooseTransferFormats(state.comboJobs, "Dateiformate für Umbenennen und Übertragen wählen");
+  if (!selectedRenameJobs) return;
+  if (!selectedRenameJobs.length) {
+    await showMessage("Umbenennen und Übertragen", "Für die gewählten Formate gibt es keine Dateien.");
     return;
   }
   const confirmed = await showModal({
-    title: "Beides starten",
-    body: "<p>Zuerst wird lokal umbenannt. Danach werden die erfolgreichen Dateien auf das Plex-Ziel übertragen.</p>",
+    title: "Umbenennen und Übertragen starten",
+    body: `<p>Zuerst werden ${selectedRenameJobs.length} Datei${selectedRenameJobs.length === 1 ? "" : "en"} lokal umbenannt. Danach werden nur diese Dateien auf das Plex-Ziel übertragen.</p>`,
     small: true,
     buttons: [
       { label: "Abbrechen", value: false },
@@ -2021,10 +2447,12 @@ async function startComboFlow() {
   if (!confirmed) return;
 
   setGlobalStatus("Kopiert...", "Umbenennen für Kombi läuft.");
-  const renameResult = await api.startRename(state.comboJobs, { refreshAfter: false });
-  state.comboJobs = renameResult.jobs || [];
+  const selectedSources = new Set(selectedRenameJobs.map((job) => String(job.source || "").toLowerCase()));
+  const renameResult = await api.startRename(selectedRenameJobs, { refreshAfter: false });
+  const renamedBySource = new Map((renameResult.jobs || []).map((job) => [String(job.source || "").toLowerCase(), job]));
+  state.comboJobs = state.comboJobs.map((job) => renamedBySource.get(String(job.source || "").toLowerCase()) || job);
   renderRenamePreview("combo");
-  const successfulRenameJobs = state.comboJobs.filter((job) => ["Umbenannt", "Unveraendert", "Unverändert"].includes(job.status));
+  const successfulRenameJobs = state.comboJobs.filter((job) => selectedSources.has(String(job.source || "").toLowerCase()) && ["Umbenannt", "Unverändert"].includes(job.status));
   const uniquePathMap = new Map();
   for (const job of successfulRenameJobs) {
     const rawPath = String(job.final_path || job.target || "").trim();
@@ -2068,7 +2496,7 @@ async function startComboFlow() {
   showWorkflowView("transfer");
   await savePendingJobs();
   renderJobs();
-  await startCopyFlow(false, "combo", els.comboRefreshInput.checked);
+  await startCopyFlow(false, "combo", els.comboRefreshInput.checked, false);
 }
 
 function wireEvents() {
