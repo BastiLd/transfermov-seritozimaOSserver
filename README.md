@@ -16,13 +16,13 @@ cd App
 npm start
 ```
 
-## Portable EXE bauen
+## Windows-Installer bauen
 
 ```powershell
 npm run dist
 ```
 
-Die portable EXE liegt danach unter `App\dist\Plex Transfer Portable.exe`.
+Der NSIS-Installer liegt danach unter `App\dist\Plex Transfer Setup 1.0.0.exe`.
 
 ## Bedienung
 

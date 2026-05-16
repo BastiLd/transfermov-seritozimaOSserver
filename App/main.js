@@ -46,7 +46,8 @@ let currentLogPath = null;
 
 function runtimeDir() {
   if (!app.isPackaged) return __dirname;
-  return process.env.PORTABLE_EXECUTABLE_DIR || path.dirname(process.execPath);
+  if (process.env.PORTABLE_EXECUTABLE_DIR) return process.env.PORTABLE_EXECUTABLE_DIR;
+  return app.getPath("userData");
 }
 
 function configPath() {

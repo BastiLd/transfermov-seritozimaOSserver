@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder --win portable"
+    "dist": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable"
   },
   "build": {
     "appId": "local.plex-transfer",
@@ -30,9 +31,24 @@
     ],
     "win": {
       "target": [
-        "portable"
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
-      "artifactName": "Plex Transfer Portable.${ext}"
+      "artifactName": "Plex Transfer Setup ${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Plex Transfer",
+      "uninstallDisplayName": "Plex Transfer"
     }
   },
   "devDependencies": {
