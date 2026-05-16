@@ -137,6 +137,14 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 Entfernen
               </button>
+              <button id="selectJobsButton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                Auswahl bearbeiten
+              </button>
+              <button id="formatButton" class="hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"></path><path d="M7 12h10"></path><path d="M10 17h4"></path></svg>
+                Formate wählen
+              </button>
               <button id="retryButton">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                 Fehler erneut
@@ -174,7 +182,11 @@
                 <h2>Laufendes Log</h2>
                 <p>Robocopy-Ausgabe, Warnungen und Systemmeldungen.</p>
               </div>
-              <label class="check-label"><input id="errorsOnlyToggle" type="checkbox"> Nur Fehler</label>
+              <div class="log-actions">
+                <button id="copyLogsButton">Logs kopieren</button>
+                <button id="saveLogsButton">Als TXT speichern</button>
+                <label class="check-label"><input id="errorsOnlyToggle" type="checkbox"> Nur Fehler</label>
+              </div>
             </div>
             <pre id="logBox" class="log-box"></pre>
           </section>

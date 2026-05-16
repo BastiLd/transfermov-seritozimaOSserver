@@ -56,6 +56,8 @@ const api = window.plexTransfer || {
   selectSeries: async () => ["D:\\Demo\\Example.Show\\Example.Show.S01E01.mkv"],
   selectAny: async () => ["D:\\Demo\\Example.Movie.2026.1080p.mkv", "D:\\Demo\\Example.Show\\Example.Show.S01E01.mkv"],
   openLogs: async () => "",
+  copyLogs: async () => ({ ok: true }),
+  saveLogs: async () => ({ ok: true }),
   openPath: async () => "",
   copyPath: async () => ({ ok: true }),
   refreshPlex: async () => ({ movies_ok: true, series_ok: true }),
@@ -105,8 +107,18 @@ const state = {
   comboJobs: [],
   logEntries: [],
   storageWarnings: [],
-  storageRequestId: 0
+  storageRequestId: 0,
+  logFlushTimer: null,
+  renderTimer: null,
+  storageRefreshTimer: null,
+  lastRenderedLogCount: 0,
+  lastStorageSignature: ""
 };
+
+const VISIBLE_LOG_LIMIT = 700;
+const LOG_FLUSH_INTERVAL_MS = 120;
+const RENDER_INTERVAL_MS = 120;
+const STORAGE_REFRESH_DELAY_MS = 350;
 
 const $ = (id) => document.getElementById(id);
 
@@ -138,9 +150,13 @@ const els = {
   moveUpButton: $("moveUpButton"),
   moveDownButton: $("moveDownButton"),
   removeButton: $("removeButton"),
+  selectJobsButton: $("selectJobsButton"),
+  formatButton: $("formatButton"),
   retryButton: $("retryButton"),
   clearButton: $("clearButton"),
   errorsOnlyToggle: $("errorsOnlyToggle"),
+  copyLogsButton: $("copyLogsButton"),
+  saveLogsButton: $("saveLogsButton"),
   logBox: $("logBox"),
   etaTitle: $("etaTitle"),
   etaDetail: $("etaDetail"),
@@ -271,6 +287,22 @@ function isOpenJob(job) {
   return !isComplete(job);
 }
 
+function isTransferSelected(job) {
+  return job?.transfer_selected !== false;
+}
+
+function selectedOpenJobs(jobs = state.jobs) {
+  return (jobs || []).filter((job) => isOpenJob(job) && isTransferSelected(job));
+}
+
+function openJobs(jobs = state.jobs) {
+  return (jobs || []).filter(isOpenJob);
+}
+
+function openJobFormats(jobs = state.jobs) {
+  return [...new Set(openJobs(jobs).map(jobExtension).filter(Boolean))].sort();
+}
+
 function progressToFraction(progress) {
   const match = String(progress || "").match(/(\d{1,3}(?:[\.,]\d+)?)%/);
   if (!match) return 0;
@@ -394,13 +426,42 @@ function appendLog(message, isError = false) {
   const stamp = new Date().toLocaleTimeString("de-DE", { hour12: false });
   const entry = { text: `[${stamp}] ${message}`, isError: Boolean(isError) };
   state.logEntries.push(entry);
-  refreshLog();
+  scheduleLogRefresh();
+}
+
+function visibleLogEntries() {
+  const rows = state.logEntries.filter((entry) => !els.errorsOnlyToggle.checked || entry.isError);
+  return rows;
+}
+
+function currentLogText() {
+  return visibleLogEntries().map((entry) => entry.text).join("\n");
 }
 
 function refreshLog() {
-  const rows = state.logEntries.filter((entry) => !els.errorsOnlyToggle.checked || entry.isError);
-  els.logBox.textContent = rows.map((entry) => entry.text).join("\n");
+  const rows = visibleLogEntries();
+  const visibleRows = rows.slice(-VISIBLE_LOG_LIMIT);
+  const hiddenCount = rows.length - visibleRows.length;
+  const prefix = hiddenCount > 0 ? [`... ${hiddenCount} ältere Logzeilen ausgeblendet. Kopieren/Speichern enthält trotzdem alle gefilterten Zeilen.`] : [];
+  els.logBox.textContent = [...prefix, ...visibleRows.map((entry) => entry.text)].join("\n");
   els.logBox.scrollTop = els.logBox.scrollHeight;
+  state.lastRenderedLogCount = rows.length;
+}
+
+function scheduleLogRefresh() {
+  if (state.logFlushTimer) return;
+  state.logFlushTimer = setTimeout(() => {
+    state.logFlushTimer = null;
+    refreshLog();
+  }, LOG_FLUSH_INTERVAL_MS);
+}
+
+function scheduleRender() {
+  if (state.renderTimer) return;
+  state.renderTimer = setTimeout(() => {
+    state.renderTimer = null;
+    renderJobs();
+  }, RENDER_INTERVAL_MS);
 }
 
 function applyTheme() {
@@ -514,6 +575,7 @@ function restorePendingJobs() {
       last_progress_at: 0,
       size_bytes: Number(item.size_bytes || 0),
       size_label: item.size_label || formatSize(Number(item.size_bytes || 0)),
+      transfer_selected: item.transfer_selected !== false,
       return_code: null
     });
   }
@@ -549,7 +611,8 @@ function renderJobs() {
   const rows = filteredJobs();
   for (const job of rows) {
     const row = document.createElement("tr");
-    row.className = job.id === state.selectedJobId ? "selected" : "";
+    const displayStatus = !isTransferSelected(job) && isOpenJob(job) ? "Nicht ausgewählt" : normalizeStatus(job.status);
+    row.className = [job.id === state.selectedJobId ? "selected" : "", !isTransferSelected(job) && isOpenJob(job) ? "job-row-unselected" : ""].filter(Boolean).join(" ");
     row.addEventListener("click", () => {
       state.selectedJobId = job.id;
       renderJobs();
@@ -566,29 +629,35 @@ function renderJobs() {
       <td class="path-cell" title="${escapeHtml(job.source)}">${escapeHtml(shortPath(job.source))}</td>
       <td class="path-cell" title="${escapeHtml(job.target)}">${escapeHtml(shortPath(job.target))}</td>
       <td>${escapeHtml(job.size_label || formatSize(job.size_bytes))}</td>
-      <td class="${statusClass(job.status)}">${escapeHtml(normalizeStatus(job.status))}</td>
+      <td class="${statusClass(displayStatus)}">${escapeHtml(displayStatus)}</td>
       <td>${escapeHtml(job.progress || "-")}</td>
     `;
     els.jobsBody.appendChild(row);
   }
 
   els.emptyJobs.classList.toggle("hidden", state.jobs.length > 0);
-  const waiting = state.jobs.filter((job) => ["Bereit", "Wartet"].includes(job.status)).length;
+  const waiting = selectedOpenJobs().filter((job) => ["Bereit", "Wartet"].includes(job.status)).length;
   const active = state.jobs.filter((job) => job.status === "Kopiert...").length;
   const failed = state.jobs.filter(isFailed).length;
+  const unselected = state.jobs.filter((job) => isOpenJob(job) && !isTransferSelected(job)).length;
   const filterNote = rows.length !== state.jobs.length ? ` · ${rows.length} sichtbar` : "";
   setText(els.jobMeta, `${state.jobs.length} Jobs in der Liste${filterNote}`);
-  setText(els.jobStatusLine, `${waiting} wartend | ${active} läuft | ${failed} Fehler`);
+  setText(els.jobStatusLine, `${waiting} ausgewählt | ${active} läuft | ${failed} Fehler${unselected ? ` | ${unselected} abgewählt` : ""}`);
 
   const index = selectedIndex();
   const hasFailed = state.jobs.some(isFailed);
   els.moveUpButton.disabled = state.running || index <= 0;
   els.moveDownButton.disabled = state.running || index < 0 || index >= state.jobs.length - 1;
   els.removeButton.disabled = state.running || index < 0;
+  els.selectJobsButton.disabled = state.running || !state.jobs.some(isOpenJob);
+  const formats = openJobFormats();
+  els.formatButton.classList.toggle("hidden", formats.length <= 1);
+  els.formatButton.disabled = state.running || formats.length <= 1;
   els.retryButton.disabled = state.running || !hasFailed;
   els.clearButton.disabled = state.running || state.jobs.length === 0;
   els.cancelButton.classList.toggle("hidden", !state.running);
   refreshStatus();
+  scheduleTargetStorageRefresh();
 }
 
 function refreshActiveRows() {
@@ -621,6 +690,7 @@ function currentLiveSpeed() {
 
 function remainingBytesForEta() {
   return state.jobs.reduce((sum, job) => {
+    if (!isTransferSelected(job)) return sum;
     if (isComplete(job)) return sum;
     if (!job.size_bytes || job.size_bytes <= 0) return sum;
     const remainingFraction = job.status === "Kopiert..." ? Math.max(0, 1 - progressToFraction(job.progress)) : 1;
@@ -670,34 +740,50 @@ function refreshEta() {
 }
 
 function refreshStatus() {
-  const total = state.jobs.length || 0;
+  const progressJobs = state.jobs.filter(isTransferSelected);
+  const total = progressJobs.length || 0;
   const success = state.jobs.filter((job) => job.status === "Kopiert").length;
   const skipped = state.jobs.filter(isSkipped).length;
   const failed = state.jobs.filter(isFailed).length;
-  const completed = success + skipped + failed;
-  const totalBytes = state.jobs.reduce((sum, job) => sum + Math.max(Number(job.size_bytes || 0), 0), 0);
-  const doneBytes = state.jobs.reduce((sum, job) => sum + Math.max(Number(job.size_bytes || 0), 0) * jobCompletionFraction(job), 0);
+  const totalBytes = progressJobs.reduce((sum, job) => sum + Math.max(Number(job.size_bytes || 0), 0), 0);
+  const doneBytes = progressJobs.reduce((sum, job) => sum + Math.max(Number(job.size_bytes || 0), 0) * jobCompletionFraction(job), 0);
   const fraction = totalBytes > 0
     ? doneBytes / totalBytes
     : total
-      ? state.jobs.reduce((sum, job) => sum + jobCompletionFraction(job), 0) / total
+      ? progressJobs.reduce((sum, job) => sum + jobCompletionFraction(job), 0) / total
       : 0;
   const percent = Math.max(0, Math.min(100, Math.round(fraction * 100)));
   els.overallProgress.style.width = `${percent}%`;
   setText(els.overallProgressText, `${percent}% abgeschlossen`);
   setText(els.summary, total ? `Erfolgreich ${success} | Übersprungen ${skipped} | Fehlgeschlagen ${failed}` : "Noch keine Kopiervorgänge gestartet.");
 
-  const open = state.jobs.filter(isOpenJob);
+  const open = selectedOpenJobs();
   const totalSize = open.reduce((sum, job) => sum + Number(job.size_bytes || 0), 0);
   setText(els.transferSize, totalSize > 0 ? `Offene Transfers: ${formatSize(totalSize)}` : state.jobs.length ? "Offene Transfers: nichts offen" : "Offene Transfers: -");
   refreshActiveRows();
   refreshEta();
-  refreshTargetStorage();
+}
+
+function storageSignature(jobs = state.jobs) {
+  return selectedOpenJobs(jobs)
+    .map((job) => `${job.id}:${job.target}:${job.size_bytes}:${job.transfer_selected !== false}`)
+    .join("|");
+}
+
+function scheduleTargetStorageRefresh(jobs = state.jobs, force = false) {
+  const signature = storageSignature(jobs);
+  if (!force && signature === state.lastStorageSignature) return;
+  state.lastStorageSignature = signature;
+  clearTimeout(state.storageRefreshTimer);
+  state.storageRefreshTimer = setTimeout(() => {
+    state.storageRefreshTimer = null;
+    refreshTargetStorage(jobs);
+  }, STORAGE_REFRESH_DELAY_MS);
 }
 
 async function refreshTargetStorage(jobs = state.jobs) {
   const requestId = ++state.storageRequestId;
-  const open = jobs.filter(isOpenJob);
+  const open = selectedOpenJobs(jobs);
   if (!open.length) {
     state.storageWarnings = [];
     setText(els.targetSpace, state.jobs.length ? "Ziel frei: nichts offen" : "-");
@@ -705,7 +791,7 @@ async function refreshTargetStorage(jobs = state.jobs) {
   }
   setText(els.targetSpace, "Speicher wird geprüft...");
   try {
-    const result = await api.getTargetStorage(jobs);
+    const result = await api.getTargetStorage(open);
     if (requestId !== state.storageRequestId) return;
     state.storageWarnings = (result || []).filter((item) => !item.ok);
     const lines = (result || []).map((item) => {
@@ -765,6 +851,7 @@ async function addPaths(paths, forcedType = null) {
     job.started_at = 0;
     job.last_progress_fraction = 0;
     job.last_progress_at = 0;
+    job.transfer_selected = true;
     state.jobs.push(job);
     state.selectedJobId = job.id;
     appendLog(`Job hinzugefügt: ${job.media_type} | ${job.source} -> ${job.target}`);
@@ -840,7 +927,7 @@ function jobExtension(job) {
 }
 
 function openJobsForFormatChoice(jobs) {
-  return (jobs || []).filter(isOpenJob);
+  return selectedOpenJobs(jobs);
 }
 
 async function chooseTransferFormats(jobs, title = "Dateiformate übertragen") {
@@ -893,7 +980,176 @@ async function chooseTransferFormats(jobs, title = "Dateiformate übertragen") {
   });
 }
 
-async function showCopyPreview(jobs = state.jobs.filter(isOpenJob)) {
+function normalizeExtensionInput(value) {
+  const raw = String(value || "").trim().toLowerCase().replace(/^\*+/, "");
+  if (!raw) return "";
+  const ext = raw.startsWith(".") ? raw : `.${raw}`;
+  return /^\.[a-z0-9_-]{1,16}$/i.test(ext) ? ext : "";
+}
+
+async function openFormatSelectionDialog({ title = "Formate wählen", applyToJobs = true, sourceJobs = state.jobs } = {}) {
+  const editableJobs = applyToJobs ? openJobs(sourceJobs) : openJobsForFormatChoice(sourceJobs);
+  const allExtensions = [...new Set(editableJobs.map(jobExtension).filter(Boolean))].sort();
+  if (allExtensions.length <= 1) return applyToJobs ? undefined : selectedOpenJobs(sourceJobs);
+  const selectedExtensions = new Set(editableJobs.filter(isTransferSelected).map(jobExtension).filter(Boolean));
+  if (!selectedExtensions.size) allExtensions.forEach((ext) => selectedExtensions.add(ext));
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal small";
+    const labelText = () => {
+      const count = selectedExtensions.size;
+      return count === allExtensions.length ? `Alle Formate (${count})` : `${count} Format${count === 1 ? "" : "e"} behalten`;
+    };
+    const renderOptions = () => {
+      const list = modal.querySelector('[data-role="format-list"]');
+      list.innerHTML = allExtensions.map((ext) => {
+        const count = editableJobs.filter((job) => jobExtension(job) === ext).length;
+        const active = selectedExtensions.has(ext);
+        return `
+          <button type="button" class="custom-select-option format-toggle-option${active ? " active" : ""}" data-format="${escapeHtml(ext)}">
+            <span class="format-check">${active ? "✓" : ""}</span>
+            <span>${escapeHtml(extensionLabel(ext))}</span>
+            <small>${count} Datei${count === 1 ? "" : "en"}</small>
+          </button>
+        `;
+      }).join("");
+      modal.querySelector('[data-role="format-trigger-label"]').textContent = labelText();
+    };
+    modal.innerHTML = `
+      <div class="modal-header"><h2>${escapeHtml(title)}</h2></div>
+      <div class="modal-body">
+        <p>Wähle aus, welche Dateiformate behalten und beim nächsten Kopiervorgang übertragen werden. Andere Formate bleiben sichtbar, werden aber abgewählt.</p>
+        <div class="custom-episode-select format-select open">
+          <button type="button" class="custom-select-trigger" data-role="format-trigger" aria-haspopup="listbox" aria-expanded="true">
+            <span data-role="format-trigger-label"></span><span aria-hidden="true">▾</span>
+          </button>
+          <div class="custom-select-popover format-popover" data-role="format-popover">
+            <div class="custom-select-list" role="listbox" data-role="format-list"></div>
+          </div>
+        </div>
+        <div class="format-add-row">
+          <input data-role="format-input" placeholder="Neues Format, z.B. mp4 oder .mkv">
+          <button data-role="format-add">Format hinzufügen</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button data-role="cancel">Abbrechen</button>
+        <button data-role="all">Alle Formate</button>
+        <button data-role="continue" class="primary">Auswahl übernehmen</button>
+      </div>
+    `;
+    const close = (value) => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve(value);
+    };
+    modal.querySelector('[data-role="cancel"]').addEventListener("click", () => close(null));
+    modal.querySelector('[data-role="all"]').addEventListener("click", () => {
+      allExtensions.forEach((ext) => selectedExtensions.add(ext));
+      renderOptions();
+    });
+    modal.querySelector('[data-role="format-list"]').addEventListener("click", (event) => {
+      const button = event.target.closest("[data-format]");
+      if (!button) return;
+      const ext = button.dataset.format;
+      if (selectedExtensions.has(ext)) selectedExtensions.delete(ext);
+      else selectedExtensions.add(ext);
+      renderOptions();
+    });
+    modal.querySelector('[data-role="format-add"]').addEventListener("click", () => {
+      const input = modal.querySelector('[data-role="format-input"]');
+      const ext = normalizeExtensionInput(input.value);
+      if (!ext) {
+        showToast("Format ungültig", "Bitte z.B. mkv oder .mp4 eingeben.", true);
+        return;
+      }
+      if (!allExtensions.includes(ext)) allExtensions.push(ext);
+      allExtensions.sort();
+      selectedExtensions.add(ext);
+      input.value = "";
+      renderOptions();
+    });
+    modal.querySelector('[data-role="continue"]').addEventListener("click", async () => {
+      if (!selectedExtensions.size) {
+        showToast("Keine Formate ausgewählt", "Bitte mindestens ein Format auswählen.", true);
+        return;
+      }
+      const selectedJobs = editableJobs.filter((job) => selectedExtensions.has(jobExtension(job)));
+      if (applyToJobs) {
+        for (const job of editableJobs) job.transfer_selected = selectedExtensions.has(jobExtension(job));
+        await savePendingJobs();
+        renderJobs();
+      }
+      close(selectedJobs);
+    });
+    els.modalHost.appendChild(modal);
+    renderOptions();
+  });
+}
+
+async function chooseTransferFormats(jobs, title = "Dateiformate übertragen") {
+  const openJobs = openJobsForFormatChoice(jobs);
+  const extensions = [...new Set(openJobs.map(jobExtension).filter(Boolean))].sort();
+  if (extensions.length <= 1) return openJobs;
+  return openFormatSelectionDialog({ title, applyToJobs: false, sourceJobs: jobs });
+}
+
+async function openTransferSelectionDialog() {
+  const editableJobs = state.jobs.filter(isOpenJob);
+  if (!editableJobs.length) {
+    await showMessage("Auswahl bearbeiten", "Es gibt keine offenen Dateien zur Auswahl.");
+    return;
+  }
+  const rows = editableJobs.map((job) => `
+    <label class="job-select-row">
+      <input type="checkbox" data-job-id="${job.id}" ${isTransferSelected(job) ? "checked" : ""}>
+      <span>
+        <strong>${escapeHtml(basename(job.source))}</strong>
+        <span>${escapeHtml(shortPath(job.source, 86))}</span>
+      </span>
+      <small>${escapeHtml(job.size_label || formatSize(job.size_bytes))}</small>
+    </label>
+  `).join("");
+  return new Promise((resolve) => {
+    els.modalHost.innerHTML = "";
+    els.modalHost.classList.remove("hidden");
+    const modal = document.createElement("div");
+    modal.className = "modal metadata-modal";
+    modal.innerHTML = `
+      <div class="modal-header"><h2>Übertragung auswählen</h2></div>
+      <div class="modal-body">
+        <p>Nur markierte Dateien werden beim nächsten Kopiervorgang übertragen. Abgewählte Dateien bleiben sichtbar und werden nicht in Gesamtgröße, Zielprüfung oder Fortschritt eingerechnet.</p>
+        <div class="job-select-list">${rows}</div>
+      </div>
+      <div class="modal-footer">
+        <button data-role="cancel">Abbrechen</button>
+        <button data-role="select-all">Alle auswählen</button>
+        <button data-role="save" class="primary">Auswahl übernehmen</button>
+      </div>
+    `;
+    const close = () => {
+      els.modalHost.classList.add("hidden");
+      els.modalHost.innerHTML = "";
+      resolve();
+    };
+    modal.querySelector('[data-role="cancel"]').addEventListener("click", close);
+    modal.querySelector('[data-role="select-all"]').addEventListener("click", () => {
+      modal.querySelectorAll("[data-job-id]").forEach((input) => { input.checked = true; });
+    });
+    modal.querySelector('[data-role="save"]').addEventListener("click", async () => {
+      const selectedIds = new Set([...modal.querySelectorAll("[data-job-id]:checked")].map((input) => Number(input.dataset.jobId)));
+      for (const job of editableJobs) job.transfer_selected = selectedIds.has(job.id);
+      await savePendingJobs();
+      renderJobs();
+      close();
+    });
+    els.modalHost.appendChild(modal);
+  });
+}
+
+async function showCopyPreview(jobs = selectedOpenJobs()) {
   const items = jobs.map((job) => `
     <div class="preview-item">
       <strong>${escapeHtml(job.media_type)} · ${escapeHtml(basename(job.source))}</strong>
@@ -957,7 +1213,7 @@ async function startCopyFlow(skipSpeedPrompt = false, workflow = "transfer", ref
   }
   const jobsToCopy = chooseFormats
     ? await chooseTransferFormats(state.jobs, workflow === "combo" ? "Dateiformate für Übertragung wählen" : "Dateiformate übertragen")
-    : state.jobs.filter(isOpenJob);
+    : selectedOpenJobs();
   if (!jobsToCopy) return;
   if (!jobsToCopy.length) {
     await showMessage("Plex Transfer", "Für die gewählten Formate gibt es keine offenen Jobs.");
@@ -2486,6 +2742,7 @@ async function startComboFlow() {
     job.started_at = 0;
     job.last_progress_fraction = 0;
     job.last_progress_at = 0;
+    job.transfer_selected = true;
     state.jobs.push(job);
   }
   for (const error of result.errors || []) appendLog(error, true);
@@ -2542,6 +2799,14 @@ function wireEvents() {
   els.logsButton.addEventListener("click", () => api.openLogs());
   els.speedButton.addEventListener("click", () => runSpeedTestFlow(false));
   els.errorsOnlyToggle.addEventListener("change", refreshLog);
+  els.copyLogsButton.addEventListener("click", async () => {
+    await api.copyLogs(currentLogText());
+    showToast("Logs kopiert", els.errorsOnlyToggle.checked ? "Nur Fehler wurden kopiert." : "Alle Logs wurden kopiert.");
+  });
+  els.saveLogsButton.addEventListener("click", async () => {
+    const result = await api.saveLogs(currentLogText());
+    if (!result?.canceled) showToast("Logs gespeichert", result?.path || "TXT-Datei wurde gespeichert.");
+  });
   els.jobSearchInput.addEventListener("input", renderJobs);
   els.settingsButton.addEventListener("click", showSettings);
   els.cancelSettingsButton.addEventListener("click", hideSettings);
@@ -2580,6 +2845,8 @@ function wireEvents() {
     if (index >= 0 && index < state.jobs.length - 1) swapJobs(index, index + 1);
   });
   els.removeButton.addEventListener("click", removeSelectedJob);
+  els.selectJobsButton.addEventListener("click", openTransferSelectionDialog);
+  els.formatButton.addEventListener("click", () => openFormatSelectionDialog({ title: "Formate behalten", applyToJobs: true }));
   els.retryButton.addEventListener("click", retryFailedJobs);
   els.clearButton.addEventListener("click", async () => {
     if (!(await showModal({
@@ -2624,7 +2891,7 @@ function wireEvents() {
   api.onCopyJobStart((payload) => {
     state.activeJobIds.add(payload.id);
     setMascotState("busy");
-    renderJobs();
+    scheduleRender();
   });
   api.onCopyJobUpdate((payload) => {
     const job = state.jobs.find((item) => item.id === payload.id);
@@ -2633,7 +2900,7 @@ function wireEvents() {
     job.progress = payload.progress;
     if (payload.return_code !== undefined) job.return_code = payload.return_code;
     updateJobLiveSpeedFromProgress(job, payload.progress);
-    renderJobs();
+    scheduleRender();
   });
   api.onCopyJobSpeed((payload) => {
     const job = state.jobs.find((item) => item.id === payload.id);

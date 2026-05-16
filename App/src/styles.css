@@ -805,6 +805,7 @@ h1, h2, p {
 
 .custom-episode-select {
   position: relative;
+  min-width: 0;
 }
 
 .custom-episode-select.open .custom-select-trigger {
@@ -814,6 +815,7 @@ h1, h2, p {
 
 .custom-select-trigger {
   width: 100%;
+  min-width: 0;
   min-height: 38px;
   justify-content: space-between;
   border-color: var(--border-strong);
@@ -866,6 +868,12 @@ h1, h2, p {
   padding: 0 10px;
 }
 
+.custom-select-option:hover:not(:disabled) {
+  transform: none;
+  position: relative;
+  z-index: 2;
+}
+
 .custom-select-option.active {
   background: var(--primary-soft);
   border-color: color-mix(in srgb, var(--primary) 48%, var(--border));
@@ -896,16 +904,71 @@ h1, h2, p {
   color: var(--muted);
 }
 
+.format-select {
+  margin-top: 12px;
+  min-height: 320px;
+}
+
+.format-popover {
+  position: relative;
+  top: auto;
+  margin-top: 8px;
+}
+
+.format-toggle-option {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.format-toggle-option small {
+  color: var(--muted);
+}
+
+.format-check {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.format-add-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.format-add-row input {
+  min-height: 38px;
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--entry);
+  color: var(--text);
+  padding: 0 12px;
+  font-weight: 700;
+}
+
 .series-season-add {
   display: grid;
-  grid-template-columns: minmax(150px, 0.8fr) minmax(220px, 1.1fr) minmax(240px, 1.2fr) minmax(120px, 0.6fr) auto;
-  gap: 10px;
+  grid-template-columns: minmax(130px, 0.7fr) minmax(230px, 1.2fr) minmax(250px, 1.25fr) minmax(110px, 0.55fr) minmax(130px, 0.65fr);
+  gap: 14px 18px;
   align-items: end;
   padding: 12px;
   margin-bottom: 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: color-mix(in srgb, var(--card-solid) 70%, transparent);
+}
+
+.series-season-add > * {
+  min-width: 0;
 }
 
 .series-season-add label {
@@ -919,6 +982,7 @@ h1, h2, p {
 .series-season-add input {
   min-height: 38px;
   width: 100%;
+  min-width: 0;
   border: 1px solid var(--border-strong);
   border-radius: 8px;
   background: var(--entry);
@@ -942,12 +1006,43 @@ h1, h2, p {
   background: color-mix(in srgb, var(--card-soft) 80%, transparent);
 }
 
+.series-batch-row > * {
+  min-width: 0;
+}
+
+.series-batch-row .check-label,
+.series-batch-row span {
+  overflow-wrap: anywhere;
+}
+
 .series-batch-row.needs-review {
   border-color: color-mix(in srgb, var(--warning) 58%, var(--border));
 }
 
 .series-batch-row small {
   color: var(--muted);
+}
+
+@media (max-width: 1180px) {
+  .series-season-add {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .series-season-add button[data-role="batch-add-season"] {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .series-season-add,
+  .series-batch-row,
+  .format-add-row {
+    grid-template-columns: 1fr;
+  }
+
+  .series-season-add button[data-role="batch-add-season"] {
+    grid-column: auto;
+  }
 }
 
 .workspace {
@@ -1098,9 +1193,46 @@ h1, h2, p {
 
 .job-actions {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 10px;
   margin-bottom: 16px;
+}
+
+.job-row-unselected {
+  opacity: 0.62;
+}
+
+.job-select-list {
+  display: grid;
+  gap: 8px;
+  max-height: 52vh;
+  overflow: auto;
+  margin-top: 12px;
+  padding-right: 4px;
+}
+
+.job-select-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--card-soft) 80%, transparent);
+}
+
+.job-select-row strong,
+.job-select-row span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.job-select-row span,
+.job-select-row small {
+  color: var(--muted);
 }
 
 .table-shell {
@@ -1185,6 +1317,20 @@ tr.selected {
   gap: 10px;
   color: var(--text);
   cursor: pointer;
+}
+
+.log-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.log-actions button {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: 13px;
 }
 
 .check-label input,

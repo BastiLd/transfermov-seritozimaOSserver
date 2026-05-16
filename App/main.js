@@ -275,6 +275,22 @@ function collectVideoFiles(sourcePath) {
   return files.sort((a, b) => a.localeCompare(b, "de"));
 }
 
+function fallbackShowNameForEpisodeFile(filePath, extractedShowName) {
+  const parentDir = path.basename(path.dirname(filePath));
+  const parentSeason = seasonFolderInfo(parentDir);
+  const showDir = parentSeason ? path.basename(path.dirname(path.dirname(filePath))) : parentDir;
+  const normalizedExtracted = normalizeShowName(extractedShowName);
+  if (
+    !normalizedExtracted
+    || normalizedExtracted === "Unbekannt"
+    || /^\d{1,4}$/.test(normalizedExtracted)
+    || seasonFolderInfo(normalizedExtracted)
+  ) {
+    return normalizeShowName(showDir);
+  }
+  return normalizedExtracted;
+}
+
 function cleanEpisodeTitle(stem, episode) {
   let raw = episode ? stem.slice(episode.end) : stem;
   raw = raw
@@ -775,6 +791,7 @@ function targetStorageSummary(jobs) {
   const config = loadConfig();
   const buckets = new Map();
   for (const job of jobs || []) {
+    if (job?.transfer_selected === false) continue;
     if (!job || ["Kopiert", "Übersprungen"].includes(job.status) || String(job.status || "").startsWith("Fehler")) continue;
     const root = expandHome(job.media_type === "Film" ? config.movies_root : config.series_root);
     if (!root) continue;
@@ -864,9 +881,11 @@ function buildJob(sourcePath, forcedType) {
       if (!stat.isFile() || !looksLikeVideo(resolvedPath)) {
         throw new Error(`Eine Serie muss ein Ordner oder eine Episodendatei sein:\n${resolvedPath}`);
       }
-      const season = detectSeasonNumber(path.parse(resolvedPath).name) || 1;
-      const extractedShowName = extractShowNameFromEpisode(path.parse(resolvedPath).name);
-      const showName = extractedShowName === "Unbekannt" ? normalizeShowName(path.basename(path.dirname(resolvedPath))) : extractedShowName;
+      const parentSeason = seasonFolderInfo(path.basename(path.dirname(resolvedPath)));
+      const stem = path.parse(resolvedPath).name;
+      const season = detectSeasonNumber(stem) || parentSeason?.season || 1;
+      const extractedShowName = detectEpisodeParts(stem) || detectSeasonNumber(stem) ? extractShowNameFromEpisode(stem) : "Unbekannt";
+      const showName = fallbackShowNameForEpisodeFile(resolvedPath, extractedShowName);
       targetPath = path.join(expandHome(config.series_root), showName, `Season ${String(season).padStart(2, "0")}`, path.basename(resolvedPath));
     }
   }
@@ -892,7 +911,8 @@ function robocopyFlags(config) {
 
 function buildRobocopyCommand(job, config) {
   const flags = robocopyFlags(config);
-  if (job.media_type === "Film") {
+  const sourceIsFile = fs.existsSync(job.source) && fs.statSync(job.source).isFile();
+  if (sourceIsFile) {
     return {
       command: "robocopy",
       args: [path.dirname(job.source), path.dirname(job.target), path.basename(job.source), ...flags]
@@ -902,6 +922,14 @@ function buildRobocopyCommand(job, config) {
     command: "robocopy",
     args: [job.source, job.target, "/E", ...flags]
   };
+}
+
+function isSourceFile(job) {
+  try {
+    return Boolean(job?.source && fs.existsSync(job.source) && fs.statSync(job.source).isFile());
+  } catch {
+    return false;
+  }
 }
 
 function extractProgress(line) {
@@ -937,7 +965,8 @@ function pendingJobPayload(jobs) {
       target: job.target,
       media_type: job.media_type,
       size_bytes: job.size_bytes || 0,
-      size_label: job.size_label || "-"
+      size_label: job.size_label || "-",
+      transfer_selected: job.transfer_selected !== false
     }));
 }
 
@@ -954,7 +983,7 @@ async function runSingleJob(job, config) {
   appendLog(`Starte Job #${job.id}: ${job.source} -> ${job.target}`, false);
 
   try {
-    const targetDir = job.media_type === "Film" && path.extname(job.target) ? path.dirname(job.target) : job.target;
+    const targetDir = isSourceFile(job) ? path.dirname(job.target) : job.target;
     ensureDir(targetDir);
     const { command, args } = buildRobocopyCommand(job, config);
     appendLog(`robocopy ${args.join(" ")}`, false);
@@ -1081,7 +1110,7 @@ async function startCopy(jobs, options = {}) {
   const config = loadConfig();
   validateRoots(config);
 
-  const copyJobs = jobs.filter((job) => !["Kopiert", "Übersprungen"].includes(job.status));
+  const copyJobs = jobs.filter((job) => job.transfer_selected !== false && !["Kopiert", "Übersprungen"].includes(job.status));
   if (!copyJobs.length) throw new Error("Es gibt keine offenen Jobs.");
 
   running = true;
@@ -1219,9 +1248,28 @@ ipcMain.handle("config:save", (_event, config) => {
 ipcMain.handle("jobs:create", (_event, paths, forcedType) => {
   const jobs = [];
   const errors = [];
+  const seenSources = new Set();
+  const seenTargets = new Set();
+  const addJob = (job) => {
+    const sourceKey = String(job.source || "").toLowerCase();
+    const targetKey = String(job.target || "").toLowerCase();
+    if (seenSources.has(sourceKey) || seenTargets.has(targetKey)) return;
+    seenSources.add(sourceKey);
+    seenTargets.add(targetKey);
+    jobs.push(job);
+  };
   for (const item of paths || []) {
     try {
-      jobs.push(buildJob(item, forcedType));
+      const resolved = path.resolve(item);
+      const stat = fs.existsSync(resolved) ? fs.statSync(resolved) : null;
+      const shouldExpandSeriesFolder = stat?.isDirectory() && (!forcedType || forcedType === "Serie");
+      if (shouldExpandSeriesFolder) {
+        const files = collectVideoFiles(resolved);
+        if (!files.length) throw new Error(`Keine Videodateien gefunden:\n${resolved}`);
+        for (const file of files) addJob(buildJob(file, "Serie"));
+      } else {
+        addJob(buildJob(item, forcedType));
+      }
     } catch (error) {
       errors.push(error.message);
     }
@@ -1299,6 +1347,20 @@ ipcMain.handle("logs:open", async () => {
   ensureDir(logsDir());
   await shell.openPath(logsDir());
   return logsDir();
+});
+ipcMain.handle("logs:copy", (_event, text) => {
+  clipboard.writeText(String(text || ""));
+  return { ok: true };
+});
+ipcMain.handle("logs:save", async (_event, text) => {
+  const result = await dialog.showSaveDialog(mainWindow, {
+    title: "Logs als TXT speichern",
+    defaultPath: `plex-transfer-logs_${nowStamp()}.txt`,
+    filters: [{ name: "Textdateien", extensions: ["txt"] }]
+  });
+  if (result.canceled || !result.filePath) return { canceled: true };
+  fs.writeFileSync(result.filePath, String(text || ""), "utf8");
+  return { ok: true, path: result.filePath };
 });
 ipcMain.handle("path:open", (_event, rawPath) => openPathSmart(rawPath));
 ipcMain.handle("path:copy", (_event, rawPath) => {

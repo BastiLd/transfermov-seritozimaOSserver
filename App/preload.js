@@ -20,6 +20,8 @@ contextBridge.exposeInMainWorld("plexTransfer", {
   selectRenameFiles: () => ipcRenderer.invoke("dialog:renameFiles"),
   selectRenameFolders: () => ipcRenderer.invoke("dialog:renameFolders"),
   openLogs: () => ipcRenderer.invoke("logs:open"),
+  copyLogs: (text) => ipcRenderer.invoke("logs:copy", text),
+  saveLogs: (text) => ipcRenderer.invoke("logs:save", text),
   openPath: (path) => ipcRenderer.invoke("path:open", path),
   copyPath: (path) => ipcRenderer.invoke("path:copy", path),
   refreshPlex: (libraries) => ipcRenderer.invoke("plex:refresh", libraries),
